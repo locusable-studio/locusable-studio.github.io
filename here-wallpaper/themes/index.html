@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Here Wallpaper — Themes</title>
   <meta name="description" content="Here Wallpaper theme preview — Basic, Pro, and Legacy palettes.">
+  <link rel="icon" href="/favicon.ico?v=7" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=7">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=7">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -38,7 +43,7 @@
       flex-wrap: wrap;
       gap: 12px 20px;
       align-items: baseline;
-      justify-content: space-between;
+      justify-content: flex-start;
     }
 
     .topbar a {
@@ -60,19 +65,12 @@
       to { opacity: 1; transform: none; }
     }
 
-    .page-title-zh {
+    .page-title {
       font-family: "Instrument Serif", Georgia, serif;
       font-size: clamp(2rem, 5vw, 2.75rem);
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.02em;
-    }
-
-    .page-title-en {
-      margin-top: 6px;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--page-muted);
     }
 
     .page-lead {
@@ -97,24 +95,9 @@
       align-items: baseline;
     }
 
-    .section-title-zh {
+    .section-title {
       font-size: 15px;
       color: var(--page-text);
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .section-title-en {
-      font-size: 13px;
-      color: var(--page-muted);
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .section-count {
-      margin-left: auto;
-      font-size: 12px;
-      color: var(--page-muted);
       text-transform: none;
       letter-spacing: 0;
     }
@@ -152,15 +135,6 @@
       flex: 1;
     }
 
-    .theme-title-zh { line-height: 1.25; }
-
-    .theme-title-en {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--page-muted);
-      line-height: 1.25;
-    }
-
     .badges {
       display: flex;
       flex-wrap: wrap;
@@ -186,12 +160,6 @@
       font-size: 13px;
       color: var(--page-muted);
       line-height: 1.45;
-    }
-
-    .theme-desc-en {
-      margin-top: 4px;
-      font-size: 12px;
-      color: #7d848c;
     }
 
     section {
@@ -319,7 +287,6 @@
       max-width: 1200px;
       margin: 0 auto;
       padding-top: 1.25rem;
-      border-top: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem 1.5rem;
@@ -339,54 +306,45 @@
 <body>
   <div class="topbar">
     <a href="/here-wallpaper/">← Here Wallpaper</a>
-    <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy</a>
   </div>
 
   <header>
-    <div class="page-title-zh">Here Wallpaper 主题</div>
-    <div class="page-title-en">Theme Preview</div>
-    <p class="page-lead">与 App 内主题一致。基础免费，PRO 订阅解锁，旧版主题仍可选用。</p>
+    <h1 class="page-title">Themes</h1>
+    <p class="page-lead">Same palettes as in the app. Basic is free, Pro unlocks with subscription, and Legacy themes remain available.</p>
   </header>
 
   <section id="basic-section">
     <h2>
-      <span class="section-title-zh">基础</span>
-      <span class="section-title-en">Basic</span>
-      <span class="section-count" id="basic-count">0</span>
+      <span class="section-title">Basic</span>
     </h2>
     <div class="grid" id="basic-grid"></div>
   </section>
 
   <section id="pro-section">
     <h2>
-      <span class="section-title-zh">PRO</span>
-      <span class="section-title-en">Pro</span>
-      <span class="section-count" id="pro-count">0</span>
+      <span class="section-title">Pro</span>
     </h2>
     <div class="grid" id="pro-grid"></div>
   </section>
 
   <section id="legacy-section">
     <h2>
-      <span class="section-title-zh">旧版</span>
-      <span class="section-title-en">Legacy</span>
-      <span class="section-count" id="legacy-count">0</span>
+      <span class="section-title">Legacy</span>
     </h2>
     <div class="grid" id="legacy-grid"></div>
   </section>
 
   <footer>
     <span>© 2026 Locusable Studio</span>
-    <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy / 隐私政策</a>
+    <a href="/here-wallpaper/privacy/">Privacy Policy</a>
   </footer>
 
   <script>
     const basicThemes = [
       {
         id: "night_atlas",
-        nameZh: "夜间地图册", nameEn: "Night Atlas",
-        descZh: "深海军蓝底色，暖金色道路，经典锁屏风格。",
-        descEn: "Deep navy canvas with warm gold roads — a calm lock-screen classic.",
+        name: "Night Atlas",
+        description: "Deep navy canvas with warm gold roads — a calm lock-screen classic.",
         tier: "basic",
         ui: { bg: "#0B1829", text: "#C9A24D" },
         map: {
@@ -396,9 +354,8 @@
       },
       {
         id: "ink_black",
-        nameZh: "墨黑", nameEn: "Ink Black",
-        descZh: "近黑底色，银白道路，硬朗图形感。",
-        descEn: "Near-black field with silver-white roads — bold and graphic.",
+        name: "Ink Black",
+        description: "Near-black field with silver-white roads — bold and graphic.",
         tier: "basic",
         ui: { bg: "#0E0E0E", text: "#E8E4DC" },
         map: {
@@ -408,9 +365,8 @@
       },
       {
         id: "harbor_mist",
-        nameZh: "港雾", nameEn: "Harbor Mist",
-        descZh: "雾灰海港色调，低饱和石板蓝水体与柔和码头色。",
-        descEn: "Foggy coastal grey with muted slate water and soft harbour tones.",
+        name: "Harbor Mist",
+        description: "Foggy coastal grey with muted slate water and soft harbour tones.",
         tier: "basic",
         ui: { bg: "#C4CED6", text: "#3A5060" },
         map: {
@@ -420,9 +376,8 @@
       },
       {
         id: "meadow_sage",
-        nameZh: "鼠尾草草甸", nameEn: "Meadow Sage",
-        descZh: "灰绿鼠尾草底色，更深的草甸绿公园与森林色道路。",
-        descEn: "Dusty sage fields with deeper meadow-green parks and forest roads.",
+        name: "Meadow Sage",
+        description: "Dusty sage fields with deeper meadow-green parks and forest roads.",
         tier: "basic",
         ui: { bg: "#D8E4D8", text: "#3A5848" },
         map: {
@@ -432,9 +387,8 @@
       },
       {
         id: "warm_clay",
-        nameZh: "暖陶土", nameEn: "Warm Clay",
-        descZh: "陶土与沙色大地色调，深褐道路。",
-        descEn: "Earthy clay and sand tones with burnt umber roads.",
+        name: "Warm Clay",
+        description: "Earthy clay and sand tones with burnt umber roads.",
         tier: "basic",
         ui: { bg: "#E8DDD0", text: "#5A4030" },
         map: {
@@ -444,9 +398,8 @@
       },
       {
         id: "pure_white",
-        nameZh: "纯白", nameEn: "Pure White",
-        descZh: "净白底色，浅灰道路，明亮极简。",
-        descEn: "Clean white canvas with soft grey roads — bright and minimal.",
+        name: "Pure White",
+        description: "Clean white canvas with soft grey roads — bright and minimal.",
         tier: "basic",
         ui: { bg: "#FFFFFF", text: "#2A2A2A" },
         map: {
@@ -456,9 +409,8 @@
       },
       {
         id: "blueprint",
-        nameZh: "蓝图", nameEn: "Blueprint",
-        descZh: "经典建筑蓝图风：深蓝底色，青白道路。",
-        descEn: "Classic architectural blueprint — cyan-white roads on deep drafting blue.",
+        name: "Blueprint",
+        description: "Classic architectural blueprint — cyan-white roads on deep drafting blue.",
         tier: "basic", badge: "Terraink",
         ui: { bg: "#1A3A5C", text: "#E8F4FF" },
         map: {
@@ -468,9 +420,8 @@
       },
       {
         id: "japanese_ink",
-        nameZh: "日本墨", nameEn: "Japanese Ink",
-        descZh: "宣纸白底，朱红主路，水墨极简。",
-        descEn: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
+        name: "Japanese Ink",
+        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
         tier: "basic", badge: "Terraink",
         ui: { bg: "#FAF8F5", text: "#2C2C2C" },
         map: {
@@ -480,9 +431,8 @@
       },
       {
         id: "tokyo_night",
-        nameZh: "东京之夜", nameEn: "Tokyo Night",
-        descZh: "深靛蓝夜色，电蓝道路与青绿霓虹，都市深夜灯海。",
-        descEn: "Deep indigo night with electric blue arteries and cyan neon accents.",
+        name: "Tokyo Night",
+        description: "Deep indigo night with electric blue arteries and cyan neon accents.",
         tier: "basic", badge: "Tokyo Night",
         ui: { bg: "#1A1B26", text: "#C0CAF5" },
         map: {
@@ -492,9 +442,8 @@
       },
       {
         id: "dracula",
-        nameZh: "德拉库拉", nameEn: "Dracula",
-        descZh: "紫灰夜色，粉紫道路与青色铁路，开源德拉库拉配色。",
-        descEn: "Purple-grey night with pink arteries, lavender roads, and cyan rail glow.",
+        name: "Dracula",
+        description: "Purple-grey night with pink arteries, lavender roads, and cyan rail glow.",
         tier: "basic", badge: "Dracula",
         ui: { bg: "#282A36", text: "#F8F8F2" },
         map: {
@@ -507,9 +456,8 @@
     const proThemes = [
       {
         id: "aurora_borealis",
-        nameZh: "极光", nameEn: "Aurora",
-        descZh: "极夜蓝黑天空，明亮绿色光带与紫罗兰边缘。",
-        descEn: "Arctic night sky with luminous green bands and violet aurora fringe.",
+        name: "Aurora",
+        description: "Arctic night sky with luminous green bands and violet aurora fringe.",
         tier: "pro",
         ui: { bg: "#050A18", text: "#78F8C8" },
         map: {
@@ -519,9 +467,8 @@
       },
       {
         id: "lavender_dusk",
-        nameZh: "薰衣草黄昏", nameEn: "Lavender Dusk",
-        descZh: "暮光紫灰，淡紫道路高光。",
-        descEn: "Twilight purple-grey with soft lilac road highlights.",
+        name: "Lavender Dusk",
+        description: "Twilight purple-grey with soft lilac road highlights.",
         tier: "pro",
         ui: { bg: "#1E1828", text: "#C8A8E0" },
         map: {
@@ -531,9 +478,8 @@
       },
       {
         id: "polar_ice",
-        nameZh: "极地冰", nameEn: "Polar Ice",
-        descZh: "极地白，冰川蓝水体与冷钢色道路。",
-        descEn: "Crisp arctic white with glacier-blue water and frozen steel roads.",
+        name: "Polar Ice",
+        description: "Crisp arctic white with glacier-blue water and frozen steel roads.",
         tier: "pro",
         ui: { bg: "#F2F8FC", text: "#1860A0" },
         map: {
@@ -543,9 +489,8 @@
       },
       {
         id: "synthwave_84",
-        nameZh: "Synthwave '84", nameEn: "Synthwave '84",
-        descZh: "复古日落紫，霓虹粉网格道路与电青光晕。",
-        descEn: "Retro sunset purple with hot-pink grid roads and electric cyan glow.",
+        name: "Synthwave '84",
+        description: "Retro sunset purple with hot-pink grid roads and electric cyan glow.",
         tier: "pro",
         ui: { bg: "#262335", text: "#03EDF9" },
         map: {
@@ -555,9 +500,8 @@
       },
       {
         id: "cyberpunk",
-        nameZh: "赛博朋克", nameEn: "Cyberpunk",
-        descZh: "工业蓝黑夜景，霓虹洋红道路与酸黄招牌。",
-        descEn: "Industrial blue-black night with neon magenta roads and acid-yellow signs.",
+        name: "Cyberpunk",
+        description: "Industrial blue-black night with neon magenta roads and acid-yellow signs.",
         tier: "pro",
         ui: { bg: "#080C14", text: "#00F5FF" },
         map: {
@@ -567,9 +511,8 @@
       },
       {
         id: "gilded_imperial",
-        nameZh: "鎏金", nameEn: "Gilded Imperial",
-        descZh: "宫墙朱红底色，鎏金道路，盛唐宫殿气派。",
-        descEn: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
+        name: "Gilded Imperial",
+        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
         tier: "pro",
         ui: { bg: "#6E1418", text: "#E8C868" },
         map: {
@@ -579,9 +522,8 @@
       },
       {
         id: "thousand_li",
-        nameZh: "千里江山", nameEn: "Thousand Li",
-        descZh: "北宋青绿山水：石绿山峦、石青江河、绢本赭黄底色。",
-        descEn: "Northern Song blue-green landscape — malachite hills, azurite rivers, silk-ochre ground.",
+        name: "Thousand Li",
+        description: "Northern Song blue-green landscape — malachite hills, azurite rivers, silk-ochre ground.",
         tier: "pro",
         ui: { bg: "#D4C898", text: "#2A4030" },
         map: {
@@ -591,9 +533,8 @@
       },
       {
         id: "indigo_print",
-        nameZh: "蓝印花布", nameEn: "Indigo Print",
-        descZh: "江南蓝印花布：靛蓝底色，米白纹样道路。",
-        descEn: "Jiangnan indigo resist cloth — deep dye blue with cream-white pattern roads.",
+        name: "Indigo Print",
+        description: "Jiangnan indigo resist cloth — deep dye blue with cream-white pattern roads.",
         tier: "pro",
         ui: { bg: "#1A3A6E", text: "#F2EDE4" },
         map: {
@@ -603,9 +544,8 @@
       },
       {
         id: "dark_souls",
-        nameZh: "黑暗之魂", nameEn: "Dark Souls",
-        descZh: "灰烬石质废墟，冷石灰道路，篝火橙只留在主干道与文字。",
-        descEn: "Ashen stone ruins with cold grey roads — bonfire orange only on the main arteries.",
+        name: "Dark Souls",
+        description: "Ashen stone ruins with cold grey roads — bonfire orange only on the main arteries.",
         tier: "pro",
         ui: { bg: "#141210", text: "#D4882A" },
         map: {
@@ -615,9 +555,8 @@
       },
       {
         id: "eva_01",
-        nameZh: "EVA-01", nameEn: "EVA-01",
-        descZh: "初号机紫甲，荧光绿光学高光——NERV 夜战配色。",
-        descEn: "Unit-01 purple armor with acid-green optic glow — Nerv night ops.",
+        name: "EVA-01",
+        description: "Unit-01 purple armor with acid-green optic glow — Nerv night ops.",
         tier: "pro",
         ui: { bg: "#1A0A28", text: "#B8F000" },
         map: {
@@ -627,9 +566,8 @@
       },
       {
         id: "aperture",
-        nameZh: "光圈", nameEn: "Aperture",
-        descZh: "光圈科技实验室白，警戒橙测试舱道路。",
-        descEn: "Aperture Science lab white with hazard-orange test-chamber arteries.",
+        name: "Aperture",
+        description: "Aperture Science lab white with hazard-orange test-chamber arteries.",
         tier: "pro",
         ui: { bg: "#F2F0EC", text: "#E8600A" },
         map: {
@@ -639,9 +577,8 @@
       },
       {
         id: "fallout",
-        nameZh: "辐射", nameEn: "Fallout",
-        descZh: "废土终端夜色——橄榄黑机壳与 Pip-Boy 磷光绿。",
-        descEn: "Wasteland terminal night — olive-black chassis with Pip-Boy phosphor green.",
+        name: "Fallout",
+        description: "Wasteland terminal night — olive-black chassis with Pip-Boy phosphor green.",
         tier: "pro",
         ui: { bg: "#0C1408", text: "#33FF00" },
         map: {
@@ -654,9 +591,8 @@
     const legacyThemes = [
       {
         id: "paper_white",
-        nameZh: "报纸", nameEn: "Newspaper",
-        descZh: "泛黄新闻纸底色，油墨感炭黑道路，复古报纸版式。",
-        descEn: "Yellowed newsprint base with inky charcoal roads — classic broadsheet feel.",
+        name: "Newspaper",
+        description: "Yellowed newsprint base with inky charcoal roads — classic broadsheet feel.",
         tier: "legacy",
         ui: { bg: "#F4F0E8", text: "#2C2824" },
         map: {
@@ -666,9 +602,8 @@
       },
       {
         id: "ember_glow",
-        nameZh: "余烬", nameEn: "Ember",
-        descZh: "炭黑底色，燃烧的余烬橙道路。",
-        descEn: "Charred dark base with glowing ember-orange arteries.",
+        name: "Ember",
+        description: "Charred dark base with glowing ember-orange arteries.",
         tier: "legacy",
         ui: { bg: "#1A1008", text: "#FFB060" },
         map: {
@@ -694,8 +629,8 @@
 
     function tierBadge(theme) {
       if (theme.tier === "pro") return `<span class="badge pro">PRO</span>`;
-      if (theme.tier === "legacy") return `<span class="badge legacy">旧版</span>`;
-      return `<span class="badge">基础</span>`;
+      if (theme.tier === "legacy") return `<span class="badge legacy">Legacy</span>`;
+      return `<span class="badge">Basic</span>`;
     }
 
     function renderTheme(theme, index) {
@@ -706,11 +641,11 @@
         : "";
 
       const swatchItems = [
-        ["背景 / BG", ui.bg],
-        ["文字 / Text", ui.text],
-        ["主路 / Major", map.roads.major],
-        ["水体 / Water", map.water],
-        ["公园 / Parks", map.parks]
+        ["BG", ui.bg],
+        ["Text", ui.text],
+        ["Major", map.roads.major],
+        ["Water", map.water],
+        ["Parks", map.parks]
       ].map(([label, color]) => `
         <div class="swatch">
           <div class="swatch-color" style="background:${color}"></div>
@@ -719,17 +654,13 @@
         </div>`).join("");
 
       return `
-        <article class="theme-card" style="animation-delay:${Math.min(index * 0.04, 0.4)}s">
+        <article class="theme-card" id="${theme.id}" style="animation-delay:${Math.min(index * 0.04, 0.4)}s">
           <div class="theme-meta">
             <h3>
-              <span class="theme-title-wrap">
-                <span class="theme-title-zh">${theme.nameZh}</span>
-                <span class="theme-title-en">${theme.nameEn}</span>
-              </span>
+              <span class="theme-title-wrap">${theme.name}</span>
               <span class="badges">${tierBadge(theme)}${sourceBadge}</span>
             </h3>
-            <p>${theme.descZh}</p>
-            <p class="theme-desc-en">${theme.descEn}</p>
+            <p>${theme.description}</p>
           </div>
           <div class="phone-wrap">
             <div class="phone">
@@ -751,14 +682,13 @@
         </article>`;
     }
 
-    function mount(list, gridId, countId) {
+    function mount(list, gridId) {
       document.getElementById(gridId).innerHTML = list.map(renderTheme).join("");
-      document.getElementById(countId).textContent = String(list.length);
     }
 
-    mount(basicThemes, "basic-grid", "basic-count");
-    mount(proThemes, "pro-grid", "pro-count");
-    mount(legacyThemes, "legacy-grid", "legacy-count");
+    mount(basicThemes, "basic-grid");
+    mount(proThemes, "pro-grid");
+    mount(legacyThemes, "legacy-grid");
   </script>
 </body>
 </html>

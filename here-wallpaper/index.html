@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Here Wallpaper — Locusable Studio</title>
   <meta name="description" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
+  <link rel="icon" href="/favicon.ico?v=7" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=7">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=7">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -17,6 +22,8 @@
       --gold: #c9a24d;
       --line: rgba(242, 239, 232, 0.12);
       --card: rgba(14, 28, 44, 0.72);
+      --theme-card: #101820;
+      --border: #243040;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +52,7 @@
 
     .topbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 1rem;
       animation: rise 0.7s ease both;
     }
@@ -67,7 +74,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 2.75rem;
+      gap: 2.5rem;
       padding: 2rem 0 3rem;
       animation: rise 0.8s ease both;
     }
@@ -75,6 +82,21 @@
     @keyframes rise {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: none; }
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+    }
+
+    .app-icon {
+      width: clamp(64px, 14vw, 88px);
+      height: clamp(64px, 14vw, 88px);
+      border-radius: 20px;
+      object-fit: cover;
+      flex-shrink: 0;
     }
 
     .brand {
@@ -95,72 +117,161 @@
       max-width: 30rem;
       color: var(--muted);
       font-size: 1.05rem;
-      animation: rise 0.9s ease 0.08s both;
     }
 
-    .links {
-      animation: rise 0.9s ease 0.16s both;
-    }
-
-    .link-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1.25rem;
-      align-items: end;
+    .themes-panel {
+      display: block;
       text-decoration: none;
       color: inherit;
-      padding: 1.4rem 1.5rem;
+      padding: 1.25rem 1.4rem 1.35rem;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--card);
       backdrop-filter: blur(16px);
-      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+      animation: rise 0.9s ease 0.12s both;
+      transition: border-color 0.25s ease, background 0.25s ease;
     }
 
-    .link-card:hover,
-    .link-card:focus-visible {
+    .themes-panel:hover,
+    .themes-panel:focus-visible {
       border-color: rgba(201, 162, 77, 0.45);
       background: rgba(18, 36, 56, 0.88);
-      transform: translateY(-3px);
       outline: none;
     }
 
-    .link-card h2 {
+    .themes-panel-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.15rem;
+      align-items: center;
+    }
+
+    .themes-panel h2 {
       font-size: 1.35rem;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    .link-card p {
-      margin-top: 0.4rem;
+    .themes-panel .lead {
+      margin-top: 0.35rem;
       color: var(--muted);
       font-size: 0.95rem;
       max-width: 28rem;
     }
 
-    .link-card .cta {
+    .themes-panel .cta {
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--gold);
       white-space: nowrap;
-      align-self: center;
     }
 
-    .preview {
-      margin-top: 1rem;
-      height: 72px;
-      border-radius: 12px;
-      overflow: hidden;
+    .theme-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 4px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 1.15rem;
     }
 
-    .preview span { display: block; height: 100%; }
+    .theme-card {
+      min-width: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0a1018;
+    }
+
+    .phone {
+      width: 100%;
+      aspect-ratio: 1170 / 844;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .wallpaper {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 300%;
+      bottom: 0;
+    }
+
+    .layer-land,
+    .layer-water,
+    .layer-park,
+    .layer-building,
+    .fade-bottom,
+    .poster-text {
+      position: absolute;
+    }
+
+    .layer-land { inset: 0; }
+
+    .layer-water {
+      right: 8%;
+      top: 22%;
+      width: 34%;
+      height: 22%;
+      border-radius: 18% 42% 38% 28%;
+    }
+
+    .layer-park {
+      left: 6%;
+      top: 38%;
+      width: 28%;
+      height: 14%;
+      border-radius: 8px;
+    }
+
+    .layer-building {
+      left: 42%;
+      top: 30%;
+      width: 18%;
+      height: 20%;
+      border-radius: 3px;
+    }
+
+    .roads {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fade-bottom {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 28%;
+      pointer-events: none;
+    }
+
+    .poster-text {
+      left: 0;
+      right: 0;
+      bottom: 8%;
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .poster-text .city {
+      font-size: clamp(9px, 1.8vw, 14px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .poster-text .region {
+      margin-top: 2px;
+      font-size: clamp(6px, 1.1vw, 8px);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+    }
 
     footer {
       padding-top: 1.5rem;
-      border-top: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem 1.5rem;
@@ -179,44 +290,135 @@
       color: var(--fg);
       outline: none;
     }
+
+    @media (max-width: 720px) {
+      .theme-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 4px;
+      }
+
+      .theme-card {
+        flex: 0 0 148px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="shell">
     <div class="topbar">
       <a href="/">← Locusable Studio</a>
-      <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy</a>
     </div>
 
     <main class="hero">
       <div>
-        <h1 class="brand">Here <em>Wallpaper</em></h1>
-        <p class="tagline">地图锁屏壁纸。选地点、主题与排版，导出全屏壁纸。</p>
+        <div class="brand-row">
+          <img class="app-icon" src="/assets/here/icon-192.png" width="88" height="88" alt="Here Wallpaper">
+          <h1 class="brand">Here <em>Wallpaper</em></h1>
+        </div>
+        <p class="tagline">Map lock-screen wallpapers. Pick a place, theme, and layout.</p>
       </div>
 
-      <section class="links" aria-label="Explore">
-        <a class="link-card" href="/here-wallpaper/themes/">
+      <a class="themes-panel" href="/here-wallpaper/themes/">
+        <div class="themes-panel-top">
           <div>
             <h2>Themes</h2>
-            <p>基础、PRO、旧版主题预览 — 色板与锁屏示意。</p>
-            <div class="preview" aria-hidden="true">
-              <span style="background:#0B1829"></span>
-              <span style="background:#1A3A5C"></span>
-              <span style="background:#FAF8F5"></span>
-              <span style="background:#6E1418"></span>
-              <span style="background:#1A1B26"></span>
-              <span style="background:#282A36"></span>
-            </div>
+            <p class="lead">Preview Basic, Pro, and Legacy palettes with lock-screen mockups.</p>
           </div>
           <span class="cta">Browse →</span>
-        </a>
-      </section>
+        </div>
+        <div class="theme-grid" id="theme-row"></div>
+      </a>
     </main>
 
     <footer>
       <span>© 2026 Locusable Studio</span>
-      <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy / 隐私政策</a>
+      <a href="/here-wallpaper/privacy/">Privacy Policy</a>
     </footer>
   </div>
+
+  <script>
+    const featured = [
+      {
+        id: "night_atlas",
+        name: "Night Atlas",
+        ui: { bg: "#0B1829", text: "#C9A24D" },
+        map: {
+          land: "#0B1829", water: "#071220", parks: "#102035", buildings: "#5A4D3A",
+          roads: { major: "#C9A24D", minor_mid: "#2E3440", path: "#3A3830" }
+        }
+      },
+      {
+        id: "blueprint",
+        name: "Blueprint",
+        ui: { bg: "#1A3A5C", text: "#E8F4FF" },
+        map: {
+          land: "#1A3A5C", water: "#0E2740", parks: "#1F466F", buildings: "#6EA4CC",
+          roads: { major: "#D8EEFA", minor_mid: "#435f7d", path: "#526c88" }
+        }
+      },
+      {
+        id: "japanese_ink",
+        name: "Japanese Ink",
+        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
+        map: {
+          land: "#FAF8F5", water: "#E8E4E0", parks: "#F0EDE8", buildings: "#959595",
+          roads: { major: "#8B2500", minor_mid: "#A8A8A8", path: "#D0CECA" }
+        }
+      },
+      {
+        id: "gilded_imperial",
+        name: "Gilded Imperial",
+        ui: { bg: "#6E1418", text: "#E8C868" },
+        map: {
+          land: "#6E1418", water: "#4A0C10", parks: "#581418", buildings: "#B8860B",
+          roads: { major: "#D4AF37", minor_mid: "#481018", path: "#501418" }
+        }
+      },
+      {
+        id: "dracula",
+        name: "Dracula",
+        ui: { bg: "#282A36", text: "#F8F8F2" },
+        map: {
+          land: "#282A36", water: "#21222C", parks: "#44475A", buildings: "#6272A4",
+          roads: { major: "#FF79C6", minor_mid: "#44475A", path: "#44475A" }
+        }
+      }
+    ];
+
+    function roadSVG(roads) {
+      return `
+        <svg class="roads" viewBox="0 0 393 852" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 180 Q120 200 200 260 T420 320" stroke="${roads.path}" stroke-width="5" fill="none" opacity="0.7"/>
+          <path d="M-10 520 Q140 500 260 540 T420 600" stroke="${roads.minor_mid}" stroke-width="9" fill="none"/>
+          <path d="M-30 740 Q200 700 420 760" stroke="${roads.major}" stroke-width="12" fill="none"/>
+          <path d="M180 -20 L210 900" stroke="${roads.major}" stroke-width="10" fill="none" opacity="0.85"/>
+          <path d="M20 300 L380 340" stroke="${roads.major}" stroke-width="11" fill="none"/>
+        </svg>`;
+    }
+
+    document.getElementById("theme-row").innerHTML = featured.map((theme) => {
+      const { ui, map } = theme;
+      const fade = `linear-gradient(to top, ${ui.bg} 0%, transparent 100%)`;
+      return `
+        <article class="theme-card" aria-label="${theme.name}">
+          <div class="phone">
+            <div class="wallpaper">
+              <div class="layer-land" style="background:${map.land}"></div>
+              <div class="layer-water" style="background:${map.water}"></div>
+              <div class="layer-park" style="background:${map.parks}"></div>
+              <div class="layer-building" style="background:${map.buildings}"></div>
+              ${roadSVG(map.roads)}
+              <div class="fade-bottom" style="background:${fade}"></div>
+              <div class="poster-text">
+                <div class="city" style="color:${ui.text}">XI'AN</div>
+                <div class="region" style="color:${ui.text}">CHINA</div>
+              </div>
+            </div>
+          </div>
+        </article>`;
+    }).join("");
+  </script>
 </body>
 </html>
