@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Locusable Studio</title>
-  <meta name="description" content="Locusable Studio — makers of Here Wallpaper.">
+  <title>Here Wallpaper — Locusable Studio</title>
+  <meta name="description" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -43,6 +43,25 @@
       padding: 2.5rem 1.5rem 1.5rem;
     }
 
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      animation: rise 0.7s ease both;
+    }
+
+    .topbar a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .topbar a:hover,
+    .topbar a:focus-visible {
+      color: var(--fg);
+      outline: none;
+    }
+
     .hero {
       flex: 1;
       display: flex;
@@ -73,17 +92,17 @@
 
     .tagline {
       margin-top: 0.85rem;
-      max-width: 28rem;
+      max-width: 30rem;
       color: var(--muted);
       font-size: 1.05rem;
       animation: rise 0.9s ease 0.08s both;
     }
 
-    .apps {
+    .links {
       animation: rise 0.9s ease 0.16s both;
     }
 
-    .app-card {
+    .link-card {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 1.25rem;
@@ -98,28 +117,28 @@
       transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
     }
 
-    .app-card:hover,
-    .app-card:focus-visible {
+    .link-card:hover,
+    .link-card:focus-visible {
       border-color: rgba(201, 162, 77, 0.45);
       background: rgba(18, 36, 56, 0.88);
       transform: translateY(-3px);
       outline: none;
     }
 
-    .app-card h2 {
+    .link-card h2 {
       font-size: 1.35rem;
       font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    .app-card p {
+    .link-card p {
       margin-top: 0.4rem;
       color: var(--muted);
       font-size: 0.95rem;
       max-width: 28rem;
     }
 
-    .app-card .cta {
+    .link-card .cta {
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--gold);
@@ -133,14 +152,11 @@
       border-radius: 12px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 4px;
     }
 
-    .preview span {
-      display: block;
-      height: 100%;
-    }
+    .preview span { display: block; height: 100%; }
 
     footer {
       padding-top: 1.5rem;
@@ -167,26 +183,32 @@
 </head>
 <body>
   <div class="shell">
+    <div class="topbar">
+      <a href="/here-wallpaper/">← Here Wallpaper</a>
+      <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy</a>
+    </div>
+
     <main class="hero">
       <div>
-        <h1 class="brand">Locusable <em>Studio</em></h1>
-        <p class="tagline">地图锁屏壁纸与本地工具。选地点、配主题，导出全屏壁纸。</p>
+        <h1 class="brand">Here <em>Wallpaper</em></h1>
+        <p class="tagline">地图锁屏壁纸。选地点、主题与排版，导出全屏壁纸。</p>
       </div>
 
-      <section class="apps" aria-label="Apps">
-        <a class="app-card" href="/here-wallpaper/">
+      <section class="links" aria-label="Explore">
+        <a class="link-card" href="/here-wallpaper/themes/">
           <div>
-            <h2>Here Wallpaper</h2>
-            <p>Map lock-screen wallpapers — pick a place, theme, and layout.</p>
+            <h2>Themes</h2>
+            <p>基础、PRO、旧版主题预览 — 色板与锁屏示意。</p>
             <div class="preview" aria-hidden="true">
               <span style="background:#0B1829"></span>
               <span style="background:#1A3A5C"></span>
+              <span style="background:#FAF8F5"></span>
               <span style="background:#6E1418"></span>
               <span style="background:#1A1B26"></span>
               <span style="background:#282A36"></span>
             </div>
           </div>
-          <span class="cta">Open →</span>
+          <span class="cta">Browse →</span>
         </a>
       </section>
     </main>
