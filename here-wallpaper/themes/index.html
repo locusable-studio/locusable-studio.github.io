@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071018">
   <title>Here Wallpaper — Themes</title>
   <meta name="description" content="Here Wallpaper theme preview — Basic, Pro, and Legacy palettes.">
   <link rel="icon" href="/favicon.ico?v=7" sizes="any">
@@ -26,6 +27,8 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { background: var(--page-bg); }
+
     body {
       font-family: "Instrument Sans", system-ui, sans-serif;
       background:
@@ -33,7 +36,7 @@
         var(--page-bg);
       color: var(--page-text);
       line-height: 1.5;
-      padding: 28px 24px 48px;
+      padding: calc(28px + env(safe-area-inset-top)) 24px calc(48px + env(safe-area-inset-bottom));
     }
 
     .topbar {
