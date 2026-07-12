@@ -326,14 +326,25 @@
   <script>
     const basicThemes = [
       {
-        id: "night_atlas",
-        name: "Night Atlas",
-        description: "Deep navy canvas with warm gold roads — a calm lock-screen classic.",
-        tier: "basic",
-        ui: { bg: "#0B1829", text: "#C9A24D" },
+        id: "tokyo_night",
+        name: "Tokyo Night",
+        description: "Deep indigo night with electric blue arteries and cyan neon accents.",
+        tier: "basic", badge: "Tokyo Night",
+        ui: { bg: "#1A1B26", text: "#C0CAF5" },
         map: {
-          land: "#0B1829", water: "#071220", parks: "#102035", buildings: "#5A4D3A",
-          roads: { major: "#C9A24D", minor_mid: "#2E3440", minor_low: "#222830", path: "#3A3830" }
+          land: "#1A1B26", water: "#16161E", parks: "#1F2335", buildings: "#565F89",
+          roads: { major: "#7AA2F7", minor_mid: "#24283B", minor_low: "#1A1B26", path: "#292E42" }
+        }
+      },
+      {
+        id: "dracula",
+        name: "Dracula",
+        description: "Purple-grey night with pink arteries, lavender roads, and cyan rail glow.",
+        tier: "basic", badge: "Dracula",
+        ui: { bg: "#282A36", text: "#F8F8F2" },
+        map: {
+          land: "#282A36", water: "#21222C", parks: "#44475A", buildings: "#6272A4",
+          roads: { major: "#FF79C6", minor_mid: "#44475A", minor_low: "#282A36", path: "#44475A" }
         }
       },
       {
@@ -345,6 +356,39 @@
         map: {
           land: "#0E0E0E", water: "#161616", parks: "#1A1A1A", buildings: "#4A4A4A",
           roads: { major: "#F0EDE6", minor_mid: "#686868", minor_low: "#404040", path: "#3A3A3A" }
+        }
+      },
+      {
+        id: "blueprint",
+        name: "Blueprint",
+        description: "Classic architectural blueprint — cyan-white roads on deep drafting blue.",
+        tier: "basic", badge: "Terraink",
+        ui: { bg: "#1A3A5C", text: "#E8F4FF" },
+        map: {
+          land: "#1A3A5C", water: "#0E2740", parks: "#1F466F", buildings: "#6EA4CC",
+          roads: { major: "#D8EEFA", minor_mid: "#435f7d", minor_low: "#375473", path: "#526c88" }
+        }
+      },
+      {
+        id: "pure_white",
+        name: "Pure White",
+        description: "Clean white canvas with soft grey roads — bright and minimal.",
+        tier: "basic",
+        ui: { bg: "#FFFFFF", text: "#2A2A2A" },
+        map: {
+          land: "#FFFFFF", water: "#ECECEC", parks: "#F6F6F6", buildings: "#C8C8C8",
+          roads: { major: "#909090", minor_mid: "#D0D0D0", minor_low: "#DADADA", path: "#E4E4E4" }
+        }
+      },
+      {
+        id: "japanese_ink",
+        name: "Japanese Ink",
+        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
+        tier: "basic", badge: "Terraink",
+        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
+        map: {
+          land: "#FAF8F5", water: "#E8E4E0", parks: "#F0EDE8", buildings: "#959595",
+          roads: { major: "#8B2500", minor_mid: "#A8A8A8", minor_low: "#BCBAB6", path: "#D0CECA" }
         }
       },
       {
@@ -379,65 +423,142 @@
           land: "#E8DDD0", water: "#C8B8A4", parks: "#DDD0C0", buildings: "#A88868",
           roads: { major: "#6A4838", minor_mid: "#B89880", minor_low: "#C8A890", path: "#D0C0B0" }
         }
-      },
-      {
-        id: "pure_white",
-        name: "Pure White",
-        description: "Clean white canvas with soft grey roads — bright and minimal.",
-        tier: "basic",
-        ui: { bg: "#FFFFFF", text: "#2A2A2A" },
-        map: {
-          land: "#FFFFFF", water: "#ECECEC", parks: "#F6F6F6", buildings: "#C8C8C8",
-          roads: { major: "#909090", minor_mid: "#D0D0D0", minor_low: "#DADADA", path: "#E4E4E4" }
-        }
-      },
-      {
-        id: "blueprint",
-        name: "Blueprint",
-        description: "Classic architectural blueprint — cyan-white roads on deep drafting blue.",
-        tier: "basic", badge: "Terraink",
-        ui: { bg: "#1A3A5C", text: "#E8F4FF" },
-        map: {
-          land: "#1A3A5C", water: "#0E2740", parks: "#1F466F", buildings: "#6EA4CC",
-          roads: { major: "#D8EEFA", minor_mid: "#435f7d", minor_low: "#375473", path: "#526c88" }
-        }
-      },
-      {
-        id: "japanese_ink",
-        name: "Japanese Ink",
-        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
-        tier: "basic", badge: "Terraink",
-        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
-        map: {
-          land: "#FAF8F5", water: "#E8E4E0", parks: "#F0EDE8", buildings: "#959595",
-          roads: { major: "#8B2500", minor_mid: "#A8A8A8", minor_low: "#BCBAB6", path: "#D0CECA" }
-        }
-      },
-      {
-        id: "tokyo_night",
-        name: "Tokyo Night",
-        description: "Deep indigo night with electric blue arteries and cyan neon accents.",
-        tier: "basic", badge: "Tokyo Night",
-        ui: { bg: "#1A1B26", text: "#C0CAF5" },
-        map: {
-          land: "#1A1B26", water: "#16161E", parks: "#1F2335", buildings: "#565F89",
-          roads: { major: "#7AA2F7", minor_mid: "#24283B", minor_low: "#1A1B26", path: "#292E42" }
-        }
-      },
-      {
-        id: "dracula",
-        name: "Dracula",
-        description: "Purple-grey night with pink arteries, lavender roads, and cyan rail glow.",
-        tier: "basic", badge: "Dracula",
-        ui: { bg: "#282A36", text: "#F8F8F2" },
-        map: {
-          land: "#282A36", water: "#21222C", parks: "#44475A", buildings: "#6272A4",
-          roads: { major: "#FF79C6", minor_mid: "#44475A", minor_low: "#282A36", path: "#44475A" }
-        }
       }
     ];
 
     const proThemes = [
+      {
+        id: "starry_night",
+        name: "Starry Night",
+        description: "Ultramarine sky, Indian-yellow stars, cerulean swirls, and viridian cypress.",
+        tier: "pro",
+        ui: { bg: "#1C4587", text: "#F0D060" },
+        map: {
+          land: "#1C4587", water: "#0E2040", parks: "#143028", buildings: "#686078",
+          roads: { major: "#E4B824", minor_mid: "#1A3870", minor_low: "#243860", path: "#1E4038" }
+        }
+      },
+      {
+        id: "great_wave",
+        name: "Great Wave",
+        description: "Prussian-blue rollers with foam-white crests and pale Fuji grey.",
+        tier: "pro",
+        ui: { bg: "#1A4578", text: "#F0ECE4" },
+        map: {
+          land: "#1A4578", water: "#0E2848", parks: "#204868", buildings: "#A89888",
+          roads: { major: "#F0ECE4", minor_mid: "#183860", minor_low: "#285880", path: "#204058" }
+        }
+      },
+      {
+        id: "the_scream",
+        name: "The Scream",
+        description: "Orange-red sky, blue-black fjord roads, and violet-blue hills.",
+        tier: "pro",
+        ui: { bg: "#EA5828", text: "#283848" },
+        map: {
+          land: "#EA5828", water: "#283848", parks: "#485868", buildings: "#685040",
+          roads: { major: "#283848", minor_mid: "#F09858", minor_low: "#F07040", path: "#F08848" }
+        }
+      },
+      {
+        id: "sunflowers",
+        name: "Sunflowers",
+        description: "Chrome-yellow ground with amber-brown roads and stem-green parks.",
+        tier: "pro",
+        ui: { bg: "#E8C858", text: "#483818" },
+        map: {
+          land: "#E8C858", water: "#D0A830", parks: "#587828", buildings: "#785028",
+          roads: { major: "#C87818", minor_mid: "#D0A848", minor_low: "#C89840", path: "#D8B868" }
+        }
+      },
+      {
+        id: "thousand_li",
+        name: "Thousand Li",
+        description: "Northern Song blue-green landscape — malachite hills, azurite rivers, silk-ochre ground.",
+        tier: "pro",
+        ui: { bg: "#D4C898", text: "#2A4030" },
+        map: {
+          land: "#D4C898", water: "#4A7A98", parks: "#5A8A48", buildings: "#A88850",
+          roads: { major: "#2E4A30", minor_mid: "#7A9060", minor_low: "#9AA878", path: "#C0B890" }
+        }
+      },
+      {
+        id: "gilded_imperial",
+        name: "Gilded Imperial",
+        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
+        tier: "pro",
+        ui: { bg: "#6E1418", text: "#E8C868" },
+        map: {
+          land: "#6E1418", water: "#4A0C10", parks: "#581418", buildings: "#B8860B",
+          roads: { major: "#D4AF37", minor_mid: "#481018", minor_low: "#3A0C10", path: "#501418" }
+        }
+      },
+      {
+        id: "synthwave_84",
+        name: "Synthwave '84",
+        description: "Retro sunset purple with hot-pink grid roads and electric cyan glow.",
+        tier: "pro",
+        ui: { bg: "#262335", text: "#03EDF9" },
+        map: {
+          land: "#262335", water: "#1E1830", parks: "#302848", buildings: "#8050A8",
+          roads: { major: "#FF7EDB", minor_mid: "#3D3258", minor_low: "#2E2645", path: "#34294F" }
+        }
+      },
+      {
+        id: "cyberpunk",
+        name: "Cyberpunk",
+        description: "Industrial blue-black night with neon magenta roads and acid-yellow signs.",
+        tier: "pro",
+        ui: { bg: "#080C14", text: "#00F5FF" },
+        map: {
+          land: "#080C14", water: "#0A1420", parks: "#101828", buildings: "#C8D020",
+          roads: { major: "#FF007A", minor_mid: "#202838", minor_low: "#141C28", path: "#1A2030" }
+        }
+      },
+      {
+        id: "eva_01",
+        name: "EVA-01",
+        description: "Unit-01 purple armor with acid-green optic glow — NERV night ops.",
+        tier: "pro",
+        ui: { bg: "#1A0A28", text: "#B8F000" },
+        map: {
+          land: "#1A0A28", water: "#0E0618", parks: "#2A1440", buildings: "#6A3A88",
+          roads: { major: "#B8F000", minor_mid: "#3A2850", minor_low: "#2A1838", path: "#3A2050" }
+        }
+      },
+      {
+        id: "firelink_shrine",
+        name: "Firelink Shrine",
+        description: "Ashen stone ruins with cold grey roads — bonfire orange only on the main arteries.",
+        tier: "pro",
+        ui: { bg: "#141210", text: "#D4882A" },
+        map: {
+          land: "#141210", water: "#0E0C0A", parks: "#222018", buildings: "#8A7060",
+          roads: { major: "#D4882A", minor_mid: "#4A4840", minor_low: "#383630", path: "#3A3830" }
+        }
+      },
+      {
+        id: "aperture",
+        name: "Aperture",
+        description: "Aperture Science lab white with hazard-orange test-chamber arteries.",
+        tier: "pro",
+        ui: { bg: "#F2F0EC", text: "#E8600A" },
+        map: {
+          land: "#F2F0EC", water: "#C8D0D8", parks: "#D8DCE0", buildings: "#A8B0B8",
+          roads: { major: "#E8600A", minor_mid: "#B8B4AC", minor_low: "#C8C4BC", path: "#D0CEC8" }
+        }
+      },
+      {
+        id: "pip_boy",
+        name: "Pip-Boy",
+        description: "Wasteland terminal night — olive-black chassis with Pip-Boy phosphor green.",
+        tier: "pro",
+        ui: { bg: "#0C1408", text: "#33FF00" },
+        map: {
+          land: "#0C1408", water: "#081008", parks: "#142018", buildings: "#3A5840",
+          roads: { major: "#33FF00", minor_mid: "#243820", minor_low: "#182818", path: "#1A2818" }
+        }
+      },
       {
         id: "aurora_borealis",
         name: "Aurora",
@@ -470,56 +591,26 @@
           land: "#F2F8FC", water: "#78B8E0", parks: "#E4F0F8", buildings: "#4890B8",
           roads: { major: "#2070A8", minor_mid: "#88B8D8", minor_low: "#98C8E0", path: "#B8D8EC" }
         }
-      },
+      }
+    ];
+
+    const legacyThemes = [
       {
-        id: "synthwave_84",
-        name: "Synthwave '84",
-        description: "Retro sunset purple with hot-pink grid roads and electric cyan glow.",
-        tier: "pro",
-        ui: { bg: "#262335", text: "#03EDF9" },
+        id: "night_atlas",
+        name: "Night Atlas",
+        description: "Deep navy canvas with warm gold roads — a calm lock-screen classic.",
+        tier: "legacy",
+        ui: { bg: "#0B1829", text: "#C9A24D" },
         map: {
-          land: "#262335", water: "#1E1830", parks: "#302848", buildings: "#8050A8",
-          roads: { major: "#FF7EDB", minor_mid: "#3D3258", minor_low: "#2E2645", path: "#34294F" }
-        }
-      },
-      {
-        id: "cyberpunk",
-        name: "Cyberpunk",
-        description: "Industrial blue-black night with neon magenta roads and acid-yellow signs.",
-        tier: "pro",
-        ui: { bg: "#080C14", text: "#00F5FF" },
-        map: {
-          land: "#080C14", water: "#0A1420", parks: "#101828", buildings: "#C8D020",
-          roads: { major: "#FF007A", minor_mid: "#202838", minor_low: "#141C28", path: "#1A2030" }
-        }
-      },
-      {
-        id: "gilded_imperial",
-        name: "Gilded Imperial",
-        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
-        tier: "pro",
-        ui: { bg: "#6E1418", text: "#E8C868" },
-        map: {
-          land: "#6E1418", water: "#4A0C10", parks: "#581418", buildings: "#B8860B",
-          roads: { major: "#D4AF37", minor_mid: "#481018", minor_low: "#3A0C10", path: "#501418" }
-        }
-      },
-      {
-        id: "thousand_li",
-        name: "Thousand Li",
-        description: "Northern Song blue-green landscape — malachite hills, azurite rivers, silk-ochre ground.",
-        tier: "pro",
-        ui: { bg: "#D4C898", text: "#2A4030" },
-        map: {
-          land: "#D4C898", water: "#4A7A98", parks: "#5A8A48", buildings: "#A88850",
-          roads: { major: "#2E4A30", minor_mid: "#7A9060", minor_low: "#9AA878", path: "#C0B890" }
+          land: "#0B1829", water: "#071220", parks: "#102035", buildings: "#5A4D3A",
+          roads: { major: "#C9A24D", minor_mid: "#2E3440", minor_low: "#222830", path: "#3A3830" }
         }
       },
       {
         id: "indigo_print",
         name: "Indigo Print",
         description: "Jiangnan indigo resist cloth — deep dye blue with cream-white pattern roads.",
-        tier: "pro",
+        tier: "legacy",
         ui: { bg: "#1A3A6E", text: "#F2EDE4" },
         map: {
           land: "#1A3A6E", water: "#122C58", parks: "#244878", buildings: "#6A88B0",
@@ -527,54 +618,7 @@
         }
       },
       {
-        id: "firelink_shrine",
-        name: "Firelink Shrine",
-        description: "Ashen stone ruins with cold grey roads — bonfire orange only on the main arteries.",
-        tier: "pro",
-        ui: { bg: "#141210", text: "#D4882A" },
-        map: {
-          land: "#141210", water: "#0E0C0A", parks: "#222018", buildings: "#8A7060",
-          roads: { major: "#D4882A", minor_mid: "#4A4840", minor_low: "#383630", path: "#3A3830" }
-        }
-      },
-      {
-        id: "eva_01",
-        name: "EVA-01",
-        description: "Unit-01 purple armor with acid-green optic glow — Nerv night ops.",
-        tier: "pro",
-        ui: { bg: "#1A0A28", text: "#B8F000" },
-        map: {
-          land: "#1A0A28", water: "#0E0618", parks: "#2A1440", buildings: "#6A3A88",
-          roads: { major: "#B8F000", minor_mid: "#3A2850", minor_low: "#2A1838", path: "#3A2050" }
-        }
-      },
-      {
-        id: "aperture",
-        name: "Aperture",
-        description: "Aperture Science lab white with hazard-orange test-chamber arteries.",
-        tier: "pro",
-        ui: { bg: "#F2F0EC", text: "#E8600A" },
-        map: {
-          land: "#F2F0EC", water: "#C8D0D8", parks: "#D8DCE0", buildings: "#A8B0B8",
-          roads: { major: "#E8600A", minor_mid: "#B8B4AC", minor_low: "#C8C4BC", path: "#D0CEC8" }
-        }
-      },
-      {
-        id: "pip_boy",
-        name: "Pip-Boy",
-        description: "Wasteland terminal night — olive-black chassis with Pip-Boy phosphor green.",
-        tier: "pro",
-        ui: { bg: "#0C1408", text: "#33FF00" },
-        map: {
-          land: "#0C1408", water: "#081008", parks: "#142018", buildings: "#3A5840",
-          roads: { major: "#33FF00", minor_mid: "#243820", minor_low: "#182818", path: "#1A2818" }
-        }
-      }
-    ];
-
-    const legacyThemes = [
-      {
-        id: "paper_white",
+        id: "newspaper",
         name: "Newspaper",
         description: "Yellowed newsprint base with inky charcoal roads — classic broadsheet feel.",
         tier: "legacy",
