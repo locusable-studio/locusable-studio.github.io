@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Here Wallpaper — Locusable Studio</title>
+  <meta name="description" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071018;
+      --bg-2: #0b1829;
+      --fg: #f2efe8;
+      --muted: #9aa6b2;
+      --gold: #c9a24d;
+      --line: rgba(242, 239, 232, 0.12);
+      --card: rgba(14, 28, 44, 0.72);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      font-family: "Instrument Sans", system-ui, sans-serif;
+      color: var(--fg);
+      background:
+        radial-gradient(ellipse 80% 50% at 70% -10%, rgba(201, 162, 77, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 10% 90%, rgba(64, 120, 160, 0.16), transparent 50%),
+        linear-gradient(165deg, var(--bg) 0%, var(--bg-2) 55%, #091420 100%);
+      background-attachment: fixed;
+      line-height: 1.5;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      animation: rise 0.7s ease both;
+    }
+
+    .topbar a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .topbar a:hover,
+    .topbar a:focus-visible {
+      color: var(--fg);
+      outline: none;
+    }
+
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.75rem;
+      padding: 2rem 0 3rem;
+      animation: rise 0.8s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .brand {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2.75rem, 8vw, 4.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .brand em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .tagline {
+      margin-top: 0.85rem;
+      max-width: 30rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      animation: rise 0.9s ease 0.08s both;
+    }
+
+    .links {
+      animation: rise 0.9s ease 0.16s both;
+    }
+
+    .link-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: end;
+      text-decoration: none;
+      color: inherit;
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+
+    .link-card:hover,
+    .link-card:focus-visible {
+      border-color: rgba(201, 162, 77, 0.45);
+      background: rgba(18, 36, 56, 0.88);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .link-card h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .link-card p {
+      margin-top: 0.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 28rem;
+    }
+
+    .link-card .cta {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+      align-self: center;
+    }
+
+    .preview {
+      margin-top: 1rem;
+      height: 72px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+    }
+
+    .preview span { display: block; height: 100%; }
+
+    footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover,
+    footer a:focus-visible {
+      color: var(--fg);
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <a href="/">← Locusable Studio</a>
+      <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy</a>
+    </div>
+
+    <main class="hero">
+      <div>
+        <h1 class="brand">Here <em>Wallpaper</em></h1>
+        <p class="tagline">地图锁屏壁纸。选地点、主题与排版，导出全屏壁纸。</p>
+      </div>
+
+      <section class="links" aria-label="Explore">
+        <a class="link-card" href="/here-wallpaper/themes/">
+          <div>
+            <h2>Themes</h2>
+            <p>基础、PRO、旧版主题预览 — 色板与锁屏示意。</p>
+            <div class="preview" aria-hidden="true">
+              <span style="background:#0B1829"></span>
+              <span style="background:#1A3A5C"></span>
+              <span style="background:#FAF8F5"></span>
+              <span style="background:#6E1418"></span>
+              <span style="background:#1A1B26"></span>
+              <span style="background:#282A36"></span>
+            </div>
+          </div>
+          <span class="cta">Browse →</span>
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© 2026 Locusable Studio</span>
+      <a href="/here-wallpaper-privacy-policy.txt">Privacy Policy / 隐私政策</a>
+    </footer>
+  </div>
+</body>
+</html>
