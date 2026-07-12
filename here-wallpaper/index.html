@@ -183,17 +183,15 @@
 
     .phone {
       width: 100%;
-      aspect-ratio: 1170 / 844;
+      aspect-ratio: 393 / 284;
       overflow: hidden;
       position: relative;
     }
 
     .wallpaper {
       position: absolute;
-      left: 0;
-      width: 100%;
-      height: 300%;
-      bottom: 0;
+      inset: 0;
+      overflow: hidden;
     }
 
     .layer-land,
@@ -208,26 +206,26 @@
     .layer-land { inset: 0; }
 
     .layer-water {
-      right: 8%;
-      top: 22%;
-      width: 34%;
-      height: 22%;
+      right: 6%;
+      top: 8%;
+      width: 38%;
+      height: 42%;
       border-radius: 18% 42% 38% 28%;
     }
 
     .layer-park {
-      left: 6%;
+      left: 5%;
       top: 38%;
-      width: 28%;
-      height: 14%;
+      width: 30%;
+      height: 32%;
       border-radius: 8px;
     }
 
     .layer-building {
-      left: 42%;
-      top: 30%;
-      width: 18%;
-      height: 20%;
+      left: 40%;
+      top: 22%;
+      width: 20%;
+      height: 40%;
       border-radius: 3px;
     }
 
@@ -242,14 +240,14 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 28%;
+      height: 48%;
       pointer-events: none;
     }
 
     .poster-text {
       left: 0;
       right: 0;
-      bottom: 8%;
+      bottom: 12%;
       text-align: center;
       z-index: 2;
       pointer-events: none;
@@ -389,12 +387,12 @@
 
     function roadSVG(roads) {
       return `
-        <svg class="roads" viewBox="0 0 393 852" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M-20 180 Q120 200 200 260 T420 320" stroke="${roads.path}" stroke-width="5" fill="none" opacity="0.7"/>
-          <path d="M-10 520 Q140 500 260 540 T420 600" stroke="${roads.minor_mid}" stroke-width="9" fill="none"/>
-          <path d="M-30 740 Q200 700 420 760" stroke="${roads.major}" stroke-width="12" fill="none"/>
-          <path d="M180 -20 L210 900" stroke="${roads.major}" stroke-width="10" fill="none" opacity="0.85"/>
-          <path d="M20 300 L380 340" stroke="${roads.major}" stroke-width="11" fill="none"/>
+        <svg class="roads" viewBox="0 0 393 284" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-20 36 Q120 48 200 78 T420 108" stroke="${roads.path}" stroke-width="5" fill="none" opacity="0.7"/>
+          <path d="M-10 148 Q140 132 260 162 T420 198" stroke="${roads.minor_mid}" stroke-width="9" fill="none"/>
+          <path d="M-30 236 Q200 210 420 250" stroke="${roads.major}" stroke-width="12" fill="none"/>
+          <path d="M180 -20 L210 310" stroke="${roads.major}" stroke-width="10" fill="none" opacity="0.85"/>
+          <path d="M20 64 L380 92" stroke="${roads.major}" stroke-width="11" fill="none"/>
         </svg>`;
     }
 
