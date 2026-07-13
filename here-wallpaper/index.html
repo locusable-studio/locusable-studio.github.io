@@ -38,7 +38,6 @@
       line-height: 1.5;
     }
 
-    /* iOS Safari 不支持 background-attachment: fixed，改用固定定位图层铺满视口 */
     body::before {
       content: "";
       position: fixed;
@@ -79,19 +78,24 @@
       outline: none;
     }
 
-    .hero {
+    main {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 2.5rem;
+      gap: 4rem;
       padding: 2rem 0 3rem;
-      animation: rise 0.8s ease both;
     }
 
     @keyframes rise {
       from { opacity: 0; transform: translateY(18px); }
       to { opacity: 1; transform: none; }
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      animation: rise 0.8s ease both;
     }
 
     .brand-row {
@@ -102,16 +106,16 @@
     }
 
     .app-icon {
-      width: clamp(64px, 14vw, 88px);
-      height: clamp(64px, 14vw, 88px);
-      border-radius: 20px;
+      width: clamp(56px, 12vw, 72px);
+      height: clamp(56px, 12vw, 72px);
+      border-radius: 18px;
       object-fit: cover;
       flex-shrink: 0;
     }
 
     .brand {
       font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2.75rem, 8vw, 4.5rem);
+      font-size: clamp(2.5rem, 7vw, 4rem);
       font-weight: 400;
       letter-spacing: -0.02em;
       line-height: 1.05;
@@ -123,10 +127,92 @@
     }
 
     .tagline {
-      margin-top: 0.85rem;
       max-width: 30rem;
       color: var(--muted);
       font-size: 1.05rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem 1.25rem;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.7rem 1.35rem;
+      border: 1px solid rgba(201, 162, 77, 0.45);
+      border-radius: 10px;
+      background: rgba(201, 162, 77, 0.12);
+      color: var(--gold);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: default;
+      user-select: none;
+    }
+
+    .hero-shots {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+      animation: rise 0.9s ease 0.1s both;
+    }
+
+    .hero-shot {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #0a1018;
+      border-radius: 14px;
+    }
+
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1170 / 2532;
+      object-fit: cover;
+    }
+
+    @media (max-width: 640px) {
+      .hero-shots {
+        gap: 0.45rem;
+      }
+
+      .hero-shot {
+        border-radius: 10px;
+      }
+    }
+
+    .points {
+      display: grid;
+      gap: 2rem;
+      animation: rise 0.9s ease 0.16s both;
+    }
+
+    @media (min-width: 720px) {
+      .points {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.75rem;
+      }
+    }
+
+    .point h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .point p {
+      margin-top: 0.4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 22rem;
     }
 
     .themes-panel {
@@ -138,7 +224,7 @@
       border-radius: 18px;
       background: var(--card);
       backdrop-filter: blur(16px);
-      animation: rise 0.9s ease 0.12s both;
+      animation: rise 0.9s ease 0.2s both;
       transition: border-color 0.25s ease, background 0.25s ease;
     }
 
@@ -190,7 +276,7 @@
       aspect-ratio: 1170 / 844;
       border-radius: 10px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       background: #0a1018;
     }
 
@@ -229,14 +315,50 @@
       <a href="/">← Locusable Studio</a>
     </div>
 
-    <main class="hero">
-      <div>
-        <div class="brand-row">
-          <img class="app-icon" src="/assets/here/icon-192.png" width="88" height="88" alt="Here Wallpaper">
-          <h1 class="brand">Here <em>Wallpaper</em></h1>
+    <main>
+      <section class="hero" aria-labelledby="product-title">
+        <div>
+          <div class="brand-row">
+            <img class="app-icon" src="/assets/here/icon-192.png" width="72" height="72" alt="">
+            <h1 class="brand" id="product-title">Here <em>Wallpaper</em></h1>
+          </div>
+          <p class="tagline">Map lock-screen wallpapers. Pick a place, theme, and layout.</p>
         </div>
-        <p class="tagline">Map lock-screen wallpapers. Pick a place, theme, and layout.</p>
-      </div>
+
+        <div class="cta-row">
+          <span class="store-btn" aria-disabled="true">Coming soon</span>
+        </div>
+
+        <div class="hero-shots" aria-label="Wallpaper previews">
+          <figure class="hero-shot">
+            <img src="/assets/shots/shot-1.jpg?v=8" width="585" height="1266" alt="Here Wallpaper preview 1">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/shots/shot-2.jpg?v=8" width="585" height="1266" alt="Here Wallpaper preview 2">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/shots/shot-3.jpg?v=8" width="585" height="1266" alt="Here Wallpaper preview 3">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/shots/shot-4.jpg?v=8" width="585" height="1266" alt="Here Wallpaper preview 4">
+          </figure>
+        </div>
+      </section>
+
+      <section class="points" aria-label="How it works">
+        <article class="point">
+          <h2>Place</h2>
+          <p>Choose a city or spot you care about. The map becomes your lock screen.</p>
+        </article>
+        <article class="point">
+          <h2>Theme</h2>
+          <p>Basic, Pro, and Legacy palettes — from quiet ink to neon routes.</p>
+        </article>
+        <article class="point">
+          <h2>Layout</h2>
+          <p>Tune type and framing so the wallpaper fits your phone and taste.</p>
+        </article>
+      </section>
 
       <a class="themes-panel" href="/here-wallpaper/themes/">
         <div class="themes-panel-top">
@@ -247,9 +369,9 @@
           <span class="cta">Browse →</span>
         </div>
         <div class="shots" aria-hidden="true">
-          <div class="shot"><img src="/assets/shots/shot-1.jpg?v=7" alt="" width="148" height="107"></div>
-          <div class="shot"><img src="/assets/shots/shot-2.jpg?v=7" alt="" width="148" height="107"></div>
-          <div class="shot"><img src="/assets/shots/shot-3.jpg?v=7" alt="" width="148" height="107"></div>
+          <div class="shot"><img src="/assets/shots/themes-shot-1.jpg?v=8" alt="" width="148" height="107"></div>
+          <div class="shot"><img src="/assets/shots/themes-shot-2.jpg?v=8" alt="" width="148" height="107"></div>
+          <div class="shot"><img src="/assets/shots/themes-shot-3.jpg?v=8" alt="" width="148" height="107"></div>
         </div>
       </a>
     </main>
