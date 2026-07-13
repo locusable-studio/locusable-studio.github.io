@@ -150,8 +150,6 @@
       color: #aeb6c2;
     }
 
-    .badge.pro { background: #2b2240; color: #c4a8e8; }
-    .badge.more { background: #2a2818; color: #c4b88a; }
     .badge.source { background: #1e2a38; color: #8eb4d0; }
 
     .theme-meta p {
@@ -722,17 +720,11 @@
         </svg>`;
     }
 
-    function tierBadge(theme) {
-      if (theme.tier === "pro") return `<span class="badge pro">PRO</span>`;
-      if (theme.tier === "more") return `<span class="badge more">More</span>`;
-      return `<span class="badge">Basic</span>`;
-    }
-
     function renderTheme(theme, index) {
       const { ui, map } = theme;
       const fade = `linear-gradient(to top, ${ui.bg} 0%, transparent 100%)`;
-      const sourceBadge = theme.badge
-        ? `<span class="badge source">${theme.badge}</span>`
+      const badges = theme.badge
+        ? `<span class="badges"><span class="badge source">${theme.badge}</span></span>`
         : "";
 
       const swatchItems = [ui.bg, ui.text, map.roads.major, map.water, map.parks]
@@ -744,7 +736,7 @@
           <div class="theme-meta">
             <h3>
               <span class="theme-title-wrap">${theme.name}</span>
-              <span class="badges">${tierBadge(theme)}${sourceBadge}</span>
+              ${badges}
             </h3>
             <p>${theme.description}</p>
           </div>
