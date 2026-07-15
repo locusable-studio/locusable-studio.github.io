@@ -98,7 +98,7 @@
       overflow: hidden;
       position: relative;
       border: 1px solid rgba(255,255,255,0.08);
-      background: #0B4F9C;
+      background: #1A3A6E;
     }
 
     .wallpaper {
@@ -377,22 +377,24 @@
     <div class="preview-wrap">
       <div class="phone" role="img" aria-label="Map layer preview">
         <div class="wallpaper" id="preview">
-          <div class="map-land" style="background:#0B4F9C"></div>
-          <div class="map-landcover is-off" data-layer="landcover" style="background:#247A7B"></div>
-          <div class="map-landuse is-off" data-layer="landuse" style="background:#4A6680"></div>
-          <div class="map-park" data-layer="parks" style="background:#3D8B5A"></div>
-          <div class="map-water" data-layer="water" style="background:#083A78"></div>
+          <div class="map-land" style="background:#1A3A6E"></div>
+          <!-- Indigo Print has no explicit landcover/landuse; derived as in MapModels.swift:
+               landcover = blend(land, park, 0.45), landuse = blend(land, building, 0.2) -->
+          <div class="map-landcover is-off" data-layer="landcover" style="background:#1F4073"></div>
+          <div class="map-landuse is-off" data-layer="landuse" style="background:#2A4A7B"></div>
+          <div class="map-park" data-layer="parks" style="background:#244878"></div>
+          <div class="map-water" data-layer="water" style="background:#122C58"></div>
           <svg class="map-waterway" data-layer="water" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="waterway-svg"></svg>
-          <div class="map-aeroway is-off" data-layer="aeroway" style="background:#1560B0"></div>
-          <div class="map-building-a is-off" data-layer="buildings" style="background:#8B7355"></div>
-          <div class="map-building-b is-off" data-layer="buildings" style="background:#8B7355"></div>
-          <div class="map-building-c is-off" data-layer="buildings" style="background:#8B7355"></div>
+          <div class="map-aeroway is-off" data-layer="aeroway" style="background:#244878"></div>
+          <div class="map-building-a is-off" data-layer="buildings" style="background:#6A88B0"></div>
+          <div class="map-building-b is-off" data-layer="buildings" style="background:#6A88B0"></div>
+          <div class="map-building-c is-off" data-layer="buildings" style="background:#6A88B0"></div>
           <svg class="rails is-off" data-layer="rail" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="rail-svg"></svg>
           <svg class="roads" data-layer="roads" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="road-svg"></svg>
-          <div class="fade-bottom" style="background:linear-gradient(to top, #0B4F9C 0%, transparent 100%)"></div>
+          <div class="fade-bottom" style="background:linear-gradient(to top, #1A3A6E 0%, transparent 100%)"></div>
           <div class="poster-text">
-            <div class="city" style="color:#F5F8FC">XI'AN</div>
-            <div class="region" style="color:#F5F8FC">CHINA</div>
+            <div class="city" style="color:#F2EDE4">XI'AN</div>
+            <div class="region" style="color:#F2EDE4">CHINA</div>
           </div>
         </div>
       </div>
@@ -425,12 +427,12 @@
     const state = Object.fromEntries(layers.map((l) => [l.id, l.defaultOn]));
 
     const roads = {
-      motorway: "#E8F0F5",
-      primary: "#5C9E4E",
-      tertiary: "#0A4588",
-      residential: "#0C508F",
-      path: "#094078",
-      outline: "#2A70B8"
+      motorway: "#F2EDE4",
+      primary: "#D8D0C4",
+      tertiary: "#5A78A0",
+      residential: "#486890",
+      path: "#3A5888",
+      outline: "#4A6898"
     };
 
     const RoadStyle = {
@@ -484,15 +486,15 @@
       const railA = curvedD([-10, 200], [140, 180], [260, 210], [420, 240]);
       const railB = `M60 -10 L 120 420`;
       document.getElementById("rail-svg").innerHTML = `
-        <path d="${railA}" stroke="#F5F8FC" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.65"/>
-        <path d="${railB}" stroke="#F5F8FC" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.55"/>
+        <path d="${railA}" stroke="#F2EDE4" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.65"/>
+        <path d="${railB}" stroke="#F2EDE4" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.55"/>
       `;
     }
 
     function mountWaterway() {
       const d = curvedD([-20, 110], [120, 150], [220, 190], [420, 260]);
       document.getElementById("waterway-svg").innerHTML = `
-        <path d="${d}" stroke="#083A78" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
+        <path d="${d}" stroke="#122C58" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
       `;
     }
 
