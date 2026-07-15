@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1c1917">
+  <title>Here Wallpaper — Layers</title>
+  <meta name="description" content="Here Wallpaper map layers — the same toggles as in the editor.">
+  <link rel="icon" href="/favicon.ico?v=7" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=7">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=7">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=7">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --page-bg: #1c1917;
+      --page-text: #f5f5f4;
+      --page-muted: #a8a29e;
+      --card-bg: #292524;
+      --border: #44403c;
+      --gold: #c9a24d;
+      --line: rgba(245, 245, 244, 0.12);
+      --toggle-off: #44403c;
+      --toggle-on: #c9a24d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { background: var(--page-bg); }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      background: var(--page-bg);
+      color: var(--page-text);
+      line-height: 1.5;
+      padding: calc(28px + env(safe-area-inset-top)) 24px calc(48px + env(safe-area-inset-bottom));
+    }
+
+    .topbar {
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    .topbar a {
+      color: var(--page-muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .topbar a:hover { color: var(--page-text); }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto 32px;
+      animation: rise 0.7s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .page-title {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .page-lead {
+      margin-top: 14px;
+      max-width: 36rem;
+      color: var(--page-muted);
+      font-size: 15px;
+    }
+
+    .stage {
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      animation: rise 0.7s ease 0.06s both;
+    }
+
+    .preview-wrap {
+      width: 100%;
+    }
+
+    .phone {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0B4F9C;
+    }
+
+    .wallpaper {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .map-land { position: absolute; inset: 0; }
+
+    .map-landcover {
+      position: absolute;
+      left: 4%;
+      top: 8%;
+      width: 42%;
+      height: 36%;
+      border-radius: 28% 40% 32% 36%;
+      opacity: 0.7;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-landuse {
+      position: absolute;
+      left: 48%;
+      top: 52%;
+      width: 38%;
+      height: 30%;
+      border-radius: 8%;
+      opacity: 0.55;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-park {
+      position: absolute;
+      left: 6%;
+      top: 38%;
+      width: 28%;
+      height: 14%;
+      border-radius: 3%;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-water {
+      position: absolute;
+      left: 58%;
+      top: 22%;
+      width: 34%;
+      height: 22%;
+      border-radius: 50%;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-waterway,
+    .roads,
+    .rails {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-building-a,
+    .map-building-b,
+    .map-building-c {
+      position: absolute;
+      border-radius: 2px;
+      opacity: 0.9;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-building-a {
+      left: 18%;
+      top: 56%;
+      width: 12%;
+      height: 10%;
+    }
+
+    .map-building-b {
+      left: 32%;
+      top: 60%;
+      width: 9%;
+      height: 8%;
+    }
+
+    .map-building-c {
+      left: 24%;
+      top: 68%;
+      width: 14%;
+      height: 7%;
+    }
+
+    .map-aeroway {
+      position: absolute;
+      left: 42%;
+      top: 58%;
+      width: 40%;
+      height: 9%;
+      border-radius: 2px;
+      transform: rotate(-16deg);
+      transform-origin: center;
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
+    }
+
+    .map-aeroway::after {
+      content: "";
+      position: absolute;
+      left: 36%;
+      top: -120%;
+      width: 18%;
+      height: 340%;
+      background: inherit;
+      border-radius: 2px;
+      opacity: 0.95;
+    }
+
+    .is-off { opacity: 0 !important; pointer-events: none; }
+
+    .fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 25%;
+      pointer-events: none;
+    }
+
+    .poster-text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 7%;
+      text-align: center;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .poster-text .city {
+      font-size: clamp(16px, 5vw, 24px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .poster-text .region {
+      margin-top: 3px;
+      font-size: clamp(9px, 2.5vw, 12px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+    }
+
+    .controls {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .controls-title {
+      padding: 14px 16px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--page-muted);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      width: 100%;
+      padding: 13px 16px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      color: var(--page-text);
+      font: inherit;
+      font-size: 15px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .toggle-row:last-child { border-bottom: 0; }
+
+    .toggle-row:hover { background: rgba(255, 255, 255, 0.03); }
+
+    .toggle-row:focus-visible {
+      outline: 2px solid rgba(201, 162, 77, 0.55);
+      outline-offset: -2px;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .badge-pro {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(201, 162, 77, 0.18);
+      color: var(--gold);
+    }
+
+    .switch {
+      position: relative;
+      width: 42px;
+      height: 26px;
+      flex-shrink: 0;
+      border-radius: 999px;
+      background: var(--toggle-off);
+      transition: background 0.2s ease;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5f5f4;
+      transition: transform 0.2s ease;
+    }
+
+    .toggle-row[aria-checked="true"] .switch {
+      background: var(--toggle-on);
+    }
+
+    .toggle-row[aria-checked="true"] .switch::after {
+      transform: translateX(16px);
+    }
+
+    footer {
+      max-width: 720px;
+      margin: 48px auto 0;
+      padding-top: 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      color: var(--page-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--page-muted);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--page-text); }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a href="/here-wallpaper/">← Here Wallpaper</a>
+  </div>
+
+  <header>
+    <h1 class="page-title">Layers</h1>
+    <p class="page-lead">Same map layer toggles as in the editor. Flip each switch to see what appears on the wallpaper.</p>
+  </header>
+
+  <div class="stage">
+    <div class="preview-wrap">
+      <div class="phone" role="img" aria-label="Map layer preview">
+        <div class="wallpaper" id="preview">
+          <div class="map-land" style="background:#0B4F9C"></div>
+          <div class="map-landcover is-off" data-layer="landcover" style="background:#247A7B"></div>
+          <div class="map-landuse is-off" data-layer="landuse" style="background:#4A6680"></div>
+          <div class="map-park" data-layer="parks" style="background:#3D8B5A"></div>
+          <div class="map-water" data-layer="water" style="background:#083A78"></div>
+          <svg class="map-waterway" data-layer="water" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="waterway-svg"></svg>
+          <div class="map-aeroway is-off" data-layer="aeroway" style="background:#1560B0"></div>
+          <div class="map-building-a is-off" data-layer="buildings" style="background:#8B7355"></div>
+          <div class="map-building-b is-off" data-layer="buildings" style="background:#8B7355"></div>
+          <div class="map-building-c is-off" data-layer="buildings" style="background:#8B7355"></div>
+          <svg class="rails is-off" data-layer="rail" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="rail-svg"></svg>
+          <svg class="roads" data-layer="roads" viewBox="0 0 393 393" preserveAspectRatio="none" aria-hidden="true" id="road-svg"></svg>
+          <div class="fade-bottom" style="background:linear-gradient(to top, #0B4F9C 0%, transparent 100%)"></div>
+          <div class="poster-text">
+            <div class="city" style="color:#F5F8FC">XI'AN</div>
+            <div class="region" style="color:#F5F8FC">CHINA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls" role="group" aria-label="Map layers">
+      <div class="controls-title">Layers</div>
+      <div id="toggles"></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026 Locusable Studio</span>
+    <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+  </footer>
+
+  <script>
+    // Defaults match MapLayerOptions in HereWallpaper
+    const layers = [
+      { id: "landcover", name: "Landcover", defaultOn: false },
+      { id: "landuse", name: "Landuse", defaultOn: false },
+      { id: "buildings", name: "Building", defaultOn: false },
+      { id: "water", name: "Water+Waterway", defaultOn: true },
+      { id: "parks", name: "Park", defaultOn: true },
+      { id: "roads", name: "Transportation (motorway/...)", defaultOn: true },
+      { id: "rail", name: "Transportation (rail/...)", defaultOn: false, pro: true },
+      { id: "aeroway", name: "Aeroway", defaultOn: false, pro: true }
+    ];
+
+    const state = Object.fromEntries(layers.map((l) => [l.id, l.defaultOn]));
+
+    const roads = {
+      motorway: "#E8F0F5",
+      primary: "#5C9E4E",
+      tertiary: "#0A4588",
+      residential: "#0C508F",
+      path: "#094078",
+      outline: "#2A70B8"
+    };
+
+    const RoadStyle = {
+      pathOpacity: 0.82,
+      residentialOpacity: 0.46,
+      tertiaryOpacity: 0.74,
+      primaryOpacity: 0.92,
+      motorwayOpacity: 1,
+      outlineOpacity: 0.85,
+      majorCasing: 1.38,
+      primaryCasing: 1.45,
+      tertiaryCasing: 1.15,
+      pathCasing: 1.6
+    };
+
+    function curvedD(from, control, to, end) {
+      const c2x = to[0] + (end[0] - to[0]) * 0.6;
+      const c2y = to[1] + (end[1] - to[1]) * 0.4;
+      return `M${from[0]} ${from[1]} Q ${control[0]} ${control[1]}, ${to[0]} ${to[1]} Q ${c2x} ${c2y}, ${end[0]} ${end[1]}`;
+    }
+
+    function roadPair(d, fill, width, fillOpacity, casingScale, outline) {
+      const casing = width * casingScale;
+      return `
+        <path d="${d}" stroke="${outline}" stroke-width="${casing}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${RoadStyle.outlineOpacity}"/>
+        <path d="${d}" stroke="${fill}" stroke-width="${width}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${fillOpacity}"/>`;
+    }
+
+    function mountRoads() {
+      const { motorway, primary, tertiary, residential, path, outline } = roads;
+      const pathD = curvedD([-20, 60], [120, 80], [200, 120], [420, 150]);
+      const residentialD = curvedD([80, 180], [180, 160], [280, 190], [420, 220]);
+      const tertiaryAD = curvedD([-10, 240], [140, 220], [260, 250], [420, 280]);
+      const tertiaryBD = `M40 300 L 360 330`;
+      const primaryD = `M20 140 L 380 170`;
+      const motorwayAD = curvedD([-30, 340], [200, 310], [200, 310], [420, 360]);
+      const motorwayBD = `M180 -20 L 210 420`;
+
+      document.getElementById("road-svg").innerHTML = `
+        ${roadPair(pathD, path, 5, RoadStyle.pathOpacity, RoadStyle.pathCasing, outline)}
+        <path d="${residentialD}" stroke="${residential}" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${RoadStyle.residentialOpacity}"/>
+        ${roadPair(tertiaryAD, tertiary, 9, RoadStyle.tertiaryOpacity, RoadStyle.tertiaryCasing, outline)}
+        ${roadPair(tertiaryBD, tertiary, 8, RoadStyle.tertiaryOpacity, RoadStyle.tertiaryCasing, outline)}
+        ${roadPair(primaryD, primary, 10, RoadStyle.primaryOpacity, RoadStyle.primaryCasing, outline)}
+        ${roadPair(motorwayAD, motorway, 12, RoadStyle.motorwayOpacity, RoadStyle.majorCasing, outline)}
+        ${roadPair(motorwayBD, motorway, 10, RoadStyle.motorwayOpacity, RoadStyle.majorCasing, outline)}
+      `;
+    }
+
+    function mountRail() {
+      const railA = curvedD([-10, 200], [140, 180], [260, 210], [420, 240]);
+      const railB = `M60 -10 L 120 420`;
+      document.getElementById("rail-svg").innerHTML = `
+        <path d="${railA}" stroke="#F5F8FC" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.65"/>
+        <path d="${railB}" stroke="#F5F8FC" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="8 6" opacity="0.55"/>
+      `;
+    }
+
+    function mountWaterway() {
+      const d = curvedD([-20, 110], [120, 150], [220, 190], [420, 260]);
+      document.getElementById("waterway-svg").innerHTML = `
+        <path d="${d}" stroke="#083A78" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
+      `;
+    }
+
+    function syncPreview() {
+      document.querySelectorAll("[data-layer]").forEach((el) => {
+        const id = el.getAttribute("data-layer");
+        el.classList.toggle("is-off", !state[id]);
+      });
+    }
+
+    function mountToggles() {
+      const root = document.getElementById("toggles");
+      root.innerHTML = layers.map((layer) => `
+        <button
+          type="button"
+          class="toggle-row"
+          role="switch"
+          aria-checked="${state[layer.id]}"
+          data-id="${layer.id}"
+        >
+          <span class="toggle-label">
+            <span>${layer.name}</span>
+            ${layer.pro ? `<span class="badge-pro">PRO</span>` : ""}
+          </span>
+          <span class="switch" aria-hidden="true"></span>
+        </button>
+      `).join("");
+
+      root.querySelectorAll(".toggle-row").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          state[id] = !state[id];
+          btn.setAttribute("aria-checked", String(state[id]));
+          syncPreview();
+        });
+      });
+    }
+
+    mountRoads();
+    mountRail();
+    mountWaterway();
+    mountToggles();
+    syncPreview();
+  </script>
+</body>
+</html>
