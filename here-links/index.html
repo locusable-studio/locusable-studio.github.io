@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#1c1917">
   <title>Here Links — Locusable Studio</title>
   <meta name="description" content="Here Links — native iOS client for your self-hosted linkding.">
-  <link rel="icon" href="/favicon.ico?v=8" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=8">
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=8">
+  <link rel="icon" href="/favicon.ico?v=10" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,6 +143,39 @@
       user-select: none;
     }
 
+    .hero-shots {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-top: 0.5rem;
+      animation: rise 0.9s ease 0.1s both;
+    }
+
+    .hero-shot {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #292524;
+      border-radius: 14px;
+    }
+
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1206 / 2622;
+      object-fit: cover;
+    }
+
+    @media (max-width: 640px) {
+      .hero-shots {
+        gap: 0.45rem;
+      }
+
+      .hero-shot {
+        border-radius: 10px;
+      }
+    }
+
     .points {
       display: grid;
       gap: 2rem;
@@ -201,7 +234,7 @@
       <section class="hero" aria-labelledby="product-title">
         <div>
           <div class="brand-row">
-            <img class="app-icon" src="/assets/here-links/icon-192.png" width="72" height="72" alt="">
+            <img class="app-icon" src="/assets/here-links/icon-192.png?v=10" width="72" height="72" alt="">
             <h1 class="brand" id="product-title">Here <em>Links</em></h1>
           </div>
           <p class="tagline">Your linkding bookmarks on iPhone — multi-server, share extension, in-app Safari.</p>
@@ -209,6 +242,21 @@
 
         <div class="cta-row">
           <span class="coming-soon" aria-disabled="true">Coming soon</span>
+        </div>
+
+        <div class="hero-shots" aria-label="App previews">
+          <figure class="hero-shot">
+            <img src="/assets/here-links/shots/shot-1.jpg?v=1" width="585" height="1272" alt="Here Links bookmarks list">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/here-links/shots/shot-2.jpg?v=2" width="585" height="1272" alt="Here Links bookmark detail">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/here-links/shots/shot-3.jpg?v=1" width="585" height="1272" alt="Here Links in-app Safari">
+          </figure>
+          <figure class="hero-shot">
+            <img src="/assets/here-links/shots/shot-4.jpg?v=1" width="585" height="1272" alt="Here Links HTML snapshot preview">
+          </figure>
         </div>
       </section>
 

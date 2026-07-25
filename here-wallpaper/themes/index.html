@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1c1917">
   <title>Here Wallpaper — Themes</title>
-  <meta name="description" content="Here Wallpaper theme preview — Basic, Featured, and Third-Party palettes.">
-  <link rel="icon" href="/favicon.ico?v=8" sizes="any">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=8">
-  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=8">
+  <meta name="description" content="Here Wallpaper theme preview — Basic and Featured palettes.">
+  <link rel="icon" href="/favicon.ico?v=10" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -269,7 +269,7 @@
 
   <header>
     <h1 class="page-title">Themes</h1>
-    <p class="page-lead">Same palettes as in the app. Basic is free, Featured unlocks with Pro, and Third-Party themes stay available.</p>
+    <p class="page-lead">Same palettes as in the app. Basic is free; Featured unlocks with Pro.</p>
   </header>
 
   <section id="basic-section">
@@ -286,12 +286,6 @@
     <div class="grid" id="pro-grid"></div>
   </section>
 
-  <section id="more-section">
-    <h2>
-      <span class="section-title">Third-Party</span>
-    </h2>
-    <div class="grid" id="more-grid"></div>
-  </section>
 
   <footer>
     <span>© 2026 Locusable Studio</span>
@@ -301,9 +295,97 @@
   <script>
     const basicThemes = [
       {
+        id: "meadow_sage",
+        name: "Meadow Sage",
+        description: "Dusty sage fields with meadow-green parks and forest roads.",
+        tier: "basic",
+        ui: { bg: "#D8E4D8", text: "#3A5848" },
+        map: {
+          land: "#D8E4D8", water: "#A8C0B0", park: "#B8D0A8",
+          roads: {
+            motorway: "#486850", primary: "#587860", tertiary: "#90A898",
+            residential: "#A0B8A8", path: "#B8C8B4", outline: "#C4D4C0"
+          }
+        }
+      },
+      {
+        id: "newspaper",
+        name: "Newspaper",
+        description: "Yellowed newsprint with inky charcoal roads.",
+        tier: "basic",
+        ui: { bg: "#F4F0E8", text: "#2C2824" },
+        map: {
+          land: "#F4F0E8", water: "#D8D2C8", park: "#E8E4DC",
+          roads: {
+            motorway: "#3A3430", primary: "#524840", tertiary: "#A89888",
+            residential: "#B8A898", path: "#D0C8BC", outline: "#D8D0C4"
+          }
+        }
+      },
+      {
+        id: "pastel_dream",
+        name: "Pastel Dream",
+        description: "Muted pastels with dusty-blue roads and mauve buildings.",
+        tier: "basic",
+        badge: "Terraink",
+        ui: { bg: "#FAF7F2", text: "#5D5A6D" },
+        map: {
+          land: "#FAF7F2", water: "#D4E4ED", park: "#E8EDE4",
+          roads: {
+            motorway: "#6870A0", primary: "#9898B8", tertiary: "#C4C2D0",
+            residential: "#CCCCDA", path: "#D8D8E2", outline: "#E0E0E8"
+          }
+        }
+      },
+      {
+        id: "coral",
+        name: "Coral",
+        description: "Soft ivory ground with warm coral roads and muted pink features.",
+        tier: "basic",
+        badge: "Terraink",
+        ui: { bg: "#F3E1DA", text: "#6E2F28" },
+        map: {
+          land: "#F3E1DA", water: "#DFC0B5", park: "#EACFC6",
+          roads: {
+            motorway: "#B9473A", primary: "#C86050", tertiary: "#E09888",
+            residential: "#DDAA9A", path: "#E8C4B8", outline: "#EDD2C8"
+          }
+        }
+      },
+      {
+        id: "japanese_ink",
+        name: "Japanese Ink",
+        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
+        tier: "basic",
+        badge: "Terraink",
+        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
+        map: {
+          land: "#FAF8F5", water: "#E8E4E0", park: "#F0EDE8",
+          roads: {
+            motorway: "#8B2500", primary: "#505050", tertiary: "#A8A8A8",
+            residential: "#BCBAB6", path: "#D0CECA", outline: "#DDDBD8"
+          }
+        }
+      },
+      {
+        id: "copper_patina",
+        name: "Copper Patina",
+        description: "Oxidized copper — teal-green patina ground with warm copper arteries.",
+        tier: "basic",
+        badge: "Terraink",
+        ui: { bg: "#E8F0F0", text: "#2A5A5A" },
+        map: {
+          land: "#E8F0F0", water: "#C0D8D8", park: "#D8E8E0",
+          roads: {
+            motorway: "#B87333", primary: "#629898", tertiary: "#A8CACA",
+            residential: "#B8D4D4", path: "#C8DEDE", outline: "#D2E6E6"
+          }
+        }
+      },
+      {
         id: "indigo_print",
         name: "Indigo Print",
-        description: "Jiangnan indigo resist cloth — deep dye blue with cream-white pattern roads.",
+        description: "Indigo blue with cream-white pattern roads.",
         tier: "basic",
         ui: { bg: "#1A3A6E", text: "#F2EDE4" },
         map: {
@@ -329,76 +411,6 @@
         }
       },
       {
-        id: "pure_white",
-        name: "Pure White",
-        description: "Clean white canvas with soft grey roads — bright and minimal.",
-        tier: "basic",
-        ui: { bg: "#FFFFFF", text: "#2A2A2A" },
-        map: {
-          land: "#FFFFFF", water: "#ECECEC", park: "#F6F6F6",
-          roads: {
-            motorway: "#909090", primary: "#A8A8A8", tertiary: "#D0D0D0",
-            residential: "#DADADA", path: "#E4E4E4", outline: "#EEEEEE"
-          }
-        }
-      },
-      {
-        id: "newspaper",
-        name: "Newspaper",
-        description: "Yellowed newsprint base with inky charcoal roads — classic broadsheet feel.",
-        tier: "basic",
-        ui: { bg: "#F4F0E8", text: "#2C2824" },
-        map: {
-          land: "#F4F0E8", water: "#D8D2C8", park: "#E8E4DC",
-          roads: {
-            motorway: "#3A3430", primary: "#524840", tertiary: "#A89888",
-            residential: "#B8A898", path: "#D0C8BC", outline: "#D8D0C4"
-          }
-        }
-      },
-      {
-        id: "harbor_mist",
-        name: "Harbor Mist",
-        description: "Foggy coastal grey with muted slate water and soft harbor tones.",
-        tier: "basic",
-        ui: { bg: "#C4CED6", text: "#3A5060" },
-        map: {
-          land: "#C4CED6", water: "#7A98A8", park: "#B8C4CC",
-          roads: {
-            motorway: "#4A6878", primary: "#587080", tertiary: "#90A0AC",
-            residential: "#A0B0BA", path: "#A8B4BC", outline: "#B4BEC6"
-          }
-        }
-      },
-      {
-        id: "meadow_sage",
-        name: "Meadow Sage",
-        description: "Dusty sage fields with deeper meadow-green parks and forest roads.",
-        tier: "basic",
-        ui: { bg: "#D8E4D8", text: "#3A5848" },
-        map: {
-          land: "#D8E4D8", water: "#A8C0B0", park: "#B8D0A8",
-          roads: {
-            motorway: "#486850", primary: "#587860", tertiary: "#90A898",
-            residential: "#A0B8A8", path: "#B8C8B4", outline: "#C4D4C0"
-          }
-        }
-      },
-      {
-        id: "warm_clay",
-        name: "Warm Clay",
-        description: "Earthy clay and sand tones with burnt umber roads.",
-        tier: "basic",
-        ui: { bg: "#E8DDD0", text: "#5A4030" },
-        map: {
-          land: "#E8DDD0", water: "#C8B8A4", park: "#DDD0C0",
-          roads: {
-            motorway: "#6A4838", primary: "#886048", tertiary: "#B89880",
-            residential: "#C8A890", path: "#D0C0B0", outline: "#D8C8B8"
-          }
-        }
-      },
-      {
         id: "ember_glow",
         name: "Ember Glow",
         description: "Charred dark base with glowing ember-orange arteries.",
@@ -413,36 +425,52 @@
         }
       },
       {
-        id: "anubis",
-        name: "Anubis",
-        description: "Lacquer-black night with gilded roads — ancient Egyptian opulence.",
+        id: "emerald_city",
+        name: "Emerald City",
+        description: "Lush dark green with glowing mint arteries.",
         tier: "basic",
-        ui: { bg: "#140B01", text: "#D6B352" },
+        badge: "Terraink",
+        ui: { bg: "#062C22", text: "#E3F9F1" },
         map: {
-          land: "#140B01", water: "#0A0500", park: "#1E1508",
+          land: "#062C22", water: "#0D4536", park: "#0F523E",
           roads: {
-            motorway: "#D4A437", primary: "#9A741F", tertiary: "#2F2412",
-            residential: "#201808", path: "#453818", outline: "#4C3F1C"
+            motorway: "#4ADEB0", primary: "#18A070", tertiary: "#32554B",
+            residential: "#25493F", path: "#42635A", outline: "#517268"
+          }
+        }
+      },
+      {
+        id: "ruby",
+        name: "Ruby",
+        description: "Garnet reds over deep plum city blocks — rich and jewel-toned.",
+        tier: "basic",
+        badge: "Terraink",
+        ui: { bg: "#1A070F", text: "#F6D7BC" },
+        map: {
+          land: "#1A070F", water: "#2A0D17", park: "#351021",
+          roads: {
+            motorway: "#C0103C", primary: "#780C2C", tertiary: "#463132",
+            residential: "#392427", path: "#553F3E", outline: "#654E4A"
+          }
+        }
+      },
+      {
+        id: "prehistoric_pottery",
+        name: "Prehistoric Pottery",
+        description: "Neolithic red ware — ochre clay ground with carbon-black road lines.",
+        tier: "basic",
+        ui: { bg: "#D4956A", text: "#2A1810" },
+        map: {
+          land: "#D4956A", water: "#6E4838", park: "#B89068",
+          roads: {
+            motorway: "#1C1008", primary: "#3D2418", tertiary: "#8B6048",
+            residential: "#A07050", path: "#C8A078", outline: "#B88868"
           }
         }
       }
     ];
 
     const proThemes = [
-      {
-        id: "starry_night",
-        name: "Starry Night",
-        description: "Ultramarine night ground with chrome-yellow stars and cobalt swirl roads.",
-        tier: "pro",
-        ui: { bg: "#0E1C48", text: "#F0C020" },
-        map: {
-          land: "#0E1C48", water: "#081028", park: "#0C1C14",
-          roads: {
-            motorway: "#F0C020", primary: "#3D7AA8", tertiary: "#1A2850",
-            residential: "#142038", path: "#182840", outline: "#2A4870"
-          }
-        }
-      },
       {
         id: "great_wave",
         name: "Great Wave",
@@ -458,16 +486,44 @@
         }
       },
       {
-        id: "the_scream",
-        name: "The Scream",
-        description: "Blood-orange sky ground with blue-black fjord roads and teal hills.",
+        id: "rivers_and_mountains",
+        name: "Rivers and Mountains",
+        description: "Song blue-green hills, azurite rivers, ochre ground.",
         tier: "pro",
-        ui: { bg: "#D94A28", text: "#1A3048" },
+        ui: { bg: "#D4C898", text: "#2A4030" },
         map: {
-          land: "#D94A28", water: "#1A3048", park: "#3A5040",
+          land: "#D4C898", water: "#4A7A98", park: "#5A8A48",
           roads: {
-            motorway: "#1A3048", primary: "#2A4058", tertiary: "#B83820",
-            residential: "#C85030", path: "#C84020", outline: "#E07050"
+            motorway: "#2E4A30", primary: "#3E6840", tertiary: "#7A9060",
+            residential: "#9AA878", path: "#C0B890", outline: "#CCC4A0"
+          }
+        }
+      },
+      {
+        id: "polar_ice",
+        name: "Polar Ice",
+        description: "Crisp arctic white with glacier-blue water and frozen steel roads.",
+        tier: "pro",
+        ui: { bg: "#F2F8FC", text: "#1860A0" },
+        map: {
+          land: "#F2F8FC", water: "#78B8E0", park: "#E4F0F8",
+          roads: {
+            motorway: "#2070A8", primary: "#3888B8", tertiary: "#88B8D8",
+            residential: "#98C8E0", path: "#B8D8EC", outline: "#C8E0F0"
+          }
+        }
+      },
+      {
+        id: "starry_night",
+        name: "Starry Night",
+        description: "Ultramarine night with yellow stars and cobalt roads.",
+        tier: "pro",
+        ui: { bg: "#0E1C48", text: "#F0C020" },
+        map: {
+          land: "#0E1C48", water: "#081028", park: "#0C1C14",
+          roads: {
+            motorway: "#F0C020", primary: "#3D7AA8", tertiary: "#1A2850",
+            residential: "#142038", path: "#182840", outline: "#2A4870"
           }
         }
       },
@@ -482,188 +538,6 @@
           roads: {
             motorway: "#5C3010", primary: "#8B5018", tertiary: "#C89828",
             residential: "#D4A830", path: "#E0B838", outline: "#E8C850"
-          }
-        }
-      },
-      {
-        id: "thousand_li",
-        name: "Rivers and Mountains",
-        description: "Northern Song blue-green landscape — malachite hills, azurite rivers, silk-ochre ground.",
-        tier: "pro",
-        ui: { bg: "#D4C898", text: "#2A4030" },
-        map: {
-          land: "#D4C898", water: "#4A7A98", park: "#5A8A48",
-          roads: {
-            motorway: "#2E4A30", primary: "#3E6840", tertiary: "#7A9060",
-            residential: "#9AA878", path: "#C0B890", outline: "#CCC4A0"
-          }
-        }
-      },
-      {
-        id: "gilded_imperial",
-        name: "Gilded Imperial",
-        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
-        tier: "pro",
-        ui: { bg: "#6E1418", text: "#E8C868" },
-        map: {
-          land: "#6E1418", water: "#4A0C10", park: "#581418",
-          roads: {
-            motorway: "#D4AF37", primary: "#C89830", tertiary: "#481018",
-            residential: "#3A0C10", path: "#501418", outline: "#601820"
-          }
-        }
-      },
-      {
-        id: "cyberpunk",
-        name: "Cyberpunk",
-        description: "Industrial blue-black night with neon magenta roads and acid-yellow signs.",
-        tier: "pro",
-        ui: { bg: "#080C14", text: "#00F5FF" },
-        map: {
-          land: "#080C14", water: "#0A1420", park: "#101828",
-          roads: {
-            motorway: "#FF007A", primary: "#C80068", tertiary: "#202838",
-            residential: "#141C28", path: "#1A2030", outline: "#283040"
-          }
-        }
-      },
-      {
-        id: "mondrian",
-        name: "Mondrian",
-        description: "Gallery-white ground with primary-red arteries, cobalt trunks, and chrome-yellow rail.",
-        tier: "pro",
-        ui: { bg: "#F7F7F2", text: "#1A1A1A" },
-        map: {
-          land: "#F7F7F2", water: "#E6E6E0", park: "#F0F0EA",
-          roads: {
-            motorway: "#C41E3A", primary: "#1E3A8A", tertiary: "#C8C8C4",
-            residential: "#D8D8D4", path: "#DEDEDA", outline: "#1A1A1A"
-          }
-        }
-      },
-      {
-        id: "sugar_skull",
-        name: "Sugar Skull",
-        description: "Violet fiesta night with hot-pink arteries, marigold roads, and sugar-cyan rail.",
-        tier: "pro",
-        ui: { bg: "#2A0A3C", text: "#FFE66D" },
-        map: {
-          land: "#2A0A3C", water: "#1A0830", park: "#5A2878",
-          roads: {
-            motorway: "#FF6B9D", primary: "#FF9F1C", tertiary: "#4A2068",
-            residential: "#381848", path: "#3A1850", outline: "#7A3A98"
-          }
-        }
-      },
-      {
-        id: "reggae",
-        name: "Reggae",
-        description: "Night-black ground with rasta-red arteries, gold trunks, and lion-green parks.",
-        tier: "pro",
-        ui: { bg: "#0C0C0C", text: "#F0C000" },
-        map: {
-          land: "#0C0C0C", water: "#0E2416", park: "#007A3D",
-          roads: {
-            motorway: "#D21034", primary: "#F0C000", tertiary: "#2A2A22",
-            residential: "#1A1A14", path: "#222218", outline: "#3A3A30"
-          }
-        }
-      },
-      {
-        id: "constructivist",
-        name: "Constructivist",
-        description: "Poster-paper ground with wedge-red arteries, ink-black trunks, and charcoal rail — red, black, white only.",
-        tier: "pro",
-        ui: { bg: "#EDE8DF", text: "#D40000" },
-        map: {
-          land: "#EDE8DF", water: "#C4BDB4", park: "#D6D0C8",
-          roads: {
-            motorway: "#D40000", primary: "#1A1A1A", tertiary: "#B0AAA2",
-            residential: "#C2BCB4", path: "#D8D2CA", outline: "#1A1A1A"
-          }
-        }
-      },
-      {
-        id: "macaw",
-        name: "Macaw",
-        description: "Cobalt flight-feather ground with scarlet arteries, gold wing-bar trunks, and covert-green parks.",
-        tier: "pro",
-        ui: { bg: "#1A7FCC", text: "#FFD54A" },
-        map: {
-          land: "#1A7FCC", water: "#0E4A78", park: "#2E8B57",
-          roads: {
-            motorway: "#E03C28", primary: "#F0B429", tertiary: "#1A68A8",
-            residential: "#1878B8", path: "#1480C0", outline: "#2A90D8"
-          }
-        }
-      },
-      {
-        id: "unit_01",
-        name: "Unit 01",
-        description: "Deep violet armor with acid-green optic glow — night-ops purple.",
-        tier: "pro",
-        ui: { bg: "#1A0A28", text: "#B8F000" },
-        map: {
-          land: "#1A0A28", water: "#0E0618", park: "#2A1440",
-          roads: {
-            motorway: "#B8F000", primary: "#88C020", tertiary: "#3A2850",
-            residential: "#2A1838", path: "#3A2050", outline: "#4A3068"
-          }
-        }
-      },
-      {
-        id: "bonfire_ash",
-        name: "Bonfire Ash",
-        description: "Ashen stone ruins with cold grey roads — bonfire orange only on the main arteries and place text.",
-        tier: "pro",
-        ui: { bg: "#141210", text: "#D4882A" },
-        map: {
-          land: "#141210", water: "#0E0C0A", park: "#222018",
-          roads: {
-            motorway: "#D4882A", primary: "#6A6058", tertiary: "#4A4840",
-            residential: "#383630", path: "#3A3830", outline: "#504C44"
-          }
-        }
-      },
-      {
-        id: "test_chamber",
-        name: "Test Chamber",
-        description: "Lab white with hazard-orange test-chamber arteries.",
-        tier: "pro",
-        ui: { bg: "#F2F0EC", text: "#C05010" },
-        map: {
-          land: "#F2F0EC", water: "#C8D0D8", park: "#D8DCE0",
-          roads: {
-            motorway: "#E8600A", primary: "#C05010", tertiary: "#B8B4AC",
-            residential: "#C8C4BC", path: "#D0CEC8", outline: "#DEDCD6"
-          }
-        }
-      },
-      {
-        id: "wasteland_terminal",
-        name: "Wasteland Terminal",
-        description: "Wasteland terminal night — olive-black chassis with phosphor green.",
-        tier: "pro",
-        ui: { bg: "#0C1408", text: "#33FF00" },
-        map: {
-          land: "#0C1408", water: "#081008", park: "#142018",
-          roads: {
-            motorway: "#33FF00", primary: "#28CC00", tertiary: "#243820",
-            residential: "#182818", path: "#1A2818", outline: "#283828"
-          }
-        }
-      },
-      {
-        id: "neighborhood_hero",
-        name: "Neighborhood Hero",
-        description: "Classic suit crimson with hero-blue arteries and web-white rail glow.",
-        tier: "pro",
-        ui: { bg: "#C8102E", text: "#F5F5F5" },
-        map: {
-          land: "#C8102E", water: "#0B1D4A", park: "#8B1528",
-          roads: {
-            motorway: "#1E4D9C", primary: "#2A5BB0", tertiary: "#901020",
-            residential: "#A81830", path: "#A01028", outline: "#E02040"
           }
         }
       },
@@ -696,159 +570,142 @@
         }
       },
       {
-        id: "polar_ice",
-        name: "Polar Ice",
-        description: "Crisp arctic white with glacier-blue water and frozen steel roads.",
+        id: "gilded_imperial",
+        name: "Gilded Imperial",
+        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
         tier: "pro",
-        ui: { bg: "#F2F8FC", text: "#1860A0" },
+        ui: { bg: "#6E1418", text: "#E8C868" },
         map: {
-          land: "#F2F8FC", water: "#78B8E0", park: "#E4F0F8",
+          land: "#6E1418", water: "#4A0C10", park: "#581418",
           roads: {
-            motorway: "#2070A8", primary: "#3888B8", tertiary: "#88B8D8",
-            residential: "#98C8E0", path: "#B8D8EC", outline: "#C8E0F0"
-          }
-        }
-      }
-    ];
-
-    const moreThemes = [
-      {
-        id: "tokyo_night",
-        name: "Tokyo Night",
-        description: "Deep indigo night with electric blue arteries and cyan neon accents.",
-        tier: "more", badge: "Tokyo Night",
-        ui: { bg: "#1A1B26", text: "#C0CAF5" },
-        map: {
-          land: "#1A1B26", water: "#16161E", park: "#1F2335",
-          roads: {
-            motorway: "#7AA2F7", primary: "#6183BB", tertiary: "#24283B",
-            residential: "#1A1B26", path: "#292E42", outline: "#3B4261"
+            motorway: "#D4AF37", primary: "#C89830", tertiary: "#481018",
+            residential: "#3A0C10", path: "#501418", outline: "#601820"
           }
         }
       },
       {
-        id: "dracula",
-        name: "Dracula",
-        description: "Purple-grey night with pink arteries, lavender roads, and cyan rail glow.",
-        tier: "more", badge: "Dracula",
-        ui: { bg: "#282A36", text: "#F8F8F2" },
+        id: "mondrian",
+        name: "Mondrian",
+        description: "Gallery white with red arteries, cobalt trunks, yellow rail.",
+        tier: "pro",
+        ui: { bg: "#F7F7F2", text: "#1A1A1A" },
         map: {
-          land: "#282A36", water: "#21222C", park: "#44475A",
+          land: "#F7F7F2", water: "#E6E6E0", park: "#F0F0EA",
           roads: {
-            motorway: "#FF79C6", primary: "#BD93F9", tertiary: "#44475A",
-            residential: "#282A36", path: "#44475A", outline: "#6272A4"
+            motorway: "#C41E3A", primary: "#1E3A8A", tertiary: "#C8C8C4",
+            residential: "#D8D8D4", path: "#DEDEDA", outline: "#1A1A1A"
           }
         }
       },
       {
-        id: "synthwave_84",
-        name: "Synthwave '84",
-        description: "Retro sunset purple with hot-pink grid roads and electric cyan glow.",
-        tier: "more", badge: "SynthWave '84",
-        ui: { bg: "#262335", text: "#03EDF9" },
+        id: "constructivist",
+        name: "Constructivist",
+        description: "Poster white with wedge-red arteries — red, black, white.",
+        tier: "pro",
+        ui: { bg: "#EDE8DF", text: "#D40000" },
         map: {
-          land: "#262335", water: "#1E1830", park: "#302848",
+          land: "#EDE8DF", water: "#C4BDB4", park: "#D6D0C8",
           roads: {
-            motorway: "#FF7EDB", primary: "#FFAE64", tertiary: "#3D3258",
-            residential: "#2E2645", path: "#34294F", outline: "#495495"
+            motorway: "#D40000", primary: "#1A1A1A", tertiary: "#B0AAA2",
+            residential: "#C2BCB4", path: "#D8D2CA", outline: "#1A1A1A"
           }
         }
       },
       {
-        id: "japanese_ink",
-        name: "Japanese Ink",
-        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
+        id: "the_scream",
+        name: "The Scream",
+        description: "Blood-orange sky ground with blue-black fjord roads and teal hills.",
+        tier: "pro",
+        ui: { bg: "#D94A28", text: "#1A3048" },
         map: {
-          land: "#FAF8F5", water: "#E8E4E0", park: "#F0EDE8",
+          land: "#D94A28", water: "#1A3048", park: "#3A5040",
           roads: {
-            motorway: "#8B2500", primary: "#505050", tertiary: "#A8A8A8",
-            residential: "#BCBAB6", path: "#D0CECA", outline: "#DDDBD8"
+            motorway: "#1A3048", primary: "#2A4058", tertiary: "#B83820",
+            residential: "#C85030", path: "#C84020", outline: "#E07050"
           }
         }
       },
       {
-        id: "copper_patina",
-        name: "Copper Patina",
-        description: "Oxidized copper — teal-green patina ground with warm copper arteries.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#E8F0F0", text: "#2A5A5A" },
+        id: "anubis",
+        name: "Anubis",
+        description: "Lacquer-black night with gilded roads — ancient Egyptian opulence.",
+        tier: "pro",
+        ui: { bg: "#140B01", text: "#D6B352" },
         map: {
-          land: "#E8F0F0", water: "#C0D8D8", park: "#D8E8E0",
+          land: "#140B01", water: "#0A0500", park: "#1E1508",
           roads: {
-            motorway: "#B87333", primary: "#629898", tertiary: "#A8CACA",
-            residential: "#B8D4D4", path: "#C8DEDE", outline: "#D2E6E6"
+            motorway: "#D4A437", primary: "#9A741F", tertiary: "#2F2412",
+            residential: "#201808", path: "#453818", outline: "#4C3F1C"
           }
         }
       },
       {
-        id: "coral",
-        name: "Coral",
-        description: "Soft ivory ground with warm coral roads and muted pink features.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#F3E1DA", text: "#6E2F28" },
+        id: "cyberpunk",
+        name: "Cyberpunk",
+        description: "Blue-black night with neon magenta roads.",
+        tier: "pro",
+        ui: { bg: "#080C14", text: "#00F5FF" },
         map: {
-          land: "#F3E1DA", water: "#DFC0B5", park: "#EACFC6",
+          land: "#080C14", water: "#0A1420", park: "#101828",
           roads: {
-            motorway: "#B9473A", primary: "#C86050", tertiary: "#E09888",
-            residential: "#DDAA9A", path: "#E8C4B8", outline: "#EDD2C8"
+            motorway: "#FF007A", primary: "#C80068", tertiary: "#202838",
+            residential: "#141C28", path: "#1A2030", outline: "#283040"
           }
         }
       },
       {
-        id: "pastel_dream",
-        name: "Pastel Dream",
-        description: "Soft muted pastels with dusty-blue roads and mauve buildings — dreamy and artistic.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#FAF7F2", text: "#5D5A6D" },
+        id: "sugar_skull",
+        name: "Sugar Skull",
+        description: "Violet night with hot-pink arteries and marigold roads.",
+        tier: "pro",
+        ui: { bg: "#2A0A3C", text: "#FFE66D" },
         map: {
-          land: "#FAF7F2", water: "#D4E4ED", park: "#E8EDE4",
+          land: "#2A0A3C", water: "#1A0830", park: "#5A2878",
           roads: {
-            motorway: "#6870A0", primary: "#9898B8", tertiary: "#C4C2D0",
-            residential: "#CCCCDA", path: "#D8D8E2", outline: "#E0E0E8"
+            motorway: "#FF6B9D", primary: "#FF9F1C", tertiary: "#4A2068",
+            residential: "#381848", path: "#3A1850", outline: "#7A3A98"
           }
         }
       },
       {
-        id: "blueprint",
-        name: "Blueprint",
-        description: "Classic architectural blueprint — cyan-white roads on deep drafting blue.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#1A3A5C", text: "#E8F4FF" },
+        id: "reggae",
+        name: "Reggae",
+        description: "Night black with rasta-red arteries and gold trunks.",
+        tier: "pro",
+        ui: { bg: "#0C0C0C", text: "#F0C000" },
         map: {
-          land: "#1A3A5C", water: "#0E2740", park: "#1F466F",
+          land: "#0C0C0C", water: "#0E2416", park: "#007A3D",
           roads: {
-            motorway: "#D8EEFA", primary: "#7AAED0", tertiary: "#435F7D",
-            residential: "#375473", path: "#526C88", outline: "#607993"
+            motorway: "#D21034", primary: "#F0C000", tertiary: "#2A2A22",
+            residential: "#1A1A14", path: "#222218", outline: "#3A3A30"
           }
         }
       },
       {
-        id: "emerald_city",
-        name: "Emerald City",
-        description: "Lush dark green with glowing mint arteries.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#062C22", text: "#E3F9F1" },
+        id: "unit_01",
+        name: "Unit 01",
+        description: "Deep violet armor with acid-green optic glow — night-ops purple.",
+        tier: "pro",
+        ui: { bg: "#1A0A28", text: "#B8F000" },
         map: {
-          land: "#062C22", water: "#0D4536", park: "#0F523E",
+          land: "#1A0A28", water: "#0E0618", park: "#2A1440",
           roads: {
-            motorway: "#4ADEB0", primary: "#18A070", tertiary: "#32554B",
-            residential: "#25493F", path: "#42635A", outline: "#517268"
+            motorway: "#B8F000", primary: "#88C020", tertiary: "#3A2850",
+            residential: "#2A1838", path: "#3A2050", outline: "#4A3068"
           }
         }
       },
       {
-        id: "ruby",
-        name: "Ruby",
-        description: "Garnet reds over deep plum city blocks — rich and jewel-toned.",
-        tier: "more", badge: "Terraink",
-        ui: { bg: "#1A070F", text: "#F6D7BC" },
+        id: "terminal",
+        name: "Terminal",
+        description: "Olive-black night with phosphor-green roads.",
+        tier: "pro",
+        ui: { bg: "#0C1408", text: "#33FF00" },
         map: {
-          land: "#1A070F", water: "#2A0D17", park: "#351021",
+          land: "#0C1408", water: "#081008", park: "#142018",
           roads: {
-            motorway: "#C0103C", primary: "#780C2C", tertiary: "#463132",
-            residential: "#392427", path: "#553F3E", outline: "#654E4A"
+            motorway: "#33FF00", primary: "#28CC00", tertiary: "#243820",
+            residential: "#182818", path: "#1A2818", outline: "#283828"
           }
         }
       }
@@ -988,7 +845,6 @@
 
     mount(basicThemes, "basic-grid");
     mount(proThemes, "pro-grid");
-    mount(moreThemes, "more-grid");
 
     paintAllRoads();
     window.addEventListener("resize", paintAllRoads);
