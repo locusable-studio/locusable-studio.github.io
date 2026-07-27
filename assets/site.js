@@ -4,7 +4,7 @@
     if (!meta) return;
     var dark = window.matchMedia("(prefers-color-scheme: dark)");
     function apply() {
-      meta.setAttribute("content", dark.matches ? "#050507" : "#f5f6f8");
+      meta.setAttribute("content", dark.matches ? "#000000" : "#ffffff");
     }
     apply();
     if (dark.addEventListener) dark.addEventListener("change", apply);

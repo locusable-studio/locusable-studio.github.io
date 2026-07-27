@@ -6,7 +6,6 @@ const pages = [
   "index.html",
   "here-wallpaper/index.html",
   "here-wallpaper/themes/index.html",
-  "here-wallpaper/layers/index.html",
   "here-wallpaper/privacy/index.html",
   "here-links/index.html",
   "here-links/privacy/index.html",

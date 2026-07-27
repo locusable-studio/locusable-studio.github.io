@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f6f8">
+  <meta name="theme-color" content="#ffffff">
   <title>Here Links — Locusable Studio</title>
   <meta name="description" content="Here Links — native iOS client for your self-hosted linkding.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -14,65 +14,68 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=21">
+  <link rel="stylesheet" href="/assets/site.css?v=26">
 </head>
 <body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-iphone" viewBox="0 0 18 28">
+      <rect x="1.25" y="1.25" width="15.5" height="25.5" rx="3.2" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="9" cy="23.2" r="1.15"/>
+    </symbol>
+  </svg>
+
   <div class="site-shell site-shell--wide">
-    <div class="topbar">
-      <a href="/">← Locusable Studio</a>
-    </div>
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><span aria-current="page">Here Links</span></li>
+      </ol>
+    </nav>
 
     <main>
-      <section class="hero hero--compact" aria-labelledby="product-title" data-reveal>
-        <div>
-          <div class="brand-row">
-            <img class="app-icon" src="/assets/here-links/icon-192.png?v=10" width="72" height="72" alt="">
-            <h1 class="display" id="product-title">Here <em>Links</em></h1>
-          </div>
-          <p class="tagline">Your linkding bookmarks on iPhone — multi-server, share extension, in-app Safari.</p>
+      <section class="product-hero" aria-labelledby="product-title">
+        <img class="product-hero__icon" src="/assets/here-links/icon-192.png?v=10" width="84" height="84" alt="">
+        <div class="platforms platforms--lg" aria-label="Available on iPhone">
+          <svg class="icon-iphone"><use href="#icon-iphone"></use></svg>
         </div>
-
-        <div class="cta-row">
+        <h1 class="display" id="product-title">Here <em>Links</em></h1>
+        <p class="unit__subhead">Your linkding bookmarks on iPhone.</p>
+        <div class="unit__links">
           <span class="coming-soon" aria-disabled="true">Coming soon</span>
         </div>
-
-        <div class="hero-shots" aria-label="App previews">
-          <figure class="hero-shot">
-            <img src="/assets/here-links/shots/shot-1.jpg?v=1" width="585" height="1272" alt="Here Links bookmarks list">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/here-links/shots/shot-2.jpg?v=2" width="585" height="1272" alt="Here Links bookmark detail">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/here-links/shots/shot-3.jpg?v=1" width="585" height="1272" alt="Here Links in-app Safari">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/here-links/shots/shot-4.jpg?v=1" width="585" height="1272" alt="Here Links HTML snapshot preview">
-          </figure>
+        <div class="unit__media unit__media--phones" aria-label="App previews">
+          <figure><img src="/assets/here-links/shots/shot-1.jpg?v=1" width="440" height="828" alt="Here Links bookmarks list"></figure>
+          <figure><img src="/assets/here-links/shots/shot-2.jpg?v=2" width="440" height="828" alt="Here Links bookmark detail"></figure>
+          <figure><img src="/assets/here-links/shots/shot-3.jpg?v=1" width="440" height="828" alt="Here Links in-app Safari"></figure>
+          <figure><img src="/assets/here-links/shots/shot-4.jpg?v=1" width="440" height="828" alt="Here Links HTML snapshot preview"></figure>
         </div>
       </section>
 
-      <section class="points" aria-label="How it works" data-reveal>
-        <article class="point">
-          <h2>Servers</h2>
-          <p>Connect one or more linkding instances. Browse a mixed feed.</p>
-        </article>
-        <article class="point">
-          <h2>Share</h2>
-          <p>Save links from other apps with the Share Extension.</p>
-        </article>
-        <article class="point">
-          <h2>Open</h2>
-          <p>Read in-app with Safari. Download snapshots with your token.</p>
-        </article>
+      <section class="unit unit--light" data-reveal aria-label="Highlights">
+        <div class="tile-grid">
+          <article class="tile">
+            <h3>Servers</h3>
+            <p>Connect one or more linkding instances. Browse a mixed feed.</p>
+          </article>
+          <article class="tile">
+            <h3>Share</h3>
+            <p>Save links from other apps with the Share Extension.</p>
+          </article>
+          <article class="tile">
+            <h3>Open</h3>
+            <p>Read in-app with Safari. Download snapshots with your token.</p>
+          </article>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>© 2026 Locusable Studio</span>
-      <a href="/here-links/privacy/">Privacy Policy</a>
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/here-links/privacy/">Privacy Policy</a>
+      </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=21" defer></script>
+  <script src="/assets/site.js?v=25" defer></script>
 </body>
 </html>

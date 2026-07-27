@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f5f6f8">
+  <meta name="theme-color" content="#ffffff">
   <title>Here Wallpaper — Themes</title>
   <meta name="description" content="Here Wallpaper theme preview — Basic and Featured palettes.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -14,7 +14,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=21">
+  <link rel="stylesheet" href="/assets/site.css?v=26">
+  <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
   <style>
     :root {
       --page-bg: var(--bg);
@@ -33,28 +35,11 @@
       padding: 0 24px calc(48px + env(safe-area-inset-bottom));
     }
 
-    .topbar {
+    .crumbbar {
+      padding-left: 0;
+      padding-right: 0;
       max-width: 1200px;
       margin: 0 auto;
-      padding-top: calc(28px + env(safe-area-inset-top));
-      margin-bottom: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 20px;
-      align-items: baseline;
-      justify-content: flex-start;
-    }
-
-    .topbar a {
-      color: var(--page-muted);
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .topbar a:hover,
-    .topbar a:focus-visible {
-      color: var(--page-text);
-      outline: none;
     }
 
     .page-title {
@@ -116,8 +101,22 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 22px;
+      }
     }
 
     .theme-card {
@@ -161,8 +160,8 @@
 
     .phone {
       width: 100%;
-      aspect-ratio: 1;
-      border-radius: 12px;
+      aspect-ratio: 1170 / 2532;
+      border-radius: 22px;
       overflow: hidden;
       position: relative;
       container-type: size;
@@ -173,34 +172,22 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
-    }
-    .layer-land { position: absolute; inset: 0; }
-
-    .layer-park {
-      position: absolute;
-      left: 6%;
-      top: 38%;
-      width: 28%;
-      height: 14%;
-      border-radius: 3%;
+      background: #d8e4d8;
     }
 
-    .layer-water {
-      position: absolute;
-      left: 58%;
-      top: 22%;
-      width: 34%;
-      height: 22%;
-      border-radius: 50%;
-    }
-
-    .roads {
+    .theme-map {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      pointer-events: none;
+    }
+
+    .theme-map .maplibregl-ctrl-attrib,
+    .theme-map .maplibregl-ctrl-logo {
+      display: none !important;
+    }
+
+    .map-fallback {
+      position: absolute;
+      inset: 0;
     }
 
     .fade-bottom {
@@ -208,8 +195,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 25%;
+      height: 28%;
       pointer-events: none;
+      z-index: 1;
     }
 
     .poster-text {
@@ -276,13 +264,17 @@
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <a href="/here-wallpaper/">← Here Wallpaper</a>
-  </div>
+  <nav class="crumbbar" aria-label="Breadcrumb">
+    <ol class="crumbs">
+      <li><a href="/">Locusable Studio</a></li>
+      <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
+      <li><span aria-current="page">Themes</span></li>
+    </ol>
+  </nav>
 
   <header>
     <h1 class="page-title">Themes</h1>
-    <p class="page-lead">Same palettes as in the app. Basic is free; Featured unlocks with Pro.</p>
+    <p class="page-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
   </header>
 
   <section id="basic-section">
@@ -301,7 +293,7 @@
 
 
   <footer>
-    <span>© 2026 Locusable Studio</span>
+    <span>© 2026 Locusable Studio · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
     <a href="/here-wallpaper/privacy/">Privacy Policy</a>
   </footer>
 
@@ -724,90 +716,165 @@
       }
     ];
 
-    // Mirror ThemeMockRoadLayer in ThemeWallpaperPreview.swift
-    const DESIGN_SIDE = 393;
-    const RoadStyle = {
-      pathOpacity: 0.82,
-      residentialOpacity: 0.46,
-      tertiaryOpacity: 0.74,
-      primaryOpacity: 0.92,
-      motorwayOpacity: 1,
-      outlineOpacity: 0.85,
-      majorCasing: 1.38,
-      primaryCasing: 1.45,
-      tertiaryCasing: 1.15,
-      pathCasing: 1.6
-    };
+    const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+    const MAP_CENTER = [108.9402, 34.3416]; // Xi'an
+    const MAP_ZOOM = 11.2;
+    const themeById = Object.fromEntries(
+      [...basicThemes, ...proThemes].map((theme) => [theme.id, theme])
+    );
 
-    function paintRoads(canvas, colors) {
-      const size = canvas.clientWidth;
-      if (size <= 0) return;
+    let baseStylePromise = null;
+    const liveMaps = new Map();
 
-      const dpr = window.devicePixelRatio || 1;
-      const pixels = Math.max(1, Math.round(size * dpr));
-      if (canvas.width !== pixels || canvas.height !== pixels) {
-        canvas.width = pixels;
-        canvas.height = pixels;
+    function getBaseStyle() {
+      if (!baseStylePromise) {
+        baseStylePromise = fetch(STYLE_URL).then((res) => {
+          if (!res.ok) throw new Error("Failed to load map style");
+          return res.json();
+        });
+      }
+      return baseStylePromise;
+    }
+
+    function hideLayer(layer) {
+      layer.layout = Object.assign({}, layer.layout || {}, { visibility: "none" });
+    }
+
+    function setPaint(layer, key, value) {
+      if (!layer.paint || !(key in layer.paint)) return;
+      layer.paint[key] = value;
+    }
+
+    // Liberty defaults are much thicker than Here Wallpaper's MapLibreStyleBuilder.
+    // Match the app: drop casings and scale remaining stroke widths down.
+    const LINE_WIDTH_SCALE = 0.42;
+
+    function scaleLineWidthExpr(value, factor) {
+      if (typeof value === "number") return value * factor;
+      if (!Array.isArray(value)) return value;
+
+      const copy = value.slice();
+      const isInterpolate = copy[0] === "interpolate" || copy[0] === "interpolate-hcl" || copy[0] === "interpolate-lab";
+      if (isInterpolate) {
+        // ["interpolate", easing, input, stop1, val1, stop2, val2, ...]
+        for (let i = 4; i < copy.length; i += 2) {
+          if (typeof copy[i] === "number") copy[i] *= factor;
+        }
+        return copy;
       }
 
-      const ctx = canvas.getContext("2d");
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.clearRect(0, 0, pixels, pixels);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return copy.map((item) => (Array.isArray(item) || typeof item === "number")
+        ? scaleLineWidthExpr(item, factor)
+        : item);
+    }
 
-      const scale = size / DESIGN_SIDE;
-      const { motorway, primary, tertiary, residential, path, outline } = colors;
+    function thinRoadLines(layer) {
+      if (!layer.paint || !("line-width" in layer.paint)) return;
+      layer.paint["line-width"] = scaleLineWidthExpr(layer.paint["line-width"], LINE_WIDTH_SCALE);
+      if ("line-gap-width" in layer.paint) {
+        layer.paint["line-gap-width"] = scaleLineWidthExpr(layer.paint["line-gap-width"], LINE_WIDTH_SCALE);
+      }
+    }
 
-      function stroke(build, hex, width, opacity = 1) {
-        ctx.save();
-        ctx.globalAlpha = opacity;
-        ctx.strokeStyle = hex;
-        ctx.lineWidth = width * scale;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.beginPath();
-        build(ctx);
-        ctx.stroke();
-        ctx.restore();
+    function themedStyle(base, theme) {
+      const style = JSON.parse(JSON.stringify(base));
+      const { land, water, park, roads } = theme.map;
+      const building = park;
+
+      for (const layer of style.layers) {
+        const id = layer.id;
+        const type = layer.type;
+
+        if (
+          type === "symbol" ||
+          type === "fill-extrusion" ||
+          id.includes("rail") ||
+          id.includes("boundary") ||
+          id.includes("poi_") ||
+          id.includes("casing")
+        ) {
+          hideLayer(layer);
+          continue;
+        }
+        if (layer.paint && ("fill-pattern" in layer.paint || "line-pattern" in layer.paint)) {
+          hideLayer(layer);
+          continue;
+        }
+
+        if (type === "line") thinRoadLines(layer);
+
+        if (id === "background") {
+          setPaint(layer, "background-color", land);
+          continue;
+        }
+
+        if (
+          id === "park" ||
+          id === "park_outline" ||
+          id.includes("landcover_wood") ||
+          id.includes("landcover_grass") ||
+          id.includes("landuse_pitch") ||
+          id.includes("landuse_track") ||
+          id.includes("landuse_cemetery")
+        ) {
+          setPaint(layer, "fill-color", park);
+          setPaint(layer, "fill-outline-color", park);
+          setPaint(layer, "line-color", park);
+          continue;
+        }
+
+        if (id.includes("water")) {
+          setPaint(layer, "fill-color", water);
+          setPaint(layer, "line-color", water);
+          continue;
+        }
+
+        if (id.includes("building")) {
+          setPaint(layer, "fill-color", building);
+          setPaint(layer, "fill-outline-color", roads.outline);
+          continue;
+        }
+
+        if (id.includes("motorway")) {
+          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.motorway);
+          continue;
+        }
+
+        if (id.includes("trunk") || id.includes("primary")) {
+          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.primary);
+          continue;
+        }
+
+        if (id.includes("secondary") || id.includes("tertiary")) {
+          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.tertiary);
+          continue;
+        }
+
+        if (id.includes("path") || id.includes("pedestrian")) {
+          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.path);
+          continue;
+        }
+
+        if (
+          id.includes("road_") ||
+          id.includes("tunnel_") ||
+          id.includes("bridge_") ||
+          id.includes("street") ||
+          id.includes("aeroway")
+        ) {
+          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.residential);
+          setPaint(layer, "fill-color", land);
+          continue;
+        }
+
+        if (id.includes("landuse") || id.includes("landcover")) {
+          setPaint(layer, "fill-color", land);
+          setPaint(layer, "fill-outline-color", land);
+          continue;
+        }
       }
 
-      function road(build, fill, width, fillOpacity, casingScale) {
-        stroke(build, outline, width * casingScale, RoadStyle.outlineOpacity);
-        stroke(build, fill, width, fillOpacity);
-      }
-
-      function linePath(from, to) {
-        return (c) => {
-          c.moveTo(from[0] * scale, from[1] * scale);
-          c.lineTo(to[0] * scale, to[1] * scale);
-        };
-      }
-
-      function curvedPath(from, control, to, end) {
-        return (c) => {
-          const c2x = (to[0] + (end[0] - to[0]) * 0.6) * scale;
-          const c2y = (to[1] + (end[1] - to[1]) * 0.4) * scale;
-          c.moveTo(from[0] * scale, from[1] * scale);
-          c.quadraticCurveTo(control[0] * scale, control[1] * scale, to[0] * scale, to[1] * scale);
-          c.quadraticCurveTo(c2x, c2y, end[0] * scale, end[1] * scale);
-        };
-      }
-
-      const pathRoad = curvedPath([-20, 60], [120, 80], [200, 120], [420, 150]);
-      const residentialRoad = curvedPath([80, 180], [180, 160], [280, 190], [420, 220]);
-      const tertiaryA = curvedPath([-10, 240], [140, 220], [260, 250], [420, 280]);
-      const tertiaryB = linePath([40, 300], [360, 330]);
-      const primaryRoad = linePath([20, 140], [380, 170]);
-      const motorwayA = curvedPath([-30, 340], [200, 310], [200, 310], [420, 360]);
-      const motorwayB = linePath([180, -20], [210, 420]);
-
-      road(pathRoad, path, 5, RoadStyle.pathOpacity, RoadStyle.pathCasing);
-      stroke(residentialRoad, residential, 7, RoadStyle.residentialOpacity);
-      road(tertiaryA, tertiary, 9, RoadStyle.tertiaryOpacity, RoadStyle.tertiaryCasing);
-      road(tertiaryB, tertiary, 8, RoadStyle.tertiaryOpacity, RoadStyle.tertiaryCasing);
-      road(primaryRoad, primary, 10, RoadStyle.primaryOpacity, RoadStyle.primaryCasing);
-      road(motorwayA, motorway, 12, RoadStyle.motorwayOpacity, RoadStyle.majorCasing);
-      road(motorwayB, motorway, 10, RoadStyle.motorwayOpacity, RoadStyle.majorCasing);
+      return style;
     }
 
     function renderTheme(theme, index) {
@@ -821,11 +888,8 @@
         <article class="theme-card" id="${theme.id}" style="animation-delay:${Math.min(index * 0.04, 0.4)}s">
           <div class="phone-wrap">
             <div class="phone">
-              <div class="wallpaper">
-                <div class="layer-land" style="background:${map.land}"></div>
-                <div class="layer-park" style="background:${map.park}"></div>
-                <div class="layer-water" style="background:${map.water}"></div>
-                <canvas class="roads" aria-hidden="true"></canvas>
+              <div class="wallpaper" style="background:${map.land}">
+                <div class="theme-map" data-theme-id="${theme.id}" aria-hidden="true"></div>
                 <div class="fade-bottom" style="background:${fade}"></div>
                 <div class="poster-text">
                   <div class="city" style="color:${ui.text}">XI'AN</div>
@@ -842,30 +906,67 @@
         </article>`;
     }
 
+    function destroyMap(el) {
+      const map = liveMaps.get(el);
+      if (!map) return;
+      map.remove();
+      liveMaps.delete(el);
+    }
+
+    async function mountMap(el) {
+      if (liveMaps.has(el) || el.dataset.mapState === "loading") return;
+      const theme = themeById[el.dataset.themeId];
+      if (!theme || typeof maplibregl === "undefined") return;
+
+      el.dataset.mapState = "loading";
+      try {
+        const base = await getBaseStyle();
+        if (!el.isConnected) return;
+        const map = new maplibregl.Map({
+          container: el,
+          style: themedStyle(base, theme),
+          center: MAP_CENTER,
+          zoom: MAP_ZOOM,
+          interactive: false,
+          attributionControl: false,
+          fadeDuration: 0,
+          pitchWithRotate: false,
+          dragRotate: false,
+          preserveDrawingBuffer: true,
+          pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5)
+        });
+        map.on("error", () => {});
+        liveMaps.set(el, map);
+        el.dataset.mapState = "ready";
+        requestAnimationFrame(() => map.resize());
+      } catch (err) {
+        el.dataset.mapState = "error";
+        el.classList.add("map-fallback");
+        el.style.background = theme.map.land;
+      }
+    }
+
     function mount(list, gridId) {
       const grid = document.getElementById(gridId);
       grid.innerHTML = list.map(renderTheme).join("");
-      grid.querySelectorAll("canvas.roads").forEach((canvas, i) => {
-        canvas._roads = list[i].map.roads;
-      });
-    }
-
-    function paintAllRoads() {
-      document.querySelectorAll("canvas.roads").forEach((canvas) => {
-        if (canvas._roads) paintRoads(canvas, canvas._roads);
-      });
     }
 
     mount(basicThemes, "basic-grid");
     mount(proThemes, "pro-grid");
 
-    paintAllRoads();
-    window.addEventListener("resize", paintAllRoads);
-    if (typeof ResizeObserver !== "undefined") {
-      const ro = new ResizeObserver(paintAllRoads);
-      document.querySelectorAll(".phone").forEach((el) => ro.observe(el));
-    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) mountMap(entry.target);
+        else destroyMap(entry.target);
+      });
+    }, { rootMargin: "240px 0px", threshold: 0.01 });
+
+    document.querySelectorAll(".theme-map").forEach((el) => io.observe(el));
+
+    window.addEventListener("resize", () => {
+      liveMaps.forEach((map) => map.resize());
+    });
   </script>
-  <script src="/assets/site.js?v=21" defer></script>
+  <script src="/assets/site.js?v=25" defer></script>
 </body>
 </html>

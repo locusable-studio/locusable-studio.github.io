@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f6f8">
+  <meta name="theme-color" content="#ffffff">
   <title>Locusable Studio</title>
   <meta name="description" content="Locusable Studio — indie apps that sense the present on Apple.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -14,85 +14,103 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=21">
+  <link rel="stylesheet" href="/assets/site.css?v=26">
 </head>
 <body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-iphone" viewBox="0 0 18 28">
+      <rect x="1.25" y="1.25" width="15.5" height="25.5" rx="3.2" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="9" cy="23.2" r="1.15"/>
+    </symbol>
+    <symbol id="icon-ipad" viewBox="0 0 24 30">
+      <rect x="1.25" y="1.25" width="21.5" height="27.5" rx="2.6" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="25.4" r="1.15"/>
+    </symbol>
+    <symbol id="icon-mac" viewBox="0 0 30 22">
+      <rect x="1.5" y="1.5" width="27" height="16.5" rx="1.8" ry="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M1.5 18h27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M10 20.5h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
   <div class="site-shell site-shell--wide">
+
     <main>
-      <section class="hero">
+      <section class="studio-hero">
         <h1 class="display brand-studio">Locusable <em>Studio</em></h1>
-        <p class="tagline">Indie apps that sense the present on Apple.</p>
-        <p class="scroll-cue">Scroll to explore</p>
+        <p class="unit__subhead">Indie apps that sense the present on Apple.</p>
       </section>
 
-      <section class="chapter-sticky" data-app="wallpaper" aria-labelledby="wallpaper-title">
-        <div class="chapter-sticky__pin">
-          <div class="chapter-sticky__inner">
-            <div class="chapter-copy">
-              <div class="chapter-kicker">
-                <img src="/assets/here/icon-192.png?v=10" width="36" height="36" alt="">
-                <span>iPhone</span>
-              </div>
-              <h2 class="display" id="wallpaper-title">Here <em>Wallpaper</em></h2>
-              <p class="tagline">Turn any place into a lock-screen map. Theme it. Frame it. Make it yours.</p>
-              <div class="cta-row">
-                <a class="cta" href="/here-wallpaper/">Explore</a>
-              </div>
-            </div>
-            <div class="chapter-media">
-              <img src="/assets/shots/shot-1.jpg?v=10" width="900" height="1125" alt="Here Wallpaper map lock screen">
-            </div>
+      <section class="unit unit--tint" data-app="wallpaper" data-reveal aria-labelledby="wallpaper-title">
+        <div class="unit__copy">
+          <div class="platforms" aria-label="Available on iPhone and iPad">
+            <svg class="icon-iphone"><use href="#icon-iphone"></use></svg>
+            <svg class="icon-ipad"><use href="#icon-ipad"></use></svg>
           </div>
+          <h2 class="display unit__title" id="wallpaper-title">Here <em>Wallpaper</em></h2>
+          <p class="unit__subhead">Map lock screens from places you care about.</p>
+          <div class="unit__links">
+            <a href="/here-wallpaper/">Learn more<span class="chev" aria-hidden="true"> ›</span></a>
+            <a
+              href="https://apps.apple.com/app/id6789155385"
+              data-app-store-link
+              data-ios-url="itms-apps://apps.apple.com/app/id6789155385"
+              data-web-url="https://apps.apple.com/app/id6789155385"
+              target="_blank"
+              rel="noopener noreferrer"
+            >App Store<span class="chev" aria-hidden="true"> ›</span></a>
+          </div>
+        </div>
+        <div class="unit__media unit__media--phones" aria-hidden="true">
+          <figure><img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/shots/shot-4.jpg?v=10" width="440" height="828" alt=""></figure>
         </div>
       </section>
 
-      <section class="chapter-sticky chapter-sticky--reverse" data-app="links" aria-labelledby="links-title">
-        <div class="chapter-sticky__pin">
-          <div class="chapter-sticky__inner">
-            <div class="chapter-copy">
-              <div class="chapter-kicker">
-                <img src="/assets/here-links/icon-192.png?v=10" width="36" height="36" alt="">
-                <span>iPhone</span>
-              </div>
-              <h2 class="display" id="links-title">Here <em>Links</em></h2>
-              <p class="tagline">Your self-hosted linkding, native on iOS — servers, share sheet, in-app Safari.</p>
-              <div class="cta-row">
-                <a class="cta" href="/here-links/">Explore</a>
-              </div>
-            </div>
-            <div class="chapter-media">
-              <img src="/assets/here-links/shots/shot-1.jpg?v=1" width="900" height="1125" alt="Here Links bookmarks list">
-            </div>
+      <section class="unit unit--white" data-app="links" data-reveal aria-labelledby="links-title">
+        <div class="unit__copy">
+          <div class="platforms" aria-label="Available on iPhone">
+            <svg class="icon-iphone"><use href="#icon-iphone"></use></svg>
           </div>
+          <h2 class="display unit__title" id="links-title">Here <em>Links</em></h2>
+          <p class="unit__subhead">Your self-hosted linkding. Native on iOS.</p>
+          <div class="unit__links">
+            <a href="/here-links/">Learn more<span class="chev" aria-hidden="true"> ›</span></a>
+          </div>
+        </div>
+        <div class="unit__media unit__media--phones" aria-hidden="true">
+          <figure><img src="/assets/here-links/shots/shot-1.jpg?v=1" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/here-links/shots/shot-2.jpg?v=2" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/here-links/shots/shot-3.jpg?v=1" width="440" height="828" alt=""></figure>
+          <figure><img src="/assets/here-links/shots/shot-4.jpg?v=1" width="440" height="828" alt=""></figure>
         </div>
       </section>
 
-      <section class="chapter-sticky" data-app="sidefy" aria-labelledby="sidefy-title">
-        <div class="chapter-sticky__pin">
-          <div class="chapter-sticky__inner">
-            <div class="chapter-copy">
-              <div class="chapter-kicker">
-                <img src="/assets/sidefy/icon-192.png?v=14" width="36" height="36" alt="">
-                <span>Mac</span>
-              </div>
-              <h2 class="display" id="sidefy-title">Here <em>Sidefy</em></h2>
-              <p class="tagline">Today’s calendar, reminders, RSS, and plugins — along the edge of your Mac.</p>
-              <div class="cta-row">
-                <a class="cta" href="https://sidefy.locusable.com/" target="_blank" rel="noopener noreferrer">Open</a>
-              </div>
-            </div>
-            <div class="chapter-media chapter-media--icon">
-              <img src="/assets/sidefy/icon-512.png?v=14" width="180" height="180" alt="Here Sidefy">
-            </div>
+      <section class="unit unit--dark" data-app="sidefy" data-reveal aria-labelledby="sidefy-title">
+        <div class="unit__copy">
+          <div class="platforms" aria-label="Available on Mac">
+            <svg class="icon-mac"><use href="#icon-mac"></use></svg>
           </div>
+          <h2 class="display unit__title" id="sidefy-title">Here <em>Sidefy</em></h2>
+          <p class="unit__subhead">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</p>
+          <div class="unit__links">
+            <a href="https://sidefy.locusable.com/" target="_blank" rel="noopener noreferrer">Learn more<span class="chev" aria-hidden="true"> ›</span></a>
+          </div>
+        </div>
+        <div class="unit__media unit__media--icon">
+          <img src="/assets/sidefy/icon-512.png?v=14" width="160" height="160" alt="Here Sidefy">
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <span>© 2026 Locusable Studio</span>
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+      </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=21" defer></script>
+  <script src="/assets/site.js?v=25" defer></script>
 </body>
 </html>

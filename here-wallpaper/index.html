@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f5f6f8">
+  <meta name="theme-color" content="#ffffff">
   <title>Here Wallpaper — Locusable Studio</title>
   <meta name="description" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -14,185 +14,95 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=21">
-  <style>
-    .shot-mock {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    .shot-mock .base { position: absolute; inset: 0; }
-    .shot-mock .park {
-      position: absolute;
-      left: 8%; top: 42%; width: 30%; height: 18%;
-      border-radius: 3%;
-    }
-    .shot-mock .water {
-      position: absolute;
-      left: 56%; top: 18%; width: 36%; height: 28%;
-      border-radius: 50%;
-    }
-    .shot-mock .building {
-      position: absolute;
-      left: 22%; top: 58%; width: 18%; height: 14%;
-      border-radius: 2px;
-      opacity: 0.85;
-    }
-    .shot-mock .rail {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          108deg,
-          transparent 0 10px,
-          rgba(242, 237, 228, 0.55) 10px 12px,
-          transparent 12px 22px
-        );
-      opacity: 0.55;
-      -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 28%, #000 72%, transparent 92%);
-      mask-image: linear-gradient(90deg, transparent 8%, #000 28%, #000 72%, transparent 92%);
-    }
-    .shot-mock .aeroway {
-      position: absolute;
-      left: 48%; top: 54%; width: 34%; height: 10%;
-      border-radius: 2px;
-      transform: rotate(-18deg);
-      opacity: 0.9;
-    }
-    .shot-mock .roads {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(105deg, transparent 46%, rgba(242, 237, 228, 0.9) 46.5%, rgba(242, 237, 228, 0.9) 48%, transparent 48.5%),
-        linear-gradient(18deg, transparent 62%, rgba(216, 208, 196, 0.75) 62.5%, rgba(216, 208, 196, 0.75) 63.8%, transparent 64.3%);
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=26">
 </head>
 <body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-iphone" viewBox="0 0 18 28">
+      <rect x="1.25" y="1.25" width="15.5" height="25.5" rx="3.2" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="9" cy="23.2" r="1.15"/>
+    </symbol>
+    <symbol id="icon-ipad" viewBox="0 0 24 30">
+      <rect x="1.25" y="1.25" width="21.5" height="27.5" rx="2.6" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="25.4" r="1.15"/>
+    </symbol>
+  </svg>
+
   <div class="site-shell site-shell--wide">
-    <div class="topbar">
-      <a href="/">← Locusable Studio</a>
-    </div>
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><span aria-current="page">Here Wallpaper</span></li>
+      </ol>
+    </nav>
 
     <main>
-      <section class="hero hero--compact" aria-labelledby="product-title" data-reveal>
-        <div>
-          <div class="brand-row">
-            <img class="app-icon" src="/assets/here/icon-192.png?v=10" width="72" height="72" alt="">
-            <h1 class="display" id="product-title">Here <em>Wallpaper</em></h1>
-          </div>
-          <p class="tagline">Map lock screens from places you care about. Pick a theme. Tune the frame.</p>
+      <section class="product-hero" aria-labelledby="product-title">
+        <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="">
+        <div class="platforms platforms--lg" aria-label="Available on iPhone and iPad">
+          <svg class="icon-iphone"><use href="#icon-iphone"></use></svg>
+          <svg class="icon-ipad"><use href="#icon-ipad"></use></svg>
         </div>
-
-        <div class="cta-row">
+        <h1 class="display" id="product-title">Here <em>Wallpaper</em></h1>
+        <p class="unit__subhead">Map lock screens from places you care about.</p>
+        <div class="unit__links">
           <a
-            class="store-btn"
             href="https://apps.apple.com/app/id6789155385"
             data-app-store-link
             data-ios-url="itms-apps://apps.apple.com/app/id6789155385"
             data-web-url="https://apps.apple.com/app/id6789155385"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="m15.079 5.999l.239.012c1.43.097 3.434 1.013 4.508 2.586a1 1 0 0 1-.344 1.44c-.05.028-.372.158-.497.217a4 4 0 0 0-.722.431c-.614.461-.948 1.009-.942 1.694c.01.885.339 1.454.907 1.846c.208.143.436.253.666.33c.126.043.426.116.444.122a1 1 0 0 1 .662.942C20 18.24 16.96 22 14.714 22c-.79 0-1.272-.091-1.983-.315l-.098-.031c-.463-.146-.702-.192-1.133-.192c-.52 0-.863.06-1.518.237l-.197.053c-.575.153-.964.226-1.5.248C5.536 22 3 16.907 3 12.928c0-3.87 1.786-6.92 5.286-6.92q.444.002.909.128c.403.107.774.26 1.296.508c.787.374.948.44 1.009.44h.016c.03-.003.128-.047 1.056-.457c1.061-.467 1.864-.685 2.746-.616l-.24-.012zM14 1a1 1 0 0 1 1 1a3 3 0 0 1-3 3a1 1 0 0 1-1-1a3 3 0 0 1 3-3"/>
-            </svg>
-            App Store
-          </a>
+          >View on the App Store<span class="chev" aria-hidden="true"> ›</span></a>
         </div>
-
-        <div class="hero-shots" aria-label="Wallpaper previews">
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-1.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 1">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-2.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 2">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-3.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 3">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-4.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 4">
-          </figure>
+        <div class="unit__media unit__media--phones" aria-label="Wallpaper previews">
+          <figure><img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 1"></figure>
+          <figure><img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 2"></figure>
+          <figure><img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 3"></figure>
+          <figure><img src="/assets/shots/shot-4.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 4"></figure>
         </div>
       </section>
 
-      <section class="points" aria-label="How it works" data-reveal>
-        <article class="point">
-          <h2>Place</h2>
-          <p>Choose a city or spot. The map becomes your lock screen.</p>
-        </article>
-        <article class="point">
-          <h2>Theme</h2>
-          <p>Basic and Featured palettes — quiet ink to neon routes.</p>
-        </article>
-        <article class="point">
-          <h2>Layout</h2>
-          <p>Tune type and framing to fit your phone.</p>
-        </article>
+      <section class="unit unit--light" data-reveal aria-label="Highlights">
+        <div class="tile-grid">
+          <article class="tile">
+            <h3>Place</h3>
+            <p>A city or spot you care about becomes your lock screen.</p>
+          </article>
+          <article class="tile">
+            <h3>Theme</h3>
+            <p>Basic and Featured palettes — quiet ink to neon routes.</p>
+          </article>
+          <article class="tile">
+            <h3>Layout</h3>
+            <p>Tune type and framing to fit your phone.</p>
+          </article>
+        </div>
       </section>
 
-      <div class="feature-rail" data-reveal>
-        <a class="feature-panel" href="/here-wallpaper/themes/">
-          <div class="feature-panel-top">
-            <div>
-              <h2>Themes</h2>
-              <p class="lead">Preview Basic and Featured palettes with the same square map mocks as in the app.</p>
-            </div>
-            <span class="cta-text">Browse →</span>
+      <section class="unit unit--white" data-reveal aria-labelledby="themes-title">
+        <div class="unit__copy">
+          <h2 class="display unit__title" id="themes-title">Themes</h2>
+          <p class="unit__subhead">Preview Basic and Featured palettes with the same square map mocks as in the app.</p>
+          <div class="unit__links">
+            <a href="/here-wallpaper/themes/">Browse themes<span class="chev" aria-hidden="true"> ›</span></a>
           </div>
-          <div class="shots" aria-hidden="true">
-            <div class="shot"><img src="/assets/shots/themes-shot-1.jpg?v=10" alt="" width="148" height="107"></div>
-            <div class="shot"><img src="/assets/shots/themes-shot-2.jpg?v=10" alt="" width="148" height="107"></div>
-            <div class="shot"><img src="/assets/shots/themes-shot-3.jpg?v=10" alt="" width="148" height="107"></div>
-          </div>
-        </a>
-
-        <a class="feature-panel" href="/here-wallpaper/layers/">
-          <div class="feature-panel-top">
-            <div>
-              <h2>Layers</h2>
-              <p class="lead">The same map layer toggles as the editor — parks, water, roads, rail, and more.</p>
-            </div>
-            <span class="cta-text">Browse →</span>
-          </div>
-          <div class="shots" aria-hidden="true">
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="park" style="background:#244878"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="building" style="background:#6A88B0"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="aeroway" style="background:#244878"></div>
-                <div class="rail"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
+        </div>
+        <div class="unit__media unit__media--phones unit__media--squares" aria-hidden="true">
+          <figure><img src="/assets/shots/themes-shot-1.jpg?v=10" width="260" height="187" alt=""></figure>
+          <figure><img src="/assets/shots/themes-shot-2.jpg?v=10" width="260" height="187" alt=""></figure>
+          <figure><img src="/assets/shots/themes-shot-3.jpg?v=10" width="260" height="187" alt=""></figure>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-      <span>© 2026 Locusable Studio</span>
-      <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+      </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=21" defer></script>
+  <script src="/assets/site.js?v=25" defer></script>
 </body>
 </html>
