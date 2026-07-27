@@ -251,6 +251,10 @@ a {
   padding-bottom: 1.75rem;
 }
 
+.unit__copy--solo {
+  padding-bottom: var(--unit-pad-y);
+}
+
 .platforms {
   display: inline-flex;
   align-items: flex-end;
@@ -374,15 +378,15 @@ a {
 }
 
 .unit__media--single {
-  max-width: 720px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 1rem var(--unit-pad-x) 0;
+  padding: 1rem var(--unit-pad-x) 2.5rem;
 }
 
 .unit__media--single img {
   width: 100%;
   height: auto;
-  border-radius: 28px 28px 0 0;
+  border-radius: 18px;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
 }
 
@@ -499,92 +503,6 @@ a {
   user-select: none;
 }
 
-/* Feature tiles — Apple “tile” grid, not cards-as-chrome */
-.tile-grid {
-  display: grid;
-  gap: 12px;
-  padding: 12px var(--unit-pad-x) calc(2rem + env(safe-area-inset-bottom));
-  max-width: var(--max-wide);
-  margin: 0 auto;
-  width: 100%;
-}
-
-@media (min-width: 840px) {
-  .tile-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .tile-grid--two {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.tile {
-  background: var(--bg-alt);
-  border-radius: 28px;
-  padding: 2.25rem 1.75rem 2rem;
-  text-align: center;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.55rem;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.25s var(--ease-out);
-}
-
-.tile:hover,
-.tile:focus-visible {
-  transform: scale(1.015);
-  outline: none;
-}
-
-.tile h2,
-.tile h3 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-.tile p {
-  color: var(--muted);
-  font-size: 15px;
-  max-width: 18rem;
-  line-height: 1.4;
-}
-
-.tile .tile-link {
-  margin-top: auto;
-  padding-top: 1rem;
-  color: var(--link);
-  font-size: 15px;
-}
-
-.tile--media {
-  padding-bottom: 0;
-  overflow: hidden;
-}
-
-.tile--media .tile-shots {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 1.25rem;
-  width: 100%;
-  overflow: hidden;
-}
-
-.tile--media .tile-shots img {
-  width: 120px;
-  height: auto;
-  aspect-ratio: 1170 / 844;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
-}
-
 .prose {
   max-width: 40rem;
   padding: 1rem 0 3rem;
@@ -637,8 +555,7 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .studio-hero,
   [data-reveal],
-  [data-reveal].is-in,
-  .tile:hover {
+  [data-reveal].is-in {
     opacity: 1;
     transform: none;
     transition: none;

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-app="sidefy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Here Sidefy — Featured Plugins</title>
+  <meta name="description" content="Featured community plugins for Here Sidefy — RSS, deals, gaming, and more.">
+  <link rel="icon" href="/favicon.ico?v=10" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css?v=29">
+  <style>
+    body {
+      padding: 0 24px calc(48px + env(safe-area-inset-bottom));
+    }
+
+    .crumbbar {
+      padding-left: 0;
+      padding-right: 0;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    header {
+      max-width: 980px;
+      margin: 0 auto 40px;
+      animation: rise 0.7s ease both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .page-title {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--accent-sidefy);
+    }
+
+    .page-lead {
+      margin-top: 14px;
+      max-width: 36rem;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .plugin-section {
+      max-width: 980px;
+      margin: 0 auto 48px;
+    }
+
+    .plugin-section h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .plugin-section .section-title {
+      font-size: 15px;
+      color: var(--fg);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .plugin-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 720px) {
+      .plugin-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+    }
+
+    .plugin-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      padding: 1.25rem 1.35rem 1.3rem;
+      border-radius: 18px;
+      background: var(--bg-alt);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s var(--ease-out), background 0.2s var(--ease-out);
+    }
+
+    .plugin-card:hover,
+    .plugin-card:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+      background: color-mix(in srgb, var(--accent-sidefy) 8%, var(--bg-alt));
+    }
+
+    .plugin-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .plugin-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .plugin-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .plugin-tags span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--fg) 8%, transparent);
+      color: var(--muted);
+    }
+
+    .plugin-card .open {
+      margin-top: 0.15rem;
+      color: var(--link);
+      font-size: 14px;
+    }
+
+    footer.footer {
+      margin-top: 1rem;
+    }
+
+    footer.footer .footer__inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/here-sidefy/">Here Sidefy</a></li>
+        <li><span aria-current="page">Plugins</span></li>
+      </ol>
+    </nav>
+
+    <header>
+      <h1 class="page-title">Featured Plugins</h1>
+      <p class="page-lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
+    </header>
+
+    <section class="plugin-section" aria-labelledby="featured-heading">
+      <h2><span class="section-title" id="featured-heading">Featured</span></h2>
+      <div class="plugin-grid" id="plugin-grid"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const featuredPlugins = [
+      {
+        name: "Say Hi",
+        description: "A random English Wikipedia article each day — AI generates the event title and greeting in your app language. Requires an LLM API key in Sidefy Advanced Settings.",
+        tags: ["AI", "Daily"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/sayhi",
+      },
+      {
+        name: "FreshRSS",
+        description: "Fetch unread and recent articles from your self-hosted FreshRSS instance via Google Reader API. Stay updated with your personal news feeds.",
+        tags: ["RSS", "News"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/freshrss",
+      },
+      {
+        name: "App Store Discount",
+        description: "Monitor price drops and discounts for apps on your Mac App Store wishlist. Get notified when your favorite apps go on sale.",
+        tags: ["Shopping", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/appstore_discount",
+      },
+      {
+        name: "Steam Wishlist Discount",
+        description: "Get instant alerts when games on your Steam wishlist go on sale. Never miss a great deal on your favorite games.",
+        tags: ["Gaming", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/steam_wishlist_discount",
+      },
+      {
+        name: "Switch Discount Tracker",
+        description: "Track Nintendo Switch eShop sales across multiple regions. Add game NSUIDs and region codes to get timeline alerts with sale price and discount when a watched title goes on sale.",
+        tags: ["Gaming", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/switch_wishlist_discount",
+      },
+      {
+        name: "Pokemon Daily",
+        description: "Discover a new Pokemon every day with detailed information, stats, and beautiful artwork. Perfect for Pokemon fans and trainers.",
+        tags: ["Entertainment", "Daily"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/pokemon_daily",
+      },
+      {
+        name: "Crypto Price Monitor",
+        description: "Monitor cryptocurrency prices via CoinGecko with price threshold and 24h percentage change alerts. Track multiple tokens with a configurable cooldown.",
+        tags: ["Crypto", "Alerts"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/crypto_price_watcher",
+      },
+      {
+        name: "V2EX Notifications",
+        description: "Unread V2EX notifications on your timeline — replies, thanks, tips, mentions, and favorites, each with distinct colors. Uses your private RSS token.",
+        tags: ["Community", "Social"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/v2ex_notifications",
+      },
+    ];
+
+    const grid = document.getElementById("plugin-grid");
+    for (const plugin of featuredPlugins) {
+      const card = document.createElement("a");
+      card.className = "plugin-card";
+      card.href = plugin.href;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+
+      const title = document.createElement("h3");
+      title.textContent = plugin.name;
+
+      const desc = document.createElement("p");
+      desc.textContent = plugin.description;
+
+      const tags = document.createElement("div");
+      tags.className = "plugin-tags";
+      for (const tag of plugin.tags) {
+        const span = document.createElement("span");
+        span.textContent = tag;
+        tags.appendChild(span);
+      }
+
+      const open = document.createElement("span");
+      open.className = "open";
+      open.textContent = "View on GitHub ›";
+
+      card.append(title, desc, tags, open);
+      grid.appendChild(card);
+    }
+  </script>
+  <script src="/assets/site.js?v=29" defer></script>
+</body>
+</html>

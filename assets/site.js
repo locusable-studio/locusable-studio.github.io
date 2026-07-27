@@ -59,16 +59,22 @@
   }
 
   function bindAppStoreLinks() {
-    var isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPhone|iPad|iPod/.test(ua) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var isMac = /Macintosh|Mac OS X/.test(ua) && !isIOS;
     document.querySelectorAll("[data-app-store-link]:not([data-app-store-bound])").forEach(function (link) {
       link.setAttribute("data-app-store-bound", "true");
       var iosUrl = link.getAttribute("data-ios-url");
+      var macUrl = link.getAttribute("data-mac-url");
       var webUrl = link.getAttribute("data-web-url") || link.getAttribute("href");
-      if (!iosUrl || !webUrl) return;
+      if (!webUrl) return;
       if (!link.hasAttribute("data-web-url")) link.setAttribute("data-web-url", webUrl);
-      if (isIOS) {
+      if (isIOS && iosUrl) {
         link.setAttribute("href", iosUrl);
+        link.removeAttribute("target");
+      } else if (isMac && macUrl) {
+        link.setAttribute("href", macUrl);
         link.removeAttribute("target");
       }
     });

@@ -9,6 +9,8 @@ const pages = [
   "here-wallpaper/privacy/index.html",
   "here-links/index.html",
   "here-links/privacy/index.html",
+  "here-sidefy/index.html",
+  "here-sidefy/plugins/index.html",
 ];
 
 const must = [
@@ -28,9 +30,38 @@ for (const page of pages) {
 }
 
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
-for (const href of ["/here-wallpaper/", "/here-links/", "https://sidefy.locusable.com/"]) {
+for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
+    failed++;
+  }
+}
+
+const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");
+for (const href of [
+  "https://apps.apple.com/app/id6751482006",
+  "https://sidefy.locusable.com/",
+  "/here-sidefy/plugins/",
+]) {
+  if (!sidefy.includes(`href="${href}"`)) {
+    console.error(`FAIL here-sidefy/index.html: missing href ${href}`);
+    failed++;
+  }
+}
+
+const plugins = fs.readFileSync(path.join(root, "here-sidefy/plugins/index.html"), "utf8");
+for (const name of [
+  "Say Hi",
+  "FreshRSS",
+  "App Store Discount",
+  "Steam Wishlist Discount",
+  "Switch Discount Tracker",
+  "Pokemon Daily",
+  "Crypto Price Monitor",
+  "V2EX Notifications",
+]) {
+  if (!plugins.includes(name)) {
+    console.error(`FAIL here-sidefy/plugins/index.html: missing plugin ${name}`);
     failed++;
   }
 }
