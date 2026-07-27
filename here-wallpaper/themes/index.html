@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=29">
+  <link rel="stylesheet" href="/assets/site.css?v=37">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
   <style>
@@ -38,8 +38,6 @@
     .crumbbar {
       padding-left: 0;
       padding-right: 0;
-      max-width: 1200px;
-      margin: 0 auto;
     }
 
     .page-title {
@@ -52,31 +50,22 @@
     }
 
     .page-lead {
-      margin-top: 14px;
+      margin: 14px auto 0;
       max-width: 36rem;
       color: var(--page-muted);
       font-size: 15px;
     }
 
-
     header {
       max-width: 1200px;
       margin: 0 auto 40px;
+      text-align: center;
       animation: rise 0.7s ease both;
     }
 
     @keyframes rise {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: none; }
-    }
-
-
-
-    .page-lead {
-      margin-top: 14px;
-      max-width: 36rem;
-      color: var(--page-muted);
-      font-size: 15px;
     }
 
     h2 {
@@ -1096,6 +1085,6 @@
       liveMaps.forEach((map) => map.resize());
     });
   </script>
-  <script src="/assets/site.js?v=29" defer></script>
+  <script src="/assets/site.js?v=34" defer></script>
 </body>
 </html>

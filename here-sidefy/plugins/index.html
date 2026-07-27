@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=29">
+  <link rel="stylesheet" href="/assets/site.css?v=37">
   <style>
     body {
       padding: 0 24px calc(48px + env(safe-area-inset-bottom));
@@ -23,13 +23,12 @@
     .crumbbar {
       padding-left: 0;
       padding-right: 0;
-      max-width: 980px;
-      margin: 0 auto;
     }
 
     header {
       max-width: 980px;
       margin: 0 auto 40px;
+      text-align: center;
       animation: rise 0.7s ease both;
     }
 
@@ -48,7 +47,7 @@
     }
 
     .page-lead {
-      margin-top: 14px;
+      margin: 14px auto 0;
       max-width: 36rem;
       color: var(--muted);
       font-size: 15px;
@@ -179,7 +178,10 @@
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
+        <span style="display:inline-flex;flex-wrap:wrap;gap:0.75rem 1.25rem">
+          <a href="/here-sidefy/privacy/">Privacy Policy</a>
+          <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
+        </span>
       </div>
     </footer>
   </div>
@@ -266,6 +268,6 @@
       grid.appendChild(card);
     }
   </script>
-  <script src="/assets/site.js?v=29" defer></script>
+  <script src="/assets/site.js?v=34" defer></script>
 </body>
 </html>

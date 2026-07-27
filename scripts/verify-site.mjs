@@ -11,6 +11,7 @@ const pages = [
   "here-links/privacy/index.html",
   "here-sidefy/index.html",
   "here-sidefy/plugins/index.html",
+  "here-sidefy/privacy/index.html",
 ];
 
 const must = [
@@ -42,9 +43,22 @@ for (const href of [
   "https://apps.apple.com/app/id6751482006",
   "https://sidefy.locusable.com/",
   "/here-sidefy/plugins/",
+  "/here-sidefy/privacy/",
 ]) {
   if (!sidefy.includes(`href="${href}"`)) {
     console.error(`FAIL here-sidefy/index.html: missing href ${href}`);
+    failed++;
+  }
+}
+
+const sidefyPrivacy = fs.readFileSync(path.join(root, "here-sidefy/privacy/index.html"), "utf8");
+for (const needle of [
+  "Local Processing",
+  "sidefy.locusable.com",
+  "github.com/sidefy-team/sidefy",
+]) {
+  if (!sidefyPrivacy.includes(needle)) {
+    console.error(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
     failed++;
   }
 }
