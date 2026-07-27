@@ -13,6 +13,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="/assets/site.css?v=76">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="/assets/theme-map-style.js?v=1"></script>
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
 </head>
 <body class="catalog-page">
@@ -54,589 +55,38 @@
   </div>
 
   <script>
-    const basicThemes = [
-      {
-        id: "meadow_sage",
-        name: "Meadow Sage",
-        description: "Dusty sage fields with meadow-green parks and forest roads.",
-        tier: "basic",
-        ui: { bg: "#D8E4D8", text: "#3A5848" },
-        map: {
-          land: "#D8E4D8", water: "#A8C0B0", park: "#B8D0A8",
-          roads: {
-            motorway: "#486850", primary: "#587860", tertiary: "#90A898",
-            residential: "#A0B8A8", path: "#B8C8B4", outline: "#C4D4C0"
-          }
-        }
-      },
-      {
-        id: "newspaper",
-        name: "Newspaper",
-        description: "Yellowed newsprint with inky charcoal roads.",
-        tier: "basic",
-        ui: { bg: "#F4F0E8", text: "#2C2824" },
-        map: {
-          land: "#F4F0E8", water: "#D8D2C8", park: "#E8E4DC",
-          roads: {
-            motorway: "#3A3430", primary: "#524840", tertiary: "#A89888",
-            residential: "#B8A898", path: "#D0C8BC", outline: "#D8D0C4"
-          }
-        }
-      },
-      {
-        id: "pastel_dream",
-        name: "Pastel Dream",
-        description: "Muted pastels with dusty-blue roads and mauve buildings.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#FAF7F2", text: "#5D5A6D" },
-        map: {
-          land: "#FAF7F2", water: "#D4E4ED", park: "#E8EDE4",
-          roads: {
-            motorway: "#6870A0", primary: "#9898B8", tertiary: "#C4C2D0",
-            residential: "#CCCCDA", path: "#D8D8E2", outline: "#E0E0E8"
-          }
-        }
-      },
-      {
-        id: "coral",
-        name: "Coral",
-        description: "Soft ivory ground with warm coral roads and muted pink features.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#F3E1DA", text: "#6E2F28" },
-        map: {
-          land: "#F3E1DA", water: "#DFC0B5", park: "#EACFC6",
-          roads: {
-            motorway: "#B9473A", primary: "#C86050", tertiary: "#E09888",
-            residential: "#DDAA9A", path: "#E8C4B8", outline: "#EDD2C8"
-          }
-        }
-      },
-      {
-        id: "japanese_ink",
-        name: "Japanese Ink",
-        description: "Rice-paper white with vermilion major roads — ink-wash minimalism.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#FAF8F5", text: "#2C2C2C" },
-        map: {
-          land: "#FAF8F5", water: "#E8E4E0", park: "#F0EDE8",
-          roads: {
-            motorway: "#8B2500", primary: "#505050", tertiary: "#A8A8A8",
-            residential: "#BCBAB6", path: "#D0CECA", outline: "#DDDBD8"
-          }
-        }
-      },
-      {
-        id: "copper_patina",
-        name: "Copper Patina",
-        description: "Oxidized copper — teal-green patina ground with warm copper arteries.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#E8F0F0", text: "#2A5A5A" },
-        map: {
-          land: "#E8F0F0", water: "#C0D8D8", park: "#D8E8E0",
-          roads: {
-            motorway: "#B87333", primary: "#629898", tertiary: "#A8CACA",
-            residential: "#B8D4D4", path: "#C8DEDE", outline: "#D2E6E6"
-          }
-        }
-      },
-      {
-        id: "indigo_print",
-        name: "Indigo Print",
-        description: "Indigo blue with cream-white pattern roads.",
-        tier: "basic",
-        ui: { bg: "#1A3A6E", text: "#F2EDE4" },
-        map: {
-          land: "#1A3A6E", water: "#122C58", park: "#244878",
-          roads: {
-            motorway: "#F2EDE4", primary: "#D8D0C4", tertiary: "#5A78A0",
-            residential: "#486890", path: "#3A5888", outline: "#4A6898"
-          }
-        }
-      },
-      {
-        id: "ink_black",
-        name: "Ink Black",
-        description: "Near-black field with silver-white roads — bold and graphic.",
-        tier: "basic",
-        ui: { bg: "#0E0E0E", text: "#E8E4DC" },
-        map: {
-          land: "#0E0E0E", water: "#161616", park: "#1A1A1A",
-          roads: {
-            motorway: "#F0EDE6", primary: "#B8B4AC", tertiary: "#686868",
-            residential: "#404040", path: "#3A3A3A", outline: "#484848"
-          }
-        }
-      },
-      {
-        id: "ember_glow",
-        name: "Ember Glow",
-        description: "Charred dark base with glowing ember-orange arteries.",
-        tier: "basic",
-        ui: { bg: "#1A1008", text: "#FFB060" },
-        map: {
-          land: "#1A1008", water: "#120B04", park: "#2E1A0C",
-          roads: {
-            motorway: "#FF7830", primary: "#C85820", tertiary: "#403028",
-            residential: "#302418", path: "#4A3828", outline: "#584838"
-          }
-        }
-      },
-      {
-        id: "emerald_city",
-        name: "Emerald City",
-        description: "Lush dark green with glowing mint arteries.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#062C22", text: "#E3F9F1" },
-        map: {
-          land: "#062C22", water: "#0D4536", park: "#0F523E",
-          roads: {
-            motorway: "#4ADEB0", primary: "#18A070", tertiary: "#32554B",
-            residential: "#25493F", path: "#42635A", outline: "#517268"
-          }
-        }
-      },
-      {
-        id: "ruby",
-        name: "Ruby",
-        description: "Garnet reds over deep plum city blocks — rich and jewel-toned.",
-        tier: "basic",
-        badge: "Terraink",
-        ui: { bg: "#1A070F", text: "#F6D7BC" },
-        map: {
-          land: "#1A070F", water: "#2A0D17", park: "#351021",
-          roads: {
-            motorway: "#C0103C", primary: "#780C2C", tertiary: "#463132",
-            residential: "#392427", path: "#553F3E", outline: "#654E4A"
-          }
-        }
-      },
-      {
-        id: "prehistoric_pottery",
-        name: "Prehistoric Pottery",
-        description: "Neolithic red ware — ochre clay ground with carbon-black road lines.",
-        tier: "basic",
-        ui: { bg: "#D4956A", text: "#2A1810" },
-        map: {
-          land: "#D4956A", water: "#6E4838", park: "#B89068",
-          roads: {
-            motorway: "#1C1008", primary: "#3D2418", tertiary: "#8B6048",
-            residential: "#A07050", path: "#C8A078", outline: "#B88868"
-          }
-        }
-      }
-    ];
-
-    const proThemes = [
-      {
-        id: "great_wave",
-        name: "Great Wave",
-        description: "Pale Fuji-sky ground with Prussian-blue wave roads and foam crests.",
-        tier: "pro",
-        ui: { bg: "#E8DCC8", text: "#003D5C" },
-        map: {
-          land: "#E8DCC8", water: "#82B0B2", park: "#D0C8B0",
-          roads: {
-            motorway: "#003D5C", primary: "#1A5570", tertiary: "#346B84",
-            residential: "#5A8898", path: "#D0C4B0", outline: "#C8BCA8"
-          }
-        }
-      },
-      {
-        id: "rivers_and_mountains",
-        name: "Rivers and Mountains",
-        description: "Song blue-green hills, azurite rivers, ochre ground.",
-        tier: "pro",
-        ui: { bg: "#D4C898", text: "#2A4030" },
-        map: {
-          land: "#D4C898", water: "#4A7A98", park: "#5A8A48",
-          roads: {
-            motorway: "#2E4A30", primary: "#3E6840", tertiary: "#7A9060",
-            residential: "#9AA878", path: "#C0B890", outline: "#CCC4A0"
-          }
-        }
-      },
-      {
-        id: "polar_ice",
-        name: "Polar Ice",
-        description: "Crisp arctic white with glacier-blue water and frozen steel roads.",
-        tier: "pro",
-        ui: { bg: "#F2F8FC", text: "#1860A0" },
-        map: {
-          land: "#F2F8FC", water: "#78B8E0", park: "#E4F0F8",
-          roads: {
-            motorway: "#2070A8", primary: "#3888B8", tertiary: "#88B8D8",
-            residential: "#98C8E0", path: "#B8D8EC", outline: "#C8E0F0"
-          }
-        }
-      },
-      {
-        id: "starry_night",
-        name: "Starry Night",
-        description: "Ultramarine night with yellow stars and cobalt roads.",
-        tier: "pro",
-        ui: { bg: "#0E1C48", text: "#F0C020" },
-        map: {
-          land: "#0E1C48", water: "#081028", park: "#0C1C14",
-          roads: {
-            motorway: "#F0C020", primary: "#3D7AA8", tertiary: "#1A2850",
-            residential: "#142038", path: "#182840", outline: "#2A4870"
-          }
-        }
-      },
-      {
-        id: "sunflowers",
-        name: "Sunflowers",
-        description: "Chrome-yellow ground with burnt-umber seed roads and olive stem parks.",
-        tier: "pro",
-        ui: { bg: "#F0C840", text: "#3D2814" },
-        map: {
-          land: "#F0C840", water: "#D4A828", park: "#4A6028",
-          roads: {
-            motorway: "#5C3010", primary: "#8B5018", tertiary: "#C89828",
-            residential: "#D4A830", path: "#E0B838", outline: "#E8C850"
-          }
-        }
-      },
-      {
-        id: "aurora_borealis",
-        name: "Aurora Borealis",
-        description: "Arctic night sky with luminous green bands and violet aurora fringe.",
-        tier: "pro",
-        ui: { bg: "#050A18", text: "#78F8C8" },
-        map: {
-          land: "#050A18", water: "#081428", park: "#0C1C30",
-          roads: {
-            motorway: "#40E8A0", primary: "#68F0B8", tertiary: "#142030",
-            residential: "#0A1018", path: "#182838", outline: "#243848"
-          }
-        }
-      },
-      {
-        id: "lavender_dusk",
-        name: "Lavender Dusk",
-        description: "Twilight purple-grey with soft lilac road highlights.",
-        tier: "pro",
-        ui: { bg: "#1E1828", text: "#C8A8E0" },
-        map: {
-          land: "#1E1828", water: "#282038", park: "#322848",
-          roads: {
-            motorway: "#A880C8", primary: "#8868A8", tertiary: "#403848",
-            residential: "#302838", path: "#484058", outline: "#584868"
-          }
-        }
-      },
-      {
-        id: "gilded_imperial",
-        name: "Gilded Imperial",
-        description: "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
-        tier: "pro",
-        ui: { bg: "#6E1418", text: "#E8C868" },
-        map: {
-          land: "#6E1418", water: "#4A0C10", park: "#581418",
-          roads: {
-            motorway: "#D4AF37", primary: "#C89830", tertiary: "#481018",
-            residential: "#3A0C10", path: "#501418", outline: "#601820"
-          }
-        }
-      },
-      {
-        id: "mondrian",
-        name: "Mondrian",
-        description: "Gallery white with red arteries, cobalt trunks, yellow rail.",
-        tier: "pro",
-        ui: { bg: "#F7F7F2", text: "#1A1A1A" },
-        map: {
-          land: "#F7F7F2", water: "#E6E6E0", park: "#F0F0EA",
-          roads: {
-            motorway: "#C41E3A", primary: "#1E3A8A", tertiary: "#C8C8C4",
-            residential: "#D8D8D4", path: "#DEDEDA", outline: "#1A1A1A"
-          }
-        }
-      },
-      {
-        id: "constructivist",
-        name: "Constructivist",
-        description: "Poster white with wedge-red arteries — red, black, white.",
-        tier: "pro",
-        ui: { bg: "#EDE8DF", text: "#D40000" },
-        map: {
-          land: "#EDE8DF", water: "#C4BDB4", park: "#D6D0C8",
-          roads: {
-            motorway: "#D40000", primary: "#1A1A1A", tertiary: "#B0AAA2",
-            residential: "#C2BCB4", path: "#D8D2CA", outline: "#1A1A1A"
-          }
-        }
-      },
-      {
-        id: "the_scream",
-        name: "The Scream",
-        description: "Blood-orange sky ground with blue-black fjord roads and teal hills.",
-        tier: "pro",
-        ui: { bg: "#D94A28", text: "#1A3048" },
-        map: {
-          land: "#D94A28", water: "#1A3048", park: "#3A5040",
-          roads: {
-            motorway: "#1A3048", primary: "#2A4058", tertiary: "#B83820",
-            residential: "#C85030", path: "#C84020", outline: "#E07050"
-          }
-        }
-      },
-      {
-        id: "anubis",
-        name: "Anubis",
-        description: "Lacquer-black night with gilded roads — ancient Egyptian opulence.",
-        tier: "pro",
-        ui: { bg: "#140B01", text: "#D6B352" },
-        map: {
-          land: "#140B01", water: "#0A0500", park: "#1E1508",
-          roads: {
-            motorway: "#D4A437", primary: "#9A741F", tertiary: "#2F2412",
-            residential: "#201808", path: "#453818", outline: "#4C3F1C"
-          }
-        }
-      },
-      {
-        id: "cyberpunk",
-        name: "Cyberpunk",
-        description: "Blue-black night with neon magenta roads.",
-        tier: "pro",
-        ui: { bg: "#080C14", text: "#00F5FF" },
-        map: {
-          land: "#080C14", water: "#0A1420", park: "#101828",
-          roads: {
-            motorway: "#FF007A", primary: "#C80068", tertiary: "#202838",
-            residential: "#141C28", path: "#1A2030", outline: "#283040"
-          }
-        }
-      },
-      {
-        id: "sugar_skull",
-        name: "Sugar Skull",
-        description: "Violet night with hot-pink arteries and marigold roads.",
-        tier: "pro",
-        ui: { bg: "#2A0A3C", text: "#FFE66D" },
-        map: {
-          land: "#2A0A3C", water: "#1A0830", park: "#5A2878",
-          roads: {
-            motorway: "#FF6B9D", primary: "#FF9F1C", tertiary: "#4A2068",
-            residential: "#381848", path: "#3A1850", outline: "#7A3A98"
-          }
-        }
-      },
-      {
-        id: "reggae",
-        name: "Reggae",
-        description: "Night black with rasta-red arteries and gold trunks.",
-        tier: "pro",
-        ui: { bg: "#0C0C0C", text: "#F0C000" },
-        map: {
-          land: "#0C0C0C", water: "#0E2416", park: "#007A3D",
-          roads: {
-            motorway: "#D21034", primary: "#F0C000", tertiary: "#2A2A22",
-            residential: "#1A1A14", path: "#222218", outline: "#3A3A30"
-          }
-        }
-      },
-      {
-        id: "unit_01",
-        name: "Unit 01",
-        description: "Deep violet armor with acid-green optic glow — night-ops purple.",
-        tier: "pro",
-        ui: { bg: "#1A0A28", text: "#B8F000" },
-        map: {
-          land: "#1A0A28", water: "#0E0618", park: "#2A1440",
-          roads: {
-            motorway: "#B8F000", primary: "#88C020", tertiary: "#3A2850",
-            residential: "#2A1838", path: "#3A2050", outline: "#4A3068"
-          }
-        }
-      },
-      {
-        id: "terminal",
-        name: "Terminal",
-        description: "Olive-black night with phosphor-green roads.",
-        tier: "pro",
-        ui: { bg: "#0C1408", text: "#33FF00" },
-        map: {
-          land: "#0C1408", water: "#081008", park: "#142018",
-          roads: {
-            motorway: "#33FF00", primary: "#28CC00", tertiary: "#243820",
-            residential: "#182818", path: "#1A2818", outline: "#283828"
-          }
-        }
-      }
-    ];
-
-    const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
-    // Qujiang Pool (西安曲江池); poster title stays XI'AN / CHINA
     const MAP_CENTER = [108.980, 34.205];
-    const MAP_ZOOM = 13.5;
-    const themeById = Object.fromEntries(
-      [...basicThemes, ...proThemes].map((theme) => [theme.id, theme])
-    );
+    const MAP_ZOOM = 14.2;
+    const PREVIEW_DISTANCE_METERS = ThemeMapStyle.DEFAULT_DISTANCE_METERS;
+    const LAYER_DEFS = ThemeMapStyle.LAYER_DEFS;
 
-    const LAYER_DEFS = [
-      { id: "landcover", name: "Landcover", defaultOn: false },
-      { id: "landuse", name: "Landuse", defaultOn: false },
-      { id: "buildings", name: "Building", defaultOn: false },
-      { id: "water", name: "Water+Waterway", defaultOn: true },
-      { id: "parks", name: "Park", defaultOn: true },
-      { id: "roads", name: "Transportation (motorway/...)", defaultOn: true },
-      { id: "rail", name: "Transportation (rail/...)", defaultOn: false, pro: true },
-      { id: "aeroway", name: "Aeroway", defaultOn: false, pro: true }
-    ];
-    const layerState = Object.fromEntries(LAYER_DEFS.map((layer) => [layer.id, layer.defaultOn]));
-
-    let baseStylePromise = null;
+    let basicThemes = [];
+    let proThemes = [];
+    let themeById = {};
+    const layerState = ThemeMapStyle.defaultToggleState();
     const liveMaps = new Map();
 
-    function layerGroupFor(id, type) {
-      if (
-        type === "symbol" ||
-        type === "fill-extrusion" ||
-        id.includes("boundary") ||
-        id.includes("poi_") ||
-        id.includes("casing")
-      ) {
-        return "hidden";
+    async function loadThemes() {
+      const [basicRes, featuredRes] = await Promise.all([
+        fetch("/here-wallpaper/themes/data/basic_themes.json"),
+        fetch("/here-wallpaper/themes/data/featured_themes.json")
+      ]);
+      if (!basicRes.ok || !featuredRes.ok) {
+        throw new Error("Failed to load theme catalog");
       }
-      if (id.includes("rail")) return "rail";
-      if (id.includes("aeroway")) return "aeroway";
-      if (id.includes("building")) return "buildings";
-      if (id.includes("water")) return "water";
-      if (id === "park" || id === "park_outline") return "parks";
-      if (id.includes("landcover")) return "landcover";
-      if (id.includes("landuse")) return "landuse";
-      if (
-        id.includes("road_") ||
-        id.includes("tunnel_") ||
-        id.includes("bridge_") ||
-        id.includes("street") ||
-        id.includes("path") ||
-        id.includes("pedestrian")
-      ) {
-        return "roads";
-      }
-      return null;
+      basicThemes = (await basicRes.json()).map(ThemeMapStyle.normalizeTheme);
+      proThemes = (await featuredRes.json()).map(ThemeMapStyle.normalizeTheme);
+      themeById = Object.fromEntries(
+        [...basicThemes, ...proThemes].map((theme) => [theme.id, theme])
+      );
     }
 
-    function getBaseStyle() {
-      if (!baseStylePromise) {
-        baseStylePromise = fetch(STYLE_URL).then((res) => {
-          if (!res.ok) throw new Error("Failed to load map style");
-          return res.json();
-        });
-      }
-      return baseStylePromise;
-    }
-
-    function hideLayer(layer) {
-      layer.layout = Object.assign({}, layer.layout || {}, { visibility: "none" });
-    }
-
-    function setPaint(layer, key, value) {
-      if (!layer.paint || !(key in layer.paint)) return;
-      layer.paint[key] = value;
-    }
-
-    // Liberty defaults are much thicker than Here Wallpaper's MapLibreStyleBuilder.
-    // Match the app: drop casings and scale remaining stroke widths down.
-    const LINE_WIDTH_SCALE = 0.42;
-
-    function scaleLineWidthExpr(value, factor) {
-      if (typeof value === "number") return value * factor;
-      if (!Array.isArray(value)) return value;
-
-      const copy = value.slice();
-      const isInterpolate = copy[0] === "interpolate" || copy[0] === "interpolate-hcl" || copy[0] === "interpolate-lab";
-      if (isInterpolate) {
-        // ["interpolate", easing, input, stop1, val1, stop2, val2, ...]
-        for (let i = 4; i < copy.length; i += 2) {
-          if (typeof copy[i] === "number") copy[i] *= factor;
-        }
-        return copy;
-      }
-
-      return copy.map((item) => (Array.isArray(item) || typeof item === "number")
-        ? scaleLineWidthExpr(item, factor)
-        : item);
-    }
-
-    function thinRoadLines(layer) {
-      if (!layer.paint || !("line-width" in layer.paint)) return;
-      layer.paint["line-width"] = scaleLineWidthExpr(layer.paint["line-width"], LINE_WIDTH_SCALE);
-      if ("line-gap-width" in layer.paint) {
-        layer.paint["line-gap-width"] = scaleLineWidthExpr(layer.paint["line-gap-width"], LINE_WIDTH_SCALE);
-      }
-    }
-
-    function themedStyle(base, theme) {
-      const style = JSON.parse(JSON.stringify(base));
-      const { land, water, park, roads } = theme.map;
-      const building = park;
-
-      for (const layer of style.layers) {
-        const id = layer.id;
-        const type = layer.type;
-        const group = layerGroupFor(id, type);
-
-        if (layer.paint && ("fill-pattern" in layer.paint || "line-pattern" in layer.paint)) {
-          hideLayer(layer);
-          continue;
-        }
-
-        if (type === "line") thinRoadLines(layer);
-
-        if (id === "background") {
-          setPaint(layer, "background-color", land);
-        } else if (id === "park" || id === "park_outline") {
-          setPaint(layer, "fill-color", park);
-          setPaint(layer, "fill-outline-color", park);
-          setPaint(layer, "line-color", park);
-        } else if (id.includes("landcover")) {
-          setPaint(layer, "fill-color", park);
-          setPaint(layer, "fill-outline-color", park);
-        } else if (id.includes("landuse")) {
-          setPaint(layer, "fill-color", land);
-          setPaint(layer, "fill-outline-color", land);
-        } else if (id.includes("water")) {
-          setPaint(layer, "fill-color", water);
-          setPaint(layer, "line-color", water);
-        } else if (id.includes("building")) {
-          setPaint(layer, "fill-color", building);
-          setPaint(layer, "fill-outline-color", roads.outline);
-        } else if (id.includes("rail")) {
-          setPaint(layer, "line-color", roads.primary);
-        } else if (id.includes("motorway")) {
-          setPaint(layer, "line-color", roads.motorway);
-        } else if (id.includes("trunk") || id.includes("primary")) {
-          setPaint(layer, "line-color", roads.primary);
-        } else if (id.includes("secondary") || id.includes("tertiary")) {
-          setPaint(layer, "line-color", roads.tertiary);
-        } else if (id.includes("path") || id.includes("pedestrian")) {
-          setPaint(layer, "line-color", roads.path);
-        } else if (
-          id.includes("road_") ||
-          id.includes("tunnel_") ||
-          id.includes("bridge_") ||
-          id.includes("street") ||
-          id.includes("aeroway")
-        ) {
-          setPaint(layer, "line-color", roads.residential);
-          setPaint(layer, "fill-color", land);
-        }
-
-        if (group === "hidden" || (group && !layerState[group])) {
-          hideLayer(layer);
-        }
-      }
-
-      return style;
+    function themedStyle(theme) {
+      return ThemeMapStyle.makeStyleJSON(
+        theme,
+        ThemeMapStyle.layerOptionsFromToggles(layerState),
+        PREVIEW_DISTANCE_METERS
+      );
     }
 
     function renderTheme(theme, index) {
@@ -677,18 +127,16 @@
       delete el.dataset.mapState;
     }
 
-    async function mountMap(el) {
+    function mountMap(el) {
       if (liveMaps.has(el) || el.dataset.mapState === "loading") return;
       const theme = themeById[el.dataset.themeId];
       if (!theme || typeof maplibregl === "undefined") return;
 
       el.dataset.mapState = "loading";
       try {
-        const base = await getBaseStyle();
-        if (!el.isConnected) return;
         const map = new maplibregl.Map({
           container: el,
-          style: themedStyle(base, theme),
+          style: themedStyle(theme),
           center: MAP_CENTER,
           zoom: MAP_ZOOM,
           interactive: false,
@@ -719,8 +167,7 @@
     }
 
     function mount(list, gridId) {
-      const grid = document.getElementById(gridId);
-      grid.innerHTML = list.map(renderTheme).join("");
+      document.getElementById(gridId).innerHTML = list.map(renderTheme).join("");
     }
 
     function mountLayerToggles() {
@@ -737,25 +184,33 @@
 
       root.querySelectorAll('input[type="checkbox"]').forEach((input) => {
         input.addEventListener("change", () => {
-          const id = input.getAttribute("data-id");
-          layerState[id] = input.checked;
+          layerState[input.getAttribute("data-id")] = input.checked;
           remountLiveMaps();
         });
       });
     }
 
-    mountLayerToggles();
-    mount(basicThemes, "basic-grid");
-    mount(proThemes, "pro-grid");
+    function observeThemeMaps() {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) mountMap(entry.target);
+          else destroyMap(entry.target);
+        });
+      }, { rootMargin: "240px 0px", threshold: 0.01 });
 
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) mountMap(entry.target);
-        else destroyMap(entry.target);
-      });
-    }, { rootMargin: "240px 0px", threshold: 0.01 });
+      document.querySelectorAll(".theme-map").forEach((el) => io.observe(el));
+    }
 
-    document.querySelectorAll(".theme-map").forEach((el) => io.observe(el));
+    loadThemes().then(() => {
+      mountLayerToggles();
+      mount(basicThemes, "basic-grid");
+      mount(proThemes, "pro-grid");
+      observeThemeMaps();
+    }).catch((err) => {
+      console.error(err);
+      document.getElementById("basic-grid").innerHTML =
+        `<p class="catalog-lead">Could not load theme catalog.</p>`;
+    });
 
     window.addEventListener("resize", () => {
       liveMaps.forEach((map) => map.resize());

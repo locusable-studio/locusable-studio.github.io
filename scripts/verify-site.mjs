@@ -17,6 +17,8 @@ const pages = [
 const cssVersion = "76";
 const jsVersion = "38";
 
+const themeMapJsVersion = "1";
+
 const must = [
   ["/assets/site.css", "shared stylesheet"],
   ["/assets/site.js", "shared script"],
@@ -162,6 +164,31 @@ if (!themes.includes("catalog-section")) {
 }
 if (!themes.includes("theme-grid")) {
   console.error("FAIL here-wallpaper/themes/index.html: missing theme-grid");
+  failed++;
+}
+if (!themes.includes(`theme-map-style.js?v=${themeMapJsVersion}`)) {
+  console.error("FAIL here-wallpaper/themes/index.html: missing theme-map-style.js");
+  failed++;
+}
+if (themes.includes("styles/liberty")) {
+  console.error("FAIL here-wallpaper/themes/index.html: legacy Liberty style URL found");
+  failed++;
+}
+for (const file of ["basic_themes.json", "featured_themes.json"]) {
+  const themePath = path.join(root, "here-wallpaper/themes/data", file);
+  if (!fs.existsSync(themePath)) {
+    console.error(`FAIL missing ${file}`);
+    failed++;
+    continue;
+  }
+  const catalog = JSON.parse(fs.readFileSync(themePath, "utf8"));
+  if (!Array.isArray(catalog) || !catalog.length) {
+    console.error(`FAIL ${file}: empty catalog`);
+    failed++;
+  }
+}
+if (!fs.existsSync(path.join(root, "assets/theme-map-style.js"))) {
+  console.error("FAIL assets/theme-map-style.js missing");
   failed++;
 }
 

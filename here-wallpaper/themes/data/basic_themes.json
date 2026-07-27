@@ -1,0 +1,320 @@
+[
+  {
+    "id": "meadow_sage",
+    "name": "Meadow Sage",
+    "description": "Dusty sage fields with meadow-green parks and forest roads.",
+    "ui": {
+      "bg": "#D8E4D8",
+      "text": "#3A5848"
+    },
+    "map": {
+      "land": "#D8E4D8",
+      "water": "#A8C0B0",
+      "waterway": "#A8C0B0",
+      "aeroway": "#B8D0A8",
+      "building": "#789878",
+      "park": "#B8D0A8",
+      "transportation_rail_transit": "#3A5848",
+      "transportation": {
+        "motorway": "#486850",
+        "path_pedestrian_cycleway_track": "#B8C8B4",
+        "outline": "#C4D4C0",
+        "primary_secondary_trunk": "#587860",
+        "tertiary_minor": "#90A898",
+        "residential_service": "#A0B8A8"
+      }
+    }
+  },
+  {
+    "id": "newspaper",
+    "name": "Newspaper",
+    "description": "Yellowed newsprint with inky charcoal roads.",
+    "ui": {
+      "bg": "#F4F0E8",
+      "text": "#2C2824"
+    },
+    "map": {
+      "land": "#F4F0E8",
+      "water": "#D8D2C8",
+      "waterway": "#D8D2C8",
+      "aeroway": "#E8E4DC",
+      "building": "#B8A898",
+      "park": "#E8E4DC",
+      "transportation_rail_transit": "#2C2824",
+      "transportation": {
+        "motorway": "#3A3430",
+        "path_pedestrian_cycleway_track": "#D0C8BC",
+        "outline": "#D8D0C4",
+        "primary_secondary_trunk": "#524840",
+        "tertiary_minor": "#A89888",
+        "residential_service": "#B8A898"
+      }
+    }
+  },
+  {
+    "id": "pastel_dream",
+    "name": "Pastel Dream",
+    "description": "Muted pastels with dusty-blue roads and mauve buildings.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#FAF7F2",
+      "text": "#5D5A6D"
+    },
+    "map": {
+      "land": "#FAF7F2",
+      "water": "#D4E4ED",
+      "waterway": "#D4E4ED",
+      "aeroway": "#E8EDE4",
+      "building": "#CEC3CB",
+      "park": "#E8EDE4",
+      "transportation_rail_transit": "#5D5A6D",
+      "transportation": {
+        "motorway": "#6870A0",
+        "path_pedestrian_cycleway_track": "#D8D8E2",
+        "outline": "#E0E0E8",
+        "primary_secondary_trunk": "#9898B8",
+        "tertiary_minor": "#C4C2D0",
+        "residential_service": "#CCCCDA"
+      }
+    }
+  },
+  {
+    "id": "coral",
+    "name": "Coral",
+    "description": "Soft ivory ground with warm coral roads and muted pink features.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#F3E1DA",
+      "text": "#6E2F28"
+    },
+    "map": {
+      "land": "#F3E1DA",
+      "water": "#DFC0B5",
+      "waterway": "#DFC0B5",
+      "aeroway": "#EACFC6",
+      "building": "#E39B89",
+      "park": "#EACFC6",
+      "transportation_rail_transit": "#6E2F28",
+      "transportation": {
+        "motorway": "#B9473A",
+        "path_pedestrian_cycleway_track": "#E8C4B8",
+        "outline": "#EDD2C8",
+        "primary_secondary_trunk": "#C86050",
+        "tertiary_minor": "#E09888",
+        "residential_service": "#DDAA9A"
+      }
+    }
+  },
+  {
+    "id": "japanese_ink",
+    "name": "Japanese Ink",
+    "description": "Rice-paper white with vermilion major roads — ink-wash minimalism.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#FAF8F5",
+      "text": "#2C2C2C"
+    },
+    "map": {
+      "land": "#FAF8F5",
+      "water": "#E8E4E0",
+      "waterway": "#E8E4E0",
+      "aeroway": "#F0EDE8",
+      "building": "#959595",
+      "park": "#F0EDE8",
+      "transportation_rail_transit": "#2C2C2C",
+      "transportation": {
+        "motorway": "#8B2500",
+        "path_pedestrian_cycleway_track": "#D0CECA",
+        "outline": "#DDDBD8",
+        "primary_secondary_trunk": "#505050",
+        "tertiary_minor": "#A8A8A8",
+        "residential_service": "#BCBAB6"
+      }
+    }
+  },
+  {
+    "id": "copper_patina",
+    "name": "Copper Patina",
+    "description": "Oxidized copper — teal-green patina ground with warm copper arteries.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#E8F0F0",
+      "text": "#2A5A5A"
+    },
+    "map": {
+      "land": "#E8F0F0",
+      "water": "#C0D8D8",
+      "waterway": "#C0D8D8",
+      "aeroway": "#D8E8E0",
+      "building": "#8AB6B6",
+      "park": "#D8E8E0",
+      "transportation_rail_transit": "#2A5A5A",
+      "transportation": {
+        "motorway": "#B87333",
+        "path_pedestrian_cycleway_track": "#C8DEDE",
+        "outline": "#D2E6E6",
+        "primary_secondary_trunk": "#629898",
+        "tertiary_minor": "#A8CACA",
+        "residential_service": "#B8D4D4"
+      }
+    }
+  },
+  {
+    "id": "indigo_print",
+    "name": "Indigo Print",
+    "description": "Indigo blue with cream-white pattern roads.",
+    "ui": {
+      "bg": "#1A3A6E",
+      "text": "#F2EDE4"
+    },
+    "map": {
+      "land": "#1A3A6E",
+      "water": "#122C58",
+      "waterway": "#122C58",
+      "aeroway": "#244878",
+      "building": "#6A88B0",
+      "park": "#244878",
+      "transportation_rail_transit": "#F2EDE4",
+      "transportation": {
+        "motorway": "#F2EDE4",
+        "path_pedestrian_cycleway_track": "#3A5888",
+        "outline": "#4A6898",
+        "primary_secondary_trunk": "#D8D0C4",
+        "tertiary_minor": "#5A78A0",
+        "residential_service": "#486890"
+      }
+    }
+  },
+  {
+    "id": "ink_black",
+    "name": "Ink Black",
+    "description": "Near-black field with silver-white roads — bold and graphic.",
+    "ui": {
+      "bg": "#0E0E0E",
+      "text": "#E8E4DC"
+    },
+    "map": {
+      "land": "#0E0E0E",
+      "water": "#161616",
+      "waterway": "#161616",
+      "aeroway": "#1A1A1A",
+      "building": "#4A4A4A",
+      "park": "#1A1A1A",
+      "transportation_rail_transit": "#E8E4DC",
+      "transportation": {
+        "motorway": "#F0EDE6",
+        "path_pedestrian_cycleway_track": "#3A3A3A",
+        "outline": "#484848",
+        "primary_secondary_trunk": "#B8B4AC",
+        "tertiary_minor": "#686868",
+        "residential_service": "#404040"
+      }
+    }
+  },
+  {
+    "id": "ember_glow",
+    "name": "Ember Glow",
+    "description": "Charred dark base with glowing ember-orange arteries.",
+    "ui": {
+      "bg": "#1A1008",
+      "text": "#FFB060"
+    },
+    "map": {
+      "land": "#1A1008",
+      "water": "#120B04",
+      "waterway": "#120B04",
+      "aeroway": "#2E1A0C",
+      "building": "#A86838",
+      "park": "#2E1A0C",
+      "transportation_rail_transit": "#FFB060",
+      "transportation": {
+        "motorway": "#FF7830",
+        "path_pedestrian_cycleway_track": "#4A3828",
+        "outline": "#584838",
+        "primary_secondary_trunk": "#C85820",
+        "tertiary_minor": "#403028",
+        "residential_service": "#302418"
+      }
+    }
+  },
+  {
+    "id": "emerald_city",
+    "name": "Emerald City",
+    "description": "Lush dark green with glowing mint arteries.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#062C22",
+      "text": "#E3F9F1"
+    },
+    "map": {
+      "land": "#062C22",
+      "water": "#0D4536",
+      "waterway": "#0D4536",
+      "aeroway": "#0F523E",
+      "building": "#1A785B",
+      "park": "#0F523E",
+      "transportation_rail_transit": "#E3F9F1",
+      "transportation": {
+        "motorway": "#4ADEB0",
+        "path_pedestrian_cycleway_track": "#42635A",
+        "outline": "#517268",
+        "primary_secondary_trunk": "#18A070",
+        "tertiary_minor": "#32554B",
+        "residential_service": "#25493F"
+      }
+    }
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "description": "Garnet reds over deep plum city blocks — rich and jewel-toned.",
+    "badge": "Terraink",
+    "ui": {
+      "bg": "#1A070F",
+      "text": "#F6D7BC"
+    },
+    "map": {
+      "land": "#1A070F",
+      "water": "#2A0D17",
+      "waterway": "#2A0D17",
+      "aeroway": "#351021",
+      "building": "#EE8EA4",
+      "park": "#351021",
+      "transportation_rail_transit": "#F6D7BC",
+      "transportation": {
+        "motorway": "#C0103C",
+        "path_pedestrian_cycleway_track": "#553F3E",
+        "outline": "#654E4A",
+        "primary_secondary_trunk": "#780C2C",
+        "tertiary_minor": "#463132",
+        "residential_service": "#392427"
+      }
+    }
+  },
+  {
+    "id": "prehistoric_pottery",
+    "name": "Prehistoric Pottery",
+    "description": "Neolithic red ware — ochre clay ground with carbon-black road lines.",
+    "ui": {
+      "bg": "#D4956A",
+      "text": "#2A1810"
+    },
+    "map": {
+      "land": "#D4956A",
+      "water": "#6E4838",
+      "waterway": "#6E4838",
+      "aeroway": "#E0B088",
+      "building": "#A85840",
+      "park": "#B89068",
+      "transportation_rail_transit": "#2A1810",
+      "transportation": {
+        "motorway": "#1C1008",
+        "path_pedestrian_cycleway_track": "#C8A078",
+        "outline": "#B88868",
+        "primary_secondary_trunk": "#3D2418",
+        "tertiary_minor": "#8B6048",
+        "residential_service": "#A07050"
+      }
+    }
+  }
+]

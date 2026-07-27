@@ -1,0 +1,444 @@
+[
+  {
+    "id": "great_wave",
+    "name": "Great Wave",
+    "description": "Pale Fuji-sky ground with Prussian-blue wave roads and foam crests.",
+    "ui": {
+      "bg": "#E8DCC8",
+      "text": "#003D5C"
+    },
+    "map": {
+      "land": "#E8DCC8",
+      "water": "#82B0B2",
+      "waterway": "#82B0B2",
+      "aeroway": "#D9D1BA",
+      "building": "#C8C0B0",
+      "park": "#D0C8B0",
+      "transportation_rail_transit": "#003D5C",
+      "transportation": {
+        "motorway": "#003D5C",
+        "path_pedestrian_cycleway_track": "#D0C4B0",
+        "outline": "#C8BCA8",
+        "primary_secondary_trunk": "#1A5570",
+        "tertiary_minor": "#346B84",
+        "residential_service": "#5A8898"
+      }
+    }
+  },
+  {
+    "id": "rivers_and_mountains",
+    "name": "Rivers and Mountains",
+    "description": "Song blue-green hills, azurite rivers, ochre ground.",
+    "ui": {
+      "bg": "#D4C898",
+      "text": "#2A4030"
+    },
+    "map": {
+      "land": "#D4C898",
+      "water": "#4A7A98",
+      "waterway": "#4A7A98",
+      "aeroway": "#C4B888",
+      "building": "#A88850",
+      "park": "#5A8A48",
+      "transportation_rail_transit": "#2A4030",
+      "transportation": {
+        "motorway": "#2E4A30",
+        "path_pedestrian_cycleway_track": "#C0B890",
+        "outline": "#CCC4A0",
+        "primary_secondary_trunk": "#3E6840",
+        "tertiary_minor": "#7A9060",
+        "residential_service": "#9AA878"
+      }
+    }
+  },
+  {
+    "id": "polar_ice",
+    "name": "Polar Ice",
+    "description": "Crisp arctic white with glacier-blue water and frozen steel roads.",
+    "ui": {
+      "bg": "#F2F8FC",
+      "text": "#1860A0"
+    },
+    "map": {
+      "land": "#F2F8FC",
+      "water": "#78B8E0",
+      "waterway": "#78B8E0",
+      "aeroway": "#E4F0F8",
+      "building": "#4890B8",
+      "park": "#E4F0F8",
+      "transportation_rail_transit": "#1860A0",
+      "transportation": {
+        "motorway": "#2070A8",
+        "path_pedestrian_cycleway_track": "#B8D8EC",
+        "outline": "#C8E0F0",
+        "primary_secondary_trunk": "#3888B8",
+        "tertiary_minor": "#88B8D8",
+        "residential_service": "#98C8E0"
+      }
+    }
+  },
+  {
+    "id": "starry_night",
+    "name": "Starry Night",
+    "description": "Ultramarine night with yellow stars and cobalt roads.",
+    "ui": {
+      "bg": "#0E1C48",
+      "text": "#F0C020"
+    },
+    "map": {
+      "land": "#0E1C48",
+      "water": "#081028",
+      "waterway": "#081028",
+      "aeroway": "#1A3060",
+      "building": "#8A6A40",
+      "park": "#0C1C14",
+      "transportation_rail_transit": "#F0C020",
+      "transportation": {
+        "motorway": "#F0C020",
+        "path_pedestrian_cycleway_track": "#182840",
+        "outline": "#2A4870",
+        "primary_secondary_trunk": "#3D7AA8",
+        "tertiary_minor": "#1A2850",
+        "residential_service": "#142038"
+      }
+    }
+  },
+  {
+    "id": "sunflowers",
+    "name": "Sunflowers",
+    "description": "Chrome-yellow ground with burnt-umber seed roads and olive stem parks.",
+    "ui": {
+      "bg": "#F0C840",
+      "text": "#3D2814"
+    },
+    "map": {
+      "land": "#F0C840",
+      "water": "#D4A828",
+      "waterway": "#D4A828",
+      "aeroway": "#F5D868",
+      "building": "#A06830",
+      "park": "#4A6028",
+      "transportation_rail_transit": "#3D2814",
+      "transportation": {
+        "motorway": "#5C3010",
+        "path_pedestrian_cycleway_track": "#E0B838",
+        "outline": "#E8C850",
+        "primary_secondary_trunk": "#8B5018",
+        "tertiary_minor": "#C89828",
+        "residential_service": "#D4A830"
+      }
+    }
+  },
+  {
+    "id": "aurora_borealis",
+    "name": "Aurora Borealis",
+    "description": "Arctic night sky with luminous green bands and violet aurora fringe.",
+    "ui": {
+      "bg": "#050A18",
+      "text": "#78F8C8"
+    },
+    "map": {
+      "land": "#050A18",
+      "water": "#081428",
+      "waterway": "#081428",
+      "aeroway": "#0C1C30",
+      "building": "#5848A0",
+      "park": "#0C1C30",
+      "transportation_rail_transit": "#78F8C8",
+      "transportation": {
+        "motorway": "#40E8A0",
+        "path_pedestrian_cycleway_track": "#182838",
+        "outline": "#243848",
+        "primary_secondary_trunk": "#68F0B8",
+        "tertiary_minor": "#142030",
+        "residential_service": "#0A1018"
+      }
+    }
+  },
+  {
+    "id": "lavender_dusk",
+    "name": "Lavender Dusk",
+    "description": "Twilight purple-grey with soft lilac road highlights.",
+    "ui": {
+      "bg": "#1E1828",
+      "text": "#C8A8E0"
+    },
+    "map": {
+      "land": "#1E1828",
+      "water": "#282038",
+      "waterway": "#282038",
+      "aeroway": "#322848",
+      "building": "#7868A0",
+      "park": "#322848",
+      "transportation_rail_transit": "#C8A8E0",
+      "transportation": {
+        "motorway": "#A880C8",
+        "path_pedestrian_cycleway_track": "#484058",
+        "outline": "#584868",
+        "primary_secondary_trunk": "#8868A8",
+        "tertiary_minor": "#403848",
+        "residential_service": "#302838"
+      }
+    }
+  },
+  {
+    "id": "gilded_imperial",
+    "name": "Gilded Imperial",
+    "description": "Palace cinnabar walls with gilt-gold roads — Tang hall grandeur.",
+    "ui": {
+      "bg": "#6E1418",
+      "text": "#E8C868"
+    },
+    "map": {
+      "land": "#6E1418",
+      "water": "#4A0C10",
+      "waterway": "#4A0C10",
+      "aeroway": "#581418",
+      "building": "#B8860B",
+      "park": "#581418",
+      "transportation_rail_transit": "#E8C868",
+      "transportation": {
+        "motorway": "#D4AF37",
+        "path_pedestrian_cycleway_track": "#501418",
+        "outline": "#601820",
+        "primary_secondary_trunk": "#C89830",
+        "tertiary_minor": "#481018",
+        "residential_service": "#3A0C10"
+      }
+    }
+  },
+  {
+    "id": "mondrian",
+    "name": "Mondrian",
+    "description": "Gallery white with red arteries, cobalt trunks, yellow rail.",
+    "ui": {
+      "bg": "#F7F7F2",
+      "text": "#1A1A1A"
+    },
+    "map": {
+      "land": "#F7F7F2",
+      "water": "#E6E6E0",
+      "waterway": "#E6E6E0",
+      "aeroway": "#EEEEEA",
+      "building": "#D0D0D0",
+      "park": "#F0F0EA",
+      "transportation_rail_transit": "#F5D000",
+      "transportation": {
+        "motorway": "#C41E3A",
+        "path_pedestrian_cycleway_track": "#DEDEDA",
+        "outline": "#1A1A1A",
+        "primary_secondary_trunk": "#1E3A8A",
+        "tertiary_minor": "#C8C8C4",
+        "residential_service": "#D8D8D4"
+      }
+    }
+  },
+  {
+    "id": "constructivist",
+    "name": "Constructivist",
+    "description": "Poster white with wedge-red arteries — red, black, white.",
+    "ui": {
+      "bg": "#EDE8DF",
+      "text": "#D40000"
+    },
+    "map": {
+      "land": "#EDE8DF",
+      "water": "#C4BDB4",
+      "waterway": "#C4BDB4",
+      "aeroway": "#E0DAD2",
+      "building": "#8A8580",
+      "park": "#D6D0C8",
+      "transportation_rail_transit": "#1A1A1A",
+      "transportation": {
+        "motorway": "#D40000",
+        "path_pedestrian_cycleway_track": "#D8D2CA",
+        "outline": "#1A1A1A",
+        "primary_secondary_trunk": "#1A1A1A",
+        "tertiary_minor": "#B0AAA2",
+        "residential_service": "#C2BCB4"
+      }
+    }
+  },
+  {
+    "id": "the_scream",
+    "name": "The Scream",
+    "description": "Blood-orange sky ground with blue-black fjord roads and teal hills.",
+    "ui": {
+      "bg": "#D94A28",
+      "text": "#1A3048"
+    },
+    "map": {
+      "land": "#D94A28",
+      "water": "#1A3048",
+      "waterway": "#1A3048",
+      "aeroway": "#E06A40",
+      "building": "#6A5848",
+      "park": "#3A5040",
+      "transportation_rail_transit": "#1A3048",
+      "transportation": {
+        "motorway": "#1A3048",
+        "path_pedestrian_cycleway_track": "#C84020",
+        "outline": "#E07050",
+        "primary_secondary_trunk": "#2A4058",
+        "tertiary_minor": "#B83820",
+        "residential_service": "#C85030"
+      }
+    }
+  },
+  {
+    "id": "anubis",
+    "name": "Anubis",
+    "description": "Lacquer-black night with gilded roads — ancient Egyptian opulence.",
+    "ui": {
+      "bg": "#140B01",
+      "text": "#D6B352"
+    },
+    "map": {
+      "land": "#140B01",
+      "water": "#0A0500",
+      "waterway": "#0A0500",
+      "aeroway": "#1E1508",
+      "building": "#6B5528",
+      "park": "#1E1508",
+      "transportation_rail_transit": "#D6B352",
+      "transportation": {
+        "motorway": "#D4A437",
+        "path_pedestrian_cycleway_track": "#453818",
+        "outline": "#4C3F1C",
+        "primary_secondary_trunk": "#9A741F",
+        "tertiary_minor": "#2F2412",
+        "residential_service": "#201808"
+      }
+    }
+  },
+  {
+    "id": "cyberpunk",
+    "name": "Cyberpunk",
+    "description": "Blue-black night with neon magenta roads.",
+    "ui": {
+      "bg": "#080C14",
+      "text": "#00F5FF"
+    },
+    "map": {
+      "land": "#080C14",
+      "water": "#0A1420",
+      "waterway": "#0A1420",
+      "aeroway": "#101828",
+      "building": "#C8D020",
+      "park": "#101828",
+      "transportation_rail_transit": "#00F5FF",
+      "transportation": {
+        "motorway": "#FF007A",
+        "path_pedestrian_cycleway_track": "#1A2030",
+        "outline": "#283040",
+        "primary_secondary_trunk": "#C80068",
+        "tertiary_minor": "#202838",
+        "residential_service": "#141C28"
+      }
+    }
+  },
+  {
+    "id": "sugar_skull",
+    "name": "Sugar Skull",
+    "description": "Violet night with hot-pink arteries and marigold roads.",
+    "ui": {
+      "bg": "#2A0A3C",
+      "text": "#FFE66D"
+    },
+    "map": {
+      "land": "#2A0A3C",
+      "water": "#1A0830",
+      "waterway": "#1A0830",
+      "aeroway": "#3C1458",
+      "building": "#C060A0",
+      "park": "#5A2878",
+      "transportation_rail_transit": "#5CDBF0",
+      "transportation": {
+        "motorway": "#FF6B9D",
+        "path_pedestrian_cycleway_track": "#3A1850",
+        "outline": "#7A3A98",
+        "primary_secondary_trunk": "#FF9F1C",
+        "tertiary_minor": "#4A2068",
+        "residential_service": "#381848"
+      }
+    }
+  },
+  {
+    "id": "reggae",
+    "name": "Reggae",
+    "description": "Night black with rasta-red arteries and gold trunks.",
+    "ui": {
+      "bg": "#0C0C0C",
+      "text": "#F0C000"
+    },
+    "map": {
+      "land": "#0C0C0C",
+      "water": "#0E2416",
+      "waterway": "#0E2416",
+      "aeroway": "#1A1A1A",
+      "building": "#3A4A2A",
+      "park": "#007A3D",
+      "transportation_rail_transit": "#F0C000",
+      "transportation": {
+        "motorway": "#D21034",
+        "path_pedestrian_cycleway_track": "#222218",
+        "outline": "#3A3A30",
+        "primary_secondary_trunk": "#F0C000",
+        "tertiary_minor": "#2A2A22",
+        "residential_service": "#1A1A14"
+      }
+    }
+  },
+  {
+    "id": "unit_01",
+    "name": "Unit 01",
+    "description": "Deep violet armor with acid-green optic glow — night-ops purple.",
+    "ui": {
+      "bg": "#1A0A28",
+      "text": "#B8F000"
+    },
+    "map": {
+      "land": "#1A0A28",
+      "water": "#0E0618",
+      "waterway": "#0E0618",
+      "aeroway": "#2A1440",
+      "building": "#6A3A88",
+      "park": "#2A1440",
+      "transportation_rail_transit": "#B8F000",
+      "transportation": {
+        "motorway": "#B8F000",
+        "path_pedestrian_cycleway_track": "#3A2050",
+        "outline": "#4A3068",
+        "primary_secondary_trunk": "#88C020",
+        "tertiary_minor": "#3A2850",
+        "residential_service": "#2A1838"
+      }
+    }
+  },
+  {
+    "id": "terminal",
+    "name": "Terminal",
+    "description": "Olive-black night with phosphor-green roads.",
+    "ui": {
+      "bg": "#0C1408",
+      "text": "#33FF00"
+    },
+    "map": {
+      "land": "#0C1408",
+      "water": "#081008",
+      "waterway": "#081008",
+      "aeroway": "#142018",
+      "building": "#3A5840",
+      "park": "#142018",
+      "transportation_rail_transit": "#33FF00",
+      "transportation": {
+        "motorway": "#33FF00",
+        "path_pedestrian_cycleway_track": "#1A2818",
+        "outline": "#283828",
+        "primary_secondary_trunk": "#28CC00",
+        "tertiary_minor": "#243820",
+        "residential_service": "#182818"
+      }
+    }
+  }
+]
