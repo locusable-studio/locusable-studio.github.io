@@ -14,7 +14,7 @@ const pages = [
   "here-sidefy/privacy/index.html",
 ];
 
-const cssVersion = "44";
+const cssVersion = "53";
 const jsVersion = "37";
 
 const must = [
@@ -22,7 +22,6 @@ const must = [
   ["/assets/site.js", "shared script"],
   [`site.css?v=${cssVersion}`, "css cache version"],
   [`site.js?v=${jsVersion}`, "js cache version"],
-  ['rel="preconnect" href="https://fonts.googleapis.com"', "fonts preconnect"],
 ];
 
 const backNav = {
@@ -71,10 +70,6 @@ for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/"]) {
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
-}
-if (!home.includes("studio-masthead__tagline")) {
-  console.error("FAIL index.html: missing studio tagline");
-  failed++;
 }
 
 const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
-
 :root {
   --bg: #ffffff;
   --bg-alt: #f5f5f7;
@@ -202,12 +200,12 @@ a {
   border: 0;
 }
 
-/* Brand & product titles — Instrument Serif */
+/* Product titles — system sans */
 .display,
 .product-title {
-  font-family: "Instrument Serif", Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: -0.025em;
   line-height: 1.05;
   color: var(--fg);
 }
@@ -224,43 +222,70 @@ a {
 }
 
 .studio-masthead {
-  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  background: color-mix(in srgb, var(--accent-studio) 7%, var(--bg));
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-studio) 14%, var(--line));
+}
+
+.studio-masthead__inner {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
   padding:
     calc(0.65rem + env(safe-area-inset-top))
     var(--unit-pad-x)
-    0.35rem;
-  background: var(--bg);
+    0.55rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .studio-masthead {
+    background: color-mix(in srgb, var(--accent-studio) 12%, var(--bg-alt));
+    border-bottom-color: color-mix(in srgb, var(--accent-studio) 18%, var(--line));
+  }
 }
 
 .studio-masthead__brand {
   display: inline-block;
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  color: var(--muted);
   text-decoration: none;
-  transition: color 0.2s var(--ease-out);
+  transition: transform 0.2s var(--ease-out);
 }
 
-.studio-masthead__brand em {
+.studio-masthead__ring {
+  /* Nintendo racetrack proportions: ~5:1 lockup, tight vertical inset, ~0.15em stroke */
+  display: inline-block;
+  padding: 0.33em 0.72em 0.37em;
+  border: 0.15em solid var(--accent-studio);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--muted);
+  transition:
+    color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    background 0.2s var(--ease-out);
+}
+
+.studio-masthead__brand em,
+.studio-masthead__ring em {
   font-style: italic;
   color: var(--accent-studio);
 }
 
-.studio-masthead__brand:hover,
-.studio-masthead__brand:focus-visible {
+.studio-masthead__brand:hover .studio-masthead__ring,
+.studio-masthead__brand:focus-visible .studio-masthead__ring {
   color: var(--fg);
+  border-color: color-mix(in srgb, var(--accent-studio) 55%, var(--fg));
   outline: none;
 }
 
-.studio-masthead__tagline {
-  margin: 0.35rem auto 0;
-  max-width: 28rem;
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.35;
-  letter-spacing: -0.016em;
+.studio-masthead__brand:focus-visible .studio-masthead__ring {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-studio) 28%, transparent);
 }
 
 /* Apple-style product unit */
@@ -477,6 +502,22 @@ a {
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
 }
 
+.unit__media--desktop-peek {
+  overflow: hidden;
+  max-width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 1.25rem var(--unit-pad-x) 0;
+  aspect-ratio: 1259 / 574;
+}
+
+.unit__media--desktop-peek img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
+  display: block;
+}
+
 .unit--dark .unit__media--single img {
   filter: brightness(1.06) contrast(1.04);
 }
@@ -557,10 +598,10 @@ a {
 }
 
 .catalog-title {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: inherit;
   font-size: clamp(2.25rem, 6vw, 3.25rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.025em;
   line-height: 1.15;
   color: var(--app-accent);
 }
@@ -680,10 +721,10 @@ a {
 }
 
 .prose h1 {
-  font-family: "Instrument Serif", Georgia, serif;
+  font-family: inherit;
   font-size: clamp(2rem, 5vw, 2.75rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.025em;
   line-height: 1.1;
   color: var(--fg);
   margin-bottom: 1.25rem;
