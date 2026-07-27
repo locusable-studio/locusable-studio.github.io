@@ -36,28 +36,6 @@
     });
   }
 
-  function initStickyChapters() {
-    var chapters = document.querySelectorAll(".chapter-sticky");
-    if (!chapters.length) return;
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      chapters.forEach(function (c) { c.style.setProperty("--chapter-progress", "1"); });
-      return;
-    }
-    function update() {
-      var vh = window.innerHeight || 1;
-      chapters.forEach(function (chapter) {
-        var rect = chapter.getBoundingClientRect();
-        var total = Math.max(chapter.offsetHeight - vh, 1);
-        var raw = Math.min(Math.max(-rect.top / total, 0), 1);
-        chapter.style.setProperty("--chapter-progress", String(raw));
-      });
-    }
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-  }
-
   function bindAppStoreLinks() {
     var ua = navigator.userAgent || "";
     var isIOS = /iPhone|iPad|iPod/.test(ua) ||
@@ -82,6 +60,5 @@
 
   initThemeColor();
   initReveals();
-  initStickyChapters();
   bindAppStoreLinks();
 })();

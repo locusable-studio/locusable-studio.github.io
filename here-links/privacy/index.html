@@ -13,86 +13,81 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=37">
+  <link rel="stylesheet" href="/assets/site.css?v=42">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <div class="site-shell--narrow">
-    <nav class="crumbbar" aria-label="Breadcrumb">
-      <ol class="crumbs">
-        <li><a href="/">Locusable Studio</a></li>
-        <li><a href="/here-links/">Here Links</a></li>
-        <li><span aria-current="page">Privacy</span></li>
-      </ol>
-    </nav>
+    <div class="doc-layout">
+      <nav class="crumbbar crumbbar--back" aria-label="Back">
+        <a class="crumb-back" href="/here-links/">‹ Here Links</a>
+      </nav>
 
-    <main class="prose" data-reveal>
-      <h1>Privacy Policy</h1>
-      <p class="meta" style="color:var(--muted);font-size:0.9rem;margin-bottom:2rem">Here Links · Locusable Studio · Effective July 24, 2026</p>
+      <main class="prose" data-reveal>
+        <h1>Privacy Policy</h1>
+        <p class="prose-meta">Here Links · Locusable Studio · Effective July 24, 2026</p>
 
-      <p>
-        Here Links (“the App”) is made by Locusable Studio (“we”, “us”).
-        The App is an unofficial native iOS client for self-hosted
-        <a href="https://linkding.link">linkding</a> servers that you operate.
-        We do not operate user accounts for the App, and we do not use data for tracking.
-        We do not sell personal data.
-      </p>
+        <p>
+          Here Links (“the App”) is made by Locusable Studio (“we”, “us”).
+          The App is an unofficial native iOS client for self-hosted
+          <a href="https://linkding.link">linkding</a> servers that you operate.
+          We do not operate user accounts for the App, and we do not use data for tracking.
+          We do not sell personal data.
+        </p>
 
-      <h2>What we don’t collect</h2>
-      <p>
-        We do not operate analytics, advertising, or crash-reporting services that receive your information.
-        We do not sell or share personal data with third parties for marketing.
-        We do not run a Locusable backend that stores your bookmarks or browsing history.
-      </p>
+        <h2>What we don’t collect</h2>
+        <p>
+          We do not operate analytics, advertising, or crash-reporting services that receive your information.
+          We do not sell or share personal data with third parties for marketing.
+          We do not run a Locusable backend that stores your bookmarks or browsing history.
+        </p>
 
-      <h2>Data that stays on your device</h2>
-      <p>
-        The App stores the following on your iPhone to provide its features. This data is not sent to us:
-      </p>
-      <ul>
-        <li><strong>API tokens</strong> — stored in the Keychain so the App (and Share Extension) can authenticate to your linkding servers.</li>
-        <li><strong>Server settings</strong> — instance URLs and related preferences stored in an App Group on your device for use by the App and Share Extension.</li>
-      </ul>
+        <h2>Data that stays on your device</h2>
+        <p>
+          The App stores the following on your iPhone to provide its features. This data is not sent to us:
+        </p>
+        <ul>
+          <li><strong>API tokens</strong> — stored in the Keychain so the App (and Share Extension) can authenticate to your linkding servers.</li>
+          <li><strong>Server settings</strong> — instance URLs and related preferences stored in an App Group on your device for use by the App and Share Extension.</li>
+        </ul>
 
-      <h2>Your linkding servers</h2>
-      <p>
-        When you use the App, bookmark lists, searches, saves, archives, tags, snapshots, and attachments
-        are requested from the linkding server URL(s) you configure.
-        Those requests are made by the App on your device to <strong>your</strong> self-hosted instance(s).
-        How that server stores or processes data is governed by your own hosting setup and the linkding project — not by Locusable Studio.
-      </p>
+        <h2>Your linkding servers</h2>
+        <p>
+          When you use the App, bookmark lists, searches, saves, archives, tags, snapshots, and attachments
+          are requested from the linkding server URL(s) you configure.
+          Those requests are made by the App on your device to <strong>your</strong> self-hosted instance(s).
+          How that server stores or processes data is governed by your own hosting setup and the linkding project — not by Locusable Studio.
+        </p>
 
-      <h2>Share Extension</h2>
-      <p>
-        The optional Share Extension lets you save a link from other apps into your default linkding server.
-        It uses the same on-device Keychain tokens and App Group settings as the main App.
-      </p>
+        <h2>Share Extension</h2>
+        <p>
+          The optional Share Extension lets you save a link from other apps into your default linkding server.
+          It uses the same on-device Keychain tokens and App Group settings as the main App.
+        </p>
 
-      <h2>Children</h2>
-      <p>
-        The App is not directed at children under 13. We do not knowingly collect personal information from children under 13.
-      </p>
+        <h2>Children</h2>
+        <p>
+          The App is not directed at children under 13. We do not knowingly collect personal information from children under 13.
+        </p>
 
-      <h2>Changes</h2>
-      <p>
-        If this policy changes, we will update this page and the effective date above.
-      </p>
+        <h2>Changes</h2>
+        <p>
+          If this policy changes, we will update this page and the effective date above.
+        </p>
 
-      <h2>Contact</h2>
-      <p>
-        For questions about this policy or technical support, open an issue at
-        <a href="https://github.com/locusable-studio/HereLinks/issues">github.com/locusable-studio/HereLinks/issues</a>.
-      </p>
-    </main>
-
+        <h2>Contact</h2>
+        <p>
+          For questions about this policy or technical support, open an issue at
+          <a href="https://github.com/locusable-studio/HereLinks/issues">github.com/locusable-studio/HereLinks/issues</a>.
+        </p>
+      </main>
     </div>
+
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=34" defer></script>
+  <script src="/assets/site.js?v=37" defer></script>
 </body>
 </html>

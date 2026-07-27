@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-app="wallpaper">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ffffff">
   <title>Here Wallpaper — Themes</title>
@@ -13,8 +13,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=37">
+  <link rel="stylesheet" href="/assets/site.css?v=42">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
   <style>
@@ -32,35 +31,6 @@
     body {
       background: transparent;
       color: var(--page-text);
-      padding: 0 24px calc(48px + env(safe-area-inset-bottom));
-    }
-
-    .crumbbar {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .page-title {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 2.75rem);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--accent-wallpaper);
-    }
-
-    .page-lead {
-      margin: 14px auto 0;
-      max-width: 36rem;
-      color: var(--page-muted);
-      font-size: 15px;
-    }
-
-    header {
-      max-width: 1200px;
-      margin: 0 auto 40px;
-      text-align: center;
-      animation: rise 0.7s ease both;
     }
 
     @keyframes rise {
@@ -139,8 +109,38 @@
     }
 
     section {
-      max-width: 1200px;
+      max-width: var(--max-wide);
+      width: 100%;
       margin: 0 auto 48px;
+    }
+
+    .layer-panel {
+      max-width: var(--max-wide);
+      width: 100%;
+      margin: 0 auto 40px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px 20px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+
+    @media (min-width: 640px) {
+      .controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 960px) {
+      .controls {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
     }
 
     .phone-wrap {
@@ -232,48 +232,15 @@
       pointer-events: none;
     }
 
-    footer {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 1.25rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
-      justify-content: space-between;
-      color: var(--page-muted);
-      font-size: 0.85rem;
-    }
-
-    footer a {
-      color: var(--page-muted);
-      text-decoration: none;
-    }
-
-    footer a:hover { color: var(--page-text); }
-
-    .layer-panel {
-      max-width: 1200px;
-      margin: 0 auto 40px;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 8px 12px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-    }
-
     .layer-check {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
       min-width: 0;
-      padding: 6px 4px;
+      padding: 8px 6px;
       color: var(--page-text);
       font-size: 14px;
+      line-height: 1.35;
       cursor: pointer;
       user-select: none;
     }
@@ -320,10 +287,11 @@
 
     .layer-check-text {
       display: inline-flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 8px;
       min-width: 0;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .badge-pro {
@@ -338,44 +306,43 @@
     }
   </style>
 </head>
-<body>
-  <nav class="crumbbar" aria-label="Breadcrumb">
-    <ol class="crumbs">
-      <li><a href="/">Locusable Studio</a></li>
-      <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
-      <li><span aria-current="page">Themes</span></li>
-    </ol>
-  </nav>
+<body class="catalog-page" data-app="wallpaper">
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar crumbbar--back" aria-label="Back">
+      <a class="crumb-back" href="/here-wallpaper/">‹ Here Wallpaper</a>
+    </nav>
 
-  <header>
-    <h1 class="page-title">Themes</h1>
-    <p class="page-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
-  </header>
+    <header class="catalog-hero">
+      <h1 class="catalog-title">Themes</h1>
+      <p class="catalog-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
+    </header>
 
-  <section class="layer-panel" aria-label="Map layers">
-    <h2><span class="section-title">Layers</span></h2>
-    <div class="controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
-  </section>
+    <section class="layer-panel" aria-label="Map layers">
+      <h2><span class="section-title">Layers</span></h2>
+      <div class="controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
+    </section>
 
-  <section id="basic-section">
-    <h2>
-      <span class="section-title">Basic</span>
-    </h2>
-    <div class="grid" id="basic-grid"></div>
-  </section>
+    <section id="basic-section">
+      <h2>
+        <span class="section-title">Basic</span>
+      </h2>
+      <div class="grid" id="basic-grid"></div>
+    </section>
 
-  <section id="pro-section">
-    <h2>
-      <span class="section-title">Featured</span>
-    </h2>
-    <div class="grid" id="pro-grid"></div>
-  </section>
+    <section id="pro-section">
+      <h2>
+        <span class="section-title">Featured</span>
+      </h2>
+      <div class="grid" id="pro-grid"></div>
+    </section>
 
-
-  <footer>
-    <span>© 2026 Locusable Studio · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
-    <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+    <footer class="footer">
+    <div class="footer__inner">
+      <span>© 2026 Locusable Studio · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
+      <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+    </div>
   </footer>
+  </div>
 
   <script>
     const basicThemes = [
@@ -1085,6 +1052,6 @@
       liveMaps.forEach((map) => map.resize());
     });
   </script>
-  <script src="/assets/site.js?v=34" defer></script>
+  <script src="/assets/site.js?v=37" defer></script>
 </body>
 </html>

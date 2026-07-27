@@ -25,7 +25,7 @@ Success looks like: opening any page feels like one coherent Apple-adjacent prod
 
 | Topic | Choice |
 |---|---|
-| Scope | Full site: homepage + app pages + privacy/themes/layers |
+| Scope | Full site: homepage + app pages + privacy/themes |
 | Theme | Auto light + dark (`prefers-color-scheme`) |
 | Homepage product presentation | Full-bleed product chapters (one app per sticky section) |
 | Display type | Instrument Serif for studio brand + page hero titles |
@@ -139,7 +139,7 @@ Structure:
 
 1. Shared topbar (back to Studio / related links already present)
 2. Hero: app icon + Instrument Serif title in app accent + short tagline + existing primary CTA(s)
-3. Scroll chapters for existing content blocks (features, shot strips, feature panels) restyled to theater sections — preserve destinations (themes/layers/privacy/store)
+3. Scroll chapters for existing content blocks (features, shot strips, feature panels) restyled to theater sections — preserve destinations (themes/privacy/store)
 4. Footer
 
 Copy polish examples (tone, not new claims):
@@ -149,10 +149,10 @@ Copy polish examples (tone, not new claims):
 
 ### Secondary pages
 
-`here-wallpaper/themes/`, `here-wallpaper/layers/`, `here-wallpaper/privacy/`, `here-links/privacy/`
+`here-wallpaper/themes/`, `here-wallpaper/privacy/`, `here-links/privacy/`
 
 - Same chrome + tokens + accent
-- Content-first layout; no forced sticky theater on dense interactive tools (themes/layers keep utility UX)
+- Content-first layout; no forced sticky theater on dense interactive tools (themes keeps utility UX with layer toggles)
 - Light motion: section reveal only
 - Privacy: readable long-form type scale, no card stack chrome
 
@@ -163,7 +163,7 @@ Copy polish examples (tone, not new claims):
 | Homepage hero | Entrance fade + slight rise |
 | Homepage product chapters | Sticky pin; media/title scrub with scroll progress |
 | App marketing heroes | Entrance + gentle media parallax |
-| Themes / layers / privacy | Intersection reveal only |
+| Themes / privacy | Intersection reveal only |
 | Reduced motion | No pin/scrub/parallax |
 
 Implementation preference: CSS sticky + `IntersectionObserver` / scroll progress in `site.js`. No animation framework dependency.
@@ -183,7 +183,6 @@ Implementation preference: CSS sticky + `IntersectionObserver` / scroll progress
   `index.html`  
   `here-wallpaper/index.html`  
   `here-wallpaper/themes/index.html`  
-  `here-wallpaper/layers/index.html`  
   `here-wallpaper/privacy/index.html`  
   `here-links/index.html`  
   `here-links/privacy/index.html`
@@ -194,5 +193,5 @@ Implementation preference: CSS sticky + `IntersectionObserver` / scroll progress
 1. Desktop + mobile widths: homepage first viewport is brand-only; product chapters read as separate compositions
 2. macOS/iOS light and dark system appearance both look intentional
 3. Sticky theater works in current Safari/Chrome; reduced-motion path remains usable
-4. All existing deep links (store, themes, layers, privacy, Sidefy external) still work
+4. All existing deep links (store, themes, privacy, Sidefy external) still work
 5. No broken assets; icons/screenshots reuse current paths

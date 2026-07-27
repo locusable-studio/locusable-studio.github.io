@@ -4,13 +4,13 @@
 
 **Goal:** Rebuild the full Locusable Studio static site with a shared Apple-like light/dark visual system, product-chapter homepage, and strong scroll theater while preserving existing links and product facts.
 
-**Architecture:** Add shared `assets/site.css` + `assets/site.js`. Strip duplicated inline chrome styles from all 7 HTML pages. Homepage uses sticky product chapters; app marketing pages reuse hero/chapter patterns; utility pages (themes/layers/privacy) get shared chrome with lighter motion.
+**Architecture:** Add shared `assets/site.css` + `assets/site.js`. Strip duplicated inline chrome styles from all HTML pages. Homepage uses product units; app marketing pages reuse hero/unit patterns; utility pages (themes/privacy) get shared chrome with lighter motion.
 
 **Tech Stack:** Static HTML, CSS custom properties + `prefers-color-scheme`, vanilla JS (sticky/scroll progress + App Store iOS deep link helper), Instrument Serif via Google Fonts, GitHub Pages.
 
 ## Global Constraints
 
-- Scope: all 7 HTML pages listed in the design spec
+- Scope: all 9 HTML pages in the site
 - Theme: auto via `prefers-color-scheme` only (no manual toggle)
 - Display font: Instrument Serif for studio brand + page hero titles
 - Accents: Wallpaper `#4CAC50`, Links `#2094F0`, Sidefy `#F44034`, Studio gold `#C9A24D`
@@ -29,8 +29,7 @@
 | `scripts/verify-site.mjs` | Link/class contract checks across HTML pages |
 | `index.html` | Studio homepage chapters |
 | `here-wallpaper/index.html` | Wallpaper marketing |
-| `here-wallpaper/themes/index.html` | Theme catalog (page-local swatch CSS kept) |
-| `here-wallpaper/layers/index.html` | Layer toggles (page-local interactive CSS/JS kept) |
+| `here-wallpaper/themes/index.html` | Theme catalog + layer toggles (page-local map CSS/JS kept) |
 | `here-wallpaper/privacy/index.html` | Privacy long-form |
 | `here-links/index.html` | Links marketing |
 | `here-links/privacy/index.html` | Privacy long-form |
@@ -64,7 +63,6 @@ const pages = [
   "index.html",
   "here-wallpaper/index.html",
   "here-wallpaper/themes/index.html",
-  "here-wallpaper/layers/index.html",
   "here-wallpaper/privacy/index.html",
   "here-links/index.html",
   "here-links/privacy/index.html",
@@ -309,24 +307,23 @@ git commit -m "feat(site): rebuild studio homepage as product chapters"
 **Files:**
 - Modify: `here-wallpaper/index.html`
 - Modify: `here-wallpaper/themes/index.html`
-- Modify: `here-wallpaper/layers/index.html`
 - Modify: `here-wallpaper/privacy/index.html`
 
 **Interfaces:**
 - Consumes: shared chrome + `--app-accent` via `data-app="wallpaper"` on `<html>` or `<body>`
-- Produces restyled pages; keep themes/layers page-local interactive CSS/JS
+- Produces restyled pages; keep themes page-local interactive CSS/JS
 
 - [ ] **Step 1: Restyle `here-wallpaper/index.html`**
 
 - `data-app="wallpaper"`
 - Title `Here <em>Wallpaper</em>` in accent green
 - Keep App Store button attrs (`data-app-store-link`, ios/web urls)
-- Keep links to themes/layers/privacy
+- Keep links to themes/privacy
 - Shorten tagline/points copy without new claims
 - Remove inline App Store script (now in `site.js`)
 - Keep shot assets paths
 
-- [ ] **Step 2: Restyle themes + layers + privacy**
+- [ ] **Step 2: Restyle themes + privacy**
 
 - Shared topbar/footer/tokens
 - Keep existing interactive behavior and theme catalog data
@@ -337,7 +334,7 @@ git commit -m "feat(site): rebuild studio homepage as product chapters"
 Run:
 
 ```bash
-rg -n "apps.apple.com/app/id6789155385|/here-wallpaper/themes/|/here-wallpaper/layers/|/here-wallpaper/privacy/" here-wallpaper
+rg -n "apps.apple.com/app/id6789155385|/here-wallpaper/themes/|/here-wallpaper/privacy/" here-wallpaper
 ```
 
 Expected: matches present
@@ -398,7 +395,7 @@ git commit -m "feat(here-links): adopt shared Apple-like site system"
 | Icon-matched product title colors | 1, 3, 4, 5 |
 | Copy polish | 3, 4, 5 |
 | Strong scroll theater + reduced motion | 1, 2 |
-| Themes/layers utility pages restyled, interactions kept | 4 |
+| Themes utility page restyled, layer toggles + interactions kept | 4 |
 | Privacy pages shared chrome | 4, 5 |
 | Preserve store/deep links | 2, 4, 5 |
 | Verification | 1, 5 |

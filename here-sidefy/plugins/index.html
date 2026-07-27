@@ -13,164 +13,20 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=37">
-  <style>
-    body {
-      padding: 0 24px calc(48px + env(safe-area-inset-bottom));
-    }
-
-    .crumbbar {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    header {
-      max-width: 980px;
-      margin: 0 auto 40px;
-      text-align: center;
-      animation: rise 0.7s ease both;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .page-title {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 2.75rem);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--accent-sidefy);
-    }
-
-    .page-lead {
-      margin: 14px auto 0;
-      max-width: 36rem;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.45;
-    }
-
-    .plugin-section {
-      max-width: 980px;
-      margin: 0 auto 48px;
-    }
-
-    .plugin-section h2 {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .plugin-section .section-title {
-      font-size: 15px;
-      color: var(--fg);
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .plugin-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    @media (min-width: 720px) {
-      .plugin-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 14px;
-      }
-    }
-
-    .plugin-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.65rem;
-      padding: 1.25rem 1.35rem 1.3rem;
-      border-radius: 18px;
-      background: var(--bg-alt);
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s var(--ease-out), background 0.2s var(--ease-out);
-    }
-
-    .plugin-card:hover,
-    .plugin-card:focus-visible {
-      transform: translateY(-2px);
-      outline: none;
-      background: color-mix(in srgb, var(--accent-sidefy) 8%, var(--bg-alt));
-    }
-
-    .plugin-card h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    .plugin-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-      flex: 1;
-    }
-
-    .plugin-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .plugin-tags span {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--fg) 8%, transparent);
-      color: var(--muted);
-    }
-
-    .plugin-card .open {
-      margin-top: 0.15rem;
-      color: var(--link);
-      font-size: 14px;
-    }
-
-    footer.footer {
-      margin-top: 1rem;
-    }
-
-    footer.footer .footer__inner {
-      max-width: 980px;
-      margin: 0 auto;
-      padding-left: 0;
-      padding-right: 0;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=42">
 </head>
-<body>
+<body class="catalog-page" data-app="sidefy">
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
-      <ol class="crumbs">
-        <li><a href="/">Locusable Studio</a></li>
-        <li><a href="/here-sidefy/">Here Sidefy</a></li>
-        <li><span aria-current="page">Plugins</span></li>
-      </ol>
+    <nav class="crumbbar crumbbar--back" aria-label="Back">
+      <a class="crumb-back" href="/here-sidefy/">‹ Here Sidefy</a>
     </nav>
 
-    <header>
-      <h1 class="page-title">Featured Plugins</h1>
-      <p class="page-lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
+    <header class="catalog-hero">
+      <h1 class="catalog-title">Featured Plugins</h1>
+      <p class="catalog-lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
     </header>
 
-    <section class="plugin-section" aria-labelledby="featured-heading">
+    <section class="catalog-section" aria-labelledby="featured-heading">
       <h2><span class="section-title" id="featured-heading">Featured</span></h2>
       <div class="plugin-grid" id="plugin-grid"></div>
     </section>
@@ -178,7 +34,7 @@
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <span style="display:inline-flex;flex-wrap:wrap;gap:0.75rem 1.25rem">
+        <span class="footer__links">
           <a href="/here-sidefy/privacy/">Privacy Policy</a>
           <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
         </span>
@@ -268,6 +124,6 @@
       grid.appendChild(card);
     }
   </script>
-  <script src="/assets/site.js?v=34" defer></script>
+  <script src="/assets/site.js?v=37" defer></script>
 </body>
 </html>
