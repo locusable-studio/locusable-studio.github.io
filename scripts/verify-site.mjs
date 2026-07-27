@@ -14,8 +14,8 @@ const pages = [
   "here-sidefy/privacy/index.html",
 ];
 
-const cssVersion = "53";
-const jsVersion = "37";
+const cssVersion = "76";
+const jsVersion = "38";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -24,15 +24,44 @@ const must = [
   [`site.js?v=${jsVersion}`, "js cache version"],
 ];
 
-const backNav = {
-  "here-wallpaper/index.html": 'href="/">‹ Locusable Studio',
-  "here-links/index.html": 'href="/">‹ Locusable Studio',
-  "here-sidefy/index.html": 'href="/">‹ Locusable Studio',
-  "here-wallpaper/themes/index.html": 'href="/here-wallpaper/">‹ Here Wallpaper',
-  "here-sidefy/plugins/index.html": 'href="/here-sidefy/">‹ Here Sidefy',
-  "here-wallpaper/privacy/index.html": 'href="/here-wallpaper/">‹ Here Wallpaper',
-  "here-links/privacy/index.html": 'href="/here-links/">‹ Here Links',
-  "here-sidefy/privacy/index.html": 'href="/here-sidefy/">‹ Here Sidefy',
+const breadcrumbs = {
+  "here-wallpaper/index.html": [
+    'href="/">Locusable Studio',
+    '<span aria-current="page">Here Wallpaper</span>',
+  ],
+  "here-links/index.html": [
+    'href="/">Locusable Studio',
+    '<span aria-current="page">Here Links</span>',
+  ],
+  "here-sidefy/index.html": [
+    'href="/">Locusable Studio',
+    '<span aria-current="page">Here Sidefy</span>',
+  ],
+  "here-wallpaper/themes/index.html": [
+    'href="/">Locusable Studio',
+    'href="/here-wallpaper/">Here Wallpaper',
+    '<span aria-current="page">Themes</span>',
+  ],
+  "here-sidefy/plugins/index.html": [
+    'href="/">Locusable Studio',
+    'href="/here-sidefy/">Here Sidefy',
+    '<span aria-current="page">Plugins</span>',
+  ],
+  "here-wallpaper/privacy/index.html": [
+    'href="/">Locusable Studio',
+    'href="/here-wallpaper/">Here Wallpaper',
+    '<span aria-current="page">Privacy</span>',
+  ],
+  "here-links/privacy/index.html": [
+    'href="/">Locusable Studio',
+    'href="/here-links/">Here Links',
+    '<span aria-current="page">Privacy</span>',
+  ],
+  "here-sidefy/privacy/index.html": [
+    'href="/">Locusable Studio',
+    'href="/here-sidefy/">Here Sidefy',
+    '<span aria-current="page">Privacy</span>',
+  ],
 };
 
 let failed = 0;
@@ -44,14 +73,22 @@ for (const page of pages) {
       failed++;
     }
   }
-  if (html.includes('class="crumbs"') || html.includes("<ol class=\"crumbs\">")) {
-    console.error(`FAIL ${page}: legacy breadcrumb markup found`);
+  if (html.includes("crumb-back") || html.includes("crumbbar--back")) {
+    console.error(`FAIL ${page}: legacy back-button nav found`);
     failed++;
   }
-  const back = backNav[page];
-  if (back && !html.includes(back)) {
-    console.error(`FAIL ${page}: missing back nav (${back})`);
-    failed++;
+  const crumbs = breadcrumbs[page];
+  if (crumbs) {
+    if (!html.includes('class="crumbs"')) {
+      console.error(`FAIL ${page}: missing breadcrumb list (.crumbs)`);
+      failed++;
+    }
+    for (const needle of crumbs) {
+      if (!html.includes(needle)) {
+        console.error(`FAIL ${page}: missing breadcrumb segment (${needle})`);
+        failed++;
+      }
+    }
   }
   if (page.endsWith("privacy/index.html") && !html.includes('class="doc-layout"')) {
     console.error(`FAIL ${page}: missing doc-layout wrapper`);
@@ -113,15 +150,38 @@ for (const name of [
     failed++;
   }
 }
-if (!plugins.includes('class="catalog-section"')) {
+if (!plugins.includes("catalog-section")) {
   console.error("FAIL here-sidefy/plugins/index.html: missing catalog-section");
   failed++;
 }
 
 const themes = fs.readFileSync(path.join(root, "here-wallpaper/themes/index.html"), "utf8");
-if (!themes.includes("@keyframes rise")) {
-  console.error("FAIL here-wallpaper/themes/index.html: missing rise animation keyframes");
+if (!themes.includes("catalog-section")) {
+  console.error("FAIL here-wallpaper/themes/index.html: missing catalog-section");
   failed++;
+}
+if (!themes.includes("theme-grid")) {
+  console.error("FAIL here-wallpaper/themes/index.html: missing theme-grid");
+  failed++;
+}
+
+const themeColors = {
+  "here-wallpaper/index.html": "#4cac50",
+  "here-wallpaper/themes/index.html": "#4cac50",
+  "here-wallpaper/privacy/index.html": "#4cac50",
+  "here-links/index.html": "#2094f0",
+  "here-links/privacy/index.html": "#2094f0",
+  "here-sidefy/index.html": "#f44034",
+  "here-sidefy/plugins/index.html": "#f44034",
+  "here-sidefy/privacy/index.html": "#f44034",
+};
+
+for (const [page, color] of Object.entries(themeColors)) {
+  const html = fs.readFileSync(path.join(root, page), "utf8");
+  if (!html.includes(`name="theme-color" content="${color}"`)) {
+    console.error(`FAIL ${page}: theme-color should be ${color}`);
+    failed++;
+  }
 }
 
 if (failed) {

@@ -1,14 +1,54 @@
 (function () {
+  var APP_THEME_COLORS = {
+    wallpaper: "#4cac50",
+    links: "#2094f0",
+    sidefy: "#f44034",
+  };
+
   function initThemeColor() {
     var meta = document.querySelector('meta[name="theme-color"]');
     if (!meta) return;
+    var app = document.documentElement.getAttribute("data-app");
+    var accent = app && APP_THEME_COLORS[app];
     var dark = window.matchMedia("(prefers-color-scheme: dark)");
     function apply() {
+      if (accent) {
+        meta.setAttribute("content", accent);
+        return;
+      }
       meta.setAttribute("content", dark.matches ? "#000000" : "#ffffff");
     }
     apply();
-    if (dark.addEventListener) dark.addEventListener("change", apply);
-    else if (dark.addListener) dark.addListener(apply);
+    if (!accent) {
+      if (dark.addEventListener) dark.addEventListener("change", apply);
+      else if (dark.addListener) dark.addListener(apply);
+    }
+  }
+
+  function syncChromeHeight() {
+    var masthead = document.querySelector(".studio-masthead");
+    if (masthead) {
+      document.documentElement.style.setProperty(
+        "--site-chrome-h-masthead",
+        masthead.offsetHeight + "px"
+      );
+    }
+    var crumb = document.querySelector(".crumbbar");
+    if (crumb) {
+      document.documentElement.style.setProperty(
+        "--site-chrome-h",
+        crumb.offsetHeight + "px"
+      );
+    }
+  }
+
+  function initChromeHeight() {
+    syncChromeHeight();
+    window.addEventListener("resize", syncChromeHeight);
+    if (!window.ResizeObserver) return;
+    document.querySelectorAll(".studio-masthead, .crumbbar").forEach(function (el) {
+      new ResizeObserver(syncChromeHeight).observe(el);
+    });
   }
 
   function initReveals() {
@@ -59,6 +99,7 @@
   }
 
   initThemeColor();
+  initChromeHeight();
   initReveals();
   bindAppStoreLinks();
 })();

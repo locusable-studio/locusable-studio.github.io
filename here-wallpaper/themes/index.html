@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#4cac50">
   <title>Here Wallpaper — Themes</title>
   <meta name="description" content="Here Wallpaper theme preview — Basic and Featured palettes.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -11,303 +11,18 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=53">
+  <link rel="stylesheet" href="/assets/site.css?v=76">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
-  <style>
-    :root {
-      --page-bg: var(--bg);
-      --page-text: var(--fg);
-      --page-muted: var(--muted);
-      --card-bg: var(--bg-elevated);
-      --border: color-mix(in srgb, var(--fg) 18%, transparent);
-      --gold: var(--accent-wallpaper);
-      --toggle-off: color-mix(in srgb, var(--fg) 22%, transparent);
-      --toggle-on: var(--accent-wallpaper);
-    }
-
-    body {
-      background: transparent;
-      color: var(--page-text);
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    h2 {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--page-muted);
-      margin-bottom: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: baseline;
-    }
-
-    .section-title {
-      font-size: 15px;
-      color: var(--page-text);
-      text-transform: none;
-      letter-spacing: 0;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    @media (min-width: 640px) {
-      .grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
-      }
-    }
-
-    @media (min-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 22px;
-      }
-    }
-
-    .theme-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      animation: rise 0.6s ease both;
-      padding: 12px;
-    }
-
-    .theme-meta {
-      padding: 10px 4px 2px;
-    }
-
-    .theme-meta h3 {
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.3;
-    }
-
-    .theme-meta p {
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--page-muted);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    section {
-      max-width: var(--max-wide);
-      width: 100%;
-      margin: 0 auto 48px;
-    }
-
-    .layer-panel {
-      max-width: var(--max-wide);
-      width: 100%;
-      margin: 0 auto 40px;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px 20px;
-      width: 100%;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 20px;
-    }
-
-    @media (min-width: 640px) {
-      .controls {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (min-width: 960px) {
-      .controls {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-
-    .phone-wrap {
-      position: relative;
-    }
-
-    .phone {
-      width: 100%;
-      aspect-ratio: 1170 / 2532;
-      border-radius: 22px;
-      overflow: hidden;
-      position: relative;
-      container-type: size;
-      container-name: preview;
-    }
-
-    .wallpaper {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      background: #d8e4d8;
-    }
-
-    .theme-map {
-      position: absolute;
-      inset: 0;
-    }
-
-    .theme-map .maplibregl-ctrl-attrib,
-    .theme-map .maplibregl-ctrl-logo {
-      display: none !important;
-    }
-
-    .map-fallback {
-      position: absolute;
-      inset: 0;
-    }
-
-    .fade-bottom {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 28%;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .poster-text {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 7%;
-      text-align: center;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    /* App ThemePickerCard: textScale 2 → title 13.2% / subtitle 6.6% of preview width */
-    .poster-text .city {
-      font-size: 13.2cqw;
-      font-weight: 700;
-      letter-spacing: 0;
-      line-height: 1.1;
-    }
-
-    .poster-text .region {
-      margin-top: 0.5cqh;
-      font-size: 6.6cqw;
-      font-weight: 500;
-      letter-spacing: 2.4cqw;
-      opacity: 0.85;
-    }
-
-    .preview-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      z-index: 3;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      padding: 4px 7px;
-      border-radius: 999px;
-      color: rgba(245, 245, 244, 0.72);
-      background: rgba(28, 25, 23, 0.45);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      pointer-events: none;
-    }
-
-    .layer-check {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      min-width: 0;
-      padding: 8px 6px;
-      color: var(--page-text);
-      font-size: 14px;
-      line-height: 1.35;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .layer-check input {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      margin: 0;
-      flex-shrink: 0;
-      border: 1.5px solid color-mix(in srgb, var(--page-text) 28%, transparent);
-      border-radius: 5px;
-      background: transparent;
-      display: grid;
-      place-content: center;
-      cursor: pointer;
-      transition: border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .layer-check input::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      transform: scale(0);
-      transition: transform 0.12s ease;
-      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
-      background: #fff;
-    }
-
-    .layer-check input:checked {
-      border-color: var(--accent-wallpaper);
-      background: var(--accent-wallpaper);
-    }
-
-    .layer-check input:checked::before {
-      transform: scale(1);
-    }
-
-    .layer-check input:focus-visible {
-      outline: 2px solid color-mix(in srgb, var(--accent-wallpaper) 55%, transparent);
-      outline-offset: 2px;
-    }
-
-    .layer-check-text {
-      display: inline-flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-      line-height: 1.35;
-    }
-
-    .badge-pro {
-      flex-shrink: 0;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--accent-wallpaper) 18%, transparent);
-      color: var(--accent-wallpaper);
-    }
-  </style>
 </head>
-<body class="catalog-page" data-app="wallpaper">
+<body class="catalog-page">
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar crumbbar--back" aria-label="Back">
-      <a class="crumb-back" href="/here-wallpaper/">‹ Here Wallpaper</a>
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
+        <li><span aria-current="page">Themes</span></li>
+      </ol>
     </nav>
 
     <header class="catalog-hero">
@@ -315,31 +30,27 @@
       <p class="catalog-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
     </header>
 
-    <section class="layer-panel" aria-label="Map layers">
+    <section class="catalog-section" aria-label="Map layers">
       <h2><span class="section-title">Layers</span></h2>
-      <div class="controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
+      <div class="layer-controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
     </section>
 
-    <section id="basic-section">
-      <h2>
-        <span class="section-title">Basic</span>
-      </h2>
-      <div class="grid" id="basic-grid"></div>
+    <section class="catalog-section" id="basic-section" aria-label="Basic themes">
+      <h2><span class="section-title">Basic</span></h2>
+      <div class="theme-grid" id="basic-grid"></div>
     </section>
 
-    <section id="pro-section">
-      <h2>
-        <span class="section-title">Featured</span>
-      </h2>
-      <div class="grid" id="pro-grid"></div>
+    <section class="catalog-section" id="pro-section" aria-label="Featured themes">
+      <h2><span class="section-title">Featured</span></h2>
+      <div class="theme-grid" id="pro-grid"></div>
     </section>
 
     <footer class="footer">
-    <div class="footer__inner">
-      <span>© 2026 Locusable Studio · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
-      <a href="/here-wallpaper/privacy/">Privacy Policy</a>
-    </div>
-  </footer>
+      <div class="footer__inner">
+        <span>© 2026 Locusable Studio · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
+        <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -764,7 +475,7 @@
     const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
     // Qujiang Pool (西安曲江池); poster title stays XI'AN / CHINA
     const MAP_CENTER = [108.980, 34.205];
-    const MAP_ZOOM = 13.0;
+    const MAP_ZOOM = 13.5;
     const themeById = Object.fromEntries(
       [...basicThemes, ...proThemes].map((theme) => [theme.id, theme])
     );
@@ -1050,6 +761,6 @@
       liveMaps.forEach((map) => map.resize());
     });
   </script>
-  <script src="/assets/site.js?v=37" defer></script>
+  <script src="/assets/site.js?v=38" defer></script>
 </body>
 </html>
