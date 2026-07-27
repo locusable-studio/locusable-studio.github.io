@@ -261,6 +261,92 @@
     }
 
     footer a:hover { color: var(--page-text); }
+
+    .layer-panel {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .layer-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      padding: 6px 4px;
+      color: var(--page-text);
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .layer-check input {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      flex-shrink: 0;
+      border: 1.5px solid color-mix(in srgb, var(--page-text) 28%, transparent);
+      border-radius: 5px;
+      background: transparent;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .layer-check input::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: transform 0.12s ease;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
+      background: #fff;
+    }
+
+    .layer-check input:checked {
+      border-color: var(--accent-wallpaper);
+      background: var(--accent-wallpaper);
+    }
+
+    .layer-check input:checked::before {
+      transform: scale(1);
+    }
+
+    .layer-check input:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--accent-wallpaper) 55%, transparent);
+      outline-offset: 2px;
+    }
+
+    .layer-check-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      line-height: 1.3;
+    }
+
+    .badge-pro {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--accent-wallpaper) 18%, transparent);
+      color: var(--accent-wallpaper);
+    }
   </style>
 </head>
 <body>
@@ -276,6 +362,11 @@
     <h1 class="page-title">Themes</h1>
     <p class="page-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
   </header>
+
+  <section class="layer-panel" aria-label="Map layers">
+    <h2><span class="section-title">Layers</span></h2>
+    <div class="controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
+  </section>
 
   <section id="basic-section">
     <h2>
@@ -717,14 +808,57 @@
     ];
 
     const STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
-    const MAP_CENTER = [108.9402, 34.3416]; // Xi'an
-    const MAP_ZOOM = 11.2;
+    // Qujiang Pool (西安曲江池); poster title stays XI'AN / CHINA
+    const MAP_CENTER = [108.980, 34.205];
+    const MAP_ZOOM = 13.0;
     const themeById = Object.fromEntries(
       [...basicThemes, ...proThemes].map((theme) => [theme.id, theme])
     );
 
+    const LAYER_DEFS = [
+      { id: "landcover", name: "Landcover", defaultOn: false },
+      { id: "landuse", name: "Landuse", defaultOn: false },
+      { id: "buildings", name: "Building", defaultOn: false },
+      { id: "water", name: "Water+Waterway", defaultOn: true },
+      { id: "parks", name: "Park", defaultOn: true },
+      { id: "roads", name: "Transportation (motorway/...)", defaultOn: true },
+      { id: "rail", name: "Transportation (rail/...)", defaultOn: false, pro: true },
+      { id: "aeroway", name: "Aeroway", defaultOn: false, pro: true }
+    ];
+    const layerState = Object.fromEntries(LAYER_DEFS.map((layer) => [layer.id, layer.defaultOn]));
+
     let baseStylePromise = null;
     const liveMaps = new Map();
+
+    function layerGroupFor(id, type) {
+      if (
+        type === "symbol" ||
+        type === "fill-extrusion" ||
+        id.includes("boundary") ||
+        id.includes("poi_") ||
+        id.includes("casing")
+      ) {
+        return "hidden";
+      }
+      if (id.includes("rail")) return "rail";
+      if (id.includes("aeroway")) return "aeroway";
+      if (id.includes("building")) return "buildings";
+      if (id.includes("water")) return "water";
+      if (id === "park" || id === "park_outline") return "parks";
+      if (id.includes("landcover")) return "landcover";
+      if (id.includes("landuse")) return "landuse";
+      if (
+        id.includes("road_") ||
+        id.includes("tunnel_") ||
+        id.includes("bridge_") ||
+        id.includes("street") ||
+        id.includes("path") ||
+        id.includes("pedestrian")
+      ) {
+        return "roads";
+      }
+      return null;
+    }
 
     function getBaseStyle() {
       if (!baseStylePromise) {
@@ -784,18 +918,8 @@
       for (const layer of style.layers) {
         const id = layer.id;
         const type = layer.type;
+        const group = layerGroupFor(id, type);
 
-        if (
-          type === "symbol" ||
-          type === "fill-extrusion" ||
-          id.includes("rail") ||
-          id.includes("boundary") ||
-          id.includes("poi_") ||
-          id.includes("casing")
-        ) {
-          hideLayer(layer);
-          continue;
-        }
         if (layer.paint && ("fill-pattern" in layer.paint || "line-pattern" in layer.paint)) {
           hideLayer(layer);
           continue;
@@ -805,72 +929,45 @@
 
         if (id === "background") {
           setPaint(layer, "background-color", land);
-          continue;
-        }
-
-        if (
-          id === "park" ||
-          id === "park_outline" ||
-          id.includes("landcover_wood") ||
-          id.includes("landcover_grass") ||
-          id.includes("landuse_pitch") ||
-          id.includes("landuse_track") ||
-          id.includes("landuse_cemetery")
-        ) {
+        } else if (id === "park" || id === "park_outline") {
           setPaint(layer, "fill-color", park);
           setPaint(layer, "fill-outline-color", park);
           setPaint(layer, "line-color", park);
-          continue;
-        }
-
-        if (id.includes("water")) {
+        } else if (id.includes("landcover")) {
+          setPaint(layer, "fill-color", park);
+          setPaint(layer, "fill-outline-color", park);
+        } else if (id.includes("landuse")) {
+          setPaint(layer, "fill-color", land);
+          setPaint(layer, "fill-outline-color", land);
+        } else if (id.includes("water")) {
           setPaint(layer, "fill-color", water);
           setPaint(layer, "line-color", water);
-          continue;
-        }
-
-        if (id.includes("building")) {
+        } else if (id.includes("building")) {
           setPaint(layer, "fill-color", building);
           setPaint(layer, "fill-outline-color", roads.outline);
-          continue;
-        }
-
-        if (id.includes("motorway")) {
-          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.motorway);
-          continue;
-        }
-
-        if (id.includes("trunk") || id.includes("primary")) {
-          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.primary);
-          continue;
-        }
-
-        if (id.includes("secondary") || id.includes("tertiary")) {
-          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.tertiary);
-          continue;
-        }
-
-        if (id.includes("path") || id.includes("pedestrian")) {
-          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.path);
-          continue;
-        }
-
-        if (
+        } else if (id.includes("rail")) {
+          setPaint(layer, "line-color", roads.primary);
+        } else if (id.includes("motorway")) {
+          setPaint(layer, "line-color", roads.motorway);
+        } else if (id.includes("trunk") || id.includes("primary")) {
+          setPaint(layer, "line-color", roads.primary);
+        } else if (id.includes("secondary") || id.includes("tertiary")) {
+          setPaint(layer, "line-color", roads.tertiary);
+        } else if (id.includes("path") || id.includes("pedestrian")) {
+          setPaint(layer, "line-color", roads.path);
+        } else if (
           id.includes("road_") ||
           id.includes("tunnel_") ||
           id.includes("bridge_") ||
           id.includes("street") ||
           id.includes("aeroway")
         ) {
-          setPaint(layer, "line-color", id.includes("casing") ? roads.outline : roads.residential);
+          setPaint(layer, "line-color", roads.residential);
           setPaint(layer, "fill-color", land);
-          continue;
         }
 
-        if (id.includes("landuse") || id.includes("landcover")) {
-          setPaint(layer, "fill-color", land);
-          setPaint(layer, "fill-outline-color", land);
-          continue;
+        if (group === "hidden" || (group && !layerState[group])) {
+          hideLayer(layer);
         }
       }
 
@@ -908,9 +1005,11 @@
 
     function destroyMap(el) {
       const map = liveMaps.get(el);
-      if (!map) return;
-      map.remove();
-      liveMaps.delete(el);
+      if (map) {
+        map.remove();
+        liveMaps.delete(el);
+      }
+      delete el.dataset.mapState;
     }
 
     async function mountMap(el) {
@@ -946,11 +1045,41 @@
       }
     }
 
+    function remountLiveMaps() {
+      const els = Array.from(liveMaps.keys());
+      els.forEach((el) => {
+        destroyMap(el);
+        mountMap(el);
+      });
+    }
+
     function mount(list, gridId) {
       const grid = document.getElementById(gridId);
       grid.innerHTML = list.map(renderTheme).join("");
     }
 
+    function mountLayerToggles() {
+      const root = document.getElementById("layer-toggles");
+      root.innerHTML = LAYER_DEFS.map((layer) => `
+        <label class="layer-check">
+          <input type="checkbox" data-id="${layer.id}" ${layerState[layer.id] ? "checked" : ""}>
+          <span class="layer-check-text">
+            <span>${layer.name}</span>
+            ${layer.pro ? `<span class="badge-pro">PRO</span>` : ""}
+          </span>
+        </label>
+      `).join("");
+
+      root.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+        input.addEventListener("change", () => {
+          const id = input.getAttribute("data-id");
+          layerState[id] = input.checked;
+          remountLiveMaps();
+        });
+      });
+    }
+
+    mountLayerToggles();
     mount(basicThemes, "basic-grid");
     mount(proThemes, "pro-grid");
 
