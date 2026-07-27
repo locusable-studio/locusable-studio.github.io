@@ -278,6 +278,14 @@ a {
 
 .unit--light { --unit-bg: var(--bg-alt); }
 .unit--white { --unit-bg: var(--bg); }
+.unit--tint {
+  --unit-base: var(--bg);
+  --unit-bg: color-mix(in srgb, var(--app-accent) 6%, var(--unit-base));
+}
+.unit--tint.unit--soft {
+  --unit-base: var(--bg-alt);
+  --unit-bg: color-mix(in srgb, var(--app-accent) 8%, var(--unit-base));
+}
 .unit--dark {
   --unit-bg: #000;
   --fg: #f5f5f7;
@@ -285,6 +293,16 @@ a {
   --link: #2997ff;
   --link-hover: #59acff;
   color: var(--fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .unit--white { --unit-bg: var(--bg-elevated); }
+  .unit--tint {
+    --unit-bg: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+  }
+  .unit--tint.unit--soft {
+    --unit-bg: color-mix(in srgb, var(--app-accent) 14%, var(--unit-base));
+  }
 }
 
 .unit__copy {

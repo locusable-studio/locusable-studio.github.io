@@ -14,7 +14,7 @@ const pages = [
   "here-sidefy/privacy/index.html",
 ];
 
-const cssVersion = "42";
+const cssVersion = "44";
 const jsVersion = "37";
 
 const must = [
