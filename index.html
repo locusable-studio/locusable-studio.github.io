@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1c1917">
+  <meta name="theme-color" content="#f5f6f8">
   <title>Locusable Studio</title>
   <meta name="description" content="Locusable Studio — indie apps that sense the present on Apple.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -14,207 +14,85 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #1c1917;
-      --fg: #f5f5f4;
-      --muted: #a8a29e;
-      --gold: #c9a24d;
-      --line: rgba(245, 245, 244, 0.12);
-      --card: rgba(41, 37, 36, 0.72);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { min-height: 100%; }
-
-    html { background: var(--bg); }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      line-height: 1.5;
-    }
-
-    .shell {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: calc(2.5rem + env(safe-area-inset-top)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 2.75rem;
-      padding: 2rem 0 3rem;
-      animation: rise 0.8s ease both;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .brand {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2.75rem, 8vw, 4.5rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-    }
-
-    .brand em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .tagline {
-      margin-top: 0.85rem;
-      max-width: 28rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-      animation: rise 0.9s ease 0.08s both;
-    }
-
-    .apps {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      animation: rise 0.9s ease 0.16s both;
-    }
-
-    .app-card {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 1.25rem 1.4rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
-    }
-
-    .app-card:hover,
-    .app-card:focus-visible {
-      border-color: rgba(201, 162, 77, 0.45);
-      background: rgba(41, 37, 36, 0.88);
-      transform: translateY(-3px);
-      outline: none;
-    }
-
-    .app-card-top {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      gap: 1.15rem;
-      align-items: center;
-    }
-
-    .app-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 16px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #fff;
-    }
-
-    .app-card h2 {
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .app-card p {
-      margin-top: 0.35rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 28rem;
-    }
-
-    .app-card .cta {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      white-space: nowrap;
-    }
-
-    footer {
-      padding-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    footer a:hover,
-    footer a:focus-visible {
-      color: var(--fg);
-      outline: none;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=21">
 </head>
 <body>
-  <div class="shell">
-    <main class="hero">
-      <div>
-        <h1 class="brand">Locusable <em>Studio</em></h1>
-        <p class="tagline">Sense the present on Apple.</p>
-      </div>
+  <div class="site-shell site-shell--wide">
+    <main>
+      <section class="hero">
+        <h1 class="display brand-studio">Locusable <em>Studio</em></h1>
+        <p class="tagline">Indie apps that sense the present on Apple.</p>
+        <p class="scroll-cue">Scroll to explore</p>
+      </section>
 
-      <section class="apps" aria-label="Apps">
-        <a class="app-card" href="/here-wallpaper/">
-          <div class="app-card-top">
-            <img class="app-icon" src="/assets/here/icon-192.png?v=10" width="72" height="72" alt="Here Wallpaper">
-            <div>
-              <h2>Here Wallpaper</h2>
-              <p>Map lock-screen wallpapers — pick a place, theme, and layout.</p>
+      <section class="chapter-sticky" data-app="wallpaper" aria-labelledby="wallpaper-title">
+        <div class="chapter-sticky__pin">
+          <div class="chapter-sticky__inner">
+            <div class="chapter-copy">
+              <div class="chapter-kicker">
+                <img src="/assets/here/icon-192.png?v=10" width="36" height="36" alt="">
+                <span>iPhone</span>
+              </div>
+              <h2 class="display" id="wallpaper-title">Here <em>Wallpaper</em></h2>
+              <p class="tagline">Turn any place into a lock-screen map. Theme it. Frame it. Make it yours.</p>
+              <div class="cta-row">
+                <a class="cta" href="/here-wallpaper/">Explore</a>
+              </div>
             </div>
-            <span class="cta">Open →</span>
+            <div class="chapter-media">
+              <img src="/assets/shots/shot-1.jpg?v=10" width="900" height="1125" alt="Here Wallpaper map lock screen">
+            </div>
           </div>
-        </a>
+        </div>
+      </section>
 
-        <a class="app-card" href="/here-links/">
-          <div class="app-card-top">
-            <img class="app-icon" src="/assets/here-links/icon-192.png?v=10" width="72" height="72" alt="Here Links">
-            <div>
-              <h2>Here Links</h2>
-              <p>Native iOS client for your self-hosted linkding.</p>
+      <section class="chapter-sticky chapter-sticky--reverse" data-app="links" aria-labelledby="links-title">
+        <div class="chapter-sticky__pin">
+          <div class="chapter-sticky__inner">
+            <div class="chapter-copy">
+              <div class="chapter-kicker">
+                <img src="/assets/here-links/icon-192.png?v=10" width="36" height="36" alt="">
+                <span>iPhone</span>
+              </div>
+              <h2 class="display" id="links-title">Here <em>Links</em></h2>
+              <p class="tagline">Your self-hosted linkding, native on iOS — servers, share sheet, in-app Safari.</p>
+              <div class="cta-row">
+                <a class="cta" href="/here-links/">Explore</a>
+              </div>
             </div>
-            <span class="cta">Open →</span>
+            <div class="chapter-media">
+              <img src="/assets/here-links/shots/shot-1.jpg?v=1" width="900" height="1125" alt="Here Links bookmarks list">
+            </div>
           </div>
-        </a>
+        </div>
+      </section>
 
-        <a class="app-card" href="https://sidefy.locusable.com/" target="_blank" rel="noopener noreferrer">
-          <div class="app-card-top">
-            <img class="app-icon" src="/assets/sidefy/icon-192.png?v=14" width="72" height="72" alt="Here Sidefy">
-            <div>
-              <h2>Here Sidefy</h2>
-              <p>Today's calendar, reminders, RSS, and plugins along your Mac screen edge.</p>
+      <section class="chapter-sticky" data-app="sidefy" aria-labelledby="sidefy-title">
+        <div class="chapter-sticky__pin">
+          <div class="chapter-sticky__inner">
+            <div class="chapter-copy">
+              <div class="chapter-kicker">
+                <img src="/assets/sidefy/icon-192.png?v=14" width="36" height="36" alt="">
+                <span>Mac</span>
+              </div>
+              <h2 class="display" id="sidefy-title">Here <em>Sidefy</em></h2>
+              <p class="tagline">Today’s calendar, reminders, RSS, and plugins — along the edge of your Mac.</p>
+              <div class="cta-row">
+                <a class="cta" href="https://sidefy.locusable.com/" target="_blank" rel="noopener noreferrer">Open</a>
+              </div>
             </div>
-            <span class="cta">Open →</span>
+            <div class="chapter-media chapter-media--icon">
+              <img src="/assets/sidefy/icon-512.png?v=14" width="180" height="180" alt="Here Sidefy">
+            </div>
           </div>
-        </a>
+        </div>
       </section>
     </main>
 
-    <footer>
+    <footer class="footer">
       <span>© 2026 Locusable Studio</span>
     </footer>
   </div>
+  <script src="/assets/site.js?v=21" defer></script>
 </body>
 </html>
