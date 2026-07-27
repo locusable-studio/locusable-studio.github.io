@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-app="wallpaper">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1c1917">
+  <meta name="theme-color" content="#4cac50">
   <title>Privacy Policy — Here Wallpaper</title>
   <meta name="description" content="Privacy Policy for Here Wallpaper by Locusable Studio.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -11,173 +11,95 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #1c1917;
-      --fg: #f5f5f4;
-      --muted: #a8a29e;
-      --gold: #c9a24d;
-      --line: rgba(245, 245, 244, 0.12);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { min-height: 100%; }
-
-    html { background: var(--bg); }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      line-height: 1.6;
-    }
-
-    .shell {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      max-width: 40rem;
-      margin: 0 auto;
-      padding: calc(2.5rem + env(safe-area-inset-top)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
-    }
-
-    .topbar {
-      margin-bottom: 2rem;
-    }
-
-    .topbar a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .topbar a:hover,
-    .topbar a:focus-visible {
-      color: var(--fg);
-      outline: none;
-    }
-
-    main { flex: 1; }
-
-    h1 {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2rem, 5vw, 2.75rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 0.5rem;
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin: 1.75rem 0 0.55rem;
-    }
-
-    p, li { margin-bottom: 0.85rem; color: var(--fg); }
-
-    ul {
-      padding-left: 1.25rem;
-      margin-bottom: 0.85rem;
-    }
-
-    a { color: var(--gold); }
-
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=76">
 </head>
 <body>
-  <div class="shell">
-    <div class="topbar">
-      <a href="/here-wallpaper/">← Here Wallpaper</a>
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
+        <li><span aria-current="page">Privacy</span></li>
+      </ol>
+    </nav>
+
+    <div class="doc-layout">
+      <main class="prose" data-reveal>
+        <h1>Privacy Policy</h1>
+        <p class="prose-meta">Here Wallpaper · Locusable Studio · Effective July 12, 2026</p>
+
+        <p>
+          Here Wallpaper (“the App”) is made by Locusable Studio (“we”, “us”).
+          The App may access limited data on your device to provide its features.
+          We do not operate user accounts, and we do not use data for tracking.
+          We do not sell personal data.
+        </p>
+
+        <h2>Location</h2>
+        <p>
+          The App may collect <strong>precise location</strong> only when you tap the locate control to use your current position.
+        </p>
+        <ul>
+          <li><strong>Purpose</strong> — App Functionality: to generate a wallpaper for your current location.</li>
+          <li><strong>Linked to your identity</strong> — No. The App has no accounts and does not associate location with an identity.</li>
+          <li><strong>Used for tracking</strong> — No.</li>
+        </ul>
+        <p>
+          Location is processed on your device for creating the wallpaper. We do not run our own servers that store your location history.
+        </p>
+
+        <h2>What we don’t collect</h2>
+        <p>
+          We do not operate analytics, advertising, or crash-reporting services that receive your information.
+          We do not sell or share personal data with third parties for marketing.
+        </p>
+
+        <h2>Other data that stays on your device</h2>
+        <p>
+          The App may also use these system features on your iPhone or iPad. This data is processed on your device and is not sent to us:
+        </p>
+        <ul>
+          <li><strong>Photo Library</strong> — optional, only when you save an exported wallpaper.</li>
+          <li><strong>App settings</strong> — preferences such as theme and layout are stored locally on your device.</li>
+        </ul>
+
+        <h2>Purchases</h2>
+        <p>
+          Optional Pro subscriptions are processed by Apple through the App Store.
+          We do not receive your payment card details. Apple’s privacy practices apply to those transactions.
+        </p>
+
+        <h2>Map content</h2>
+        <p>
+          Map tiles and place labels may be loaded from map data providers (for example OpenFreeMap / OpenStreetMap-related services)
+          so the App can display maps. Those requests are made by the App on your device to show map imagery;
+          we do not run a separate backend that collects your identity from them.
+        </p>
+
+        <h2>Children</h2>
+        <p>
+          The App is not directed at children under 13. We do not knowingly collect personal information from children under 13.
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          If this policy changes, we will update this page and the effective date above.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          For questions about this policy or technical support, open an issue at
+          <a href="https://github.com/locusable-studio/HereWallpaper-Issues/issues">github.com/locusable-studio/HereWallpaper-Issues/issues</a>.
+        </p>
+      </main>
     </div>
 
-    <main>
-      <h1>Privacy Policy</h1>
-      <p class="meta">Here Wallpaper · Locusable Studio · Effective July 12, 2026</p>
-
-      <p>
-        Here Wallpaper (“the App”) is made by Locusable Studio (“we”, “us”).
-        The App may access limited data on your device to provide its features.
-        We do not operate user accounts, and we do not use data for tracking.
-        We do not sell personal data.
-      </p>
-
-      <h2>Location</h2>
-      <p>
-        The App may collect <strong>precise location</strong> only when you tap the locate control to use your current position.
-      </p>
-      <ul>
-        <li><strong>Purpose</strong> — App Functionality: to generate a wallpaper for your current location.</li>
-        <li><strong>Linked to your identity</strong> — No. The App has no accounts and does not associate location with an identity.</li>
-        <li><strong>Used for tracking</strong> — No.</li>
-      </ul>
-      <p>
-        Location is processed on your device for creating the wallpaper. We do not run our own servers that store your location history.
-      </p>
-
-      <h2>What we don’t collect</h2>
-      <p>
-        We do not operate analytics, advertising, or crash-reporting services that receive your information.
-        We do not sell or share personal data with third parties for marketing.
-      </p>
-
-      <h2>Other data that stays on your device</h2>
-      <p>
-        The App may also use these system features on your iPhone or iPad. This data is processed on your device and is not sent to us:
-      </p>
-      <ul>
-        <li><strong>Photo Library</strong> — optional, only when you save an exported wallpaper.</li>
-        <li><strong>App settings</strong> — preferences such as theme and layout are stored locally on your device.</li>
-      </ul>
-
-      <h2>Purchases</h2>
-      <p>
-        Optional Pro subscriptions are processed by Apple through the App Store.
-        We do not receive your payment card details. Apple’s privacy practices apply to those transactions.
-      </p>
-
-      <h2>Map content</h2>
-      <p>
-        Map tiles and place labels may be loaded from map data providers (for example OpenFreeMap / OpenStreetMap-related services)
-        so the App can display maps. Those requests are made by the App on your device to show map imagery;
-        we do not run a separate backend that collects your identity from them.
-      </p>
-
-      <h2>Children</h2>
-      <p>
-        The App is not directed at children under 13. We do not knowingly collect personal information from children under 13.
-      </p>
-
-      <h2>Changes</h2>
-      <p>
-        If this policy changes, we will update this page and the effective date above.
-      </p>
-
-      <h2>Contact</h2>
-      <p>
-        For questions about this policy or technical support, open an issue at
-        <a href="https://github.com/locusable-studio/HereWallpaper-Issues/issues">github.com/locusable-studio/HereWallpaper-Issues/issues</a>.
-      </p>
-    </main>
-
-    <footer>© 2026 Locusable Studio</footer>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+      </div>
+    </footer>
   </div>
+  <script src="/assets/site.js?v=38" defer></script>
 </body>
 </html>

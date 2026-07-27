@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-app="wallpaper">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#1c1917">
+  <meta name="theme-color" content="#4cac50">
   <title>Here Wallpaper — Locusable Studio</title>
   <meta name="description" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
@@ -11,514 +11,71 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #1c1917;
-      --fg: #f5f5f4;
-      --muted: #a8a29e;
-      --gold: #c9a24d;
-      --line: rgba(245, 245, 244, 0.12);
-      --card: rgba(41, 37, 36, 0.72);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { min-height: 100%; }
-
-    html { background: var(--bg); }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      line-height: 1.5;
-    }
-
-    .shell {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: calc(2.5rem + env(safe-area-inset-top)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: flex-start;
-      gap: 1rem;
-      animation: rise 0.7s ease both;
-    }
-
-    .topbar a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .topbar a:hover,
-    .topbar a:focus-visible {
-      color: var(--fg);
-      outline: none;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
-      padding: 2rem 0 3rem;
-    }
-
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-      animation: rise 0.8s ease both;
-    }
-
-    .brand-row {
-      display: flex;
-      align-items: center;
-      gap: 1.1rem;
-      flex-wrap: wrap;
-    }
-
-    .app-icon {
-      width: clamp(56px, 12vw, 72px);
-      height: clamp(56px, 12vw, 72px);
-      border-radius: 18px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .brand {
-      font-family: "Instrument Serif", Georgia, serif;
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-    }
-
-    .brand em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .tagline {
-      max-width: 30rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.85rem 1.25rem;
-    }
-
-    .store-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      min-height: 2.75rem;
-      padding: 0.7rem 1.35rem;
-      border: 1px solid rgba(201, 162, 77, 0.45);
-      border-radius: 10px;
-      background: rgba(201, 162, 77, 0.12);
-      color: var(--gold);
-      font-size: 0.95rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      text-decoration: none;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .store-btn svg {
-      width: 1rem;
-      height: 1rem;
-      flex-shrink: 0;
-    }
-
-    .store-btn:hover,
-    .store-btn:focus-visible {
-      background: rgba(201, 162, 77, 0.22);
-      border-color: rgba(201, 162, 77, 0.7);
-      outline: none;
-    }
-
-    .hero-shots {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.65rem;
-      margin-top: 0.5rem;
-      animation: rise 0.9s ease 0.1s both;
-    }
-
-    .hero-shot {
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: #292524;
-      border-radius: 14px;
-    }
-
-    .hero-shot img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 1170 / 2532;
-      object-fit: cover;
-    }
-
-    @media (max-width: 640px) {
-      .hero-shots {
-        gap: 0.45rem;
-      }
-
-      .hero-shot {
-        border-radius: 10px;
-      }
-    }
-
-    .points {
-      display: grid;
-      gap: 2rem;
-      animation: rise 0.9s ease 0.16s both;
-    }
-
-    @media (min-width: 720px) {
-      .points {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.75rem;
-      }
-    }
-
-    .point h2 {
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .point p {
-      margin-top: 0.4rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 22rem;
-    }
-
-    .panels {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      animation: rise 0.9s ease 0.2s both;
-    }
-
-    .feature-panel {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 1.25rem 1.4rem 1.35rem;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--card);
-      backdrop-filter: blur(16px);
-      transition: border-color 0.25s ease, background 0.25s ease;
-    }
-
-    .feature-panel:hover,
-    .feature-panel:focus-visible {
-      border-color: rgba(201, 162, 77, 0.45);
-      background: rgba(41, 37, 36, 0.88);
-      outline: none;
-    }
-
-    .feature-panel-top {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 1.15rem;
-      align-items: center;
-    }
-
-    .feature-panel h2 {
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .feature-panel .lead {
-      margin-top: 0.35rem;
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 28rem;
-    }
-
-    .feature-panel .cta {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--gold);
-      white-space: nowrap;
-    }
-
-    .shots {
-      display: flex;
-      gap: 10px;
-      margin-top: 1.15rem;
-      overflow-x: auto;
-      padding-bottom: 2px;
-    }
-
-    .shot {
-      width: 148px;
-      flex: 0 0 auto;
-      aspect-ratio: 1170 / 844;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: #292524;
-    }
-
-    .shot img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .shot-mock {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .shot-mock .base { position: absolute; inset: 0; }
-    .shot-mock .park {
-      position: absolute;
-      left: 8%; top: 42%; width: 30%; height: 18%;
-      border-radius: 3%;
-    }
-    .shot-mock .water {
-      position: absolute;
-      left: 56%; top: 18%; width: 36%; height: 28%;
-      border-radius: 50%;
-    }
-    .shot-mock .building {
-      position: absolute;
-      left: 22%; top: 58%; width: 18%; height: 14%;
-      border-radius: 2px;
-      opacity: 0.85;
-    }
-    .shot-mock .rail {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          108deg,
-          transparent 0 10px,
-          rgba(242, 237, 228, 0.55) 10px 12px,
-          transparent 12px 22px
-        );
-      opacity: 0.55;
-      -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 28%, #000 72%, transparent 92%);
-      mask-image: linear-gradient(90deg, transparent 8%, #000 28%, #000 72%, transparent 92%);
-    }
-    .shot-mock .aeroway {
-      position: absolute;
-      left: 48%; top: 54%; width: 34%; height: 10%;
-      border-radius: 2px;
-      transform: rotate(-18deg);
-      opacity: 0.9;
-    }
-    .shot-mock .roads {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(105deg, transparent 46%, rgba(242, 237, 228, 0.9) 46.5%, rgba(242, 237, 228, 0.9) 48%, transparent 48.5%),
-        linear-gradient(18deg, transparent 62%, rgba(216, 208, 196, 0.75) 62.5%, rgba(216, 208, 196, 0.75) 63.8%, transparent 64.3%);
-    }
-
-    footer {
-      padding-top: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    footer a:hover,
-    footer a:focus-visible {
-      color: var(--fg);
-      outline: none;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css?v=76">
 </head>
 <body>
-  <div class="shell">
-    <div class="topbar">
-      <a href="/">← Locusable Studio</a>
-    </div>
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><span aria-current="page">Here Wallpaper</span></li>
+      </ol>
+    </nav>
 
     <main>
-      <section class="hero" aria-labelledby="product-title">
-        <div>
-          <div class="brand-row">
-            <img class="app-icon" src="/assets/here/icon-192.png?v=10" width="72" height="72" alt="">
-            <h1 class="brand" id="product-title">Here <em>Wallpaper</em></h1>
-          </div>
-          <p class="tagline">Map lock-screen wallpapers. Pick a place, theme, and layout.</p>
-        </div>
-
-        <div class="cta-row">
+      <section class="product-hero" aria-labelledby="product-title">
+        <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="Here Wallpaper app icon">
+        <p class="platforms platforms--lg">iPhone and iPad</p>
+        <h1 class="product-title" id="product-title">Here <em>Wallpaper</em></h1>
+        <p class="unit__subhead">Map lock screens from places you care about.</p>
+        <div class="unit__links">
           <a
-            class="store-btn"
             href="https://apps.apple.com/app/id6789155385"
             data-app-store-link
             data-ios-url="itms-apps://apps.apple.com/app/id6789155385"
             data-web-url="https://apps.apple.com/app/id6789155385"
             target="_blank"
             rel="noopener noreferrer"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="m15.079 5.999l.239.012c1.43.097 3.434 1.013 4.508 2.586a1 1 0 0 1-.344 1.44c-.05.028-.372.158-.497.217a4 4 0 0 0-.722.431c-.614.461-.948 1.009-.942 1.694c.01.885.339 1.454.907 1.846c.208.143.436.253.666.33c.126.043.426.116.444.122a1 1 0 0 1 .662.942C20 18.24 16.96 22 14.714 22c-.79 0-1.272-.091-1.983-.315l-.098-.031c-.463-.146-.702-.192-1.133-.192c-.52 0-.863.06-1.518.237l-.197.053c-.575.153-.964.226-1.5.248C5.536 22 3 16.907 3 12.928c0-3.87 1.786-6.92 5.286-6.92q.444.002.909.128c.403.107.774.26 1.296.508c.787.374.948.44 1.009.44h.016c.03-.003.128-.047 1.056-.457c1.061-.467 1.864-.685 2.746-.616l-.24-.012zM14 1a1 1 0 0 1 1 1a3 3 0 0 1-3 3a1 1 0 0 1-1-1a3 3 0 0 1 3-3"/>
-            </svg>
-            App Store
-          </a>
+          >View on the App Store<span class="chev" aria-hidden="true"> ›</span></a>
         </div>
-
-        <div class="hero-shots" aria-label="Wallpaper previews">
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-1.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 1">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-2.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 2">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-3.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 3">
-          </figure>
-          <figure class="hero-shot">
-            <img src="/assets/shots/shot-4.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 4">
-          </figure>
+        <div class="unit__media unit__media--phones" aria-label="Wallpaper previews">
+          <figure><img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 1"></figure>
+          <figure><img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 2"></figure>
+          <figure><img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 3"></figure>
+          <figure><img src="/assets/shots/shot-4.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 4"></figure>
         </div>
       </section>
 
-      <section class="points" aria-label="How it works">
-        <article class="point">
-          <h2>Place</h2>
-          <p>Choose a city or spot you care about. The map becomes your lock screen.</p>
-        </article>
-        <article class="point">
-          <h2>Theme</h2>
-          <p>Basic and Featured palettes — from quiet ink to neon routes.</p>
-        </article>
-        <article class="point">
-          <h2>Layout</h2>
-          <p>Tune type and framing so the wallpaper fits your phone and taste.</p>
-        </article>
+      <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="place-title">
+        <div class="unit__copy unit__copy--solo">
+          <h2 class="product-title unit__title" id="place-title">Place and layout</h2>
+          <p class="unit__subhead">A city or spot you care about becomes your lock screen. Tune type and framing to fit your phone.</p>
+        </div>
       </section>
 
-      <div class="panels">
-        <a class="feature-panel" href="/here-wallpaper/themes/">
-          <div class="feature-panel-top">
-            <div>
-              <h2>Themes</h2>
-              <p class="lead">Preview Basic and Featured palettes with the same square map mocks as in the app.</p>
-            </div>
-            <span class="cta">Browse →</span>
+      <section class="unit unit--tint" data-reveal aria-labelledby="themes-title">
+        <div class="unit__copy">
+          <h2 class="product-title unit__title" id="themes-title">Themes</h2>
+          <p class="unit__subhead">Basic and Featured palettes — quiet ink to neon routes. Preview them with the same square map mocks as in the app.</p>
+          <div class="unit__links">
+            <a href="/here-wallpaper/themes/">Browse themes<span class="chev" aria-hidden="true"> ›</span></a>
           </div>
-          <div class="shots" aria-hidden="true">
-            <div class="shot"><img src="/assets/shots/themes-shot-1.jpg?v=10" alt="" width="148" height="107"></div>
-            <div class="shot"><img src="/assets/shots/themes-shot-2.jpg?v=10" alt="" width="148" height="107"></div>
-            <div class="shot"><img src="/assets/shots/themes-shot-3.jpg?v=10" alt="" width="148" height="107"></div>
-          </div>
-        </a>
-
-        <a class="feature-panel" href="/here-wallpaper/layers/">
-          <div class="feature-panel-top">
-            <div>
-              <h2>Layers</h2>
-              <p class="lead">Same map layer toggles as in the editor — landcover, water, parks, roads, rail, and more.</p>
-            </div>
-            <span class="cta">Browse →</span>
-          </div>
-          <div class="shots" aria-hidden="true">
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="park" style="background:#244878"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="building" style="background:#6A88B0"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-            <div class="shot">
-              <div class="shot-mock">
-                <div class="base" style="background:#1A3A6E"></div>
-                <div class="water" style="background:#122C58"></div>
-                <div class="aeroway" style="background:#244878"></div>
-                <div class="rail"></div>
-                <div class="roads"></div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
+        </div>
+        <div class="unit__media unit__media--phones unit__media--squares" aria-hidden="true">
+          <figure><img src="/assets/shots/themes-shot-1.jpg?v=10" width="260" height="187" alt="Here Wallpaper theme preview — Meadow Sage"></figure>
+          <figure><img src="/assets/shots/themes-shot-2.jpg?v=10" width="260" height="187" alt="Here Wallpaper theme preview — Newspaper"></figure>
+          <figure><img src="/assets/shots/themes-shot-3.jpg?v=10" width="260" height="187" alt="Here Wallpaper theme preview — Pastel Dream"></figure>
+        </div>
+      </section>
     </main>
 
-    <footer>
-      <span>© 2026 Locusable Studio</span>
-      <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+      </div>
     </footer>
   </div>
-  <script>
-    (function () {
-      var isIOS = function () {
-        var ua = navigator.userAgent;
-        if (/iPhone|iPad|iPod/.test(ua)) return true;
-        return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
-      };
-
-      document.querySelectorAll("[data-app-store-link]:not([data-app-store-bound])").forEach(function (link) {
-        link.setAttribute("data-app-store-bound", "true");
-
-        var iosUrl = link.getAttribute("data-ios-url");
-        var webUrl = link.getAttribute("data-web-url") || link.getAttribute("href");
-        if (!iosUrl || !webUrl) return;
-
-        if (!link.hasAttribute("data-web-url")) {
-          link.setAttribute("data-web-url", webUrl);
-        }
-
-        if (isIOS()) {
-          link.setAttribute("href", iosUrl);
-          link.removeAttribute("target");
-        }
-      });
-    })();
-  </script>
+  <script src="/assets/site.js?v=38" defer></script>
 </body>
 </html>

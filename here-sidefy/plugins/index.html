@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-app="sidefy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f44034">
+  <title>Here Sidefy — Featured Plugins</title>
+  <meta name="description" content="Featured community plugins for Here Sidefy — RSS, deals, gaming, and more.">
+  <link rel="icon" href="/favicon.ico?v=10" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/assets/site.css?v=76">
+</head>
+<body class="catalog-page">
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/here-sidefy/">Here Sidefy</a></li>
+        <li><span aria-current="page">Plugins</span></li>
+      </ol>
+    </nav>
+
+    <header class="catalog-hero">
+      <h1 class="catalog-title">Featured Plugins</h1>
+      <p class="catalog-lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
+    </header>
+
+    <section class="catalog-section catalog-section--plugins" data-reveal aria-label="Featured plugins">
+      <div class="plugin-grid" id="plugin-grid"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <span class="footer__links">
+          <a href="/here-sidefy/privacy/">Privacy Policy</a>
+          <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const pluginIconPaths = {
+      sparkles: '<path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2-2a2 2 0 0 1-2-2a2 2 0 0 1-2 2m0-12a2 2 0 0 1 2 2a2 2 0 0 1 2-2a2 2 0 0 1-2-2a2 2 0 0 1-2 2M9 18a6 6 0 0 1 6-6a6 6 0 0 1-6-6a6 6 0 0 1-6 6a6 6 0 0 1 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+      rss: '<path d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0-2 0M4 4a16 16 0 0 1 16 16M4 11a9 9 0 0 1 9 9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+      "brand-apple": '<path d="M8.286 7.008C5.07 7.008 4 10.238 4 12.928C4 16.157 6.143 21 8.286 21c1.165-.05 1.799-.538 3.214-.538c1.406 0 1.607.538 3.214.538S19 17.771 19 15.619c-.03-.011-2.649-.434-2.679-3.23c-.02-2.335 2.589-3.179 2.679-3.228c-1.096-1.606-3.162-2.113-3.75-2.153c-1.535-.12-3.032 1.077-3.75 1.077c-.729 0-2.036-1.077-3.214-1.077M12 4a2 2 0 0 0 2-2a2 2 0 0 0-2 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+      "brand-steam": '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16.5 5a4.5 4.5 0 1 1-.653 8.953L11.5 16.962V17a3 3 0 0 1-2.824 3H8.5a3 3 0 0 1-2.94-2.402L3 16.5V13l3.51 1.755a2.99 2.99 0 0 1 2.834-.635l2.727-3.818A4.5 4.5 0 0 1 16.5 5"/><path d="M15.5 9.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0" fill="currentColor"/></g>',
+      "device-nintendo": '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 20V4H7a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4zm4 0V4h3a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4z"/><path d="M16.5 15.5a1 1 0 1 0 2 0a1 1 0 1 0-2 0m-11-7a1 1 0 1 0 2 0a1 1 0 1 0-2 0" fill="currentColor"/></g>',
+      pokeball: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0-6 0m-6 0h6m6 0h6"/></g>',
+      "currency-bitcoin": '<path d="M6 6h8a3 3 0 0 1 0 6a3 3 0 0 1 0 6H6M8 6v12m0-6h6M9 3v3m4-3v3M9 18v3m4-3v3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+      messages: '<path d="m21 14l-3-3h-7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1zm-7 1v2a1 1 0 0 1-1 1H6l-3 3V11a1 1 0 0 1 1-1h2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>',
+    };
+
+    function createPluginIcon(name, color) {
+      const icon = document.createElement("span");
+      icon.className = "plugin-card__icon";
+      icon.style.color = color;
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${pluginIconPaths[name]}</svg>`;
+      return icon;
+    }
+
+    const featuredPlugins = [
+      {
+        name: "Say Hi",
+        description: "A random English Wikipedia article each day — AI generates the event title and greeting in your app language. Requires an LLM API key in Sidefy Advanced Settings.",
+        tags: ["AI", "Daily"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/sayhi",
+        icon: "sparkles",
+        iconColor: "#3366cc",
+      },
+      {
+        name: "FreshRSS",
+        description: "Fetch unread and recent articles from your self-hosted FreshRSS instance via Google Reader API. Stay updated with your personal news feeds.",
+        tags: ["RSS", "News"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/freshrss",
+        icon: "rss",
+        iconColor: "#d97706",
+      },
+      {
+        name: "App Store Discount",
+        description: "Monitor price drops and discounts for apps on your Mac App Store wishlist. Get notified when your favorite apps go on sale.",
+        tags: ["Shopping", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/appstore_discount",
+        icon: "brand-apple",
+        iconColor: "#78716c",
+      },
+      {
+        name: "Steam Wishlist Discount",
+        description: "Get instant alerts when games on your Steam wishlist go on sale. Never miss a great deal on your favorite games.",
+        tags: ["Gaming", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/steam_wishlist_discount",
+        icon: "brand-steam",
+        iconColor: "#57534e",
+      },
+      {
+        name: "Switch Discount Tracker",
+        description: "Track Nintendo Switch eShop sales across multiple regions. Add game NSUIDs and region codes to get timeline alerts with sale price and discount when a watched title goes on sale.",
+        tags: ["Gaming", "Deals"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/switch_wishlist_discount",
+        icon: "device-nintendo",
+        iconColor: "#dc2626",
+      },
+      {
+        name: "Pokemon Daily",
+        description: "Discover a new Pokemon every day with detailed information, stats, and beautiful artwork. Perfect for Pokemon fans and trainers.",
+        tags: ["Entertainment", "Daily"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/pokemon_daily",
+        icon: "pokeball",
+        iconColor: "#ca8a04",
+      },
+      {
+        name: "Crypto Price Monitor",
+        description: "Monitor cryptocurrency prices via CoinGecko with price threshold and 24h percentage change alerts. Track multiple tokens with a configurable cooldown.",
+        tags: ["Crypto", "Alerts"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/crypto_price_watcher",
+        icon: "currency-bitcoin",
+        iconColor: "#ca8a04",
+      },
+      {
+        name: "V2EX Notifications",
+        description: "Unread V2EX notifications on your timeline — replies, thanks, tips, mentions, and favorites, each with distinct colors. Uses your private RSS token.",
+        tags: ["Community", "Social"],
+        href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/v2ex_notifications",
+        icon: "messages",
+        iconColor: "#78716c",
+      },
+    ];
+
+    const grid = document.getElementById("plugin-grid");
+    featuredPlugins.forEach((plugin, index) => {
+      const card = document.createElement("a");
+      card.className = "plugin-card";
+      card.href = plugin.href;
+      card.target = "_blank";
+      card.rel = "noopener noreferrer";
+      card.style.animationDelay = `${0.04 + index * 0.05}s`;
+
+      const head = document.createElement("div");
+      head.className = "plugin-card__head";
+
+      const icon = createPluginIcon(plugin.icon, plugin.iconColor);
+
+      const title = document.createElement("h3");
+      title.textContent = plugin.name;
+      head.append(icon, title);
+
+      const desc = document.createElement("p");
+      desc.className = "plugin-card__desc";
+      desc.textContent = plugin.description;
+
+      const foot = document.createElement("div");
+      foot.className = "plugin-card__foot";
+
+      const tags = document.createElement("div");
+      tags.className = "plugin-tags";
+      for (const tag of plugin.tags) {
+        const span = document.createElement("span");
+        span.textContent = tag;
+        tags.appendChild(span);
+      }
+
+      const cta = document.createElement("span");
+      cta.className = "plugin-card__cta";
+      cta.innerHTML = 'Learn more<span class="chev" aria-hidden="true"> ›</span>';
+
+      foot.append(tags, cta);
+      card.append(head, desc, foot);
+      grid.appendChild(card);
+    });
+  </script>
+  <script src="/assets/site.js?v=38" defer></script>
+</body>
+</html>
