@@ -12,10 +12,11 @@ const pages = [
   "here-sidefy/index.html",
   "here-sidefy/plugins/index.html",
   "here-sidefy/privacy/index.html",
+  "here-island/index.html",
 ];
 
-const cssVersion = "76";
-const jsVersion = "38";
+const cssVersion = "88";
+const jsVersion = "39";
 
 const themeMapJsVersion = "1";
 
@@ -38,6 +39,10 @@ const breadcrumbs = {
   "here-sidefy/index.html": [
     'href="/">Locusable Studio',
     '<span aria-current="page">Here Sidefy</span>',
+  ],
+  "here-island/index.html": [
+    'href="/">Locusable Studio',
+    '<span aria-current="page">Here Island</span>',
   ],
   "here-wallpaper/themes/index.html": [
     'href="/">Locusable Studio',
@@ -104,9 +109,19 @@ if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
 }
 
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
-for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/"]) {
+for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
+    failed++;
+  }
+}
+
+const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
+for (const href of [
+  "https://github.com/sha2kyou/HereIsland",
+]) {
+  if (!island.includes(`href="${href}"`)) {
+    console.error(`FAIL here-island/index.html: missing href ${href}`);
     failed++;
   }
 }
@@ -201,6 +216,7 @@ const themeColors = {
   "here-sidefy/index.html": "#f44034",
   "here-sidefy/plugins/index.html": "#f44034",
   "here-sidefy/privacy/index.html": "#f44034",
+  "here-island/index.html": "#9820b0",
 };
 
 for (const [page, color] of Object.entries(themeColors)) {

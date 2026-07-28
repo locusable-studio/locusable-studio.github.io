@@ -12,6 +12,7 @@
   --accent-wallpaper: #4cac50;
   --accent-links: #2094f0;
   --accent-sidefy: #f44034;
+  --accent-island: #9820b0;
   --app-accent: var(--accent-studio);
   --unit-pad-y: clamp(3.5rem, 8vw, 5.5rem);
   --unit-pad-x: clamp(1.25rem, 4vw, 2.5rem);
@@ -42,6 +43,7 @@
 [data-app="wallpaper"] { --app-accent: var(--accent-wallpaper); }
 [data-app="links"] { --app-accent: var(--accent-links); }
 [data-app="sidefy"] { --app-accent: var(--accent-sidefy); }
+[data-app="island"] { --app-accent: var(--accent-island); }
 
 *,
 *::before,
@@ -525,14 +527,14 @@ html[data-app] .footer a:focus-visible,
   overflow: hidden;
   background: var(--bg-elevated);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  /* real shots ~585×1266 — crop bottom 10%, keep flush to unit bottom */
+  aspect-ratio: 585 / 1139;
 }
 
 .unit__media--phones img {
   width: 100%;
   height: auto;
-  aspect-ratio: 1170 / 2200;
-  object-fit: cover;
-  object-position: top center;
+  display: block;
 }
 
 @media (max-width: 720px) {
@@ -552,6 +554,12 @@ html[data-app] .footer a:focus-visible,
   max-width: min(1120px, 100%);
   margin: 0 auto;
   padding: 1.25rem var(--unit-pad-x) 0;
+  /* real shot 1259×717 — crop bottom 10%, keep flush to unit bottom */
+  aspect-ratio: 1259 / 645;
+}
+
+.product-hero .unit__media--desktop-peek {
+  /* product page keeps a slightly deeper peek */
   aspect-ratio: 1259 / 574;
 }
 
@@ -561,6 +569,57 @@ html[data-app] .footer a:focus-visible,
   border-radius: 16px 16px 0 0;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
   display: block;
+}
+
+.unit__media--island {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.65rem, 1.8vw, 1.15rem);
+  max-width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 1.25rem var(--unit-pad-x) 0;
+  overflow: hidden;
+}
+
+.unit__media--island figure {
+  margin: 0;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  background: var(--bg-elevated);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  /* real shots ~890×360 — crop bottom 10%, keep flush to unit bottom */
+  aspect-ratio: 890 / 324;
+}
+
+.product-hero .unit__media--island {
+  padding-bottom: 2rem;
+  align-items: stretch;
+}
+
+.product-hero .unit__media--island figure {
+  border-radius: 18px;
+  aspect-ratio: auto;
+}
+
+.unit__media--island img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .unit__media--island figure:nth-child(n + 2) {
+    display: none;
+  }
+
+  .unit__media--island figure {
+    flex: 1 1 auto;
+    width: 100%;
+  }
 }
 
 .unit__media--squares {

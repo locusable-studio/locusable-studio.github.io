@@ -3,6 +3,7 @@
     wallpaper: "#4cac50",
     links: "#2094f0",
     sidefy: "#f44034",
+    island: "#9820b0",
   };
 
   function initThemeColor() {
