@@ -15,7 +15,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "89";
+const cssVersion = "90";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
@@ -121,6 +121,39 @@ if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 4
 }
 if (home.includes("home-app-card__details")) {
   console.error("FAIL index.html: homepage app cards should not include expandable details");
+  failed++;
+}
+for (const needle of [
+  'class="home-product-grid"',
+  "home-app-card--feature",
+  "home-app-card__screens",
+  "home-app-card__arrow",
+  "home-app-card__arrow--feature",
+]) {
+  if (!home.includes(needle)) {
+    console.error(`FAIL index.html: missing featured homepage card structure (${needle})`);
+    failed++;
+  }
+}
+const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
+if (!siteCss.includes("height: clamp(240px, 30vw, 390px);")) {
+  console.error("FAIL assets/site.css: homepage screenshots should use a constrained height");
+  failed++;
+}
+if (!siteCss.includes("border-radius: 20px;")) {
+  console.error("FAIL assets/site.css: homepage cards should use rounded corners");
+  failed++;
+}
+if (!siteCss.includes(".site-shell:has(.home-product-grid) main")) {
+  console.error("FAIL assets/site.css: homepage grid should fill the main viewport area");
+  failed++;
+}
+if (!siteCss.includes("padding-top: var(--site-chrome-h-masthead);")) {
+  console.error("FAIL assets/site.css: homepage grid should clear the fixed masthead");
+  failed++;
+}
+if (!siteCss.includes(".home-app-card--feature .product-hero__icon")) {
+  console.error("FAIL assets/site.css: featured card icon should align with its content");
   failed++;
 }
 

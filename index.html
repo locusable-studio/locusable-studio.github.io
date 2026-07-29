@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=89">
+  <link rel="stylesheet" href="/assets/site.css?v=90">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -24,13 +24,20 @@
     </header>
 
     <main>
-      <a class="unit unit--tint unit--soft unit--lead home-app-card" href="/here-wallpaper/" data-app="wallpaper" data-reveal aria-labelledby="wallpaper-title">
+      <div class="home-product-grid">
+      <a class="unit unit--tint unit--soft unit--lead home-app-card home-app-card--feature" href="/here-wallpaper/" data-app="wallpaper" data-reveal aria-labelledby="wallpaper-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="Here Wallpaper app icon">
           <p class="platforms">iPhone and iPad</p>
           <h2 class="product-title unit__title" id="wallpaper-title">Here <em>Wallpaper</em></h2>
           <p class="unit__subhead">Map lock screens from places you care about.</p>
         </div>
+        <div class="home-app-card__screens" aria-hidden="true">
+          <img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="">
+          <img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="">
+          <img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt="">
+        </div>
+        <span class="home-app-card__arrow home-app-card__arrow--feature" aria-hidden="true">›</span>
       </a>
 
       <a class="unit unit--tint home-app-card" href="/here-links/" data-app="links" data-reveal aria-labelledby="links-title">
@@ -40,6 +47,7 @@
           <h2 class="product-title unit__title" id="links-title">Here <em>Links</em></h2>
           <p class="unit__subhead">Your self-hosted linkding. Native on iOS.</p>
         </div>
+        <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
 
       <a class="unit unit--tint home-app-card" href="/here-sidefy/" data-app="sidefy" data-reveal aria-labelledby="sidefy-title">
@@ -49,6 +57,7 @@
           <h2 class="product-title unit__title" id="sidefy-title">Here <em>Sidefy</em></h2>
           <p class="unit__subhead">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</p>
         </div>
+        <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
 
       <a class="unit unit--tint unit--soft home-app-card" href="/here-island/" data-app="island" data-reveal aria-labelledby="island-title">
@@ -58,7 +67,9 @@
           <h2 class="product-title unit__title" id="island-title">Here <em>Island</em></h2>
           <p class="unit__subhead">A focused media companion in your MacBook notch.</p>
         </div>
+        <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
+      </div>
     </main>
 
     <footer class="footer">
