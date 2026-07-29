@@ -16,7 +16,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "91";
+const cssVersion = "92";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
@@ -112,6 +112,10 @@ for (const page of pages) {
     console.error(`FAIL ${page}: legacy back-button nav found`);
     failed++;
   }
+  if (page !== "index.html" && html.includes('href="/about/"')) {
+    console.error(`FAIL ${page}: About link should only appear on the homepage`);
+    failed++;
+  }
   const crumbs = breadcrumbs[page];
   if (crumbs) {
     if (!html.includes('class="crumbs"')) {
@@ -154,8 +158,10 @@ const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
   "Focused tools for the Apple devices you use every day.",
   "overlooked interface spaces",
-  "A two-person studio from Xi'an, China,",
-  "more than a decade of programming experience",
+  "Map lock screens from places you care about.",
+  "Your linkding bookmarks on iPhone.",
+  "Stay informed without leaving your desktop.",
+  "A focused media companion in your MacBook notch.",
 ]) {
   if (!about.includes(needle)) {
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
@@ -165,6 +171,15 @@ for (const needle of [
 if (about.includes("personal information such as self-hosted bookmarks")) {
   console.error("FAIL about/index.html: removed bookmark rationale should not be shown");
   failed++;
+}
+for (const needle of [
+  "A two-person studio from Xi'an, China,",
+  "more than a decade of programming experience",
+]) {
+  if (about.includes(needle)) {
+    console.error(`FAIL about/index.html: removed studio detail should not be shown (${needle})`);
+    failed++;
+  }
 }
 if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
