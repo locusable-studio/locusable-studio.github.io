@@ -11,13 +11,13 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=90">
+  <link rel="stylesheet" href="/assets/site.css?v=91">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
     <nav class="crumbbar" aria-label="Breadcrumb">
       <ol class="crumbs">
-        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><span aria-current="page">Here Links</span></li>
       </ol>
     </nav>
@@ -42,7 +42,7 @@
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="features-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="features-title">Built for linkding</h2>
-          <ul class="feature-list">
+          <ul class="feature-list feature-list--cards">
             <li>
               <strong>Servers</strong>
               <span>Connect one or more linkding instances. Browse a mixed feed.</span>
@@ -58,11 +58,30 @@
           </ul>
         </div>
       </section>
+
+      <section class="product-faq" aria-labelledby="faq-title">
+        <div class="product-faq__inner">
+          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <details>
+            <summary>Is Here Links free?</summary>
+            <p>Here Links is free to use.</p>
+          </details>
+          <details>
+            <summary>What is linkding?</summary>
+            <p><a href="https://linkding.link" target="_blank" rel="noopener noreferrer">linkding</a> is a self-hosted bookmark manager designed to be minimal, fast, and easy to set up.</p>
+          </details>
+          <details>
+            <summary>Can I connect more than one server?</summary>
+            <p>Yes. Here Links can connect to one or more linkding instances and show them in a mixed feed.</p>
+          </details>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/about/">About</a>
         <a href="/here-links/privacy/">Privacy Policy</a>
       </div>
     </footer>

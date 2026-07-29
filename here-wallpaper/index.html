@@ -11,13 +11,13 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=90">
+  <link rel="stylesheet" href="/assets/site.css?v=91">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
     <nav class="crumbbar" aria-label="Breadcrumb">
       <ol class="crumbs">
-        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><span aria-current="page">Here Wallpaper</span></li>
       </ol>
     </nav>
@@ -47,9 +47,13 @@
       </section>
 
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="place-title">
-        <div class="unit__copy unit__copy--solo">
+        <div class="unit__copy">
           <h2 class="product-title unit__title" id="place-title">Place and layout</h2>
           <p class="unit__subhead">A city or spot you care about becomes your lock screen. Tune type and framing to fit your phone.</p>
+        </div>
+        <div class="detail-feature-media" aria-label="Place and layout previews">
+          <figure><img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="Here Wallpaper map lock-screen layout preview"></figure>
+          <figure><img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="Here Wallpaper map lock-screen layout preview"></figure>
         </div>
       </section>
 
@@ -67,11 +71,30 @@
           <figure><img src="/assets/shots/themes-shot-3.jpg?v=10" width="260" height="187" alt="Here Wallpaper theme preview — Pastel Dream"></figure>
         </div>
       </section>
+
+      <section class="product-faq" aria-labelledby="faq-title">
+        <div class="product-faq__inner">
+          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <details>
+            <summary>Is Here Wallpaper free?</summary>
+            <p>Here Wallpaper is free to download. Here Wallpaper Pro is available as a monthly or annual subscription.</p>
+          </details>
+          <details>
+            <summary>What does Here Wallpaper Pro include?</summary>
+            <p>Pro adds iCloud sync for favorites, Shortcuts support, more themes, fonts, and map layers, plus the option to hide export credits.</p>
+          </details>
+          <details>
+            <summary>Where does the map data come from?</summary>
+            <p>Maps use OpenStreetMap and related open projects, rendered with MapLibre.</p>
+          </details>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/about/">About</a>
         <a href="/here-wallpaper/privacy/">Privacy Policy</a>
       </div>
     </footer>

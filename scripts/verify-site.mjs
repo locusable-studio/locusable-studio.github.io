@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const pages = [
   "index.html",
+  "about/index.html",
   "here-wallpaper/index.html",
   "here-wallpaper/themes/index.html",
   "here-wallpaper/privacy/index.html",
@@ -15,7 +16,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "90";
+const cssVersion = "91";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
@@ -28,46 +29,73 @@ const must = [
 ];
 
 const breadcrumbs = {
+  "about/index.html": [
+    'href="/">Locusable <em>Studio</em>',
+    '<span aria-current="page">About</span>',
+  ],
   "here-wallpaper/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here Wallpaper</span>',
   ],
   "here-links/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here Links</span>',
   ],
   "here-sidefy/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here Sidefy</span>',
   ],
   "here-island/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here Island</span>',
   ],
   "here-wallpaper/themes/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     'href="/here-wallpaper/">Here Wallpaper',
     '<span aria-current="page">Themes</span>',
   ],
   "here-sidefy/plugins/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     'href="/here-sidefy/">Here Sidefy',
     '<span aria-current="page">Plugins</span>',
   ],
   "here-wallpaper/privacy/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     'href="/here-wallpaper/">Here Wallpaper',
     '<span aria-current="page">Privacy</span>',
   ],
   "here-links/privacy/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     'href="/here-links/">Here Links',
     '<span aria-current="page">Privacy</span>',
   ],
   "here-sidefy/privacy/index.html": [
-    'href="/">Locusable Studio',
+    'href="/">Locusable <em>Studio</em>',
     'href="/here-sidefy/">Here Sidefy',
     '<span aria-current="page">Privacy</span>',
+  ],
+};
+
+const productFaqs = {
+  "here-wallpaper/index.html": [
+    "Is Here Wallpaper free?",
+    "What does Here Wallpaper Pro include?",
+    "Where does the map data come from?",
+  ],
+  "here-links/index.html": [
+    "Is Here Links free?",
+    "What is linkding?",
+    "Can I connect more than one server?",
+  ],
+  "here-sidefy/index.html": [
+    "How is Here Sidefy priced?",
+    "What does Here Sidefy integrate with?",
+    "Does Here Sidefy collect personal data?",
+  ],
+  "here-island/index.html": [
+    "Is Here Island free and open source?",
+    "What does Here Island do?",
+    "What do I need to run it?",
   ],
 };
 
@@ -101,6 +129,19 @@ for (const page of pages) {
     console.error(`FAIL ${page}: missing doc-layout wrapper`);
     failed++;
   }
+  const faqQuestions = productFaqs[page];
+  if (faqQuestions) {
+    if (!html.includes('class="product-faq"')) {
+      console.error(`FAIL ${page}: missing product FAQ section`);
+      failed++;
+    }
+    for (const question of faqQuestions) {
+      if (!html.includes(`<summary>${question}</summary>`)) {
+        console.error(`FAIL ${page}: missing FAQ question (${question})`);
+        failed++;
+      }
+    }
+  }
 }
 
 if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
@@ -109,6 +150,23 @@ if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
 }
 
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
+for (const needle of [
+  "Focused tools for the Apple devices you use every day.",
+  "overlooked interface spaces",
+  "self-hosted bookmarks",
+  "A two-person studio from Xi'an, China,",
+  "more than a decade of programming experience",
+]) {
+  if (!about.includes(needle)) {
+    console.error(`FAIL about/index.html: missing studio context (${needle})`);
+    failed++;
+  }
+}
+if (!home.includes('href="/about/"')) {
+  console.error("FAIL index.html: missing About link");
+  failed++;
+}
 for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
@@ -136,7 +194,7 @@ for (const needle of [
   }
 }
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
-if (!siteCss.includes("height: clamp(240px, 30vw, 390px);")) {
+if (!siteCss.includes("height: clamp(210px, 26vw, 340px);")) {
   console.error("FAIL assets/site.css: homepage screenshots should use a constrained height");
   failed++;
 }
@@ -156,8 +214,78 @@ if (!siteCss.includes(".home-app-card--feature .product-hero__icon")) {
   console.error("FAIL assets/site.css: featured card icon should align with its content");
   failed++;
 }
+for (const needle of [
+  "padding-top: 1.25rem;",
+  "right: -2rem;",
+  "top: 1.25rem;",
+]) {
+  if (!siteCss.includes(needle)) {
+    console.error(`FAIL assets/site.css: missing homepage visual polish (${needle})`);
+    failed++;
+  }
+}
+for (const needle of [
+  ".detail-feature-grid",
+  ".detail-feature-media",
+  ".feature-list--cards",
+]) {
+  if (!siteCss.includes(needle)) {
+    console.error(`FAIL assets/site.css: missing product-detail layout (${needle})`);
+    failed++;
+  }
+}
+for (const needle of ['content: "›";']) {
+  if (!siteCss.includes(needle)) {
+    console.error(`FAIL assets/site.css: missing unified breadcrumb styling (${needle})`);
+    failed++;
+  }
+}
+const crumbBrandRule = siteCss.match(/\.crumbs a\[href="\/"\] \{([^}]*)\}/)?.[1] || "";
+for (const needle of [
+  "padding: 0.33em 0.72em 0.37em;",
+  "font-size: 1rem;",
+]) {
+  if (!crumbBrandRule.includes(needle)) {
+    console.error(`FAIL assets/site.css: breadcrumb brand should match masthead (${needle})`);
+    failed++;
+  }
+}
+for (const needle of [
+  ".product-faq {",
+  ".product-faq details {",
+  ".product-faq summary {",
+]) {
+  if (!siteCss.includes(needle)) {
+    console.error(`FAIL assets/site.css: missing FAQ style (${needle})`);
+    failed++;
+  }
+}
+if (!siteCss.includes(".about-page .unit__subhead {\n  max-width: 34rem;")) {
+  console.error("FAIL assets/site.css: About copy should avoid orphaned final words");
+  failed++;
+}
+if (!siteCss.includes(".crumbs {\n  list-style: none;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 0.35rem 0.55rem;\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0 var(--unit-pad-x);")) {
+  console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
+  failed++;
+}
+
+const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
+if (!wallpaper.includes("detail-feature-media")) {
+  console.error("FAIL here-wallpaper/index.html: missing place-and-layout visual treatment");
+  failed++;
+}
+
+const linksPage = fs.readFileSync(path.join(root, "here-links/index.html"), "utf8");
+if (!linksPage.includes("feature-list--cards")) {
+  console.error("FAIL here-links/index.html: missing feature-card treatment");
+  failed++;
+}
 
 const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
+if (!island.includes("detail-feature-grid")) {
+  console.error("FAIL here-island/index.html: missing paired feature layout");
+  failed++;
+}
 for (const href of [
   "https://github.com/sha2kyou/HereIsland",
 ]) {
@@ -168,6 +296,10 @@ for (const href of [
 }
 
 const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");
+if (!sidefy.includes("detail-feature-grid")) {
+  console.error("FAIL here-sidefy/index.html: missing paired feature layout");
+  failed++;
+}
 for (const href of [
   "https://apps.apple.com/app/id6751482006",
   "https://sidefy.locusable.com/",

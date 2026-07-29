@@ -11,13 +11,13 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=90">
+  <link rel="stylesheet" href="/assets/site.css?v=91">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
     <nav class="crumbbar" aria-label="Breadcrumb">
       <ol class="crumbs">
-        <li><a href="/">Locusable Studio</a></li>
+        <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><span aria-current="page">Here Island</span></li>
       </ol>
     </nav>
@@ -41,6 +41,7 @@
         </div>
       </section>
 
+      <div class="detail-feature-grid">
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="notch-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="notch-title">Music in the notch</h2>
@@ -54,11 +55,31 @@
           <p class="unit__subhead">Shuffle, previous, play/pause, next, and repeat — plus progress and an optional real-time waveform.</p>
         </div>
       </section>
+      </div>
+
+      <section class="product-faq" aria-labelledby="faq-title">
+        <div class="product-faq__inner">
+          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <details>
+            <summary>Is Here Island free and open source?</summary>
+            <p>Yes. Here Island is free and open source under the GNU General Public License v3.0.</p>
+          </details>
+          <details>
+            <summary>What does Here Island do?</summary>
+            <p>Here Island is a focused macOS notch media companion with album art, track details, playback controls, progress, and an optional real-time waveform.</p>
+          </details>
+          <details>
+            <summary>What do I need to run it?</summary>
+            <p>Here Island requires macOS 26.0 or later.</p>
+          </details>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/about/">About</a>
       </div>
     </footer>
   </div>
