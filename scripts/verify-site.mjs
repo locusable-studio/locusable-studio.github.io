@@ -154,7 +154,6 @@ const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
   "Focused tools for the Apple devices you use every day.",
   "overlooked interface spaces",
-  "self-hosted bookmarks",
   "A two-person studio from Xi'an, China,",
   "more than a decade of programming experience",
 ]) {
@@ -162,6 +161,10 @@ for (const needle of [
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
     failed++;
   }
+}
+if (about.includes("personal information such as self-hosted bookmarks")) {
+  console.error("FAIL about/index.html: removed bookmark rationale should not be shown");
+  failed++;
 }
 if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
