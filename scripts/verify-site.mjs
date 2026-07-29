@@ -244,7 +244,6 @@ for (const needle of [
 }
 for (const needle of [
   ".detail-feature-grid",
-  ".detail-feature-media",
   ".feature-list--cards",
 ]) {
   if (!siteCss.includes(needle)) {
@@ -288,8 +287,12 @@ if (!siteCss.includes(".crumbs {\n  list-style: none;\n  display: flex;\n  flex-
 }
 
 const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
-if (!wallpaper.includes("detail-feature-media")) {
-  console.error("FAIL here-wallpaper/index.html: missing place-and-layout visual treatment");
+if (wallpaper.includes("detail-feature-media")) {
+  console.error("FAIL here-wallpaper/index.html: place-and-layout should not duplicate hero previews");
+  failed++;
+}
+if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1) {
+  console.error("FAIL here-wallpaper/index.html: hero preview should appear only once");
   failed++;
 }
 

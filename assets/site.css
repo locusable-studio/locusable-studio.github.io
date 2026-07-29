@@ -822,28 +822,6 @@ html[data-app] .footer a:focus-visible,
   padding-bottom: 0;
 }
 
-.detail-feature-media {
-  display: flex;
-  justify-content: center;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-  padding: 0 var(--unit-pad-x) var(--unit-pad-y);
-}
-
-.detail-feature-media figure {
-  flex: 0 1 190px;
-  max-width: 190px;
-  margin: 0;
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
-}
-
-.detail-feature-media img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 @media (max-width: 720px) {
   .feature-list--cards,
   .detail-feature-grid {
