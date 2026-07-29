@@ -15,7 +15,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "88";
+const cssVersion = "89";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
@@ -114,6 +114,14 @@ for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
+}
+if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 4) {
+  console.error("FAIL index.html: homepage app cards should use the compact-card class");
+  failed++;
+}
+if (home.includes("home-app-card__details")) {
+  console.error("FAIL index.html: homepage app cards should not include expandable details");
+  failed++;
 }
 
 const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
