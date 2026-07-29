@@ -957,15 +957,15 @@ html[data-app] .footer a:focus-visible,
 }
 
 .unit__media--squares {
-  align-items: center;
-  padding-bottom: 2.5rem;
+  align-items: flex-end;
+  padding-bottom: 0;
 }
 
 .unit__media--squares figure {
   flex: 0 1 260px;
   max-width: 260px;
-  border-radius: 18px;
-  aspect-ratio: 1170 / 844;
+  border-radius: 18px 18px 0 0;
+  aspect-ratio: 1170 / 760;
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
 }
 

@@ -281,6 +281,14 @@ if (!siteCss.includes(".about-page .unit__subhead {\n  max-width: 34rem;")) {
   console.error("FAIL assets/site.css: About copy should avoid orphaned final words");
   failed++;
 }
+if (!siteCss.includes(".unit__media--squares {\n  align-items: flex-end;\n  padding-bottom: 0;")) {
+  console.error("FAIL assets/site.css: theme previews should align with the unit bottom");
+  failed++;
+}
+if (!siteCss.includes("aspect-ratio: 1170 / 760;")) {
+  console.error("FAIL assets/site.css: theme previews should crop their bottom edge");
+  failed++;
+}
 if (!siteCss.includes(".crumbs {\n  list-style: none;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 0.35rem 0.55rem;\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0 var(--unit-pad-x);")) {
   console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
   failed++;
