@@ -16,7 +16,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "93";
+const cssVersion = "100";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
@@ -202,9 +202,13 @@ if (home.includes("home-app-card__details")) {
 for (const needle of [
   'class="home-product-grid"',
   "home-app-card--feature",
+  "home-app-card--island",
   "home-app-card__screens",
+  "home-app-card__peeks",
   "home-app-card__arrow",
   "home-app-card__arrow--feature",
+  "/assets/here-island/shot-compact.jpg",
+  "/assets/here-island/shot-expanded.jpg",
 ]) {
   if (!home.includes(needle)) {
     console.error(`FAIL index.html: missing featured homepage card structure (${needle})`);
@@ -212,8 +216,20 @@ for (const needle of [
   }
 }
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
-if (!siteCss.includes("height: clamp(210px, 26vw, 340px);")) {
+if (!siteCss.includes("height: clamp(170px, 20vw, 260px);")) {
   console.error("FAIL assets/site.css: homepage screenshots should use a constrained height");
+  failed++;
+}
+if (!siteCss.includes("left: 48%;")) {
+  console.error("FAIL assets/site.css: featured screenshots should stay in the right half");
+  failed++;
+}
+if (!siteCss.includes(".home-app-card--island")) {
+  console.error("FAIL assets/site.css: missing Island full-width homepage card");
+  failed++;
+}
+if (!siteCss.includes("aspect-ratio: 890 / 324;")) {
+  console.error("FAIL assets/site.css: Island peeks should crop the bottom 10%");
   failed++;
 }
 if (!siteCss.includes("border-radius: 20px;")) {
@@ -234,7 +250,7 @@ if (!siteCss.includes(".home-app-card--feature .product-hero__icon")) {
 }
 for (const needle of [
   "padding-top: 1.25rem;",
-  "right: -2rem;",
+  "right: -2.5rem;",
   "top: 1.25rem;",
 ]) {
   if (!siteCss.includes(needle)) {
