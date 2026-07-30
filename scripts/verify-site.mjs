@@ -16,7 +16,7 @@ const pages = [
   "here-island/index.html",
 ];
 
-const cssVersion = "92";
+const cssVersion = "93";
 const jsVersion = "39";
 
 const themeMapJsVersion = "1";
