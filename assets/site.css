@@ -655,7 +655,10 @@ html[data-app] .footer a:focus-visible,
   overflow: hidden;
   border-radius: 14px 14px 0 0;
   background: var(--bg-elevated);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  /* CleanShot-style: soft lift + negative spread so edges don't stamp hard */
+  box-shadow:
+    0 2px 6px -2px rgba(14, 12, 27, 0.08),
+    0 12px 28px -8px rgba(14, 12, 27, 0.16);
   /* real shots ~890×360 — crop bottom 10%, flush to card bottom */
   aspect-ratio: 890 / 324;
   max-height: min(11rem, calc(100% - 0.75rem));
@@ -670,6 +673,14 @@ html[data-app] .footer a:focus-visible,
   width: 100%;
   height: auto;
   display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .home-app-card--island .home-app-card__peeks figure {
+    box-shadow:
+      0 2px 8px -2px rgba(0, 0, 0, 0.28),
+      0 14px 32px -8px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .home-app-card:focus-visible {
@@ -1004,7 +1015,11 @@ html[data-app] .footer a:focus-visible,
   border-radius: 18px 18px 0 0;
   overflow: hidden;
   background: var(--bg-elevated);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  /* Apple product + CleanShot: soft ambient, negative spread, no card ring */
+  box-shadow:
+    0 4px 12px -2px rgba(14, 12, 27, 0.08),
+    0 18px 40px -8px rgba(14, 12, 27, 0.14),
+    0 40px 80px -12px rgba(17, 12, 46, 0.12);
   /* real shots ~890×360 — crop bottom 10%, keep flush to unit bottom */
   aspect-ratio: 890 / 324;
 }
@@ -1023,6 +1038,15 @@ html[data-app] .footer a:focus-visible,
   width: 100%;
   height: auto;
   display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .unit__media--island figure {
+    box-shadow:
+      0 4px 14px -2px rgba(0, 0, 0, 0.32),
+      0 20px 44px -8px rgba(0, 0, 0, 0.36),
+      0 40px 80px -12px rgba(0, 0, 0, 0.28);
+  }
 }
 
 @media (max-width: 720px) {
