@@ -731,27 +731,7 @@ html[data-app] .footer a:focus-visible,
     border-radius: 16px 16px 0 0;
   }
 
-  .home-app-card--island {
-    flex-wrap: wrap;
-    align-items: flex-start;
-    min-height: 0;
-    padding: 1.5rem 1.5rem 0 6rem;
-  }
-
-  .home-app-card--island .unit__copy {
-    max-width: none;
-    width: 100%;
-    padding: 0.15rem 2rem 0.85rem 0;
-  }
-
   .home-app-card--island .home-app-card__peeks {
-    width: 100%;
-    max-width: none;
-    margin-left: -4.5rem;
-    padding: 0.35rem 0.25rem 0;
-  }
-
-  .home-app-card--island .home-app-card__peeks figure:nth-child(n + 2) {
     display: none;
   }
 }
