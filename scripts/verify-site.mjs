@@ -332,7 +332,7 @@ if (!island.includes("detail-feature-grid")) {
   failed++;
 }
 for (const href of [
-  "https://github.com/sha2kyou/HereIsland",
+  "https://github.com/locusable-studio/HereIsland",
 ]) {
   if (!island.includes(`href="${href}"`)) {
     console.error(`FAIL here-island/index.html: missing href ${href}`);
