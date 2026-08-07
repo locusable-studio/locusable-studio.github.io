@@ -11,16 +11,32 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=112">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=125">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
     <nav class="crumbbar" aria-label="Breadcrumb">
-      <ol class="crumbs">
+      <div class="crumbbar__inner">
+        <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><a href="/here-sidefy/">Here Sidefy</a></li>
         <li><span aria-current="page">Privacy</span></li>
-      </ol>
+        </ol>
+        <div class="theme-control" data-theme-control>
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+            <span class="theme-control__icon" aria-hidden="true"></span>
+            <span class="sr-only">Theme settings</span>
+          </button>
+          <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
+            <div class="theme-control__group" role="group" aria-label="Theme">
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"></span></button>
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"></span></button>
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </nav>
 
     <div class="doc-layout">
@@ -126,6 +142,6 @@
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=41" defer></script>
+  <script src="/assets/site.js?v=44" defer></script>
 </body>
 </html>
