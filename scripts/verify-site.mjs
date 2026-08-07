@@ -17,7 +17,7 @@ const pages = [
   "here-hackerba/index.html",
 ];
 
-const cssVersion = "108";
+const cssVersion = "112";
 const jsVersion = "41";
 
 const themeMapJsVersion = "1";
@@ -213,18 +213,23 @@ if (home.includes("home-app-card__details")) {
 for (const needle of [
   'class="home-product-grid"',
   "home-app-card--feature",
-  "home-app-card--island",
   "home-app-card__screens",
-  "home-app-card__peeks",
   "home-app-card__arrow",
   "home-app-card__arrow--feature",
-  "/assets/here-island/shot-compact.jpg",
-  "/assets/here-island/shot-expanded.jpg",
+  'data-app="island"',
+  'data-app="sidefy"',
+  'data-app="links"',
+  'data-app="hackerba"',
+  'data-app="wallpaper"',
 ]) {
   if (!home.includes(needle)) {
     console.error(`FAIL index.html: missing featured homepage card structure (${needle})`);
     failed++;
   }
+}
+if (home.includes("home-app-card--island") || home.includes("home-app-card__peeks")) {
+  console.error("FAIL index.html: Island should use a compact card without peeks");
+  failed++;
 }
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
 if (!siteCss.includes("height: clamp(170px, 20vw, 260px);")) {
@@ -235,12 +240,16 @@ if (!siteCss.includes("left: 48%;")) {
   console.error("FAIL assets/site.css: featured screenshots should stay in the right half");
   failed++;
 }
-if (!siteCss.includes(".home-app-card--island")) {
-  console.error("FAIL assets/site.css: missing Island full-width homepage card");
+if (!siteCss.includes("grid-template-rows: repeat(3, minmax(0, 1fr));")) {
+  console.error("FAIL assets/site.css: homepage grid should use three equal rows");
   failed++;
 }
-if (!siteCss.includes("aspect-ratio: 890 / 324;")) {
-  console.error("FAIL assets/site.css: Island peeks should crop the bottom 10%");
+if (!siteCss.includes(".home-app-card--feature {\n  display: block;\n  grid-row: span 2;")) {
+  console.error("FAIL assets/site.css: Wallpaper feature card should span two rows");
+  failed++;
+}
+if (siteCss.includes(".home-app-card--island")) {
+  console.error("FAIL assets/site.css: Island full-width homepage card styles should be removed");
   failed++;
 }
 if (!siteCss.includes("border-radius: 20px;")) {

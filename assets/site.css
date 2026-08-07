@@ -498,7 +498,7 @@ html[data-app] .footer a:focus-visible,
   flex: 1;
   min-height: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   padding: 0.75rem;
 }
@@ -566,7 +566,7 @@ html[data-app] .footer a:focus-visible,
 
 .home-app-card--feature {
   display: block;
-  grid-row: span 3;
+  grid-row: span 2;
   min-height: 0;
   padding: 2.25rem 2.5rem;
   overflow: hidden;
@@ -630,67 +630,6 @@ html[data-app] .footer a:focus-visible,
   margin-bottom: 0.55rem;
 }
 
-.home-app-card--island {
-  grid-column: 1 / -1;
-  overflow: hidden;
-  padding-right: 1.5rem;
-  padding-bottom: 0;
-}
-
-.home-app-card--island .unit__copy {
-  z-index: 1;
-  flex: 1 1 auto;
-  max-width: 28rem;
-  min-width: 0;
-  padding: 1.5rem 0;
-}
-
-.home-app-card--island .home-app-card__peeks {
-  position: relative;
-  z-index: 0;
-  display: flex;
-  align-items: flex-end;
-  align-self: stretch;
-  justify-content: flex-end;
-  flex: 0 1 auto;
-  gap: 0.65rem;
-  max-width: min(66%, 56rem);
-  min-width: 0;
-  margin-left: auto;
-  padding: 0.75rem 2.25rem 0 0.75rem;
-  pointer-events: none;
-}
-
-.home-app-card--island .home-app-card__peeks figure {
-  margin: 0;
-  flex: 1 1 0;
-  min-width: 0;
-  overflow: hidden;
-  border-radius: 14px 14px 0 0;
-  background: transparent;
-  box-shadow: var(--shot-flush-shadow);
-  /* real shots ~890×360 — crop bottom 10%, flush to card bottom */
-  aspect-ratio: 890 / 324;
-  max-height: min(11rem, calc(100% - 0.75rem));
-}
-
-.home-app-card--island .home-app-card__peeks figure:first-child {
-  flex: 1.35 1 0;
-  max-height: min(13rem, calc(100% - 0.5rem));
-}
-
-.home-app-card--island .home-app-card__peeks img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@media (prefers-color-scheme: dark) {
-  .home-app-card--island .home-app-card__peeks figure {
-    box-shadow: var(--shot-flush-shadow-dark);
-  }
-}
-
 .home-app-card:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--app-accent) 65%, var(--fg));
   outline-offset: -3px;
@@ -712,16 +651,15 @@ html[data-app] .footer a:focus-visible,
     order: 2;
   }
 
-  .home-app-card[data-app="links"] {
+  .home-app-card[data-app="island"] {
     order: 3;
   }
 
-  .home-app-card--island {
-    grid-column: auto;
+  .home-app-card[data-app="hackerba"] {
     order: 4;
   }
 
-  .home-app-card[data-app="hackerba"] {
+  .home-app-card[data-app="links"] {
     order: 5;
   }
 
@@ -731,10 +669,6 @@ html[data-app] .footer a:focus-visible,
 
   .home-app-card:not(.home-app-card--feature) {
     min-height: 150px;
-  }
-
-  .home-app-card--island .home-app-card__peeks {
-    max-width: min(52%, 20rem);
   }
 }
 
@@ -762,10 +696,6 @@ html[data-app] .footer a:focus-visible,
 
   .home-app-card__screens img {
     border-radius: 16px 16px 0 0;
-  }
-
-  .home-app-card--island .home-app-card__peeks {
-    display: none;
   }
 }
 
