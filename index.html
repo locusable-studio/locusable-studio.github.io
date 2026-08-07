@@ -11,7 +11,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/assets/site.css?v=112">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); var layout = localStorage.getItem("locusable-home-layout"); if (layout === "list") document.documentElement.setAttribute("data-home-layout", layout); } catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=125">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -20,6 +21,24 @@
         <a href="/" class="studio-masthead__brand">
           <span class="studio-masthead__ring">Locusable <em>Studio</em></span>
         </a>
+        <div class="theme-control" data-theme-control>
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+            <span class="theme-control__icon" aria-hidden="true"></span>
+            <span class="sr-only">Theme settings</span>
+          </button>
+          <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
+            <div class="theme-control__group" role="group" aria-label="Theme">
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"></span></button>
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"></span></button>
+            <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Layout">
+            <button class="theme-control__option" type="button" role="menuitemradio" data-layout-option="grid" aria-label="Grid" title="Grid"><span class="theme-control__option-icon theme-control__option-icon--grid" aria-hidden="true"></span></button>
+            <button class="theme-control__option" type="button" role="menuitemradio" data-layout-option="list" aria-label="List" title="List"><span class="theme-control__option-icon theme-control__option-icon--list" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -37,6 +56,12 @@
           <img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="">
           <img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt="">
         </div>
+        <div class="home-app-card__list-shots" aria-hidden="true">
+          <img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="">
+          <img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="">
+          <img src="/assets/shots/shot-3.jpg?v=10" width="440" height="828" alt="">
+          <img src="/assets/shots/shot-4.jpg?v=10" width="440" height="828" alt="">
+        </div>
         <span class="home-app-card__arrow home-app-card__arrow--feature" aria-hidden="true">›</span>
       </a>
 
@@ -46,6 +71,9 @@
           <p class="platforms">Mac</p>
           <h2 class="product-title unit__title" id="sidefy-title">Here <em>Sidefy</em></h2>
           <p class="unit__subhead">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</p>
+        </div>
+        <div class="home-app-card__list-shots" aria-hidden="true">
+          <img src="/assets/sidefy/shot-hero.jpg?v=1" alt="">
         </div>
         <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
@@ -57,6 +85,10 @@
           <h2 class="product-title unit__title" id="island-title">Here <em>Island</em></h2>
           <p class="unit__subhead">A focused media companion in your MacBook notch.</p>
         </div>
+        <div class="home-app-card__list-shots" aria-hidden="true">
+          <img src="/assets/here-island/shot-expanded.jpg?v=1" alt="">
+          <img src="/assets/here-island/shot-compact.jpg?v=1" alt="">
+        </div>
         <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
 
@@ -67,6 +99,10 @@
           <h2 class="product-title unit__title" id="hackerba-title">Here <em>HackerBa</em></h2>
           <p class="unit__subhead">Hacker News, restyled as a Tieba-like forum.</p>
         </div>
+        <div class="home-app-card__list-shots" aria-hidden="true">
+          <img src="/assets/here-hackerba/shot-list.jpg?v=1" alt="">
+          <img src="/assets/here-hackerba/shot-thread.jpg?v=1" alt="">
+        </div>
         <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
 
@@ -76,6 +112,12 @@
           <p class="platforms">iPhone</p>
           <h2 class="product-title unit__title" id="links-title">Here <em>Links</em></h2>
           <p class="unit__subhead">Your self-hosted linkding. Native on iOS.</p>
+        </div>
+        <div class="home-app-card__list-shots" aria-hidden="true">
+          <img src="/assets/here-links/shots/shot-1.jpg?v=1" alt="">
+          <img src="/assets/here-links/shots/shot-2.jpg?v=1" alt="">
+          <img src="/assets/here-links/shots/shot-3.jpg?v=1" alt="">
+          <img src="/assets/here-links/shots/shot-4.jpg?v=1" alt="">
         </div>
         <span class="home-app-card__arrow" aria-hidden="true">›</span>
       </a>
@@ -89,6 +131,6 @@
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=41" defer></script>
+  <script src="/assets/site.js?v=44" defer></script>
 </body>
 </html>

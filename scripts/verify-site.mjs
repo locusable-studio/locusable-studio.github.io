@@ -17,8 +17,8 @@ const pages = [
   "here-hackerba/index.html",
 ];
 
-const cssVersion = "112";
-const jsVersion = "41";
+const cssVersion = "125";
+const jsVersion = "44";
 
 const themeMapJsVersion = "1";
 
@@ -325,7 +325,7 @@ if (!siteCss.includes("aspect-ratio: 1170 / 760;")) {
   console.error("FAIL assets/site.css: theme previews should crop their bottom edge");
   failed++;
 }
-if (!siteCss.includes(".crumbs {\n  list-style: none;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 0.35rem 0.55rem;\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 0 var(--unit-pad-x);")) {
+if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;")) {
   console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
   failed++;
 }
