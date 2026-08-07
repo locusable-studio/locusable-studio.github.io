@@ -17,7 +17,7 @@ const pages = [
   "here-hackerba/index.html",
 ];
 
-const cssVersion = "128";
+const cssVersion = "130";
 const jsVersion = "51";
 
 const themeMapJsVersion = "1";

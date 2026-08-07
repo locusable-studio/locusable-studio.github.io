@@ -874,6 +874,28 @@ html[data-home-layout="list"] .home-app-card:not(.home-app-card--feature) .unit_
   font-size: clamp(1.75rem, 3vw, 2.35rem);
 }
 
+html[data-home-layout="list"] .home-app-card--feature .product-hero__icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 0 0.75rem;
+}
+
+html[data-home-layout="list"] .home-app-card--feature .platforms {
+  margin: 0 0 0.25rem;
+  text-align: left;
+  font-size: 10px;
+}
+
+html[data-home-layout="list"] .home-app-card--feature .unit__title {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+}
+
+html[data-home-layout="list"] .home-app-card--feature .unit__subhead {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
 html[data-home-layout="list"] .home-app-card--feature {
   grid-row: auto;
 }
@@ -995,6 +1017,14 @@ html[data-theme="dark"][data-home-layout="list"] .home-app-card__list-shots img 
 .unit--tint.unit--soft {
   --unit-base: var(--bg-alt);
   --unit-bg: color-mix(in srgb, var(--app-accent) 8%, var(--unit-base));
+}
+
+html[data-theme="dark"] .unit--tint {
+  --unit-bg: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+}
+
+html[data-theme="dark"] .unit--tint.unit--soft {
+  --unit-bg: color-mix(in srgb, var(--app-accent) 14%, var(--unit-base));
 }
 
 @media (prefers-color-scheme: dark) {
