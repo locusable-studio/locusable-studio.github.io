@@ -58,10 +58,37 @@
       var menu = control.querySelector("[data-theme-menu]");
       var options = control.querySelectorAll("[data-theme-option]");
       if (!trigger || !menu) return;
+      var closeTimer;
+      var menuAnimation;
 
       function close() {
+        window.clearTimeout(closeTimer);
         trigger.setAttribute("aria-expanded", "false");
-        menu.hidden = true;
+        menu.classList.remove("is-open");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          menu.hidden = true;
+          return;
+        }
+        if (menuAnimation) menuAnimation.cancel();
+        menuAnimation = menu.animate([
+          { opacity: 1, transform: "translateY(0) scale(1)" },
+          { opacity: 0, transform: "translateY(-0.3rem) scale(0.97)" },
+        ], { duration: 160, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+        menuAnimation.onfinish = function () {
+          menu.hidden = true;
+        };
+      }
+
+      function open() {
+        window.clearTimeout(closeTimer);
+        if (menuAnimation) menuAnimation.cancel();
+        menu.hidden = false;
+        menu.classList.add("is-open");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        menuAnimation = menu.animate([
+          { opacity: 0, transform: "translateY(-0.3rem) scale(0.97)" },
+          { opacity: 1, transform: "translateY(0) scale(1)" },
+        ], { duration: 160, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
       }
 
       function update(nextPreference) {
@@ -89,8 +116,11 @@
       trigger.addEventListener("click", function () {
         var expanded = trigger.getAttribute("aria-expanded") === "true";
         trigger.setAttribute("aria-expanded", String(!expanded));
-        menu.hidden = expanded;
-        if (!expanded) menu.querySelector("[aria-checked='true']").focus();
+        if (expanded) close();
+        else {
+          open();
+          menu.querySelector("[aria-checked='true']").focus();
+        }
       });
 
       document.addEventListener("click", function (event) {
@@ -140,6 +170,7 @@
         var menu = control && control.querySelector("[data-theme-menu]");
         if (trigger && menu) {
           trigger.setAttribute("aria-expanded", "false");
+          menu.classList.remove("is-open");
           menu.hidden = true;
           trigger.focus();
         }

@@ -510,10 +510,27 @@ html[data-app] .footer a:focus-visible,
   border-radius: 0.75rem;
   background: var(--bg-elevated);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+  transform: translateY(-0.5rem) scale(0.94);
+  transform-origin: top right;
+  transition:
+    opacity 0.22s var(--ease-out),
+    transform 0.22s var(--ease-out);
 }
 
 .theme-control__menu[hidden] {
   display: none;
+}
+
+.theme-control__menu.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-control__menu {
+    transition: none;
+  }
 }
 
 .theme-control__group {
