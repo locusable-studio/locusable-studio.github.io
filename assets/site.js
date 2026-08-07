@@ -4,6 +4,7 @@
     links: "#2094f0",
     sidefy: "#f44034",
     island: "#9820b0",
+    hackerba: "#ff6600",
   };
 
   function initThemeColor() {

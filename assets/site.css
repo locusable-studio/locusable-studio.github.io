@@ -13,7 +13,19 @@
   --accent-links: #2094f0;
   --accent-sidefy: #f44034;
   --accent-island: #9820b0;
+  --accent-hackerba: #ff6600;
   --app-accent: var(--accent-studio);
+  /* Flush peeks: no downward bloom (clips into a dirty band at the crop edge) */
+  --shot-flush-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    -14px 0 28px -18px rgba(0, 0, 0, 0.2),
+    14px 0 28px -18px rgba(0, 0, 0, 0.2),
+    0 -10px 24px -14px rgba(0, 0, 0, 0.14);
+  --shot-flush-shadow-dark:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    -14px 0 28px -18px rgba(0, 0, 0, 0.55),
+    14px 0 28px -18px rgba(0, 0, 0, 0.55),
+    0 -10px 24px -14px rgba(0, 0, 0, 0.4);
   --unit-pad-y: clamp(3.5rem, 8vw, 5.5rem);
   --unit-pad-x: clamp(1.25rem, 4vw, 2.5rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -44,6 +56,7 @@
 [data-app="links"] { --app-accent: var(--accent-links); }
 [data-app="sidefy"] { --app-accent: var(--accent-sidefy); }
 [data-app="island"] { --app-accent: var(--accent-island); }
+[data-app="hackerba"] { --app-accent: var(--accent-hackerba); }
 
 *,
 *::before,
@@ -485,7 +498,7 @@ html[data-app] .footer a:focus-visible,
   flex: 1;
   min-height: 0;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
   padding: 0.75rem;
 }
@@ -553,7 +566,7 @@ html[data-app] .footer a:focus-visible,
 
 .home-app-card--feature {
   display: block;
-  grid-row: span 2;
+  grid-row: span 3;
   min-height: 0;
   padding: 2.25rem 2.5rem;
   overflow: hidden;
@@ -606,7 +619,7 @@ html[data-app] .footer a:focus-visible,
   width: auto;
   height: 100%;
   border-radius: 22px 22px 0 0;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shot-flush-shadow);
 }
 
 .home-app-card__screens img:nth-child(2) {
@@ -654,11 +667,8 @@ html[data-app] .footer a:focus-visible,
   min-width: 0;
   overflow: hidden;
   border-radius: 14px 14px 0 0;
-  background: var(--bg-elevated);
-  /* CleanShot-style: soft lift + negative spread so edges don't stamp hard */
-  box-shadow:
-    0 2px 6px -2px rgba(14, 12, 27, 0.08),
-    0 12px 28px -8px rgba(14, 12, 27, 0.16);
+  background: transparent;
+  box-shadow: var(--shot-flush-shadow);
   /* real shots ~890×360 — crop bottom 10%, flush to card bottom */
   aspect-ratio: 890 / 324;
   max-height: min(11rem, calc(100% - 0.75rem));
@@ -677,9 +687,7 @@ html[data-app] .footer a:focus-visible,
 
 @media (prefers-color-scheme: dark) {
   .home-app-card--island .home-app-card__peeks figure {
-    box-shadow:
-      0 2px 8px -2px rgba(0, 0, 0, 0.28),
-      0 14px 32px -8px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shot-flush-shadow-dark);
   }
 }
 
@@ -697,6 +705,24 @@ html[data-app] .footer a:focus-visible,
   .home-app-card--feature {
     grid-row: auto;
     min-height: 460px;
+    order: 1;
+  }
+
+  .home-app-card[data-app="sidefy"] {
+    order: 2;
+  }
+
+  .home-app-card[data-app="links"] {
+    order: 3;
+  }
+
+  .home-app-card--island {
+    grid-column: auto;
+    order: 4;
+  }
+
+  .home-app-card[data-app="hackerba"] {
+    order: 5;
   }
 
   .home-app-card--feature .unit__copy {
@@ -705,10 +731,6 @@ html[data-app] .footer a:focus-visible,
 
   .home-app-card:not(.home-app-card--feature) {
     min-height: 150px;
-  }
-
-  .home-app-card--island {
-    grid-column: auto;
   }
 
   .home-app-card--island .home-app-card__peeks {
@@ -950,8 +972,8 @@ html[data-app] .footer a:focus-visible,
   margin: 0;
   border-radius: 32px 32px 0 0;
   overflow: hidden;
-  background: var(--bg-elevated);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  background: transparent;
+  box-shadow: var(--shot-flush-shadow);
   /* real shots ~585×1266 — crop bottom 10%, keep flush to unit bottom */
   aspect-ratio: 585 / 1139;
 }
@@ -992,8 +1014,48 @@ html[data-app] .footer a:focus-visible,
   width: 100%;
   height: auto;
   border-radius: 16px 16px 0 0;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shot-flush-shadow);
   display: block;
+}
+
+.unit__media--desktop-dual {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.65rem, 1.8vw, 1.15rem);
+  max-width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 1.25rem var(--unit-pad-x) 0;
+  overflow: hidden;
+}
+
+.unit__media--desktop-dual figure {
+  margin: 0;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  background: transparent;
+  box-shadow: var(--shot-flush-shadow);
+  /* shots ~1400×792 / 1400×758 — crop bottom ~10%, flush to hero bottom */
+  aspect-ratio: 1400 / 713;
+}
+
+.unit__media--desktop-dual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .unit__media--desktop-dual figure:nth-child(n + 2) {
+    display: none;
+  }
+
+  .unit__media--desktop-dual figure {
+    flex: 1 1 auto;
+    width: 100%;
+  }
 }
 
 .unit__media--island {
@@ -1014,24 +1076,10 @@ html[data-app] .footer a:focus-visible,
   min-width: 0;
   border-radius: 18px 18px 0 0;
   overflow: hidden;
-  background: var(--bg-elevated);
-  /* Apple product + CleanShot: soft ambient, negative spread, no card ring */
-  box-shadow:
-    0 4px 12px -2px rgba(14, 12, 27, 0.08),
-    0 18px 40px -8px rgba(14, 12, 27, 0.14),
-    0 40px 80px -12px rgba(17, 12, 46, 0.12);
+  background: transparent;
+  box-shadow: var(--shot-flush-shadow);
   /* real shots ~890×360 — crop bottom 10%, keep flush to unit bottom */
   aspect-ratio: 890 / 324;
-}
-
-.product-hero .unit__media--island {
-  padding-bottom: 2rem;
-  align-items: stretch;
-}
-
-.product-hero .unit__media--island figure {
-  border-radius: 18px;
-  aspect-ratio: auto;
 }
 
 .unit__media--island img {
@@ -1041,11 +1089,13 @@ html[data-app] .footer a:focus-visible,
 }
 
 @media (prefers-color-scheme: dark) {
-  .unit__media--island figure {
-    box-shadow:
-      0 4px 14px -2px rgba(0, 0, 0, 0.32),
-      0 20px 44px -8px rgba(0, 0, 0, 0.36),
-      0 40px 80px -12px rgba(0, 0, 0, 0.28);
+  .unit__media--phones figure,
+  .unit__media--desktop-peek img,
+  .unit__media--desktop-dual figure,
+  .unit__media--island figure,
+  .unit__media--squares figure,
+  .home-app-card__screens img {
+    box-shadow: var(--shot-flush-shadow-dark);
   }
 }
 
@@ -1070,7 +1120,8 @@ html[data-app] .footer a:focus-visible,
   max-width: 260px;
   border-radius: 18px 18px 0 0;
   aspect-ratio: 1170 / 760;
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shot-flush-shadow);
+  background: transparent;
 }
 
 .unit__media--squares img {

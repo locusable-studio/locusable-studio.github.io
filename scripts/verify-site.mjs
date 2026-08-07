@@ -14,10 +14,11 @@ const pages = [
   "here-sidefy/plugins/index.html",
   "here-sidefy/privacy/index.html",
   "here-island/index.html",
+  "here-hackerba/index.html",
 ];
 
-const cssVersion = "100";
-const jsVersion = "39";
+const cssVersion = "108";
+const jsVersion = "41";
 
 const themeMapJsVersion = "1";
 
@@ -48,6 +49,10 @@ const breadcrumbs = {
   "here-island/index.html": [
     'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here Island</span>',
+  ],
+  "here-hackerba/index.html": [
+    'href="/">Locusable <em>Studio</em>',
+    '<span aria-current="page">Here HackerBa</span>',
   ],
   "here-wallpaper/themes/index.html": [
     'href="/">Locusable <em>Studio</em>',
@@ -96,6 +101,11 @@ const productFaqs = {
     "Is Here Island free and open source?",
     "What does Here Island do?",
     "What do I need to run it?",
+  ],
+  "here-hackerba/index.html": [
+    "Is Here HackerBa free and open source?",
+    "What does Here HackerBa do?",
+    "How do I install it?",
   ],
 };
 
@@ -156,12 +166,13 @@ if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
-  "Focused tools for the Apple devices you use every day.",
+  "Focused tools for the devices you use every day.",
   "overlooked interface spaces",
   "Map lock screens from places you care about.",
   "Your linkding bookmarks on iPhone.",
   "Stay informed without leaving your desktop.",
   "A focused media companion in your MacBook notch.",
+  "Hacker News, restyled as a Tieba-like forum.",
 ]) {
   if (!about.includes(needle)) {
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
@@ -185,13 +196,13 @@ if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
   failed++;
 }
-for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/"]) {
+for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/", "/here-hackerba/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
 }
-if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 4) {
+if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 5) {
   console.error("FAIL index.html: homepage app cards should use the compact-card class");
   failed++;
 }
@@ -340,6 +351,31 @@ for (const href of [
   }
 }
 
+const hackerba = fs.readFileSync(path.join(root, "here-hackerba/index.html"), "utf8");
+if (!hackerba.includes("detail-feature-grid")) {
+  console.error("FAIL here-hackerba/index.html: missing paired feature layout");
+  failed++;
+}
+for (const href of [
+  "https://github.com/sha2kyou/HackerBa",
+]) {
+  if (!hackerba.includes(`href="${href}"`)) {
+    console.error(`FAIL here-hackerba/index.html: missing href ${href}`);
+    failed++;
+  }
+}
+for (const needle of [
+  "Here <em>HackerBa</em>",
+  "/assets/here-hackerba/shot-list.jpg",
+  "/assets/here-hackerba/shot-thread.jpg",
+  "unit__media--desktop-dual",
+]) {
+  if (!hackerba.includes(needle)) {
+    console.error(`FAIL here-hackerba/index.html: missing ${needle}`);
+    failed++;
+  }
+}
+
 const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");
 if (!sidefy.includes("detail-feature-grid")) {
   console.error("FAIL here-sidefy/index.html: missing paired feature layout");
@@ -435,6 +471,7 @@ const themeColors = {
   "here-sidefy/plugins/index.html": "#f44034",
   "here-sidefy/privacy/index.html": "#f44034",
   "here-island/index.html": "#9820b0",
+  "here-hackerba/index.html": "#ff6600",
 };
 
 for (const [page, color] of Object.entries(themeColors)) {

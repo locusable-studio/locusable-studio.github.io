@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-app="hackerba">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff6600">
+  <title>Here HackerBa — Locusable Studio</title>
+  <meta name="description" content="Here HackerBa — a Chrome extension that turns Hacker News into a Tieba-style reading experience.">
+  <link rel="icon" href="/favicon.ico?v=10" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/assets/site.css?v=108">
+</head>
+<body>
+  <div class="site-shell site-shell--wide">
+    <nav class="crumbbar" aria-label="Breadcrumb">
+      <ol class="crumbs">
+        <li><a href="/">Locusable <em>Studio</em></a></li>
+        <li><span aria-current="page">Here HackerBa</span></li>
+      </ol>
+    </nav>
+
+    <main>
+      <section class="product-hero" aria-labelledby="product-title">
+        <img class="product-hero__icon" src="/assets/here-hackerba/icon-192.png?v=1" width="84" height="84" alt="Here HackerBa extension icon">
+        <p class="platforms platforms--lg">Chrome</p>
+        <h1 class="product-title" id="product-title">Here <em>HackerBa</em></h1>
+        <p class="unit__subhead">Hacker News, restyled as a Tieba-like forum — same stories, clearer threads.</p>
+        <div class="unit__links">
+          <a
+            href="https://github.com/sha2kyou/HackerBa"
+            target="_blank"
+            rel="noopener noreferrer"
+          >View on GitHub<span class="chev" aria-hidden="true"> ›</span></a>
+        </div>
+        <div class="unit__media unit__media--desktop-dual" aria-label="Extension previews">
+          <figure><img src="/assets/here-hackerba/shot-list.jpg?v=1" width="1400" height="792" alt="Here HackerBa list page in English"></figure>
+          <figure><img src="/assets/here-hackerba/shot-thread.jpg?v=1" width="1400" height="758" alt="Here HackerBa thread page in English"></figure>
+        </div>
+      </section>
+
+      <div class="detail-feature-grid">
+      <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="tieba-title">
+        <div class="unit__copy unit__copy--solo">
+          <h2 class="product-title unit__title" id="tieba-title">Forum-shaped HN</h2>
+          <p class="unit__subhead">Scores, badges, floors, and nested replies — content still comes from Hacker News.</p>
+        </div>
+      </section>
+
+      <section class="unit unit--tint" data-reveal aria-labelledby="prefs-title">
+        <div class="unit__copy unit__copy--solo">
+          <h2 class="product-title unit__title" id="prefs-title">Your reading mode</h2>
+          <p class="unit__subhead">English or Chinese, light or dark, blue or HN-orange accent — plus density and click behavior.</p>
+        </div>
+      </section>
+      </div>
+
+      <section class="product-faq" aria-labelledby="faq-title">
+        <div class="product-faq__inner">
+          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <details>
+            <summary>Is Here HackerBa free and open source?</summary>
+            <p>Yes. Here HackerBa is free and open source under the MIT License.</p>
+          </details>
+          <details>
+            <summary>What does Here HackerBa do?</summary>
+            <p>Here HackerBa is a Chrome extension that restyles Hacker News as a Tieba-like forum while keeping HN content and accounts unchanged.</p>
+          </details>
+          <details>
+            <summary>How do I install it?</summary>
+            <p>Load the unpacked extension from the GitHub repository in Chrome’s extensions page, then visit any news.ycombinator.com page.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+      </div>
+    </footer>
+  </div>
+  <script src="/assets/site.js?v=41" defer></script>
+</body>
+</html>
