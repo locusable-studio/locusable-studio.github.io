@@ -15,10 +15,11 @@ const pages = [
   "here-sidefy/privacy/index.html",
   "here-island/index.html",
   "here-hackerba/index.html",
+  "here-trmnl/index.html",
 ];
 
-const cssVersion = "131";
-const jsVersion = "51";
+const cssVersion = "158";
+const jsVersion = "55";
 
 const themeMapJsVersion = "1";
 
@@ -53,6 +54,10 @@ const breadcrumbs = {
   "here-hackerba/index.html": [
     'href="/">Locusable <em>Studio</em>',
     '<span aria-current="page">Here HackerBa</span>',
+  ],
+  "here-trmnl/index.html": [
+    'href="/">Locusable <em>Studio</em>',
+    '<span aria-current="page">Here TRMNL</span>',
   ],
   "here-wallpaper/themes/index.html": [
     'href="/">Locusable <em>Studio</em>',
@@ -169,10 +174,12 @@ for (const needle of [
   "Focused tools for the devices you use every day.",
   "overlooked interface spaces",
   "Map lock screens from places you care about.",
-  "Your linkding bookmarks on iPhone.",
-  "Stay informed without leaving your desktop.",
+  "Calendar, reminders, RSS, and plugins — along your Mac’s edge.",
   "A focused media companion in your MacBook notch.",
+  "Your LaraPaper / TRMNL screen, mirrored on the Mac desktop.",
   "Hacker News, restyled as a Tieba-like forum.",
+  "Your self-hosted linkding. Native on iOS.",
+  "Coming Soon",
 ]) {
   if (!about.includes(needle)) {
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
@@ -196,14 +203,18 @@ if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
   failed++;
 }
-for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/", "/here-hackerba/"]) {
+for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/", "/here-hackerba/", "/here-trmnl/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
 }
-if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 5) {
-  console.error("FAIL index.html: homepage app cards should use the compact-card class");
+if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 6) {
+  console.error("FAIL index.html: homepage should have six tinted app cards");
+  failed++;
+}
+if (home.includes("unit--soft home-app-card") || home.includes("home-app-card--feature") || home.includes("home-app-card__screens")) {
+  console.error("FAIL index.html: homepage should not use soft/feature/screens card patterns");
   failed++;
 }
 if (home.includes("home-app-card__details")) {
@@ -212,18 +223,19 @@ if (home.includes("home-app-card__details")) {
 }
 for (const needle of [
   'class="home-product-grid"',
-  "home-app-card--feature",
-  "home-app-card__screens",
+  "home-app-card--1x2",
+  "home-app-card--2x1",
+  "home-app-card__list-shots",
   "home-app-card__arrow",
-  "home-app-card__arrow--feature",
   'data-app="island"',
   'data-app="sidefy"',
   'data-app="links"',
   'data-app="hackerba"',
   'data-app="wallpaper"',
+  'data-app="trmnl"',
 ]) {
   if (!home.includes(needle)) {
-    console.error(`FAIL index.html: missing featured homepage card structure (${needle})`);
+    console.error(`FAIL index.html: missing homepage card structure (${needle})`);
     failed++;
   }
 }
@@ -232,20 +244,20 @@ if (home.includes("home-app-card--island") || home.includes("home-app-card__peek
   failed++;
 }
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
-if (!siteCss.includes("height: clamp(170px, 20vw, 260px);")) {
-  console.error("FAIL assets/site.css: homepage screenshots should use a constrained height");
-  failed++;
-}
-if (!siteCss.includes("left: 48%;")) {
-  console.error("FAIL assets/site.css: featured screenshots should stay in the right half");
+if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-card__screens")) {
+  console.error("FAIL assets/site.css: legacy feature/screens homepage styles should be removed");
   failed++;
 }
 if (!siteCss.includes("grid-template-rows: repeat(3, minmax(0, 1fr));")) {
   console.error("FAIL assets/site.css: homepage grid should use three equal rows");
   failed++;
 }
-if (!siteCss.includes(".home-app-card--feature {\n  display: block;\n  grid-row: span 2;")) {
-  console.error("FAIL assets/site.css: Wallpaper feature card should span two rows");
+if (!siteCss.includes(".home-app-card--1x2 {")) {
+  console.error("FAIL assets/site.css: missing 竖版小卡 size class");
+  failed++;
+}
+if (!siteCss.includes(".home-app-card--2x1 {")) {
+  console.error("FAIL assets/site.css: missing 横版小卡 size class");
   failed++;
 }
 if (siteCss.includes(".home-app-card--island")) {
@@ -264,19 +276,13 @@ if (!siteCss.includes("padding-top: var(--site-chrome-h-masthead);")) {
   console.error("FAIL assets/site.css: homepage grid should clear the fixed masthead");
   failed++;
 }
-if (!siteCss.includes(".home-app-card--feature .product-hero__icon")) {
-  console.error("FAIL assets/site.css: featured card icon should align with its content");
+if (!siteCss.includes("border-radius: var(--shot-radius) var(--shot-radius) 0 0;")) {
+  console.error("FAIL assets/site.css: screenshot peeks should use --shot-radius token");
   failed++;
 }
-for (const needle of [
-  "padding-top: 1.25rem;",
-  "right: -2.5rem;",
-  "top: 1.25rem;",
-]) {
-  if (!siteCss.includes(needle)) {
-    console.error(`FAIL assets/site.css: missing homepage visual polish (${needle})`);
-    failed++;
-  }
+if (!siteCss.includes('html[data-theme="dark"] .product-hero {')) {
+  console.error("FAIL assets/site.css: product hero dark tint should respect data-theme");
+  failed++;
 }
 for (const needle of [
   ".detail-feature-grid",
@@ -471,16 +477,17 @@ if (!fs.existsSync(path.join(root, "assets/theme-map-style.js"))) {
 }
 
 const themeColors = {
-  "here-wallpaper/index.html": "#4cac50",
-  "here-wallpaper/themes/index.html": "#4cac50",
-  "here-wallpaper/privacy/index.html": "#4cac50",
-  "here-links/index.html": "#2094f0",
-  "here-links/privacy/index.html": "#2094f0",
-  "here-sidefy/index.html": "#f44034",
-  "here-sidefy/plugins/index.html": "#f44034",
-  "here-sidefy/privacy/index.html": "#f44034",
-  "here-island/index.html": "#9820b0",
+  "here-wallpaper/index.html": "#4caf50",
+  "here-wallpaper/themes/index.html": "#4caf50",
+  "here-wallpaper/privacy/index.html": "#4caf50",
+  "here-links/index.html": "#2196f3",
+  "here-links/privacy/index.html": "#2196f3",
+  "here-sidefy/index.html": "#f44336",
+  "here-sidefy/plugins/index.html": "#f44336",
+  "here-sidefy/privacy/index.html": "#f44336",
+  "here-island/index.html": "#9c27b0",
   "here-hackerba/index.html": "#ff6600",
+  "here-trmnl/index.html": "#3f51b5",
 };
 
 for (const [page, color] of Object.entries(themeColors)) {

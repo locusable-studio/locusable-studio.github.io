@@ -47,7 +47,8 @@ Rules:
 - Home card and product page must use the **same** platforms string.
 - Every coming-soon product uses this same platforms pattern (Links and TRMNL alike). Do not leave one as bare platform while another appends Coming Soon.
 - Coming Soon CTA (`unit__links-soon`) is separate from the platforms line; do not invent App Store / GitHub links for unreleased products.
-- About list copy for coming-soon products should also say coming soon.
+- About list copy for coming-soon products should also say Coming Soon.
+- Home card and product hero `unit__subhead` must use the same one-liner.
 
 ## App accent colors
 
