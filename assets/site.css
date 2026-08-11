@@ -9,10 +9,10 @@
   --link: #0066cc;
   --link-hover: #0077ed;
   --accent-studio: #b8860b;
-  --accent-wallpaper: #4cac50;
-  --accent-links: #2094f0;
-  --accent-sidefy: #f44034;
-  --accent-island: #9820b0;
+  --accent-wallpaper: #4caf50;
+  --accent-links: #2196f3;
+  --accent-sidefy: #f44336;
+  --accent-island: #9c27b0;
   --accent-hackerba: #ff6600;
   --accent-trmnl: #3f51b5;
   --app-accent: var(--accent-studio);

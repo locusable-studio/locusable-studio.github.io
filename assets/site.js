@@ -2,10 +2,10 @@
   var THEME_STORAGE_KEY = "locusable-theme";
   var LAYOUT_STORAGE_KEY = "locusable-home-layout";
   var APP_THEME_COLORS = {
-    wallpaper: "#4cac50",
-    links: "#2094f0",
-    sidefy: "#f44034",
-    island: "#9820b0",
+    wallpaper: "#4caf50",
+    links: "#2196f3",
+    sidefy: "#f44336",
+    island: "#9c27b0",
     hackerba: "#ff6600",
     trmnl: "#3f51b5",
   };
