@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-app="links">
+<html lang="en" data-app="trmnl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#2094f0">
-  <title>Here Links — Locusable Studio</title>
-  <meta name="description" content="Here Links — native iOS client for your self-hosted linkding.">
+  <meta name="theme-color" content="#3f51b5">
+  <title>Here TRMNL — Locusable Studio</title>
+  <meta name="description" content="Here TRMNL — a macOS menu bar app that mirrors your LaraPaper / TRMNL BYOS screen on the desktop.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=152">
+  <link rel="stylesheet" href="/assets/site.css?v=146">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -20,7 +20,7 @@
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
-        <li><span aria-current="page">Here Links</span></li>
+        <li><span aria-current="page">Here TRMNL</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
           <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
@@ -40,55 +40,52 @@
 
     <main>
       <section class="product-hero" aria-labelledby="product-title">
-        <img class="product-hero__icon" src="/assets/here-links/icon-192.png?v=10" width="84" height="84" alt="Here Links app icon">
-        <p class="platforms platforms--lg">iPhone · Coming Soon</p>
-        <h1 class="product-title" id="product-title">Here <em>Links</em></h1>
-        <p class="unit__subhead">Your linkding bookmarks on iPhone.</p>
+        <img class="product-hero__icon" src="/assets/here-trmnl/icon-192.png?v=1" width="84" height="84" alt="Here TRMNL app icon">
+        <p class="platforms platforms--lg">Mac · Coming Soon</p>
+        <h1 class="product-title" id="product-title">Here <em>TRMNL</em></h1>
+        <p class="unit__subhead">A menu bar companion that mirrors your LaraPaper / TRMNL BYOS screen on the Mac desktop.</p>
         <div class="unit__links">
           <span class="unit__links-soon">Coming Soon</span>
         </div>
-        <div class="unit__media unit__media--phones" aria-label="App previews">
-          <figure><img src="/assets/here-links/shots/shot-1.jpg?v=1" width="440" height="828" alt="Here Links bookmarks list"></figure>
-          <figure><img src="/assets/here-links/shots/shot-2.jpg?v=2" width="440" height="828" alt="Here Links bookmark detail"></figure>
-          <figure><img src="/assets/here-links/shots/shot-3.jpg?v=1" width="440" height="828" alt="Here Links in-app Safari"></figure>
-          <figure><img src="/assets/here-links/shots/shot-4.jpg?v=1" width="440" height="828" alt="Here Links HTML snapshot preview"></figure>
+        <div class="unit__media unit__media--desktop-peek" aria-label="App preview">
+          <img src="/assets/here-trmnl/shot-hero.jpg?v=1" width="1400" height="671" alt="Here TRMNL showing a LaraPaper e-ink screen over the desktop">
         </div>
       </section>
 
-      <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="features-title">
+      <div class="detail-feature-grid">
+      <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="mirror-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="features-title">Built for linkding</h2>
-          <ul class="feature-list feature-list--cards">
-            <li>
-              <strong>Servers</strong>
-              <span>Connect one or more linkding instances. Browse a mixed feed.</span>
-            </li>
-            <li>
-              <strong>Share</strong>
-              <span>Save links from other apps with the Share Extension.</span>
-            </li>
-            <li>
-              <strong>Open</strong>
-              <span>Read in-app with Safari. Download snapshots with your token.</span>
-            </li>
-          </ul>
+          <h2 class="product-title unit__title" id="mirror-title">Desktop mirror</h2>
+          <p class="unit__subhead">Polls your BYOS display API and keeps the latest e-ink frame visible — without a Dock icon.</p>
         </div>
       </section>
+
+      <section class="unit unit--tint" data-reveal aria-labelledby="controls-title">
+        <div class="unit__copy unit__copy--solo">
+          <h2 class="product-title unit__title" id="controls-title">Stay on top</h2>
+          <p class="unit__subhead">Keep on top, restore device size, opacity, launch at login, and light / dark / automatic display tone.</p>
+        </div>
+      </section>
+      </div>
 
       <section class="product-faq" aria-labelledby="faq-title">
         <div class="product-faq__inner">
           <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
           <details>
-            <summary>Is Here Links free?</summary>
-            <p>Here Links is free to use.</p>
+            <summary>Is Here TRMNL available yet?</summary>
+            <p>Not yet. Coming soon.</p>
           </details>
           <details>
-            <summary>What is linkding?</summary>
-            <p><a href="https://linkding.link" target="_blank" rel="noopener noreferrer">linkding</a> is a self-hosted bookmark manager designed to be minimal, fast, and easy to set up.</p>
+            <summary>Is it free or open source?</summary>
+            <p>TBD.</p>
           </details>
           <details>
-            <summary>Can I connect more than one server?</summary>
-            <p>Yes. Here Links can connect to one or more linkding instances and show them in a mixed feed.</p>
+            <summary>What does Here TRMNL do?</summary>
+            <p>Here TRMNL is a macOS menu bar app that mirrors your LaraPaper / TRMNL BYOS screen on the desktop.</p>
+          </details>
+          <details>
+            <summary>What do I need to run it?</summary>
+            <p>TBD.</p>
           </details>
         </div>
       </section>
@@ -97,10 +94,9 @@
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="/here-links/privacy/">Privacy Policy</a>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=51" defer></script>
+  <script src="/assets/site.js?v=53" defer></script>
 </body>
 </html>
