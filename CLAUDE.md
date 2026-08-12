@@ -27,7 +27,13 @@ All home cards must use one of these standard sizes. Do not invent ad-hoc spans.
 
 ### List layout height
 
-List-mode cards use **one grid row height** (`--home-row-h`, same as 横版小卡 / “1 高度”), not a taller clamp. 竖版小卡 also becomes one row tall in list mode.
+Desktop list-mode cards use **one grid row height** (`--home-row-h`, same as 横版小卡 / “1 高度”), not a taller clamp. 竖版小卡 also becomes one row tall in list mode.
+
+### Mobile home (≤800px) — desktop rules above stay unchanged
+
+- **Grid:** single column; every card is a compact horizontal row (absolute icon). Tighten left/right padding vs desktop; smaller title/subhead.
+- **List:** unlock fixed `--home-row-h` (`height: auto`). Icon stays **in-flow** — do **not** keep the desktop `6rem` absolute-icon left gutter. Copy `max-width` ~54%; one shot only; shot `max-height` explicit (not `calc(var(--home-row-h)…)`).
+- ≤520px: further tighten padding, icon, type, and shot radius (`--shot-radius-sm`).
 
 ### 竖版小卡 (grid)
 

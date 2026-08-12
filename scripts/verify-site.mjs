@@ -18,7 +18,7 @@ const pages = [
   "here-trmnl/index.html",
 ];
 
-const cssVersion = "158";
+const cssVersion = "162";
 const jsVersion = "55";
 
 const themeMapJsVersion = "1";

@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=158">
+  <link rel="stylesheet" href="/assets/site.css?v=162">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -41,11 +41,20 @@
     <main>
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here-trmnl/icon-192.png?v=1" width="84" height="84" alt="Here TRMNL app icon">
-        <p class="platforms platforms--lg">Mac · Coming Soon</p>
+        <p class="platforms platforms--lg">Mac</p>
         <h1 class="product-title" id="product-title">Here <em>TRMNL</em></h1>
         <p class="unit__subhead">Your LaraPaper / TRMNL screen, mirrored on the Mac desktop.</p>
         <div class="unit__links">
-          <span class="unit__links-soon">Coming Soon</span>
+          <a
+            href="https://github.com/locusable-studio/HereTRMNL/releases/latest/download/HereTRMNL.dmg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Download<span class="chev" aria-hidden="true"> ›</span></a>
+          <a
+            href="https://github.com/locusable-studio/HereTRMNL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >View on GitHub<span class="chev" aria-hidden="true"> ›</span></a>
         </div>
         <div class="unit__media unit__media--desktop-peek" aria-label="App preview">
           <img src="/assets/here-trmnl/shot-hero.jpg?v=1" width="1400" height="671" alt="Here TRMNL showing a LaraPaper e-ink screen over the desktop">
@@ -73,11 +82,11 @@
           <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
           <details>
             <summary>Is Here TRMNL available yet?</summary>
-            <p>Not yet. Coming Soon.</p>
+            <p>Yes. Download the latest release from GitHub.</p>
           </details>
           <details>
             <summary>Is it free or open source?</summary>
-            <p>TBD.</p>
+            <p>Yes. Here TRMNL is free to download, and its source code is available on GitHub.</p>
           </details>
           <details>
             <summary>What does Here TRMNL do?</summary>
@@ -85,7 +94,7 @@
           </details>
           <details>
             <summary>What do I need to run it?</summary>
-            <p>TBD.</p>
+            <p>macOS 26.0 or later, plus a LaraPaper-compatible base URL, device ID, and access token.</p>
           </details>
         </div>
       </section>
