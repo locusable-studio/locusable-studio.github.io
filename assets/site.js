@@ -7,7 +7,7 @@
     sidefy: "#f44336",
     island: "#9c27b0",
     hackerba: "#ff6600",
-    trmnl: "#3f51b5",
+    trmnl: "#3c50b4",
   };
 
   function getThemePreference() {

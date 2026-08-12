@@ -67,9 +67,15 @@ Rules:
 | Sidefy | `#f44336` |
 | Island | `#9c27b0` |
 | HackerBa | `#ff6600` |
-| TRMNL | `#3f51b5` |
+| TRMNL | `#3c50b4` |
 
 Sample from `icon-192.png` (dominant non-white fill). Tiny deltas from “nearby” hex still count as wrong.
+
+## UI icons (Lucide)
+
+Theme / layout / chevron icons are **inline SVG** with `stroke="currentColor"` (not CSS `mask-image` of external Lucide files). External stroke SVGs used as CSS masks render broken/garbled in WebKit.
+
+Keep `assets/lucide/*.svg` as source reference; page UI should embed the paths inline.
 
 ## Screenshot / shot rules
 

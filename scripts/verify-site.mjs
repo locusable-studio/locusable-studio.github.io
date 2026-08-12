@@ -18,8 +18,8 @@ const pages = [
   "here-trmnl/index.html",
 ];
 
-const cssVersion = "162";
-const jsVersion = "55";
+const cssVersion = "164";
+const jsVersion = "56";
 
 const themeMapJsVersion = "1";
 
@@ -487,7 +487,7 @@ const themeColors = {
   "here-sidefy/privacy/index.html": "#f44336",
   "here-island/index.html": "#9c27b0",
   "here-hackerba/index.html": "#ff6600",
-  "here-trmnl/index.html": "#3f51b5",
+  "here-trmnl/index.html": "#3c50b4",
 };
 
 for (const [page, color] of Object.entries(themeColors)) {

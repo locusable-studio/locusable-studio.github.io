@@ -14,7 +14,7 @@
   --accent-sidefy: #f44336;
   --accent-island: #9c27b0;
   --accent-hackerba: #ff6600;
-  --accent-trmnl: #3f51b5;
+  --accent-trmnl: #3c50b4;
   --app-accent: var(--accent-studio);
   --shot-radius: 18px;
   --shot-radius-sm: 12px;
@@ -501,9 +501,13 @@ html[data-app] .footer a:focus-visible,
   display: block;
   width: 1.1rem;
   height: 1.1rem;
-  background: currentColor;
-  -webkit-mask: url("/assets/lucide/settings.svg") center / contain no-repeat;
-  mask: url("/assets/lucide/settings.svg") center / contain no-repeat;
+  color: inherit;
+}
+
+.theme-control__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .theme-control__menu {
@@ -584,34 +588,13 @@ html[data-app] .footer a:focus-visible,
   display: block;
   width: 1rem;
   height: 1rem;
-  background: currentColor;
-  -webkit-mask: center / contain no-repeat;
-  mask: center / contain no-repeat;
+  color: inherit;
 }
 
-.theme-control__option-icon--system {
-  -webkit-mask-image: url("/assets/lucide/monitor.svg");
-  mask-image: url("/assets/lucide/monitor.svg");
-}
-
-.theme-control__option-icon--dark {
-  -webkit-mask-image: url("/assets/lucide/moon.svg");
-  mask-image: url("/assets/lucide/moon.svg");
-}
-
-.theme-control__option-icon--light {
-  -webkit-mask-image: url("/assets/lucide/sun.svg");
-  mask-image: url("/assets/lucide/sun.svg");
-}
-
-.theme-control__option-icon--grid {
-  -webkit-mask-image: url("/assets/lucide/grid-2x2.svg");
-  mask-image: url("/assets/lucide/grid-2x2.svg");
-}
-
-.theme-control__option-icon--list {
-  -webkit-mask-image: url("/assets/lucide/list.svg");
-  mask-image: url("/assets/lucide/list.svg");
+.theme-control__option-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .theme-control__divider {
@@ -827,10 +810,12 @@ html[data-app] .footer a:focus-visible,
   color: var(--muted);
   width: 1.25rem;
   height: 1.25rem;
-  font-size: 0;
-  background: currentColor;
-  -webkit-mask: url("/assets/lucide/chevron-right.svg") center / contain no-repeat;
-  mask: url("/assets/lucide/chevron-right.svg") center / contain no-repeat;
+}
+
+.home-app-card__arrow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .home-app-card__list-shots {
@@ -1300,10 +1285,13 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   height: 0.9em;
   margin-left: 0.12em;
   vertical-align: -0.1em;
-  font-size: 0;
-  background: currentColor;
-  -webkit-mask: url("/assets/lucide/chevron-right.svg") center / contain no-repeat;
-  mask: url("/assets/lucide/chevron-right.svg") center / contain no-repeat;
+  color: inherit;
+}
+
+.unit__links a .chev svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .status-note {
@@ -1947,7 +1935,18 @@ html[data-app] body.catalog-page .plugin-card__cta {
 }
 
 .plugin-card__cta .chev {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
   margin-left: 0.06em;
+  vertical-align: -0.1em;
+  color: inherit;
+}
+
+.plugin-card__cta .chev svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Themes catalog */
