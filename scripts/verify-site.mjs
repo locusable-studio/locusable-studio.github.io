@@ -18,7 +18,7 @@ const pages = [
   "here-trmnl/index.html",
 ];
 
-const cssVersion = "164";
+const cssVersion = "165";
 const jsVersion = "56";
 
 const themeMapJsVersion = "1";
@@ -176,7 +176,7 @@ for (const needle of [
   "Map lock screens from places you care about.",
   "Calendar, reminders, RSS, and plugins — along your Mac’s edge.",
   "A focused media companion in your MacBook notch.",
-  "Your LaraPaper / TRMNL screen, mirrored on the Mac desktop.",
+  "Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.",
   "Hacker News, restyled as a Tieba-like forum.",
   "Your self-hosted linkding. Native on iOS.",
   "Coming Soon",

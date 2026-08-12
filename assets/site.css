@@ -1446,8 +1446,8 @@ html[data-theme="dark"] .unit--tint.unit--soft {
 }
 
 html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
-  /* shot 1400×671 — crop bottom ~15%, flush to hero bottom */
-  aspect-ratio: 1400 / 570;
+  /* shot 1617×898 — crop bottom ~15%, flush to hero bottom */
+  aspect-ratio: 1617 / 763;
 }
 
 .unit__media--desktop-peek img {
