@@ -1,6 +1,7 @@
 (function () {
   var THEME_STORAGE_KEY = "locusable-theme";
   var LAYOUT_STORAGE_KEY = "locusable-home-layout";
+  var LANG_STORAGE_KEY = "locusable-lang";
   var APP_THEME_COLORS = {
     wallpaper: "#4caf50",
     links: "#2196f3",
@@ -136,6 +137,44 @@
     });
   }
 
+  function closeThemeMenu(control) {
+    var trigger = control && control.querySelector("[data-theme-trigger]");
+    var menu = control && control.querySelector("[data-theme-menu]");
+    if (!trigger || !menu) return;
+    trigger.setAttribute("aria-expanded", "false");
+    menu.classList.remove("is-open");
+    menu.hidden = true;
+    trigger.focus();
+  }
+
+  function initLangControl() {
+    var options = document.querySelectorAll("[data-lang-option]");
+    if (!options.length) return;
+    var i18n = window.LocusableI18n;
+    var preference = i18n ? i18n.getLang() : "en";
+
+    function apply(lang) {
+      preference = lang === "zh" ? "zh" : "en";
+      try {
+        if (preference === "zh") window.localStorage.setItem(LANG_STORAGE_KEY, "zh");
+        else window.localStorage.removeItem(LANG_STORAGE_KEY);
+      } catch (error) {}
+      if (i18n) i18n.apply(preference);
+      options.forEach(function (option) {
+        option.setAttribute("aria-checked", String(option.getAttribute("data-lang-option") === preference));
+      });
+      document.dispatchEvent(new Event("langchange"));
+    }
+
+    apply(preference);
+    options.forEach(function (option) {
+      option.addEventListener("click", function () {
+        apply(option.getAttribute("data-lang-option"));
+        closeThemeMenu(option.closest("[data-theme-control]"));
+      });
+    });
+  }
+
   function initLayoutControl() {
     var grid = document.querySelector(".home-product-grid");
     var options = document.querySelectorAll("[data-layout-option]");
@@ -166,15 +205,7 @@
           if (preference === "list") window.localStorage.setItem(LAYOUT_STORAGE_KEY, preference);
           else window.localStorage.removeItem(LAYOUT_STORAGE_KEY);
         } catch (error) {}
-        var control = option.closest("[data-theme-control]");
-        var trigger = control && control.querySelector("[data-theme-trigger]");
-        var menu = control && control.querySelector("[data-theme-menu]");
-        if (trigger && menu) {
-          trigger.setAttribute("aria-expanded", "false");
-          menu.classList.remove("is-open");
-          menu.hidden = true;
-          trigger.focus();
-        }
+        closeThemeMenu(option.closest("[data-theme-control]"));
       });
     });
   }
@@ -254,8 +285,10 @@
 
   initThemeControl();
   initLayoutControl();
+  initLangControl();
   initThemeColor();
   initChromeHeight();
   initReveals();
   bindAppStoreLinks();
+  document.documentElement.classList.add("is-i18n-ready");
 })();

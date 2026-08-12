@@ -4,34 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ff6600">
-  <title>Here HackerBa — Locusable Studio</title>
-  <meta name="description" content="Here HackerBa — a Chrome extension that turns Hacker News into a Tieba-style reading experience.">
+  <title data-i18n="title.hackerba">Here HackerBa — Locusable Studio</title>
+  <meta name="description" data-i18n-content="meta.hackerba" content="Here HackerBa — a Chrome extension that turns Hacker News into a Tieba-style reading experience.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><span aria-current="page">Here HackerBa</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
             </div>
           </div>
         </div>
@@ -41,17 +46,17 @@
     <main>
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here-hackerba/icon-192.png?v=1" width="84" height="84" alt="Here HackerBa extension icon">
-        <p class="platforms platforms--lg">Chrome</p>
+        <p class="platforms platforms--lg" data-i18n="platform.chrome">Chrome</p>
         <h1 class="product-title" id="product-title">Here <em>HackerBa</em></h1>
-        <p class="unit__subhead">Hacker News, restyled as a Tieba-like forum.</p>
+        <p class="unit__subhead" data-i18n="hackerba.subhead">Hacker News, restyled as a Tieba-like forum.</p>
         <div class="unit__links">
           <a
             href="https://github.com/sha2kyou/HackerBa"
             target="_blank"
             rel="noopener noreferrer"
-          >View on GitHub<span class="chev" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
+           data-i18n="cta.github">View on GitHub<span class="chev" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
         </div>
-        <div class="unit__media unit__media--desktop-dual" aria-label="Extension previews">
+        <div class="unit__media unit__media--desktop-dual" data-i18n-aria-label="hackerba.previews" aria-label="Extension previews">
           <figure><img src="/assets/here-hackerba/shot-list.jpg?v=1" width="1400" height="792" alt="Here HackerBa list page in English"></figure>
           <figure><img src="/assets/here-hackerba/shot-thread.jpg?v=1" width="1400" height="758" alt="Here HackerBa thread page in English"></figure>
         </div>
@@ -60,33 +65,33 @@
       <div class="detail-feature-grid">
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="tieba-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="tieba-title">Forum-shaped HN</h2>
-          <p class="unit__subhead">Scores, badges, floors, and nested replies — content still comes from Hacker News.</p>
+          <h2 class="product-title unit__title" id="tieba-title" data-i18n="hackerba.tiebaTitle">Forum-shaped HN</h2>
+          <p class="unit__subhead" data-i18n="hackerba.tiebaSubhead">Scores, badges, floors, and nested replies — content still comes from Hacker News.</p>
         </div>
       </section>
 
       <section class="unit unit--tint" data-reveal aria-labelledby="prefs-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="prefs-title">Your reading mode</h2>
-          <p class="unit__subhead">English or Chinese, light or dark, blue or HN-orange accent — plus density and click behavior.</p>
+          <h2 class="product-title unit__title" id="prefs-title" data-i18n="hackerba.prefsTitle">Your reading mode</h2>
+          <p class="unit__subhead" data-i18n="hackerba.prefsSubhead">English or Chinese, light or dark, blue or HN-orange accent — plus density and click behavior.</p>
         </div>
       </section>
       </div>
 
       <section class="product-faq" aria-labelledby="faq-title">
         <div class="product-faq__inner">
-          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <h2 class="product-title unit__title" id="faq-title" data-i18n="hackerba.faqTitle">FAQ</h2>
           <details>
-            <summary>Is Here HackerBa free and open source?</summary>
-            <p>Yes. Here HackerBa is free and open source under the MIT License.</p>
+            <summary data-i18n="hackerba.faq.q1">Is Here HackerBa free and open source?</summary>
+            <p data-i18n="hackerba.faq.a1">Yes. Here HackerBa is free and open source under the MIT License.</p>
           </details>
           <details>
-            <summary>What does Here HackerBa do?</summary>
-            <p>Here HackerBa is a Chrome extension that restyles Hacker News as a Tieba-like forum while keeping HN content and accounts unchanged.</p>
+            <summary data-i18n="hackerba.faq.q2">What does Here HackerBa do?</summary>
+            <p data-i18n="hackerba.faq.a2">Here HackerBa is a Chrome extension that restyles Hacker News as a Tieba-like forum while keeping HN content and accounts unchanged.</p>
           </details>
           <details>
-            <summary>How do I install it?</summary>
-            <p>Load the unpacked extension from the GitHub repository in Chrome’s extensions page, then visit any news.ycombinator.com page.</p>
+            <summary data-i18n="hackerba.faq.q3">How do I install it?</summary>
+            <p data-i18n="hackerba.faq.a3">Load the unpacked extension from the GitHub repository in Chrome’s extensions page, then visit any news.ycombinator.com page.</p>
           </details>
         </div>
       </section>
@@ -94,10 +99,11 @@
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

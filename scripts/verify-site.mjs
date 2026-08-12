@@ -18,22 +18,25 @@ const pages = [
   "here-trmnl/index.html",
 ];
 
-const cssVersion = "165";
-const jsVersion = "56";
+const cssVersion = "166";
+const jsVersion = "57";
+const i18nJsVersion = "1";
 
 const themeMapJsVersion = "1";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
   ["/assets/site.js", "shared script"],
+  ["/assets/i18n.js", "i18n script"],
   [`site.css?v=${cssVersion}`, "css cache version"],
   [`site.js?v=${jsVersion}`, "js cache version"],
+  [`i18n.js?v=${i18nJsVersion}`, "i18n cache version"],
 ];
 
 const breadcrumbs = {
   "about/index.html": [
     'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">About</span>',
+    '<span aria-current="page" data-i18n="crumb.about">About</span>',
   ],
   "here-wallpaper/index.html": [
     'href="/">Locusable <em>Studio</em>',
@@ -62,27 +65,27 @@ const breadcrumbs = {
   "here-wallpaper/themes/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-wallpaper/">Here Wallpaper',
-    '<span aria-current="page">Themes</span>',
+    '<span aria-current="page" data-i18n="crumb.themes">Themes</span>',
   ],
   "here-sidefy/plugins/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-sidefy/">Here Sidefy',
-    '<span aria-current="page">Plugins</span>',
+    '<span aria-current="page" data-i18n="crumb.plugins">Plugins</span>',
   ],
   "here-wallpaper/privacy/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-wallpaper/">Here Wallpaper',
-    '<span aria-current="page">Privacy</span>',
+    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
   ],
   "here-links/privacy/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-links/">Here Links',
-    '<span aria-current="page">Privacy</span>',
+    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
   ],
   "here-sidefy/privacy/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-sidefy/">Here Sidefy',
-    '<span aria-current="page">Privacy</span>',
+    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
   ],
 };
 
@@ -155,7 +158,7 @@ for (const page of pages) {
       failed++;
     }
     for (const question of faqQuestions) {
-      if (!html.includes(`<summary>${question}</summary>`)) {
+      if (!html.includes(`>${question}</summary>`)) {
         console.error(`FAIL ${page}: missing FAQ question (${question})`);
         failed++;
       }
@@ -494,6 +497,18 @@ for (const [page, color] of Object.entries(themeColors)) {
   const html = fs.readFileSync(path.join(root, page), "utf8");
   if (!html.includes(`name="theme-color" content="${color}"`)) {
     console.error(`FAIL ${page}: theme-color should be ${color}`);
+    failed++;
+  }
+}
+
+if (!fs.existsSync(path.join(root, "assets/i18n.js"))) {
+  console.error("FAIL assets/i18n.js missing");
+  failed++;
+}
+for (const page of pages) {
+  const html = fs.readFileSync(path.join(root, page), "utf8");
+  if (!html.includes('data-lang-option="en"') || !html.includes('data-lang-option="zh"')) {
+    console.error(`FAIL ${page}: missing language switcher`);
     failed++;
   }
 }

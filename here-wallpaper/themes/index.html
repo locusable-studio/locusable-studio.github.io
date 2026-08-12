@@ -4,32 +4,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#4caf50">
-  <title>Here Wallpaper — Themes</title>
-  <meta name="description" content="Here Wallpaper theme preview — Basic and Featured palettes.">
+  <title data-i18n="title.wallpaper.themes">Here Wallpaper — Themes</title>
+  <meta name="description" data-i18n-content="meta.wallpaper.themes" content="Here Wallpaper theme preview — Basic and Featured palettes.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
   <link href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css" rel="stylesheet">
   <script src="/assets/theme-map-style.js?v=1"></script>
   <script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
 </head>
 <body class="catalog-page">
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
-        <li><span aria-current="page">Themes</span></li>
+        <li><span aria-current="page" data-i18n="crumb.themes">Themes</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
@@ -37,35 +37,40 @@
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
             </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
+            </div>
           </div>
         </div>
       </div>
     </nav>
 
     <header class="catalog-hero">
-      <h1 class="catalog-title">Themes</h1>
-      <p class="catalog-lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
+      <h1 class="catalog-title" data-i18n="themes.title">Themes</h1>
+      <p class="catalog-lead" data-i18n="themes.lead">Same palettes as in the app, previewed on real OpenStreetMap. Basic is free; Featured unlocks with Pro.</p>
     </header>
 
-    <section class="catalog-section" aria-label="Map layers">
-      <h2><span class="section-title">Layers</span></h2>
-      <div class="layer-controls" id="layer-toggles" role="group" aria-label="Map layer toggles"></div>
+    <section class="catalog-section" data-i18n-aria-label="themes.layersLabel" aria-label="Map layers">
+      <h2><span class="section-title" data-i18n="themes.layers">Layers</span></h2>
+      <div class="layer-controls" id="layer-toggles" role="group" data-i18n-aria-label="themes.layersToggles" aria-label="Map layer toggles"></div>
     </section>
 
-    <section class="catalog-section" id="basic-section" aria-label="Basic themes">
-      <h2><span class="section-title">Basic</span></h2>
+    <section class="catalog-section" id="basic-section" data-i18n-aria-label="themes.basicLabel" aria-label="Basic themes">
+      <h2><span class="section-title" data-i18n="themes.basic">Basic</span></h2>
       <div class="theme-grid" id="basic-grid"></div>
     </section>
 
-    <section class="catalog-section" id="pro-section" aria-label="Featured themes">
-      <h2><span class="section-title">Featured</span></h2>
+    <section class="catalog-section" id="pro-section" data-i18n-aria-label="themes.featuredLabel" aria-label="Featured themes">
+      <h2><span class="section-title" data-i18n="themes.featured">Featured</span></h2>
       <div class="theme-grid" id="pro-grid"></div>
     </section>
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved. · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
-        <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+        <span data-i18n="footer.copyright.themes">Copyright © 2026 Locusable Studio. All rights reserved. · Map data © OpenStreetMap · tiles © OpenFreeMap</span>
+        <a href="/here-wallpaper/privacy/" data-i18n="footer.privacy">Privacy Policy</a>
       </div>
     </footer>
   </div>
@@ -192,7 +197,7 @@
         <label class="layer-check">
           <input type="checkbox" data-id="${layer.id}" ${layerState[layer.id] ? "checked" : ""}>
           <span class="layer-check-text">
-            <span>${layer.name}</span>
+            <span data-i18n="themes.layer.${layer.id}">${layer.name}</span>
             ${layer.pro ? `<span class="badge-pro">PRO</span>` : ""}
           </span>
         </label>
@@ -222,16 +227,19 @@
       mount(basicThemes, "basic-grid");
       mount(proThemes, "pro-grid");
       observeThemeMaps();
+      if (window.LocusableI18n) window.LocusableI18n.apply();
     }).catch((err) => {
       console.error(err);
+      const message = (window.LocusableI18n && window.LocusableI18n.t("themes.loadError")) || "Could not load theme catalog.";
       document.getElementById("basic-grid").innerHTML =
-        `<p class="catalog-lead">Could not load theme catalog.</p>`;
+        `<p class="catalog-lead">${message}</p>`;
     });
 
     window.addEventListener("resize", () => {
       liveMaps.forEach((map) => map.resize());
     });
   </script>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

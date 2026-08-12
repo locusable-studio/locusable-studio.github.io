@@ -4,34 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#2196f3">
-  <title>Here Links — Locusable Studio</title>
-  <meta name="description" content="Here Links — native iOS client for your self-hosted linkding.">
+  <title data-i18n="title.links">Here Links — Locusable Studio</title>
+  <meta name="description" data-i18n-content="meta.links" content="Here Links — native iOS client for your self-hosted linkding.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><span aria-current="page">Here Links</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
             </div>
           </div>
         </div>
@@ -41,13 +46,13 @@
     <main>
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here-links/icon-192.png?v=10" width="84" height="84" alt="Here Links app icon">
-        <p class="platforms platforms--lg">iPhone · Coming Soon</p>
+        <p class="platforms platforms--lg" data-i18n="platform.iphoneSoon">iPhone · Coming Soon</p>
         <h1 class="product-title" id="product-title">Here <em>Links</em></h1>
-        <p class="unit__subhead">Your self-hosted linkding. Native on iOS.</p>
+        <p class="unit__subhead" data-i18n="links.subhead">Your self-hosted linkding. Native on iOS.</p>
         <div class="unit__links">
-          <span class="unit__links-soon">Coming Soon</span>
+          <span class="unit__links-soon" data-i18n="cta.soon">Coming Soon</span>
         </div>
-        <div class="unit__media unit__media--phones" aria-label="App previews">
+        <div class="unit__media unit__media--phones" data-i18n-aria-label="links.previews" aria-label="App previews">
           <figure><img src="/assets/here-links/shots/shot-1.jpg?v=1" width="440" height="828" alt="Here Links bookmarks list"></figure>
           <figure><img src="/assets/here-links/shots/shot-2.jpg?v=2" width="440" height="828" alt="Here Links bookmark detail"></figure>
           <figure><img src="/assets/here-links/shots/shot-3.jpg?v=1" width="440" height="828" alt="Here Links in-app Safari"></figure>
@@ -57,19 +62,19 @@
 
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="features-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="features-title">Built for linkding</h2>
+          <h2 class="product-title unit__title" id="features-title" data-i18n="links.featuresTitle">Built for linkding</h2>
           <ul class="feature-list feature-list--cards">
             <li>
-              <strong>Servers</strong>
-              <span>Connect one or more linkding instances. Browse a mixed feed.</span>
+              <strong data-i18n="links.serversTitle">Servers</strong>
+              <span data-i18n="links.serversBody">Connect one or more linkding instances. Browse a mixed feed.</span>
             </li>
             <li>
-              <strong>Share</strong>
-              <span>Save links from other apps with the Share Extension.</span>
+              <strong data-i18n="links.shareTitle">Share</strong>
+              <span data-i18n="links.shareBody">Save links from other apps with the Share Extension.</span>
             </li>
             <li>
-              <strong>Open</strong>
-              <span>Read in-app with Safari. Download snapshots with your token.</span>
+              <strong data-i18n="links.openTitle">Open</strong>
+              <span data-i18n="links.openBody">Read in-app with Safari. Download snapshots with your token.</span>
             </li>
           </ul>
         </div>
@@ -77,18 +82,18 @@
 
       <section class="product-faq" aria-labelledby="faq-title">
         <div class="product-faq__inner">
-          <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
+          <h2 class="product-title unit__title" id="faq-title" data-i18n="links.faqTitle">FAQ</h2>
           <details>
-            <summary>Is Here Links free?</summary>
-            <p>Here Links is free to use.</p>
+            <summary data-i18n="links.faq.q1">Is Here Links free?</summary>
+            <p data-i18n="links.faq.a1">Here Links is free to use.</p>
           </details>
           <details>
-            <summary>What is linkding?</summary>
-            <p><a href="https://linkding.link" target="_blank" rel="noopener noreferrer">linkding</a> is a self-hosted bookmark manager designed to be minimal, fast, and easy to set up.</p>
+            <summary data-i18n="links.faq.q2">What is linkding?</summary>
+            <p data-i18n-html="links.faq.a2"><a href="https://linkding.link" target="_blank" rel="noopener noreferrer">linkding</a> is a self-hosted bookmark manager designed to be minimal, fast, and easy to set up.</p>
           </details>
           <details>
-            <summary>Can I connect more than one server?</summary>
-            <p>Yes. Here Links can connect to one or more linkding instances and show them in a mixed feed.</p>
+            <summary data-i18n="links.faq.q3">Can I connect more than one server?</summary>
+            <p data-i18n="links.faq.a3">Yes. Here Links can connect to one or more linkding instances and show them in a mixed feed.</p>
           </details>
         </div>
       </section>
@@ -96,11 +101,12 @@
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="/here-links/privacy/">Privacy Policy</a>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/here-links/privacy/" data-i18n="footer.privacy">Privacy Policy</a>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

@@ -4,34 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#b8860b">
-  <title>About — Locusable Studio</title>
-  <meta name="description" content="Locusable Studio makes focused tools for everyday devices.">
+  <title data-i18n="title.about">About — Locusable Studio</title>
+  <meta name="description" data-i18n-content="meta.about" content="Locusable Studio makes focused tools for everyday devices.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
-        <li><span aria-current="page">About</span></li>
+        <li><span aria-current="page" data-i18n="crumb.about">About</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
             </div>
           </div>
         </div>
@@ -41,27 +46,27 @@
     <main class="about-page">
       <section class="product-hero" aria-labelledby="about-title">
         <p class="platforms platforms--lg">Locusable Studio</p>
-        <h1 class="product-title" id="about-title">Tools for what is <em>already here.</em></h1>
-        <p class="unit__subhead">Focused tools for the devices you use every day.</p>
+        <h1 class="product-title" id="about-title" data-i18n-html="about.heroTitle">Tools for what is <em>already here.</em></h1>
+        <p class="unit__subhead" data-i18n="about.heroSubhead">Focused tools for the devices you use every day.</p>
       </section>
 
       <section class="unit unit--tint unit--soft" aria-labelledby="approach-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="approach-title">Overlooked places, useful tools</h2>
-          <p class="unit__subhead">Locusable Studio makes focused native tools for overlooked interface spaces.</p>
+          <h2 class="product-title unit__title" id="approach-title" data-i18n="about.approachTitle">Overlooked places, useful tools</h2>
+          <p class="unit__subhead" data-i18n="about.approachSubhead">Locusable Studio makes focused native tools for overlooked interface spaces.</p>
         </div>
       </section>
 
       <section class="unit" aria-labelledby="products-title">
         <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="products-title">The products</h2>
+          <h2 class="product-title unit__title" id="products-title" data-i18n="about.productsTitle">The products</h2>
           <ul class="feature-list feature-list--cards about-product-list">
-            <li><strong><a href="/here-wallpaper/">Here Wallpaper</a></strong><span>Map lock screens from places you care about.</span></li>
-            <li><strong><a href="/here-sidefy/">Here Sidefy</a></strong><span>Calendar, reminders, RSS, and plugins — along your Mac’s edge.</span></li>
-            <li><strong><a href="/here-island/">Here Island</a></strong><span>A focused media companion in your MacBook notch.</span></li>
-            <li><strong><a href="/here-trmnl/">Here TRMNL</a></strong><span>Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.</span></li>
-            <li><strong><a href="/here-hackerba/">Here HackerBa</a></strong><span>Hacker News, restyled as a Tieba-like forum.</span></li>
-            <li><strong><a href="/here-links/">Here Links</a></strong><span>Coming Soon — Your self-hosted linkding. Native on iOS.</span></li>
+            <li><strong><a href="/here-wallpaper/">Here Wallpaper</a></strong><span data-i18n="about.wallpaper">Map lock screens from places you care about.</span></li>
+            <li><strong><a href="/here-sidefy/">Here Sidefy</a></strong><span data-i18n="about.sidefy">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</span></li>
+            <li><strong><a href="/here-island/">Here Island</a></strong><span data-i18n="about.island">A focused media companion in your MacBook notch.</span></li>
+            <li><strong><a href="/here-trmnl/">Here TRMNL</a></strong><span data-i18n="about.trmnl">Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.</span></li>
+            <li><strong><a href="/here-hackerba/">Here HackerBa</a></strong><span data-i18n="about.hackerba">Hacker News, restyled as a Tieba-like forum.</span></li>
+            <li><strong><a href="/here-links/">Here Links</a></strong><span data-i18n="about.links">Coming Soon — Your self-hosted linkding. Native on iOS.</span></li>
           </ul>
         </div>
       </section>
@@ -69,10 +74,11 @@
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

@@ -4,35 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#4caf50">
-  <title>Privacy Policy — Here Wallpaper</title>
-  <meta name="description" content="Privacy Policy for Here Wallpaper by Locusable Studio.">
+  <title data-i18n="title.wallpaper.privacy">Privacy Policy — Here Wallpaper</title>
+  <meta name="description" data-i18n-content="meta.wallpaper.privacy" content="Privacy Policy for Here Wallpaper by Locusable Studio.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><a href="/here-wallpaper/">Here Wallpaper</a></li>
-        <li><span aria-current="page">Privacy</span></li>
+        <li><span aria-current="page" data-i18n="crumb.privacy">Privacy</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
             </div>
           </div>
         </div>
@@ -41,6 +46,7 @@
 
     <div class="doc-layout">
       <main class="prose" data-reveal>
+        <div data-lang-block="en">
         <h1>Privacy Policy</h1>
         <p class="prose-meta">Here Wallpaper · Locusable Studio · Effective July 12, 2026</p>
 
@@ -107,15 +113,86 @@
           For questions about this policy or technical support, open an issue at
           <a href="https://github.com/locusable-studio/HereWallpaper-Issues/issues">github.com/locusable-studio/HereWallpaper-Issues/issues</a>.
         </p>
+        </div>
+        <div data-lang-block="zh">
+        <h1>隐私政策</h1>
+        <p class="prose-meta">Here Wallpaper · Locusable Studio · 生效日期 2026 年 7 月 12 日</p>
+
+        <p>
+          Here Wallpaper（“本应用”）由 Locusable Studio（“我们”）开发。
+          本应用可能访问设备上的有限数据以提供功能。
+          我们不运营用户账户，也不将数据用于追踪。
+          我们不出售个人数据。
+        </p>
+
+        <h2>位置</h2>
+        <p>
+          仅当你点按定位控件以使用当前位置时，本应用才会采集<strong>精确位置</strong>。
+        </p>
+        <ul>
+          <li><strong>用途</strong> — 应用功能：为当前位置生成壁纸。</li>
+          <li><strong>是否关联身份</strong> — 否。本应用没有账户，也不会把位置与身份关联。</li>
+          <li><strong>是否用于追踪</strong> — 否。</li>
+        </ul>
+        <p>
+          位置在你的设备上处理，用于生成壁纸。我们不运行用于存储位置历史的自有服务器。
+        </p>
+
+        <h2>我们不收集什么</h2>
+        <p>
+          我们不运营会接收你信息的分析、广告或崩溃上报服务。
+          我们不向第三方出售或共享个人数据用于营销。
+        </p>
+
+        <h2>留在设备上的其他数据</h2>
+        <p>
+          本应用还可能在 iPhone 或 iPad 上使用以下系统功能。这些数据在设备上处理，不会发送给我们：
+        </p>
+        <ul>
+          <li><strong>照片图库</strong> — 可选，仅在你保存导出的壁纸时使用。</li>
+          <li><strong>应用设置</strong> — 主题和排版等偏好存储在本机。</li>
+        </ul>
+
+        <h2>购买</h2>
+        <p>
+          可选的 Pro 订阅由 Apple 通过 App Store 处理。
+          我们不会收到你的支付卡信息，这类交易适用 Apple 自身的隐私政策。
+        </p>
+
+        <h2>地图内容</h2>
+        <p>
+          地图瓦片和地点标签可能从地图数据提供方加载（例如 OpenFreeMap / 与 OpenStreetMap 相关的服务），以便显示地图。
+          这些请求由本应用在你的设备上发出，用于显示地图画面；
+          我们不运行单独的后端从中收集你的身份。
+        </p>
+
+        <h2>儿童</h2>
+        <p>
+          本应用不以 13 岁以下儿童为对象。我们不会故意收集 13 岁以下儿童的个人信息。
+        </p>
+
+        <h2>变更</h2>
+        <p>
+          若本政策变更，我们会更新本页及上方生效日期。
+        </p>
+
+        <h2>联系</h2>
+        <p>
+          关于本政策或技术支持的问题，请在
+          <a href="https://github.com/locusable-studio/HereWallpaper-Issues/issues">github.com/locusable-studio/HereWallpaper-Issues/issues</a>
+          提交 issue。
+        </p>
+        </div>
       </main>
     </div>
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

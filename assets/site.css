@@ -604,6 +604,28 @@ html[data-app] .footer a:focus-visible,
   background: var(--line);
 }
 
+.theme-control__option--lang {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+html[data-lang="zh"]:not(.is-i18n-ready) body {
+  visibility: hidden;
+}
+
+[data-lang-block="zh"] {
+  display: none;
+}
+
+html[data-lang="zh"] [data-lang-block="en"] {
+  display: none;
+}
+
+html[data-lang="zh"] [data-lang-block="zh"] {
+  display: block;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

@@ -4,29 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f44336">
-  <title>Here Sidefy — Featured Plugins</title>
-  <meta name="description" content="Featured community plugins for Here Sidefy — RSS, deals, gaming, and more.">
+  <title data-i18n="title.sidefy.plugins">Here Sidefy — Featured Plugins</title>
+  <meta name="description" data-i18n-content="meta.sidefy.plugins" content="Featured community plugins for Here Sidefy — RSS, deals, gaming, and more.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body class="catalog-page">
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><a href="/here-sidefy/">Here Sidefy</a></li>
-        <li><span aria-current="page">Plugins</span></li>
+        <li><span aria-current="page" data-i18n="crumb.plugins">Plugins</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
@@ -34,26 +34,31 @@
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
             </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
+            </div>
           </div>
         </div>
       </div>
     </nav>
 
     <header class="catalog-hero">
-      <h1 class="catalog-title">Featured Plugins</h1>
-      <p class="catalog-lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
+      <h1 class="catalog-title" data-i18n="plugins.title">Featured Plugins</h1>
+      <p class="catalog-lead" data-i18n="plugins.lead">Community plugins from the official Sidefy showcase — RSS, deals, gaming, and more. Open a card for the GitHub source.</p>
     </header>
 
-    <section class="catalog-section catalog-section--plugins" data-reveal aria-label="Featured plugins">
+    <section class="catalog-section catalog-section--plugins" data-reveal data-i18n-aria-label="plugins.listLabel" aria-label="Featured plugins">
       <div class="plugin-grid" id="plugin-grid"></div>
     </section>
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
         <span class="footer__links">
-          <a href="/here-sidefy/privacy/">Privacy Policy</a>
-          <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer">Official showcase</a>
+          <a href="/here-sidefy/privacy/" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="https://sidefy.locusable.com/featured-plugins" target="_blank" rel="noopener noreferrer" data-i18n="footer.showcase">Official showcase</a>
         </span>
       </div>
     </footer>
@@ -80,10 +85,26 @@
       return icon;
     }
 
+    const pluginTagZh = {
+      AI: "AI",
+      Daily: "每日",
+      RSS: "RSS",
+      News: "资讯",
+      Shopping: "购物",
+      Deals: "优惠",
+      Gaming: "游戏",
+      Entertainment: "娱乐",
+      Crypto: "加密货币",
+      Alerts: "提醒",
+      Community: "社区",
+      Social: "社交",
+    };
+
     const featuredPlugins = [
       {
         name: "Say Hi",
         description: "A random English Wikipedia article each day — AI generates the event title and greeting in your app language. Requires an LLM API key in Sidefy Advanced Settings.",
+        descriptionZh: "每天呈现一篇随机英文维基百科条目 — AI 会用你的应用语言生成事件标题与问候语。需要在 Sidefy 高级设置中配置 LLM API 密钥。",
         tags: ["AI", "Daily"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/sayhi",
         icon: "sparkles",
@@ -92,6 +113,7 @@
       {
         name: "FreshRSS",
         description: "Fetch unread and recent articles from your self-hosted FreshRSS instance via Google Reader API. Stay updated with your personal news feeds.",
+        descriptionZh: "通过 Google Reader API，从你自托管的 FreshRSS 拉取未读与最新文章，随时跟进个人订阅。",
         tags: ["RSS", "News"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/freshrss",
         icon: "rss",
@@ -100,6 +122,7 @@
       {
         name: "App Store Discount",
         description: "Monitor price drops and discounts for apps on your Mac App Store wishlist. Get notified when your favorite apps go on sale.",
+        descriptionZh: "监控 Mac App Store 心愿单中应用的降价与折扣，喜欢的应用打折时立即提醒你。",
         tags: ["Shopping", "Deals"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/appstore_discount",
         icon: "brand-apple",
@@ -108,6 +131,7 @@
       {
         name: "Steam Wishlist Discount",
         description: "Get instant alerts when games on your Steam wishlist go on sale. Never miss a great deal on your favorite games.",
+        descriptionZh: "Steam 心愿单中的游戏打折时立即提醒，绝不错过心动优惠。",
         tags: ["Gaming", "Deals"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/steam_wishlist_discount",
         icon: "brand-steam",
@@ -116,6 +140,7 @@
       {
         name: "Switch Discount Tracker",
         description: "Track Nintendo Switch eShop sales across multiple regions. Add game NSUIDs and region codes to get timeline alerts with sale price and discount when a watched title goes on sale.",
+        descriptionZh: "跟踪多个地区的 Nintendo Switch eShop 折扣信息。添加游戏 NSUID 与地区代码后，关注的游戏一旦打折，就会在时间线上显示售价与折扣力度。",
         tags: ["Gaming", "Deals"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/switch_wishlist_discount",
         icon: "device-nintendo",
@@ -124,6 +149,7 @@
       {
         name: "Pokemon Daily",
         description: "Discover a new Pokemon every day with detailed information, stats, and beautiful artwork. Perfect for Pokemon fans and trainers.",
+        descriptionZh: "每天认识一只新的宝可梦，附带详细资料、能力数据与精美插画，宝可梦爱好者和训练家的每日必看。",
         tags: ["Entertainment", "Daily"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/pokemon_daily",
         icon: "pokeball",
@@ -132,6 +158,7 @@
       {
         name: "Crypto Price Monitor",
         description: "Monitor cryptocurrency prices via CoinGecko with price threshold and 24h percentage change alerts. Track multiple tokens with a configurable cooldown.",
+        descriptionZh: "通过 CoinGecko 监控加密货币价格，支持设置价格阈值与 24 小时涨跌幅提醒。可同时跟踪多个代币，提醒冷却时间也能自由配置。",
         tags: ["Crypto", "Alerts"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/crypto_price_watcher",
         icon: "currency-bitcoin",
@@ -140,6 +167,7 @@
       {
         name: "V2EX Notifications",
         description: "Unread V2EX notifications on your timeline — replies, thanks, tips, mentions, and favorites, each with distinct colors. Uses your private RSS token.",
+        descriptionZh: "把未读的 V2EX 通知放上时间线 — 回复、感谢、打赏、提及和收藏各有专属颜色区分。使用你的私有 RSS 令牌接入。",
         tags: ["Community", "Social"],
         href: "https://github.com/sidefy-team/sidefy-plugins/tree/main/v2ex_notifications",
         icon: "messages",
@@ -148,47 +176,61 @@
     ];
 
     const grid = document.getElementById("plugin-grid");
-    featuredPlugins.forEach((plugin, index) => {
-      const card = document.createElement("a");
-      card.className = "plugin-card";
-      card.href = plugin.href;
-      card.target = "_blank";
-      card.rel = "noopener noreferrer";
-      card.style.animationDelay = `${0.04 + index * 0.05}s`;
+    const ctaChev = '<span class="chev" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>';
 
-      const head = document.createElement("div");
-      head.className = "plugin-card__head";
-
-      const icon = createPluginIcon(plugin.icon, plugin.iconColor);
-
-      const title = document.createElement("h3");
-      title.textContent = plugin.name;
-      head.append(icon, title);
-
-      const desc = document.createElement("p");
-      desc.className = "plugin-card__desc";
-      desc.textContent = plugin.description;
-
-      const foot = document.createElement("div");
-      foot.className = "plugin-card__foot";
-
-      const tags = document.createElement("div");
-      tags.className = "plugin-tags";
-      for (const tag of plugin.tags) {
-        const span = document.createElement("span");
-        span.textContent = tag;
-        tags.appendChild(span);
+    function currentLang() {
+      if (window.LocusableI18n) return window.LocusableI18n.getLang();
+      try {
+        return window.localStorage.getItem("locusable-lang") === "zh" ? "zh" : "en";
+      } catch (error) {
+        return "en";
       }
+    }
 
-      const cta = document.createElement("span");
-      cta.className = "plugin-card__cta";
-      cta.innerHTML = 'Learn more<span class="chev" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>';
+    function renderPlugins() {
+      const zh = currentLang() === "zh";
+      const learnMore = (window.LocusableI18n && window.LocusableI18n.t("cta.learnMore")) || (zh ? "了解更多" : "Learn more");
+      grid.replaceChildren();
+      featuredPlugins.forEach((plugin, index) => {
+        const card = document.createElement("a");
+        card.className = "plugin-card";
+        card.href = plugin.href;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        card.style.animationDelay = `${0.04 + index * 0.05}s`;
 
-      foot.append(tags, cta);
-      card.append(head, desc, foot);
-      grid.appendChild(card);
-    });
+        const head = document.createElement("div");
+        head.className = "plugin-card__head";
+        const title = document.createElement("h3");
+        title.textContent = plugin.name;
+        head.append(createPluginIcon(plugin.icon, plugin.iconColor), title);
+
+        const desc = document.createElement("p");
+        desc.className = "plugin-card__desc";
+        desc.textContent = zh ? plugin.descriptionZh : plugin.description;
+
+        const foot = document.createElement("div");
+        foot.className = "plugin-card__foot";
+        const tags = document.createElement("div");
+        tags.className = "plugin-tags";
+        for (const tag of plugin.tags) {
+          const span = document.createElement("span");
+          span.textContent = zh ? (pluginTagZh[tag] || tag) : tag;
+          tags.appendChild(span);
+        }
+        const cta = document.createElement("span");
+        cta.className = "plugin-card__cta";
+        cta.innerHTML = learnMore + ctaChev;
+        foot.append(tags, cta);
+        card.append(head, desc, foot);
+        grid.appendChild(card);
+      });
+    }
+
+    renderPlugins();
+    document.addEventListener("langchange", renderPlugins);
   </script>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

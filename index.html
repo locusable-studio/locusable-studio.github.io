@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
-  <title>Locusable Studio</title>
-  <meta name="description" content="Locusable Studio — focused indie tools for the devices you use every day.">
+  <title data-i18n="title.home">Locusable Studio</title>
+  <meta name="description" data-i18n-content="meta.home" content="Locusable Studio — focused indie tools for the devices you use every day.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); var layout = localStorage.getItem("locusable-home-layout"); if (layout === "list") document.documentElement.setAttribute("data-home-layout", layout); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); var layout = localStorage.getItem("locusable-home-layout"); if (layout === "list") document.documentElement.setAttribute("data-home-layout", layout);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -22,9 +22,9 @@
           <span class="studio-masthead__ring">Locusable <em>Studio</em></span>
         </a>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
@@ -37,6 +37,11 @@
             <button class="theme-control__option" type="button" role="menuitemradio" data-layout-option="grid" aria-label="Grid" title="Grid"><span class="theme-control__option-icon theme-control__option-icon--grid" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-layout-option="list" aria-label="List" title="List"><span class="theme-control__option-icon theme-control__option-icon--list" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></svg></span></button>
             </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
+            </div>
           </div>
         </div>
       </div>
@@ -47,9 +52,9 @@
       <a class="unit unit--tint home-app-card home-app-card--1x2" href="/here-wallpaper/" data-app="wallpaper" data-reveal aria-labelledby="wallpaper-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="Here Wallpaper app icon">
-          <p class="platforms">iPhone and iPad</p>
+          <p class="platforms" data-i18n="platform.iphoneIpad">iPhone and iPad</p>
           <h2 class="product-title unit__title" id="wallpaper-title">Here <em>Wallpaper</em></h2>
-          <p class="unit__subhead">Map lock screens from places you care about.</p>
+          <p class="unit__subhead" data-i18n="home.wallpaper.subhead">Map lock screens from places you care about.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="">
@@ -63,9 +68,9 @@
       <a class="unit unit--tint home-app-card home-app-card--1x2" href="/here-sidefy/" data-app="sidefy" data-reveal aria-labelledby="sidefy-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/sidefy/icon-192.png?v=14" width="84" height="84" alt="Here Sidefy app icon">
-          <p class="platforms">Mac</p>
+          <p class="platforms" data-i18n="platform.mac">Mac</p>
           <h2 class="product-title unit__title" id="sidefy-title">Here <em>Sidefy</em></h2>
-          <p class="unit__subhead">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</p>
+          <p class="unit__subhead" data-i18n="home.sidefy.subhead">Calendar, reminders, RSS, and plugins — along your Mac’s edge.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/sidefy/shot-hero.jpg?v=1" width="1259" height="717" alt="">
@@ -76,9 +81,9 @@
       <a class="unit unit--tint home-app-card home-app-card--2x1" href="/here-island/" data-app="island" data-reveal aria-labelledby="island-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here-island/icon-192.png?v=2" width="84" height="84" alt="Here Island app icon">
-          <p class="platforms">Mac</p>
+          <p class="platforms" data-i18n="platform.mac">Mac</p>
           <h2 class="product-title unit__title" id="island-title">Here <em>Island</em></h2>
-          <p class="unit__subhead">A focused media companion in your MacBook notch.</p>
+          <p class="unit__subhead" data-i18n="home.island.subhead">A focused media companion in your MacBook notch.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/here-island/shot-expanded.jpg?v=1" width="890" height="360" alt="">
@@ -90,9 +95,9 @@
       <a class="unit unit--tint home-app-card home-app-card--2x1" href="/here-trmnl/" data-app="trmnl" data-reveal aria-labelledby="trmnl-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here-trmnl/icon-192.png?v=2" width="84" height="84" alt="Here TRMNL app icon">
-          <p class="platforms">Mac</p>
+          <p class="platforms" data-i18n="platform.mac">Mac</p>
           <h2 class="product-title unit__title" id="trmnl-title">Here <em>TRMNL</em></h2>
-          <p class="unit__subhead">Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.</p>
+          <p class="unit__subhead" data-i18n="home.trmnl.subhead">Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/here-trmnl/shot-hero.jpg?v=2" width="1617" height="898" alt="">
@@ -103,9 +108,9 @@
       <a class="unit unit--tint home-app-card home-app-card--2x1" href="/here-hackerba/" data-app="hackerba" data-reveal aria-labelledby="hackerba-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here-hackerba/icon-192.png?v=1" width="84" height="84" alt="Here HackerBa extension icon">
-          <p class="platforms">Chrome</p>
+          <p class="platforms" data-i18n="platform.chrome">Chrome</p>
           <h2 class="product-title unit__title" id="hackerba-title">Here <em>HackerBa</em></h2>
-          <p class="unit__subhead">Hacker News, restyled as a Tieba-like forum.</p>
+          <p class="unit__subhead" data-i18n="home.hackerba.subhead">Hacker News, restyled as a Tieba-like forum.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/here-hackerba/shot-list.jpg?v=1" width="1400" height="792" alt="">
@@ -117,9 +122,9 @@
       <a class="unit unit--tint home-app-card home-app-card--2x1" href="/here-links/" data-app="links" data-reveal aria-labelledby="links-title">
         <div class="unit__copy">
           <img class="product-hero__icon" src="/assets/here-links/icon-192.png?v=10" width="84" height="84" alt="Here Links app icon">
-          <p class="platforms">iPhone · Coming Soon</p>
+          <p class="platforms" data-i18n="platform.iphoneSoon">iPhone · Coming Soon</p>
           <h2 class="product-title unit__title" id="links-title">Here <em>Links</em></h2>
-          <p class="unit__subhead">Your self-hosted linkding. Native on iOS.</p>
+          <p class="unit__subhead" data-i18n="home.links.subhead">Your self-hosted linkding. Native on iOS.</p>
         </div>
         <div class="home-app-card__list-shots" aria-hidden="true">
           <img src="/assets/here-links/shots/shot-1.jpg?v=1" width="585" height="1272" alt="">
@@ -134,11 +139,12 @@
 
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="/about/">About</a>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="/about/" data-i18n="footer.about">About</a>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>

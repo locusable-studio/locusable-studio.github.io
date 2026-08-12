@@ -4,35 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f44336">
-  <title>Privacy Policy — Here Sidefy</title>
-  <meta name="description" content="Privacy Policy for Here Sidefy by Locusable Studio.">
+  <title data-i18n="title.sidefy.privacy">Privacy Policy — Here Sidefy</title>
+  <meta name="description" data-i18n-content="meta.sidefy.privacy" content="Privacy Policy for Here Sidefy by Locusable Studio.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
-  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme); } catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=165">
+  <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
+  <link rel="stylesheet" href="/assets/site.css?v=166">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
-    <nav class="crumbbar" aria-label="Breadcrumb">
+    <nav class="crumbbar" data-i18n-aria-label="nav.breadcrumb" aria-label="Breadcrumb">
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
         <li><a href="/here-sidefy/">Here Sidefy</a></li>
-        <li><span aria-current="page">Privacy</span></li>
+        <li><span aria-current="page" data-i18n="crumb.privacy">Privacy</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
-          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Theme settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
+          <button class="theme-control__trigger" type="button" data-theme-trigger aria-label="Settings" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu">
             <span class="theme-control__icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <span class="sr-only">Theme settings</span>
+            <span class="sr-only">Settings</span>
           </button>
           <div class="theme-control__menu" id="theme-menu" role="menu" data-theme-menu hidden>
             <div class="theme-control__group" role="group" aria-label="Theme">
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="system" aria-label="System" title="System"><span class="theme-control__option-icon theme-control__option-icon--system" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="dark" aria-label="Dark" title="Dark"><span class="theme-control__option-icon theme-control__option-icon--dark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg></span></button>
             <button class="theme-control__option" type="button" role="menuitemradio" data-theme-option="light" aria-label="Light" title="Light"><span class="theme-control__option-icon theme-control__option-icon--light" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></span></button>
+            </div>
+            <span class="theme-control__divider" aria-hidden="true"></span>
+            <div class="theme-control__group" role="group" aria-label="Language">
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="en" aria-label="English" title="English">EN</button>
+            <button class="theme-control__option theme-control__option--lang" type="button" role="menuitemradio" data-lang-option="zh" aria-label="中文" title="中文">中</button>
             </div>
           </div>
         </div>
@@ -41,6 +46,7 @@
 
     <div class="doc-layout">
       <main class="prose" data-reveal>
+      <div data-lang-block="en">
       <h1>Privacy Policy</h1>
       <p class="prose-meta">Here Sidefy · Locusable Studio · Last updated June 27, 2026</p>
 
@@ -132,16 +138,107 @@
         <a href="https://github.com/sidefy-team/sidefy">github.com/sidefy-team/sidefy</a>.
       </p>
       <p>This privacy policy is effective as of the date stated above.</p>
+      </div>
+      <div data-lang-block="zh">
+      <h1>隐私政策</h1>
+      <p class="prose-meta">Here Sidefy · Locusable Studio · 最近更新 2026 年 6 月 27 日</p>
+
+      <p>
+        本隐私政策适用于 Sidefy macOS 应用（仅在本地处理数据）以及
+        <a href="https://sidefy.locusable.com/">sidefy.locusable.com</a>。
+        本页覆盖两个独立场景：Sidefy macOS 应用，以及 sidefy.locusable.com 网站。下文分节说明。
+      </p>
+
+      <h2>Sidefy 应用</h2>
+      <p>
+        Sidefy（下文称“我们”）重视你的隐私。
+        本节说明 macOS 应用如何处理你的信息。
+      </p>
+
+      <h2>数据收集</h2>
+      <p>
+        <strong>本地处理：</strong>Sidefy 在你的 Mac 上本地处理全部数据。
+        我们不会通过应用收集、存储或向外部服务器传输你的个人信息。
+      </p>
+      <p>
+        <strong>无分析：</strong>Sidefy 应用不使用分析追踪工具，也不使用会收集使用模式的服务。
+      </p>
+      <p>
+        <strong>无广告：</strong>Sidefy 不含广告或广告追踪技术。
+      </p>
+
+      <h2>我们不收集的信息</h2>
+      <ul>
+        <li>个人身份信息</li>
+        <li>日历数据或内容</li>
+        <li>任务列表或笔记</li>
+        <li>系统信息或设备详情</li>
+        <li>使用分析或行为数据</li>
+        <li>位置信息</li>
+      </ul>
+
+      <h2>第三方服务</h2>
+      <p>
+        仅在你明确配置时，Sidefy 才可能连接第三方服务（例如天气 API、日历服务）。此时：
+      </p>
+      <ul>
+        <li>数据在你的设备与第三方服务之间直接传输</li>
+        <li>我们不拦截、存储或访问这些数据</li>
+        <li>各第三方服务有自己的隐私政策</li>
+      </ul>
+
+      <h2>数据安全</h2>
+      <ul>
+        <li>所有数据处理都在你的设备本地完成</li>
+        <li>我们的服务器不存储应用数据</li>
+        <li>插件数据按各插件自己的隐私政策处理</li>
+      </ul>
+
+      <h2>插件隐私</h2>
+      <p>使用第三方插件时：</p>
+      <ul>
+        <li>每个插件可能有自己的隐私政策</li>
+        <li>插件独立于 Sidefy 核心隐私保护运行</li>
+        <li>建议在安装前阅读插件的隐私政策</li>
+      </ul>
+
+      <h2>网站（sidefy.locusable.com）</h2>
+      <p>
+        本节仅适用于营销网站 — 不适用于 Sidefy macOS 应用。
+      </p>
+      <p>
+        <strong>分析：</strong>我们可能使用分析服务（例如 Google Analytics）
+        了解网站的总体流量和页面浏览。这些工具不会访问你的
+        Sidefy 应用数据、日历、提醒或插件内容。
+      </p>
+      <p>
+        <strong>无账户系统：</strong>网站不需要账户，也不会收集上文应用部分列出的个人数据类型。
+      </p>
+
+      <h2>政策变更</h2>
+      <p>
+        我们可能不时更新本隐私政策。任何变更都会发布在本页，并更新修订日期。
+      </p>
+
+      <h2>联系我们</h2>
+      <p>
+        如对本隐私政策有疑问，请通过
+        <a href="https://github.com/sidefy-team/sidefy">github.com/sidefy-team/sidefy</a>
+        联系我们。
+      </p>
+      <p>本隐私政策自上方日期起生效。</p>
+      </div>
     </main>
 
     </div>
     <footer class="footer">
       <div class="footer__inner">
-        <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="https://sidefy.locusable.com/privacy" target="_blank" rel="noopener noreferrer">Official source</a>
+        <span data-i18n="footer.copyright">Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <a href="https://sidefy.locusable.com/privacy" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">Official source</a>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=56" defer></script>
+  <script src="/assets/i18n.js?v=1" defer></script>
+  <script src="/assets/site.js?v=57" defer></script>
 </body>
 </html>
