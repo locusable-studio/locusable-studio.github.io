@@ -1,4 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+@font-face {
+  font-family: "Maplestory";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/Maplestory-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Maplestory";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/Maplestory-Bold.woff2") format("woff2");
+}
 
 :root {
   --bg: #ffffff;
@@ -37,8 +51,9 @@
   --max: 980px;
   --max-wide: 1320px;
   --site-chrome-pad-x: 0.75rem;
-  --site-chrome-h: calc(0.65rem + 0.55rem + 1.25rem + env(safe-area-inset-top));
-  --site-chrome-h-masthead: calc(0.65rem + 0.55rem + 1.35rem + env(safe-area-inset-top));
+  --site-brand-size: 1.35rem;
+  --site-chrome-h: calc(0.65rem + 0.55rem + var(--site-brand-size) + env(safe-area-inset-top));
+  --site-chrome-h-masthead: calc(0.65rem + 0.55rem + var(--site-brand-size) + env(safe-area-inset-top));
   color-scheme: light;
 }
 
@@ -187,11 +202,11 @@ a {
   border-radius: 0;
   background: transparent;
   color: var(--fg);
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: "Maplestory", "Apple SD Gothic Neo", "PingFang SC", sans-serif;
+  font-size: var(--site-brand-size);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .crumbs a[href="/"]:hover,
@@ -209,7 +224,8 @@ a {
 
 .crumbs a[href="/"] em {
   color: var(--accent-studio);
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .crumbs [aria-current="page"] {
@@ -656,18 +672,19 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 .studio-masthead__ring {
   display: inline-block;
-  font-family: "Instrument Serif", Georgia, serif;
-  font-size: 1.35rem;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-family: "Maplestory", "Apple SD Gothic Neo", "PingFang SC", sans-serif;
+  font-size: var(--site-brand-size);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
   color: var(--fg);
   transition: color 0.2s var(--ease-out);
 }
 
 .studio-masthead__brand em,
 .studio-masthead__ring em {
-  font-style: italic;
+  font-style: normal;
+  font-weight: 700;
   color: var(--accent-studio);
 }
 
