@@ -16,6 +16,9 @@
     "crumb.privacy": "隐私",
     "crumb.themes": "主题",
     "crumb.plugins": "插件",
+    "crumb.comingSoon": "即将推出",
+    "nav.comingSoon": "即将推出",
+    "nav.released": "已发布",
 
     "footer.copyright": "© 2026 Locusable Studio 保留所有权利。",
     "footer.copyright.themes": "© 2026 Locusable Studio 保留所有权利。· 地图数据 © OpenStreetMap · 瓦片 © OpenFreeMap",
@@ -26,6 +29,7 @@
 
     "title.home": "Locusable Studio",
     "title.about": "关于 — Locusable Studio",
+    "title.comingSoon": "即将推出 — Locusable Studio",
     "title.wallpaper": "Here Wallpaper — Locusable Studio",
     "title.wallpaper.themes": "Here Wallpaper — 主题",
     "title.wallpaper.privacy": "隐私政策 — Here Wallpaper",
@@ -40,6 +44,8 @@
 
     "meta.home": "Locusable Studio — 为日常设备打造的专注独立工具。",
     "meta.about": "Locusable Studio 为日常设备打造专注的工具。",
+    "meta.comingSoon": "Locusable Studio 还有更多工具即将推出。",
+
     "meta.wallpaper": "Here Wallpaper — 地图锁屏壁纸，可挑选地点、主题与排版。",
     "meta.wallpaper.themes": "Here Wallpaper 主题预览 — 基础与精选配色。",
     "meta.wallpaper.privacy": "Locusable Studio 出品的 Here Wallpaper 隐私政策。",
