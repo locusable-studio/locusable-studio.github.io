@@ -59,7 +59,6 @@
     "meta.links.privacy": "Locusable Studio 出品的 Here Links 隐私政策。",
 
     "platform.iphoneIpad": "iPhone 和 iPad",
-    "platform.iphoneIpadMac": "iPhone、iPad 和 Mac",
     "platform.mac": "Mac",
     "platform.chrome": "Chrome",
     "platform.iphoneSoon": "iPhone · 即将推出",
@@ -107,7 +106,7 @@
     "wallpaper.faq.a3": "地图数据来自 OpenStreetMap 及相关开放项目，由 MapLibre 渲染呈现。",
     "wallpaper.macSoon": "独立 Mac 应用即将上线。",
     "wallpaper.faq.q4": "Mac 上能用吗？",
-    "wallpaper.faq.a4": "能。现在就能在 Mac 上用。独立 Mac 应用即将上线，iPhone、iPad 与 Mac 共用一份 Pro 订阅。",
+    "wallpaper.faq.a4": "还不能。独立 Mac 应用即将上线，上线后与 iPhone、iPad 共用一份 Pro 订阅。",
 
     "sidefy.subhead": "日历、提醒、RSS 和插件，汇聚在 Mac 屏幕边缘。",
     "sidefy.preview": "应用预览",

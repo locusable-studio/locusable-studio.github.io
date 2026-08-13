@@ -21,7 +21,7 @@ const pages = [
 
 const cssVersion = "182";
 const jsVersion = "59";
-const i18nJsVersion = "5";
+const i18nJsVersion = "6";
 
 const themeMapJsVersion = "1";
 
