@@ -34,6 +34,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --max: 980px;
   --max-wide: 1320px;
+  --site-chrome-pad-x: 0.75rem;
   --site-chrome-h: calc(0.65rem + 0.55rem + 1.25rem + env(safe-area-inset-top));
   --site-chrome-h-masthead: calc(0.65rem + 0.55rem + 1.7rem + env(safe-area-inset-top));
   color-scheme: light;
@@ -134,7 +135,7 @@ a {
   justify-content: space-between;
   gap: 1rem;
   box-sizing: border-box;
-  padding: 0 var(--unit-pad-x);
+  padding: 0 var(--site-chrome-pad-x);
 }
 
 .crumbs {
@@ -461,7 +462,7 @@ html[data-app] .footer a:focus-visible,
   gap: 1rem;
   padding:
     calc(0.65rem + env(safe-area-inset-top))
-    var(--unit-pad-x)
+    var(--site-chrome-pad-x)
     0.55rem;
 }
 
@@ -708,10 +709,6 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   padding: 0.75rem;
-}
-
-.site-shell:has(.home-product-grid) .studio-masthead__inner {
-  padding-inline: 0.75rem;
 }
 
 .home-app-card {
@@ -1118,13 +1115,13 @@ html[data-home-layout="list"] .home-app-card[data-app="island"] .home-app-card__
 }
 
 @media (max-width: 520px) {
+  :root {
+    --site-chrome-pad-x: 0.5rem;
+  }
+
   .home-product-grid {
     padding: 0.5rem;
     gap: 0.5rem;
-  }
-
-  .site-shell:has(.home-product-grid) .studio-masthead__inner {
-    padding-inline: 0.5rem;
   }
 
   .home-app-card,
