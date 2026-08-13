@@ -285,7 +285,7 @@ html[data-theme="dark"] .site-shell:has(.doc-layout) {
   width: 100%;
   padding:
     1rem
-    var(--unit-pad-x)
+    var(--site-chrome-pad-x)
     calc(1.25rem + env(safe-area-inset-bottom));
   display: flex;
   flex-wrap: wrap;
@@ -865,12 +865,13 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 .home-app-card__arrow {
   position: absolute;
-  top: 1.25rem;
+  top: 50%;
   right: 1.25rem;
   bottom: auto;
   color: var(--muted);
   width: 1.25rem;
   height: 1.25rem;
+  transform: translateY(-50%);
   transition: color 0.2s var(--ease-out);
 }
 
@@ -882,7 +883,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 @media (hover: hover) {
   .home-app-card:hover {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 11%, var(--unit-base, var(--bg)));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 14%, var(--unit-base, var(--bg)));
   }
 
   .home-app-card:hover .home-app-card__arrow {
@@ -890,13 +891,13 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   }
 
   html[data-theme="dark"] .home-app-card:hover {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 18%, var(--unit-base, var(--bg)));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 22%, var(--unit-base, var(--bg)));
   }
 }
 
 @media (hover: hover) and (prefers-color-scheme: dark) {
   :root:not([data-theme]) .home-app-card:hover {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 18%, var(--unit-base, var(--bg)));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 22%, var(--unit-base, var(--bg)));
   }
 }
 
@@ -1092,10 +1093,11 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   }
 
   .home-app-card__arrow {
-    top: 1rem;
+    top: 50%;
     right: 0.95rem;
     width: 1.1rem;
     height: 1.1rem;
+    transform: translateY(-50%);
   }
 
   /* Unlock desktop list row height on narrow screens */
@@ -1612,6 +1614,14 @@ html[data-theme="dark"] .product-hero {
 .product-hero .unit__links {
   margin-top: 1.15rem;
   margin-bottom: 2rem;
+}
+
+.product-hero .unit__links:has(+ .status-note) {
+  margin-bottom: 0.45rem;
+}
+
+.product-hero .status-note {
+  margin: 0 auto 2rem;
 }
 
 @media (max-width: 520px) {
@@ -2256,6 +2266,12 @@ html[data-app] body.catalog-page .theme-card {
   color: inherit;
 }
 
+html[data-lang="zh"] .edge-plaster__label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
 .edge-plaster:hover,
 .edge-plaster:focus-visible {
   background: var(--wash);
@@ -2295,6 +2311,11 @@ html[data-app] body.catalog-page .theme-card {
   .edge-plaster__label {
     font-size: 0.6rem;
     letter-spacing: 0.14em;
+  }
+
+  html[data-lang="zh"] .edge-plaster__label {
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
   }
 }
 

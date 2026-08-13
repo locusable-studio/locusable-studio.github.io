@@ -19,9 +19,9 @@ const pages = [
   "coming-soon/index.html",
 ];
 
-const cssVersion = "181";
+const cssVersion = "182";
 const jsVersion = "59";
-const i18nJsVersion = "3";
+const i18nJsVersion = "5";
 
 const themeMapJsVersion = "1";
 
@@ -95,6 +95,7 @@ const productFaqs = {
     "Is Here Wallpaper free?",
     "What does Here Wallpaper Pro include?",
     "Where does the map data come from?",
+    "Does it work on Mac?",
   ],
   "here-links/index.html": [
     "Is Here Links free?",
@@ -177,12 +178,12 @@ const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
   "Focused tools for the devices you use every day.",
   "overlooked interface spaces",
-  "Map lock screens from places you care about.",
+  "Map wallpapers from places you care about.",
   "Calendar, reminders, RSS, and plugins — along your Mac’s edge.",
   "A focused media companion in your MacBook notch.",
   "Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.",
   "Hacker News, restyled as a Tieba-like forum.",
-  "Your self-hosted linkding. Native on iOS.",
+  "Your self-hosted linkding. Native on iPhone.",
   "Coming Soon",
 ]) {
   if (!about.includes(needle)) {

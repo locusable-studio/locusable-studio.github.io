@@ -45,7 +45,7 @@ The `.platforms` label must stay consistent across home card and product hero.
 
 | State | Format | Example |
 |-------|--------|---------|
-| Released | `{Platform}` | `Mac`, `iPhone`, `Chrome`, `iPhone and iPad` |
+| Released | `{Platform}` | `Mac`, `iPhone`, `Chrome`, `iPhone and iPad`, `iPhone, iPad, and Mac` |
 | Coming soon | `{Platform} · Coming Soon` | `Mac · Coming Soon`, `iPhone · Coming Soon` |
 
 Rules:

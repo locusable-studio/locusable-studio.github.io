@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#4caf50">
   <title data-i18n="title.wallpaper">Here Wallpaper — Locusable Studio</title>
-  <meta name="description" data-i18n-content="meta.wallpaper" content="Here Wallpaper — map lock-screen wallpapers. Pick a place, theme, and layout.">
+  <meta name="description" data-i18n-content="meta.wallpaper" content="Here Wallpaper — map wallpapers. Pick a place, theme, and layout.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
-  <link rel="stylesheet" href="/assets/site.css?v=181">
+  <link rel="stylesheet" href="/assets/site.css?v=182">
 </head>
 <body>
   <div class="site-shell site-shell--wide">
@@ -46,9 +46,9 @@
     <main>
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="Here Wallpaper app icon">
-        <p class="platforms platforms--lg" data-i18n="platform.iphoneIpad">iPhone and iPad</p>
+        <p class="platforms platforms--lg" data-i18n="platform.iphoneIpadMac">iPhone, iPad, and Mac</p>
         <h1 class="product-title" id="product-title">Here <em>Wallpaper</em></h1>
-        <p class="unit__subhead" data-i18n="wallpaper.subhead">Map lock screens from places you care about.</p>
+        <p class="unit__subhead" data-i18n="wallpaper.subhead">Map wallpapers from places you care about.</p>
         <div class="unit__links">
           <a
             href="https://apps.apple.com/app/id6789155385"
@@ -59,6 +59,7 @@
             rel="noopener noreferrer"
            data-i18n="cta.appStore">View on the App Store<span class="chev" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span></a>
         </div>
+        <p class="status-note" data-i18n="wallpaper.macSoon">Dedicated Mac app coming soon.</p>
         <div class="unit__media unit__media--phones" data-i18n-aria-label="wallpaper.previews" aria-label="Wallpaper previews">
           <figure><img src="/assets/shots/shot-1.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 1"></figure>
           <figure><img src="/assets/shots/shot-2.jpg?v=10" width="440" height="828" alt="Here Wallpaper preview 2"></figure>
@@ -70,7 +71,7 @@
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="place-title">
         <div class="unit__copy">
           <h2 class="product-title unit__title" id="place-title" data-i18n="wallpaper.placeTitle">Place and layout</h2>
-          <p class="unit__subhead" data-i18n="wallpaper.placeSubhead">A city or spot you care about becomes your lock screen. Tune type and framing to fit your phone.</p>
+          <p class="unit__subhead" data-i18n="wallpaper.placeSubhead">A city or spot you care about becomes your wallpaper. Tune type and framing to fit your screen.</p>
         </div>
       </section>
 
@@ -104,6 +105,10 @@
             <summary data-i18n="wallpaper.faq.q3">Where does the map data come from?</summary>
             <p data-i18n="wallpaper.faq.a3">Maps use OpenStreetMap and related open projects, rendered with MapLibre.</p>
           </details>
+          <details>
+            <summary data-i18n="wallpaper.faq.q4">Does it work on Mac?</summary>
+            <p data-i18n="wallpaper.faq.a4">Yes. It already runs on Mac. A dedicated Mac app is coming soon, and one Pro subscription covers iPhone, iPad, and Mac.</p>
+          </details>
         </div>
       </section>
     </main>
@@ -115,7 +120,7 @@
       </div>
     </footer>
   </div>
-  <script src="/assets/i18n.js?v=3" defer></script>
+  <script src="/assets/i18n.js?v=5" defer></script>
   <script src="/assets/site.js?v=59" defer></script>
 </body>
 </html>
