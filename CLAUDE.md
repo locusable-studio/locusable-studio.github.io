@@ -79,11 +79,7 @@ Keep `assets/lucide/*.svg` as source reference; page UI should embed the paths i
 
 ## Screenshot / shot rules
 
-- **Grid layout: no screenshots** on home cards. Shots only appear in **list** layout (`data-home-layout="list"`).
-- **List shot count:**
-  - Desktop list: show **all** shots in `.home-app-card__list-shots` (do not drop assets from the markup).
-  - Exception: Here Island desktop list shows **only the first** shot (shots are wide).
-  - Mobile list (`max-width: 800px`): show **only the first** shot (`img:nth-child(n + 2) { display: none }`).
+- **Home product cards: no screenshots** in grid or list. Shots live on product pages only.
 - **Aspect ratio is sacred.** Never invent, override, or stretch screenshot proportions.
   - Use the file’s intrinsic ratio only (`width: auto; height: auto`).
   - Scale with `max-height` / `max-width` caps; both axes must shrink together.

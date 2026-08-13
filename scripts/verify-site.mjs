@@ -16,11 +16,12 @@ const pages = [
   "here-island/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
+  "coming-soon/index.html",
 ];
 
-const cssVersion = "166";
-const jsVersion = "57";
-const i18nJsVersion = "1";
+const cssVersion = "181";
+const jsVersion = "59";
+const i18nJsVersion = "3";
 
 const themeMapJsVersion = "1";
 
@@ -130,8 +131,8 @@ for (const page of pages) {
     console.error(`FAIL ${page}: legacy back-button nav found`);
     failed++;
   }
-  if (page !== "index.html" && html.includes('href="/about/"')) {
-    console.error(`FAIL ${page}: About link should only appear on the homepage`);
+  if (page !== "index.html" && page !== "coming-soon/index.html" && html.includes('href="/about/"')) {
+    console.error(`FAIL ${page}: About link should only appear on hub pages`);
     failed++;
   }
   const crumbs = breadcrumbs[page];
@@ -206,14 +207,14 @@ if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
   failed++;
 }
-for (const href of ["/here-wallpaper/", "/here-links/", "/here-sidefy/", "/here-island/", "/here-hackerba/", "/here-trmnl/"]) {
+for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/here-hackerba/", "/here-trmnl/", "/coming-soon/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
 }
-if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 6) {
-  console.error("FAIL index.html: homepage should have six tinted app cards");
+if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 5) {
+  console.error("FAIL index.html: homepage should have five tinted app cards");
   failed++;
 }
 if (home.includes("unit--soft home-app-card") || home.includes("home-app-card--feature") || home.includes("home-app-card__screens")) {
@@ -226,13 +227,11 @@ if (home.includes("home-app-card__details")) {
 }
 for (const needle of [
   'class="home-product-grid"',
-  "home-app-card--1x2",
+  "home-app-card--2x2",
   "home-app-card--2x1",
-  "home-app-card__list-shots",
   "home-app-card__arrow",
   'data-app="island"',
   'data-app="sidefy"',
-  'data-app="links"',
   'data-app="hackerba"',
   'data-app="wallpaper"',
   'data-app="trmnl"',
@@ -241,6 +240,23 @@ for (const needle of [
     console.error(`FAIL index.html: missing homepage card structure (${needle})`);
     failed++;
   }
+}
+if (home.includes("home-app-card__list-shots")) {
+  console.error("FAIL index.html: homepage cards should not embed list screenshots");
+  failed++;
+}
+if (home.includes('data-app="links"')) {
+  console.error("FAIL index.html: Here Links belongs on coming-soon, not the homepage");
+  failed++;
+}
+const comingSoon = fs.readFileSync(path.join(root, "coming-soon/index.html"), "utf8");
+if (!comingSoon.includes('data-app="links"') || !comingSoon.includes("home-product-grid")) {
+  console.error("FAIL coming-soon/index.html: should list Here Links in the product grid");
+  failed++;
+}
+if (comingSoon.includes("home-app-card__list-shots")) {
+  console.error("FAIL coming-soon/index.html: cards should not embed list screenshots");
+  failed++;
 }
 if (home.includes("home-app-card--island") || home.includes("home-app-card__peeks")) {
   console.error("FAIL index.html: Island should use a compact card without peeks");
@@ -304,8 +320,8 @@ for (const needle of ['content: "›";']) {
 }
 const crumbBrandRule = siteCss.match(/\.crumbs a\[href="\/"\] \{([^}]*)\}/)?.[1] || "";
 for (const needle of [
-  "padding: 0.33em 0.72em 0.37em;",
-  "font-size: 1rem;",
+  'font-family: "Maplestory"',
+  "font-size: var(--site-brand-size);",
 ]) {
   if (!crumbBrandRule.includes(needle)) {
     console.error(`FAIL assets/site.css: breadcrumb brand should match masthead (${needle})`);
