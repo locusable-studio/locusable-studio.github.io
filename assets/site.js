@@ -179,6 +179,7 @@
     var grid = document.querySelector(".home-product-grid");
     var options = document.querySelectorAll("[data-layout-option]");
     if (!grid || !options.length) return;
+    var narrow = window.matchMedia("(max-width: 800px)");
 
     function getPreference() {
       try {
@@ -189,7 +190,8 @@
     }
 
     function apply(preference) {
-      if (preference === "list") document.documentElement.setAttribute("data-home-layout", "list");
+      var effective = narrow.matches ? "list" : preference;
+      if (effective === "list") document.documentElement.setAttribute("data-home-layout", "list");
       else document.documentElement.removeAttribute("data-home-layout");
       options.forEach(function (option) {
         option.setAttribute("aria-checked", String(option.getAttribute("data-layout-option") === preference));
@@ -197,8 +199,12 @@
     }
 
     apply(getPreference());
+    if (narrow.addEventListener) narrow.addEventListener("change", function () { apply(getPreference()); });
+    else if (narrow.addListener) narrow.addListener(function () { apply(getPreference()); });
+
     options.forEach(function (option) {
       option.addEventListener("click", function () {
+        if (narrow.matches) return;
         var preference = option.getAttribute("data-layout-option");
         apply(preference);
         try {
