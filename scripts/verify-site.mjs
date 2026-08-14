@@ -252,6 +252,11 @@ for (const needle of [
     failed++;
   }
 }
+if (!home.includes('class="home-app-card__shot"') || !home.includes('/assets/shots/shot-1.jpg?v=10" width="585" height="1266"')) {
+  console.error("FAIL index.html: missing wallpaper shot in the 2x2 card");
+  failed++;
+}
+
 if (home.includes("home-card-tags")) {
   for (const needle of [
     'data-i18n="home.wallpaper.tag.osm"',

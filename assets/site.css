@@ -779,9 +779,33 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 .home-app-card--1x2 .unit__copy,
 .home-app-card--2x2 .unit__copy {
-  max-width: none;
+  max-width: 54%;
   margin: 0;
   padding: 0;
+}
+
+/* Portrait wallpaper screenshot peeking from the right edge of the 2×2
+   card — same flush-to-bottom treatment as product-page shots. */
+.home-app-card__shot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 44%;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: 0 var(--shot-radius) 0 0;
+}
+
+.home-app-card__shot img {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: auto;
+  transform: translateX(-50%);
+  border-radius: 0 0 var(--shot-radius) 0;
+  box-shadow: var(--shot-flush-shadow);
 }
 
 .home-app-card--1x2 .product-hero__icon,
@@ -980,6 +1004,11 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__copy {
   padding: 0;
 }
 
+html[data-home-layout="list"] .home-card-tags,
+html[data-home-layout="list"] .home-app-card__shot {
+  display: none;
+}
+
 html[data-home-layout="list"] .home-app-card .product-hero__icon,
 html[data-home-layout="list"] .home-app-card--1x2 .product-hero__icon,
 html[data-home-layout="list"] .home-app-card--2x2 .product-hero__icon {
@@ -1045,6 +1074,16 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   /* Feature pills only fit the tall 2×2 card; hide in compact rows */
   .home-card-tags {
     display: none;
+  }
+
+  /* Shot only fits the tall 2×2 card */
+  .home-app-card__shot {
+    display: none;
+  }
+
+  .home-app-card--1x2 .unit__copy,
+  .home-app-card--2x2 .unit__copy {
+    max-width: none;
   }
 
   .home-app-card--1x1,
@@ -1551,7 +1590,8 @@ html[data-theme="dark"] .unit__media--phones figure,
 html[data-theme="dark"] .unit__media--desktop-peek img,
 html[data-theme="dark"] .unit__media--desktop-dual figure,
 html[data-theme="dark"] .unit__media--island figure,
-html[data-theme="dark"] .unit__media--squares figure {
+html[data-theme="dark"] .unit__media--squares figure,
+html[data-theme="dark"] .home-app-card__shot img {
   box-shadow: var(--shot-flush-shadow-dark);
 }
 
@@ -1560,7 +1600,8 @@ html[data-theme="dark"] .unit__media--squares figure {
   :root:not([data-theme]) .unit__media--desktop-peek img,
   :root:not([data-theme]) .unit__media--desktop-dual figure,
   :root:not([data-theme]) .unit__media--island figure,
-  :root:not([data-theme]) .unit__media--squares figure {
+  :root:not([data-theme]) .unit__media--squares figure,
+  :root:not([data-theme]) .home-app-card__shot img {
     box-shadow: var(--shot-flush-shadow-dark);
   }
 }
