@@ -103,7 +103,7 @@ const breadcrumbs = {
 const productFaqs = {
   "here-wallpaper/index.html": [
     "Is Here Wallpaper free?",
-    "What does Here Wallpaper Pro include?",
+    "What does Pro include?",
     "Where does the map data come from?",
     "Does it work on Mac?",
   ],
@@ -188,12 +188,12 @@ const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
   "Focused tools for the devices you use every day.",
   "overlooked interface spaces",
-  "Map wallpapers from places you care about.",
-  "Calendar, reminders, RSS, and plugins — along your Mac’s edge.",
-  "A focused media companion in your MacBook notch.",
-  "Your LaraPaper / TRMNL screen, between the wallpaper and desktop icons.",
-  "Hacker News, restyled as a Tieba-like forum.",
-  "Your self-hosted linkding. Native on iPhone.",
+  "Your places. Your wallpaper.",
+  "Your day. Along the edge.",
+  "Music. In the notch.",
+  "Your screen. On your desktop.",
+  "HN. Reborn as a forum.",
+  "Your bookmarks. Natively iPhone.",
   "Coming Soon",
 ]) {
   if (!about.includes(needle)) {
@@ -562,6 +562,16 @@ for (const file of ["basic_themes.json", "featured_themes.json"]) {
   const catalog = JSON.parse(fs.readFileSync(themePath, "utf8"));
   if (!Array.isArray(catalog) || !catalog.length) {
     console.error(`FAIL ${file}: empty catalog`);
+    failed++;
+  }
+}
+// Guard against stale catalogs: mirrors the HereWallpaper app resources.
+const themeCounts = { "basic_themes.json": 8, "featured_themes.json": 38 };
+for (const [file, min] of Object.entries(themeCounts)) {
+  const themePath = path.join(root, "here-wallpaper/themes/data", file);
+  const catalog = JSON.parse(fs.readFileSync(themePath, "utf8"));
+  if (catalog.length < min) {
+    console.error(`FAIL ${file}: expected >= ${min} themes, found ${catalog.length} — re-run scripts/sync-wallpaper-themes.mjs`);
     failed++;
   }
 }
