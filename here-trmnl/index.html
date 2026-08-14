@@ -76,6 +76,39 @@
         </div>
       </section>
 
+      <section class="unit unit--tint unit--soft eink-section" data-reveal aria-labelledby="eink-title">
+        <div class="unit__copy">
+          <h2 class="product-title unit__title" id="eink-title" data-i18n="trmnl.liveTitle">The screen, live</h2>
+          <p class="unit__subhead" data-i18n="trmnl.liveSubhead">A faithful e-ink preview of what your TRMNL screen is showing right now — refreshed on the server’s interval.</p>
+        </div>
+        <div class="eink-demo" data-eink-demo>
+          <div class="eink-device" role="img" data-i18n-aria-label="trmnl.preview" aria-label="Live e-ink preview">
+            <div class="eink-screen" data-eink-screen>
+              <div class="eink-grid" aria-hidden="true"></div>
+              <div class="eink-statusline">
+                <span class="eink-time" data-eink-time>--:--</span>
+                <span class="eink-date" data-eink-date>···</span>
+              </div>
+              <div class="eink-rule" aria-hidden="true"></div>
+              <div class="eink-weather">
+                <span class="eink-temp" data-eink-temp>24°</span>
+                <span class="eink-cond" data-eink-cond>CLEAR</span>
+              </div>
+              <div class="eink-rule" aria-hidden="true"></div>
+              <ul class="eink-events">
+                <li><span class="eink-ev-time">10:00</span><span class="eink-ev-title" data-i18n="trmnl.ev1">Team standup</span></li>
+                <li><span class="eink-ev-time">14:30</span><span class="eink-ev-title" data-i18n="trmnl.ev2">Design review</span></li>
+                <li><span class="eink-ev-time">18:00</span><span class="eink-ev-title" data-i18n="trmnl.ev3">Dinner</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="eink-toolbar">
+            <button type="button" class="eink-refresh" data-eink-refresh data-i18n="trmnl.refresh">Refresh</button>
+            <span class="eink-status" data-eink-status data-i18n="trmnl.status">Auto-refresh</span>
+          </div>
+        </div>
+      </section>
+
       <div class="detail-feature-grid">
       <section class="unit unit--tint unit--soft" data-reveal aria-labelledby="mirror-title">
         <div class="unit__copy unit__copy--solo">
@@ -121,6 +154,71 @@
       </div>
     </footer>
   </div>
+  <script>
+    (function () {
+      var demo = document.querySelector("[data-eink-demo]");
+      if (!demo) return;
+      var screen = demo.querySelector("[data-eink-screen]");
+      var timeEl = demo.querySelector("[data-eink-time]");
+      var dateEl = demo.querySelector("[data-eink-date]");
+      var tempEl = demo.querySelector("[data-eink-temp]");
+      var condEl = demo.querySelector("[data-eink-cond]");
+      var btn = demo.querySelector("[data-eink-refresh]");
+      var statusEl = demo.querySelector("[data-eink-status]");
+
+      function lang() {
+        if (window.LocusableI18n) return window.LocusableI18n.getLang();
+        try {
+          return window.localStorage.getItem("locusable-lang") === "zh" ? "zh" : "en";
+        } catch (e) { return "en"; }
+      }
+
+      function renderClock() {
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2, "0");
+        var m = String(now.getMinutes()).padStart(2, "0");
+        if (timeEl) timeEl.textContent = h + ":" + m;
+        if (dateEl) {
+          var opts = lang() === "zh"
+            ? { weekday: "short", month: "short", day: "numeric" }
+            : { weekday: "short", month: "short", day: "numeric" };
+          var s = now.toLocaleDateString(lang() === "zh" ? "zh-CN" : "en-US", opts);
+          dateEl.textContent = s.toUpperCase();
+        }
+        if (tempEl && condEl) {
+          var t = 18 + Math.round(now.getMinutes() / 5) % 9; // gentle drift, stays plausible
+          tempEl.textContent = t + "°";
+          condEl.textContent = lang() === "zh" ? "晴" : "CLEAR";
+        }
+      }
+
+      function flash() {
+        if (!screen) return;
+        screen.classList.add("is-refreshing");
+        renderClock();
+        setTimeout(function () {
+          screen.classList.remove("is-refreshing");
+          if (btn) btn.classList.remove("is-busy");
+          if (statusEl) {
+            var txt = (window.LocusableI18n && window.LocusableI18n.t("trmnl.statusNow")) || "Updated just now";
+            statusEl.textContent = txt;
+          }
+        }, 520);
+      }
+
+      if (btn) {
+        btn.addEventListener("click", function () {
+          if (btn.classList.contains("is-busy")) return;
+          btn.classList.add("is-busy");
+          flash();
+        });
+      }
+
+      renderClock();
+      setInterval(renderClock, 30000);
+      document.addEventListener("langchange", renderClock);
+    })();
+  </script>
   <script src="/assets/i18n.js?v=6" defer></script>
   <script src="/assets/site.js?v=59" defer></script>
 </body>
