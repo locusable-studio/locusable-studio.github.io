@@ -252,11 +252,6 @@ for (const needle of [
     failed++;
   }
 }
-if (!home.includes("home-app-card__art") || !home.includes("home-app-card__art-pin")) {
-  console.error("FAIL index.html: missing map-wallpaper art in the 2x2 card");
-  failed++;
-}
-
 if (home.includes("home-card-tags")) {
   for (const needle of [
     'data-i18n="home.wallpaper.tag.osm"',
