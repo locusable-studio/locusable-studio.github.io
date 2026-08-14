@@ -315,6 +315,23 @@ html[data-theme="dark"] .site-shell:has(.doc-layout) {
   color: var(--app-accent);
 }
 
+/* Standalone units between the hero and the FAQ (mac/place/themes,
+   plugins…): same rounded-card language as the hero, centered column. */
+main > .unit {
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 24px;
+}
+
+main > .unit + .unit {
+  margin-top: 0.75rem;
+}
+
+main > .unit .unit__media {
+  max-width: none;
+}
+
 .product-faq {
   padding: var(--unit-pad-y) var(--unit-pad-x);
   background: var(--bg);
@@ -1418,7 +1435,9 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
-  padding: 0.75rem;
+  padding: 1.5rem 0 0.75rem;
+  max-width: var(--max);
+  margin: 0 auto;
 }
 
 .detail-feature-grid .unit {
@@ -1427,6 +1446,20 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   padding: clamp(2rem, 5vw, 4rem) var(--unit-pad-x);
   align-items: center;
   border-radius: 20px;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .detail-feature-grid .unit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 44px -22px rgba(0, 0, 0, 0.25);
+  }
+
+  html[data-theme="dark"] .detail-feature-grid .unit:hover {
+    box-shadow: 0 22px 50px -24px rgba(0, 0, 0, 0.55);
+  }
 }
 
 .detail-feature-grid .unit__copy--solo {
@@ -1440,7 +1473,7 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   }
 
   .detail-feature-grid {
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     gap: 0.5rem;
   }
 
@@ -1625,26 +1658,34 @@ html[data-theme="dark"] .home-app-card__shot img {
   }
 }
 
-/* Product page hero */
+/* Product page hero — a rounded card on a neutral page, matching the
+   home-grid card language (radius, tint, flush screenshots). */
 .product-hero {
   text-align: center;
+  max-width: var(--max);
+  margin: calc(var(--site-chrome-h) + 1rem) auto 0;
   padding:
-    calc(var(--site-chrome-h) + 0.5rem)
+    clamp(2.5rem, 5vw, 4rem)
     var(--unit-pad-x)
     0;
+  overflow: hidden;
   --unit-base: var(--bg);
   background: color-mix(in srgb, var(--app-accent) 6%, var(--unit-base));
+  border-radius: 24px;
+  box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.22);
 }
 
 html[data-theme="dark"] .product-hero {
   --unit-base: var(--bg-alt);
   background: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
+  box-shadow: 0 28px 70px -30px rgba(0, 0, 0, 0.6);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .product-hero {
     --unit-base: var(--bg-alt);
     background: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
+    box-shadow: 0 28px 70px -30px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -1712,6 +1753,21 @@ html[data-theme="dark"] .product-hero {
   }
 }
 
+/* Narrow screens: hero card goes edge-to-edge to match the grid */
+@media (max-width: 720px) {
+  .product-hero {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    border-radius: 18px;
+  }
+
+  main > .unit {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+    border-radius: 18px;
+  }
+}
+
 /* Catalog / utility pages (themes, plugins) */
 html[data-app] body.catalog-page {
   --catalog-base: var(--bg);
@@ -1739,20 +1795,20 @@ html[data-theme="dark"] body.catalog-page {
 
 html[data-app] .site-shell:has(.product-hero) {
   --page-base: var(--bg);
-  background: color-mix(in srgb, var(--app-accent) 6%, var(--page-base));
+  background: var(--page-base);
   min-height: 100vh;
   min-height: 100svh;
 }
 
 html[data-theme="dark"][data-app] .site-shell:has(.product-hero) {
   --page-base: var(--bg-alt);
-  background: color-mix(in srgb, var(--app-accent) 20%, var(--page-base));
+  background: var(--page-base);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme])[data-app] .site-shell:has(.product-hero) {
     --page-base: var(--bg-alt);
-    background: color-mix(in srgb, var(--app-accent) 20%, var(--page-base));
+    background: var(--page-base);
   }
 }
 
