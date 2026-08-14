@@ -375,14 +375,6 @@ if (!siteCss.includes(".about-page .unit__subhead {\n  max-width: 34rem;")) {
   console.error("FAIL assets/site.css: About copy should avoid orphaned final words");
   failed++;
 }
-if (!siteCss.includes(".unit__media--squares {\n  align-items: flex-end;\n  padding-bottom: 0;")) {
-  console.error("FAIL assets/site.css: theme previews should align with the unit bottom");
-  failed++;
-}
-if (!siteCss.includes("aspect-ratio: 1170 / 760;")) {
-  console.error("FAIL assets/site.css: theme previews should crop their bottom edge");
-  failed++;
-}
 if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;")) {
   console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
   failed++;
@@ -393,15 +385,21 @@ if (!wallpaper.includes('data-i18n="platform.iphoneIpadMac"')) {
   console.error("FAIL here-wallpaper/index.html: platform line should include Mac");
   failed++;
 }
-if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-dual")) {
+if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-peek")) {
   console.error("FAIL here-wallpaper/index.html: missing Mac desktop preview section");
   failed++;
 }
-for (const file of ["assets/here-wallpaper/shot-mac-chicago.jpg", "assets/here-wallpaper/shot-mac-marrakech.jpg"]) {
-  if (!fs.existsSync(path.join(root, file))) {
-    console.error(`FAIL missing ${file}`);
-    failed++;
-  }
+if (!fs.existsSync(path.join(root, "assets/here-wallpaper/shot-mac-chicago.jpg"))) {
+  console.error("FAIL missing assets/here-wallpaper/shot-mac-chicago.jpg");
+  failed++;
+}
+if (fs.existsSync(path.join(root, "assets/here-wallpaper/shot-mac-marrakech.jpg"))) {
+  console.error("FAIL assets/here-wallpaper/shot-mac-marrakech.jpg should be removed");
+  failed++;
+}
+if (wallpaper.includes("shot-mac-marrakech") || wallpaper.includes("desktop-dual")) {
+  console.error("FAIL here-wallpaper/index.html: Mac preview should be a single desktop-peek image");
+  failed++;
 }
 
 

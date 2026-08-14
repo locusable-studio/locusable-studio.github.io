@@ -96,8 +96,8 @@
 
     "wallpaper.subhead": "把你在意的地方，变成地图壁纸。",
     "wallpaper.previews": "壁纸预览",
-    "wallpaper.macTitle": "在 Mac 上，同样精彩",
-    "wallpaper.macSubhead": "同样的地点、配色与字体 — 为桌面重新构图。Mac 应用即将上线。",
+    "wallpaper.macTitle": "Mac 专属的动态壁纸",
+    "wallpaper.macSubhead": "同样的地点、配色与字体 — 在桌面上实时渲染，以动态壁纸持续更新。Mac 应用即将上线。",
     "wallpaper.macPreviews": "Mac 壁纸预览",
     "wallpaper.placeTitle": "地点与排版",
     "wallpaper.placeSubhead": "选一座城市，或一个你在意的地点，作为你的壁纸；再调整字体与构图，贴合你的屏幕。",
