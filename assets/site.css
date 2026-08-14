@@ -784,17 +784,18 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   padding: 0;
 }
 
-/* Portrait wallpaper screenshot peeking from the right edge of the 2×2
-   card — same flush-to-bottom treatment as product-page shots. */
+/* Portrait wallpaper screenshot floating on the right side of the 2×2
+   card — centered vertically with equal 1.5rem gaps on top, right and
+   bottom (matching the card padding), fully rounded, touching no edge. */
 .home-app-card__shot {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 44%;
+  top: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 40%;
   overflow: hidden;
   pointer-events: none;
-  border-radius: 0 var(--shot-radius) 0 0;
+  border-radius: var(--shot-radius);
 }
 
 .home-app-card__shot img {
@@ -804,7 +805,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   height: 100%;
   width: auto;
   transform: translateX(-50%);
-  border-radius: 0 0 var(--shot-radius) 0;
+  border-radius: var(--shot-radius);
   box-shadow: var(--shot-flush-shadow);
 }
 
