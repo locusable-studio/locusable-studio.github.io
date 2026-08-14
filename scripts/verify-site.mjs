@@ -103,29 +103,39 @@ const breadcrumbs = {
 const productFaqs = {
   "here-wallpaper/index.html": [
     "Is Here Wallpaper free?",
-    "What does Pro include?",
-    "Where does the map data come from?",
-    "Does it work on Mac?",
+    "What does Here Wallpaper do?",
+    "What do I need to run it?",
+    "Does Here Wallpaper collect personal data?",
   ],
   "here-links/index.html": [
     "Is Here Links free?",
-    "What is linkding?",
-    "Can I connect more than one server?",
+    "What does Here Links do?",
+    "What do I need to run it?",
+    "Does Here Links collect personal data?",
   ],
   "here-sidefy/index.html": [
-    "How is Here Sidefy priced?",
-    "What does Here Sidefy integrate with?",
+    "Is Here Sidefy free?",
+    "What does Here Sidefy do?",
+    "What do I need to run it?",
     "Does Here Sidefy collect personal data?",
   ],
   "here-island/index.html": [
-    "Is Here Island free and open source?",
+    "Is Here Island free?",
     "What does Here Island do?",
     "What do I need to run it?",
+    "Does Here Island collect personal data?",
   ],
   "here-hackerba/index.html": [
-    "Is Here HackerBa free and open source?",
+    "Is Here HackerBa free?",
     "What does Here HackerBa do?",
-    "How do I install it?",
+    "What do I need to run it?",
+    "Does Here HackerBa collect personal data?",
+  ],
+  "here-trmnl/index.html": [
+    "Is Here TRMNL free?",
+    "What does Here TRMNL do?",
+    "What do I need to run it?",
+    "Does Here TRMNL collect personal data?",
   ],
 };
 
@@ -188,13 +198,9 @@ const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
   "Focused tools for the devices you use every day.",
   "overlooked interface spaces",
-  "Your places. Your wallpaper.",
-  "Your day. Along the edge.",
-  "Music. In the notch.",
-  "Your screen. On your desktop.",
-  "HN. Reborn as a forum.",
-  "Your bookmarks. Natively iPhone.",
-  "Coming Soon",
+  "Overlooked spaces deserve great tools",
+  "Locusable Studio makes focused native tools for overlooked interface spaces.",
+  "The notch. The screen edge. Between the wallpaper and your icons.",
 ]) {
   if (!about.includes(needle)) {
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
