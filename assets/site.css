@@ -1443,11 +1443,6 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   aspect-ratio: 1259 / 574;
 }
 
-html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
-  /* shot 1617×898 — crop bottom ~15%, flush to hero bottom */
-  aspect-ratio: 1617 / 763;
-}
-
 .unit__media--desktop-peek img {
   width: 100%;
   height: auto;
