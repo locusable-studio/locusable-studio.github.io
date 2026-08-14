@@ -315,6 +315,16 @@ html[data-theme="dark"] .site-shell:has(.doc-layout) {
   color: var(--app-accent);
 }
 
+
+/* Cards need breathing room above the footer border */
+main > .unit:last-child {
+  margin-bottom: 2rem;
+}
+
+.about-page .unit:last-child {
+  margin-bottom: 2rem;
+}
+
 /* Standalone units between the hero and the FAQ (mac/place/themes,
    plugins…): same rounded-card language as the hero, centered column. */
 main > .unit {
