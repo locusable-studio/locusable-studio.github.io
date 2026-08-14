@@ -26,6 +26,11 @@
   --app-accent: var(--accent-studio);
   --shot-radius: 18px;
   --shot-radius-sm: 12px;
+  /* Unified card language — single source of truth */
+  --card-radius: 20px;
+  --card-radius-sm: 16px;
+  --card-gap: 0.75rem;
+  --section-gap: 3.5rem;
   /* Flush peeks: no downward bloom (clips into a dirty band at the crop edge) */
   --shot-flush-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.06),
@@ -316,26 +321,22 @@ html[data-theme="dark"] .site-shell:has(.doc-layout) {
 }
 
 
-/* Cards need breathing room above the footer border */
-main > .unit:last-child {
-  margin-bottom: 2rem;
-}
-
-.about-page .unit:last-child {
-  margin-bottom: 2rem;
-}
-
 /* Standalone units between the hero and the FAQ (mac/place/themes,
    plugins…): same rounded-card language as the hero, centered column. */
 main > .unit {
   max-width: var(--max);
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 24px;
+  margin: 0 auto;
+  border-radius: var(--card-radius);
 }
 
 main > .unit + .unit {
-  margin-top: 0.75rem;
+  margin-top: var(--card-gap);
+}
+
+/* Every card gets the same generous breathing room above the footer */
+main > .unit:last-child,
+.about-page .unit:last-child {
+  margin-bottom: var(--section-gap);
 }
 
 main > .unit .unit__media {
@@ -761,7 +762,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   min-height: 0;
   padding: 1.5rem 4.5rem 1.5rem 6rem;
   align-items: center;
-  border-radius: 20px;
+  border-radius: var(--card-radius);
   color: inherit;
   text-decoration: none;
   text-align: left;
@@ -1256,7 +1257,7 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   .unit__media--desktop-peek img,
   .unit__media--desktop-dual figure,
   .unit__media--island figure {
-    border-radius: var(--shot-radius-sm) var(--shot-radius-sm) 0 0;
+    border-radius: var(--card-radius-sm);
   }
 
   .crumbbar__inner {
@@ -1443,8 +1444,8 @@ html[data-theme="dark"] .unit--tint.unit--soft {
 .detail-feature-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-  padding: 1.5rem 0 0.75rem;
+  gap: var(--card-gap);
+  padding: var(--card-gap) 0 var(--card-gap);
   max-width: var(--max);
   margin: 0 auto;
 }
@@ -1454,7 +1455,7 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   min-height: 340px;
   padding: clamp(2rem, 5vw, 4rem) var(--unit-pad-x);
   align-items: center;
-  border-radius: 20px;
+  border-radius: var(--card-radius);
   transition: background 0.2s var(--ease-out);
 }
 
@@ -1495,7 +1496,7 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   justify-content: center;
   align-items: flex-end;
   gap: clamp(0.65rem, 1.8vw, 1.15rem);
-  padding: 1.25rem var(--unit-pad-x) 0;
+  padding: 1.25rem var(--unit-pad-x) 1.25rem;
   overflow: hidden;
 }
 
@@ -1503,12 +1504,18 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   flex: 0 1 280px;
   max-width: 280px;
   margin: 0;
-  border-radius: 32px 32px 0 0;
+  border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
   box-shadow: var(--shot-flush-shadow);
-  /* real shots 585×1266 / 585×1272 — crop bottom 5%, flush to unit bottom */
-  aspect-ratio: 585 / 1205;
+  /* real shots 585×1266 / 585×1272 — shown at full intrinsic ratio */
+  aspect-ratio: 585 / 1266;
+}
+
+
+/* Links phone shots are 585×1272 — keep full ratio, no crop */
+html[data-app="links"] .unit__media--phones figure {
+  aspect-ratio: 585 / 1272;
 }
 
 .unit__media--phones img {
@@ -1533,25 +1540,25 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   overflow: hidden;
   max-width: min(1120px, 100%);
   margin: 0 auto;
-  padding: 1.25rem var(--unit-pad-x) 0;
-  /* real shot 1400×787 (Mac wallpaper) — crop bottom 5%, flush to unit bottom */
-  aspect-ratio: 1400 / 748;
+  padding: 1.25rem var(--unit-pad-x) 1.25rem;
+  /* real shot 1400×787 (Mac wallpaper) — shown at full intrinsic ratio */
+  aspect-ratio: 1400 / 787;
 }
 
 .product-hero .unit__media--desktop-peek {
-  /* real shot 1259×717 — crop bottom 5%, flush to hero bottom */
-  aspect-ratio: 1259 / 681;
+  /* real shot 1259×717 — shown at full intrinsic ratio */
+  aspect-ratio: 1259 / 717;
 }
 
 html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
-  /* real shot 1617×898 — crop bottom 5%, flush to hero bottom */
-  aspect-ratio: 1617 / 853;
+  /* real shot 1617×898 — shown at full intrinsic ratio */
+  aspect-ratio: 1617 / 898;
 }
 
 .unit__media--desktop-peek img {
   width: 100%;
   height: auto;
-  border-radius: var(--shot-radius) var(--shot-radius) 0 0;
+  border-radius: var(--card-radius);
   box-shadow: var(--shot-flush-shadow);
   display: block;
 }
@@ -1563,7 +1570,7 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
   gap: clamp(0.65rem, 1.8vw, 1.15rem);
   max-width: min(1120px, 100%);
   margin: 0 auto;
-  padding: 1.25rem var(--unit-pad-x) 0;
+  padding: 1.25rem var(--unit-pad-x) 1.25rem;
   overflow: hidden;
 }
 
@@ -1571,17 +1578,17 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
   margin: 0;
   flex: 1 1 0;
   min-width: 0;
-  border-radius: var(--shot-radius) var(--shot-radius) 0 0;
+  border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
   box-shadow: var(--shot-flush-shadow);
-  /* default: crop bottom 5% of a 1400×758 shot */
-  aspect-ratio: 1400 / 720;
+  /* 1400×758 — shown at full intrinsic ratio */
+  aspect-ratio: 1400 / 758;
 }
 
 .unit__media--desktop-dual figure:nth-child(1) {
-  /* 1400×792 — crop bottom 5% */
-  aspect-ratio: 1400 / 752;
+  /* 1400×792 — shown at full intrinsic ratio */
+  aspect-ratio: 1400 / 792;
 }
 
 .unit__media--desktop-dual img {
@@ -1609,7 +1616,7 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
   gap: clamp(0.65rem, 1.8vw, 1.15rem);
   max-width: min(1120px, 100%);
   margin: 0 auto;
-  padding: 1.25rem var(--unit-pad-x) 0;
+  padding: 1.25rem var(--unit-pad-x) 1.25rem;
   overflow: hidden;
 }
 
@@ -1617,12 +1624,12 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
   margin: 0;
   flex: 1 1 0;
   min-width: 0;
-  border-radius: var(--shot-radius) var(--shot-radius) 0 0;
+  border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
   box-shadow: var(--shot-flush-shadow);
-  /* real shots 890×360 — crop bottom 5%, keep flush to unit bottom */
-  aspect-ratio: 890 / 342;
+  /* real shots 890×360 — shown at full intrinsic ratio */
+  aspect-ratio: 890 / 360;
 }
 
 .unit__media--island img {
@@ -1665,15 +1672,15 @@ html[data-theme="dark"] .home-app-card__shot img {
 .product-hero {
   text-align: center;
   max-width: var(--max);
-  margin: calc(var(--site-chrome-h) + 1rem) auto 0.75rem;
+  margin: calc(var(--site-chrome-h) + 1rem) auto var(--card-gap);
   padding:
     clamp(2.5rem, 5vw, 4rem)
     var(--unit-pad-x)
-    0;
+    clamp(1.5rem, 3vw, 2rem);
   overflow: hidden;
   --unit-base: var(--bg);
   background: color-mix(in srgb, var(--app-accent) 6%, var(--unit-base));
-  border-radius: 24px;
+  border-radius: var(--card-radius);
 }
 
 html[data-theme="dark"] .product-hero {
@@ -1757,13 +1764,13 @@ html[data-theme="dark"] .product-hero {
   .product-hero {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
-    border-radius: 18px;
+    border-radius: var(--card-radius-sm);
   }
 
   main > .unit {
     margin-left: 0.75rem;
     margin-right: 0.75rem;
-    border-radius: 18px;
+    border-radius: var(--card-radius-sm);
   }
 }
 
@@ -1893,7 +1900,7 @@ html[data-app] body.catalog-page .plugin-card,
 html[data-app] body.catalog-page .theme-card {
   background: var(--bg-elevated);
   border: none;
-  border-radius: 18px;
+  border-radius: var(--card-radius);
   animation: hero-in 0.65s var(--ease-out) both;
 }
 
@@ -2118,7 +2125,7 @@ html[data-app] body.catalog-page .theme-card {
   width: 100%;
   background: var(--bg-elevated);
   border: none;
-  border-radius: 18px;
+  border-radius: var(--card-radius);
   padding: 18px 22px;
 }
 

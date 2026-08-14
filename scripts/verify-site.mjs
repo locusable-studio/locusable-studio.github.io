@@ -322,8 +322,8 @@ if (siteCss.includes(".home-app-card--island")) {
   console.error("FAIL assets/site.css: Island full-width homepage card styles should be removed");
   failed++;
 }
-if (!siteCss.includes("border-radius: 20px;")) {
-  console.error("FAIL assets/site.css: homepage cards should use rounded corners");
+if (!siteCss.includes("--card-radius: 20px;") || !siteCss.includes("border-radius: var(--card-radius);")) {
+  console.error("FAIL assets/site.css: cards should use the unified --card-radius token");
   failed++;
 }
 if (!siteCss.includes(".site-shell:has(.home-product-grid) main")) {
@@ -334,8 +334,8 @@ if (!siteCss.includes("padding-top: var(--site-chrome-h-masthead);")) {
   console.error("FAIL assets/site.css: homepage grid should clear the fixed masthead");
   failed++;
 }
-if (!siteCss.includes("border-radius: var(--shot-radius) var(--shot-radius) 0 0;")) {
-  console.error("FAIL assets/site.css: screenshot peeks should use --shot-radius token");
+if (!siteCss.includes("border-radius: var(--card-radius);") || !siteCss.includes("aspect-ratio: 1400 / 787;")) {
+  console.error("FAIL assets/site.css: screenshots should show full ratio with --card-radius corners");
   failed++;
 }
 if (!siteCss.includes('html[data-theme="dark"] .product-hero {')) {
