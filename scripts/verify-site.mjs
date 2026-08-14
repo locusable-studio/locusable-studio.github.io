@@ -32,6 +32,16 @@ const must = [
   [`site.css?v=${cssVersion}`, "css cache version"],
   [`site.js?v=${jsVersion}`, "js cache version"],
   [`i18n.js?v=${i18nJsVersion}`, "i18n cache version"],
+  ["<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>", "no-JS fallback"],
+  ['rel="preload" href="/assets/fonts/Maplestory-Bold.woff2" as="font" type="font/woff2" crossorigin', "font preload"],
+  ['property="og:title"', "og:title"],
+  ['property="og:description"', "og:description"],
+  ['property="og:type"', "og:type"],
+  ['property="og:url"', "og:url"],
+  ['property="og:image"', "og:image"],
+  ['name="twitter:card"', "twitter:card"],
+  ['name="twitter:title"', "twitter:title"],
+  ['name="twitter:description"', "twitter:description"],
 ];
 
 const breadcrumbs = {
@@ -365,6 +375,34 @@ if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1)
   console.error("FAIL here-wallpaper/index.html: hero preview should appear only once");
   failed++;
 }
+// Phone shots must declare their intrinsic dimensions (585×1266 / 585×1272), not a copied hero size.
+if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
+  console.error("FAIL here-wallpaper/index.html: hero phone shots should declare 585x1266");
+  failed++;
+}
+
+const linksShots = fs.readFileSync(path.join(root, "here-links/index.html"), "utf8");
+if ((linksShots.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="585" height="1272"/g) || []).length !== 4) {
+  console.error("FAIL here-links/index.html: phone shots should declare 585x1272");
+  failed++;
+}
+
+// Home cards render icons at 52px (CSS), so the HTML attributes must match, not the 84px hero size.
+const homeCardIcon = (html) => (html.match(/class="unit unit--tint[^"]*home-app-card[\s\S]*?width="52" height="52"/g) || []).length;
+if (homeCardIcon(home) !== 5) {
+  console.error("FAIL index.html: all five home cards should declare 52px icons");
+  failed++;
+}
+if (homeCardIcon(comingSoon) !== 1) {
+  console.error("FAIL coming-soon/index.html: the Links card should declare a 52px icon");
+  failed++;
+}
+
+const siteJs = fs.readFileSync(path.join(root, "assets/site.js"), "utf8");
+if (!siteJs.includes('studio: "#b8860b"')) {
+  console.error("FAIL assets/site.js: APP_THEME_COLORS should include the studio accent");
+  failed++;
+}
 
 const linksPage = fs.readFileSync(path.join(root, "here-links/index.html"), "utf8");
 if (!linksPage.includes("feature-list--cards")) {
@@ -497,6 +535,7 @@ if (!fs.existsSync(path.join(root, "assets/theme-map-style.js"))) {
 }
 
 const themeColors = {
+  "about/index.html": "#b8860b",
   "here-wallpaper/index.html": "#4caf50",
   "here-wallpaper/themes/index.html": "#4caf50",
   "here-wallpaper/privacy/index.html": "#4caf50",
@@ -516,6 +555,25 @@ for (const [page, color] of Object.entries(themeColors)) {
     console.error(`FAIL ${page}: theme-color should be ${color}`);
     failed++;
   }
+}
+
+
+const siteCss2 = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
+if (!siteCss2.includes("@supports not selector(:has(*))")) {
+  console.error("FAIL assets/site.css: missing :has() fallback block");
+  failed++;
+}
+if (siteCss2.includes("Maplestory-Light")) {
+  console.error("FAIL assets/site.css: Light font face should be removed (dead resource)");
+  failed++;
+}
+if (!fs.existsSync(path.join(root, "assets/fonts/Maplestory-Bold.woff2"))) {
+  console.error("FAIL assets/fonts/Maplestory-Bold.woff2 missing");
+  failed++;
+}
+if (fs.existsSync(path.join(root, "assets/fonts/Maplestory-Light.woff2"))) {
+  console.error("FAIL assets/fonts/Maplestory-Light.woff2 should be removed");
+  failed++;
 }
 
 if (!fs.existsSync(path.join(root, "assets/i18n.js"))) {

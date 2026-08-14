@@ -16,7 +16,6 @@
     "crumb.privacy": "隐私",
     "crumb.themes": "主题",
     "crumb.plugins": "插件",
-    "crumb.comingSoon": "即将推出",
     "nav.comingSoon": "即将推出",
     "nav.released": "已发布",
 
@@ -190,7 +189,6 @@
     "plugins.title": "精选插件",
     "plugins.lead": "来自 Sidefy 官方展示页的社区插件，涵盖 RSS、优惠、游戏等更多类别。点击卡片即可查看 GitHub 源码。",
     "plugins.listLabel": "精选插件",
-    "plugins.learnMore": "了解更多",
 
     "themes.title": "主题",
     "themes.lead": "与应用内同款配色，基于真实 OpenStreetMap 地图预览效果。基础主题免费，精选主题需 Pro 解锁。",
@@ -209,9 +207,7 @@
     "themes.layer.parks": "公园",
     "themes.layer.roads": "道路（高速公路等）",
     "themes.layer.rail": "轨道交通（铁路等）",
-    "themes.layer.aeroway": "机场",
-
-    "privacy.title": "隐私政策"
+    "themes.layer.aeroway": "机场"
   };
 
   var EN_UI = {

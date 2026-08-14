@@ -1,14 +1,6 @@
 @font-face {
   font-family: "Maplestory";
   font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url("/assets/fonts/Maplestory-Light.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Maplestory";
-  font-style: normal;
   font-weight: 700;
   font-display: swap;
   src: url("/assets/fonts/Maplestory-Bold.woff2") format("woff2");
@@ -906,6 +898,15 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   --home-row-h: calc((100dvh - var(--site-chrome-h-masthead) - 5.5rem) / 3);
 }
 
+/* Browsers without :has() (pre-2022): keep the fixed masthead from
+   overlapping the first row of home cards. The grid's own 0.75rem
+   padding still applies; list-mode rows fall back to auto height. */
+@supports not selector(:has(*)) {
+  .home-product-grid {
+    margin-top: var(--site-chrome-h-masthead);
+  }
+}
+
 html[data-home-layout="list"] .site-shell:has(.home-product-grid) main {
   display: block;
 }
@@ -1012,6 +1013,12 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   .home-product-grid {
     grid-template-columns: 1fr;
     grid-template-rows: none;
+  }
+
+  /* The edge-plaster tab overlays the card's right edge on narrow screens;
+     drop the decorative chevron (the whole card is still a link). */
+  .home-app-card__arrow {
+    display: none;
   }
 
   .home-app-card--1x1,

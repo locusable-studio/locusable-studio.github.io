@@ -3,6 +3,7 @@
   var LAYOUT_STORAGE_KEY = "locusable-home-layout";
   var LANG_STORAGE_KEY = "locusable-lang";
   var APP_THEME_COLORS = {
+    studio: "#b8860b",
     wallpaper: "#4caf50",
     links: "#2196f3",
     sidefy: "#f44336",

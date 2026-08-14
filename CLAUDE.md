@@ -4,38 +4,40 @@
 
 The home page uses a **4-column × 3-row** CSS grid. Card sizes are named by column × row spans:
 
-| Name | Span | Class | Notes |
+| Name | Span | Class | Used? |
 |------|------|-------|-------|
-| 方卡 | 1×1 | `home-app-card--1x1` | Former Wallpaper feature cell |
-| 竖版小卡 | 1×2 | `home-app-card--1x2` | Quarter width, double height |
-| 横版小卡 | 2×1 | `home-app-card--2x1` | Half width, single row |
-| 横版大卡 | 4×1 | `home-app-card--4x1` | Full width, single row |
+| 主推方卡 | 2×2 | `home-app-card--2x2` | ✅ Home: Wallpaper |
+| 横版小卡 | 2×1 | `home-app-card--2x1` | ✅ Home: Sidefy, Island, HackerBa, TRMNL · Coming Soon: Links |
+| 方卡 | 1×1 | `home-app-card--1x1` | ⚠️ CSS reserved, not used |
+| 竖版小卡 | 1×2 | `home-app-card--1x2` | ⚠️ CSS reserved, not used (legacy; `verify-site.mjs` still asserts the class exists — if you remove it, update the assertion too) |
+| 横版大卡 | 4×1 | `home-app-card--4x1` | ⚠️ CSS reserved, not used |
 
-All home cards must use one of these standard sizes. Do not invent ad-hoc spans.
+All home cards must use one of these standard classes. Do not invent ad-hoc spans.
 
 ### Current home layout
 
 ```
-[Wallpaper 1×2] [Sidefy 1×2] [Island 2×1 ]
-[      ↑        ] [     ↑      ] [TRMNL 2×1  ]
-[HackerBa 2×1              ] [Links 2×1  ]
+[Wallpaper 2×2 ] [Sidefy 2×1  ]
+[              ] [Island 2×1  ]
+[HackerBa 2×1  ] [TRMNL 2×1   ]
 ```
 
-- Left: Wallpaper + Sidefy as 竖版小卡
-- Right (middle stack): Island + TRMNL as 横版小卡
-- Bottom: HackerBa + Links as 横版小卡, left-right
+- Wallpaper is the 2×2 主推方卡 (top-left).
+- Right stack: Sidefy + Island as 2×1 cards.
+- Bottom row: HackerBa + TRMNL as 2×1 cards.
+- Here Links is **not** on the homepage — it lives on `/coming-soon/` as a single 2×1 card.
 
 ### List layout height
 
-Desktop list-mode cards use **one grid row height** (`--home-row-h`, same as 横版小卡 / “1 高度”), not a taller clamp. 竖版小卡 also becomes one row tall in list mode.
+Desktop list-mode cards use **one grid row height** (`--home-row-h`, same as 横版小卡 / “1 高度”), not a taller clamp. 竖版/主推方卡 also becomes one row tall in list mode.
 
 ### Mobile home (≤800px) — desktop rules above stay unchanged
 
-- **Grid:** single column; every card is a compact horizontal row (absolute icon). Tighten left/right padding vs desktop; smaller title/subhead.
+- **Grid:** single column; every card is a compact horizontal row (absolute icon). Cards reorder via `order`: wallpaper 1 → sidefy 2 → island 3 → hackerba 4 → trmnl 5 → links 6. Tighten left/right padding vs desktop; smaller title/subhead.
 - **List:** unlock fixed `--home-row-h` (`height: auto`). Icon stays **in-flow** — do **not** keep the desktop `6rem` absolute-icon left gutter. Copy `max-width` ~54%; one shot only; shot `max-height` explicit (not `calc(var(--home-row-h)…)`).
 - ≤520px: further tighten padding, icon, type, and shot radius (`--shot-radius-sm`).
 
-### 竖版小卡 (grid)
+### 主推方卡 / 竖版卡 (grid)
 
 With no screenshots in grid, center content vertically (`justify-content: center`) so the tall card does not look empty at the bottom.
 
@@ -51,7 +53,7 @@ The `.platforms` label must stay consistent across home card and product hero.
 Rules:
 - Always include the real platform. Never replace it with only `Coming Soon`.
 - Home card and product page must use the **same** platforms string.
-- Every coming-soon product uses this same platforms pattern (Links and TRMNL alike). Do not leave one as bare platform while another appends Coming Soon.
+- Every coming-soon product uses this same platforms pattern (Links today). Do not leave one as bare platform while another appends Coming Soon.
 - Coming Soon CTA (`unit__links-soon`) is separate from the platforms line; do not invent App Store / GitHub links for unreleased products.
 - About list copy for coming-soon products should also say Coming Soon.
 - Home card and product hero `unit__subhead` must use the same one-liner.
@@ -62,6 +64,7 @@ Rules:
 
 | App | Accent |
 |-----|--------|
+| Studio (about) | `#b8860b` |
 | Wallpaper | `#4caf50` |
 | Links | `#2196f3` |
 | Sidefy | `#f44336` |
@@ -69,7 +72,28 @@ Rules:
 | HackerBa | `#ff6600` |
 | TRMNL | `#3c50b4` |
 
-Sample from `icon-192.png` (dominant non-white fill). Tiny deltas from “nearby” hex still count as wrong.
+- Every page’s `data-app` (including `studio` on `/about/`) must have a matching `APP_THEME_COLORS` entry in `site.js`, or the JS overrides the `<meta name="theme-color">` with black/white and the head declaration is dead.
+- `verify-site.mjs` `themeColors` table asserts every page’s `theme-color` — keep it in sync when adding apps.
+
+## Social / SEO meta
+
+- Every page must ship `og:title` / `og:description` / `og:type` / `og:url` / `og:image` and `twitter:card` / `twitter:title` / `twitter:description`.
+- `og:title` and `og:description` reuse the same `data-i18n-content` keys as `<title>` / `meta[name=description]` so the language toggle stays consistent.
+- `og:image` must be an absolute URL (`https://locusable.com/...`), pointing at the product’s `icon-192.png` (or `/icon-512.png` for hub pages).
+
+## No-JS fallback
+
+- Every page includes `<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>` right after the stylesheet link — without it the whole page is invisible when JS is disabled.
+
+## Browser compatibility
+
+- Layout depends on `:has()` in a few spots (home grid padding, page tints). A `@supports not selector(:has(*))` block in `site.css` keeps the home grid clear of the fixed masthead on pre-2022 browsers — preserve it.
+
+## Brand font
+
+- Only one face ships: `assets/fonts/Maplestory-Bold.woff2`, **subsetted** to Latin letters + digits (~5KB). The former Light face was dead weight — never reintroduce a full font file.
+- Every page preloads it (`<link rel="preload" ... as="font" type="font/woff2" crossorigin>` before the stylesheet) so the brand wordmark does not pop in late.
+- Brand glyph coverage is limited to `Locusable Studio` + ASCII; any new brand copy must fit that set or add glyphs to the subset.
 
 ## UI icons (Lucide)
 
@@ -81,7 +105,7 @@ Keep `assets/lucide/*.svg` as source reference; page UI should embed the paths i
 
 - **Home product cards: no screenshots** in grid or list. Shots live on product pages only.
 - **Aspect ratio is sacred.** Never invent, override, or stretch screenshot proportions.
-  - Use the file’s intrinsic ratio only (`width: auto; height: auto`).
+  - The `<img width height>` attributes must equal the **file’s intrinsic dimensions** (verify with the real file; e.g. `assets/shots/shot-*.jpg` is 585×1266, `assets/here-links/shots/shot-*.jpg` is 585×1272 — do not copy hero dimensions onto phone shots).
   - Scale with `max-height` / `max-width` caps; both axes must shrink together.
   - Forbidden: `width: 100%` + `max-height` without allowing width to shrink (that flattens portraits).
   - Forbidden: equal grid columns that force every shot to the same width.
