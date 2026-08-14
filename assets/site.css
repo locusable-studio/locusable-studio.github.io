@@ -779,7 +779,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 .home-app-card--1x2 .unit__copy,
 .home-app-card--2x2 .unit__copy {
-  max-width: none;
+  max-width: 58%;
   margin: 0;
   padding: 0;
 }
@@ -841,6 +841,71 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   background: var(--wash);
   color: var(--muted);
   border: 1px solid var(--line);
+}
+
+/* CSS-drawn map-wallpaper art filling the right side of the 2×2 card:
+   sky gradient, two roads, and a location pin — no image asset. */
+.home-app-card__art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.home-app-card__art-sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 18%, color-mix(in srgb, var(--app-accent) 26%, transparent), transparent 55%),
+    linear-gradient(200deg, color-mix(in srgb, var(--app-accent) 20%, var(--bg)) 0%, var(--bg) 62%);
+}
+
+.home-app-card__art-road {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  height: 1.5px;
+  background: color-mix(in srgb, var(--app-accent) 34%, var(--fg));
+  border-radius: 999px;
+}
+
+.home-app-card__art-road--1 {
+  top: 46%;
+  transform: rotate(-9deg);
+}
+
+.home-app-card__art-road--2 {
+  top: 63%;
+  transform: rotate(6deg);
+  opacity: 0.6;
+}
+
+.home-app-card__art-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 50% 50% 50% 0;
+  transform: translate(-50%, -92%) rotate(-45deg);
+  background: color-mix(in srgb, var(--app-accent) 78%, var(--fg));
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.home-app-card__art-pin::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg);
+  transform: translate(-50%, -50%);
 }
 
 .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__copy {
@@ -1045,6 +1110,16 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   /* Feature pills only fit the tall 2×2 card; hide in compact rows */
   .home-card-tags {
     display: none;
+  }
+
+  /* Map art only fits the tall 2×2 card */
+  .home-app-card__art {
+    display: none;
+  }
+
+  .home-app-card--1x2 .unit__copy,
+  .home-app-card--2x2 .unit__copy {
+    max-width: none;
   }
 
   .home-app-card--1x1,
