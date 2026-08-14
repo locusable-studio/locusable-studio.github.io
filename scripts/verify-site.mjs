@@ -389,6 +389,22 @@ if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  marg
 }
 
 const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
+if (!wallpaper.includes('data-i18n="platform.iphoneIpadMac"')) {
+  console.error("FAIL here-wallpaper/index.html: platform line should include Mac");
+  failed++;
+}
+if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-dual")) {
+  console.error("FAIL here-wallpaper/index.html: missing Mac desktop preview section");
+  failed++;
+}
+for (const file of ["assets/here-wallpaper/shot-mac-chicago.jpg", "assets/here-wallpaper/shot-mac-marrakech.jpg"]) {
+  if (!fs.existsSync(path.join(root, file))) {
+    console.error(`FAIL missing ${file}`);
+    failed++;
+  }
+}
+
+
 if (wallpaper.includes("detail-feature-media")) {
   console.error("FAIL here-wallpaper/index.html: place-and-layout should not duplicate hero previews");
   failed++;
