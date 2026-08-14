@@ -75,6 +75,15 @@ Rules:
 - Every page’s `data-app` (including `studio` on `/about/`) must have a matching `APP_THEME_COLORS` entry in `site.js`, or the JS overrides the `<meta name="theme-color">` with black/white and the head declaration is dead.
 - `verify-site.mjs` `themeColors` table asserts every page’s `theme-color` — keep it in sync when adding apps.
 
+## Theme catalog sync
+
+- `here-wallpaper/themes/data/*.json` mirror the app's resources. Re-run
+  `node scripts/sync-wallpaper-themes.mjs` (from this repo root) whenever the
+  HereWallpaper app adds/changes themes — the script copies from
+  `../HereWallpaper/HereWallpaperCore/Resources`.
+- `verify-site.mjs` asserts a minimum theme count per catalog so stale data
+  fails CI instead of shipping.
+
 ## Social / SEO meta
 
 - Every page must ship `og:title` / `og:description` / `og:type` / `og:url` / `og:image` and `twitter:card` / `twitter:title` / `twitter:description`.

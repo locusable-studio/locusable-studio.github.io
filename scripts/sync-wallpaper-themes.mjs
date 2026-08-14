@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const appRoot = path.resolve(root, "../HereWallpaper/HereWallpaper/Resources");
+const appRoot = path.resolve(root, "../HereWallpaper/HereWallpaperCore/Resources");
 const outDir = path.join(root, "here-wallpaper/themes/data");
 
 const files = ["basic_themes.json", "featured_themes.json"];
