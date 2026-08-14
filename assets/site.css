@@ -693,7 +693,6 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 .studio-masthead__brand {
   display: inline-block;
   text-decoration: none;
-  transition: transform 0.2s var(--ease-out);
 }
 
 .studio-masthead__ring {
@@ -1456,14 +1455,12 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   padding: clamp(2rem, 5vw, 4rem) var(--unit-pad-x);
   align-items: center;
   border-radius: 20px;
-  transition:
-    transform 0.25s var(--ease-out),
-    box-shadow 0.25s var(--ease-out);
+  transition: background 0.2s var(--ease-out);
 }
 
 @media (hover: hover) {
   .detail-feature-grid .unit:hover {
-    transform: translateY(-3px);
+    --unit-bg: color-mix(in srgb, var(--app-accent) 8%, var(--unit-base, var(--bg)));
   }
 }
 
@@ -1898,9 +1895,6 @@ html[data-app] body.catalog-page .theme-card {
   border: none;
   border-radius: 18px;
   animation: hero-in 0.65s var(--ease-out) both;
-  transition:
-    transform 0.4s var(--ease-out),
-    box-shadow 0.4s var(--ease-out);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -1914,15 +1908,7 @@ html[data-app] body.catalog-page .theme-card {
   html[data-app] body.catalog-page .plugin-card:hover,
   html[data-app] body.catalog-page .plugin-card:focus-visible,
   html[data-app] body.catalog-page .theme-card:hover {
-    transform: translateY(-4px) scale(1.008);
     outline: none;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    html[data-app] body.catalog-page .plugin-card:hover,
-    html[data-app] body.catalog-page .plugin-card:focus-visible,
-    html[data-app] body.catalog-page .theme-card:hover {
-    }
   }
 }
 
@@ -2380,12 +2366,12 @@ html[data-lang="zh"] .edge-plaster__label {
 
 .edge-plaster--right:hover,
 .edge-plaster--right:focus-visible {
-  transform: translateY(-50%) translateX(-0.15rem);
+  color: var(--fg);
 }
 
 .edge-plaster--left:hover,
 .edge-plaster--left:focus-visible {
-  transform: translateY(-50%) translateX(0.15rem);
+  color: var(--fg);
 }
 
 .edge-plaster:focus-visible {
@@ -2423,7 +2409,7 @@ html[data-lang="zh"] .edge-plaster__label {
   .edge-plaster--right:focus-visible,
   .edge-plaster--left:hover,
   .edge-plaster--left:focus-visible {
-    transform: translateY(-50%);
+    color: var(--fg);
   }
 }
 

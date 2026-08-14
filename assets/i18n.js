@@ -57,7 +57,6 @@
     "meta.links": "Here Links — 你的书签。原生 iPhone。",
     "meta.links.privacy": "Here Links 隐私政策 — Locusable Studio。",
 
-    "platform.iphoneIpad": "iPhone 和 iPad",
     "platform.iphoneIpadMac": "iPhone、iPad 与 Mac",
     "platform.mac": "Mac",
     "platform.chrome": "Chrome",
@@ -200,7 +199,8 @@
     "links.faq.q1": "Here Links 免费吗？",
     "links.faq.a1": "免费。",
     "links.faq.q2": "Here Links 能做什么？",
-    "links.faq.a2": "<a href=\"https://linkding.link\" target=\"_blank\" rel=\"noopener noreferrer\">linkding</a>。自托管。精简、快速、易部署。",
+    "links.faq.a2": "自托管 linkding 的原生 iPhone 客户端。浏览、阅读、保存 — 一条信息流。",
+    "links.faq.a5": "<a href=\"https://linkding.link\" target=\"_blank\" rel=\"noopener noreferrer\">linkding</a>。自托管。精简、快速、易部署。",
     "links.faq.q3": "运行条件？",
     "links.faq.a3": "运行 iOS 26 的 iPhone 或 iPad，以及带 API 令牌的 linkding 服务器。",
     "links.faq.q4": "Here Links 会收集个人数据吗？",
