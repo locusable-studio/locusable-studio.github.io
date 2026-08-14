@@ -2625,5 +2625,67 @@ html[data-app] .crumbbar + .doc-layout .prose {
 }
 
 html[data-app="trmnl"] .eink-refresh:focus-visible {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-trmnl) 28%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent) 28%, transparent);
+}
+
+/* ===== Here TRMNL — the whole page IS the e-ink display =====
+   Every tint, shadow and hover on this product page renders in paper
+   white + ink gray. Dark mode is intentionally ignored: an e-ink panel
+   has no dark variant, so the page stays paper-white under any theme. */
+html[data-app="trmnl"],
+html[data-app="trmnl"][data-theme="dark"],
+html[data-app="trmnl"]:not([data-theme]) {
+  --accent-studio: #2e2a24;
+  --app-accent: #2e2a24;
+  --bg: #f2efe8;
+  --bg-alt: #eae6dc;
+  --bg-elevated: #f8f5ef;
+  --fg: #1f1d19;
+  --muted: #777168;
+  --line: rgba(31, 29, 25, 0.16);
+  --wash: rgba(31, 29, 25, 0.06);
+  --link: #1f1d19;
+  --link-hover: #4a443b;
+  color-scheme: light;
+}
+
+/* Dither texture over the whole page (very subtle) */
+html[data-app="trmnl"] body {
+  background-image:
+    radial-gradient(rgba(31, 29, 25, 0.045) 0.5px, transparent 0.6px),
+    radial-gradient(rgba(31, 29, 25, 0.03) 0.5px, transparent 0.6px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 2px 2px;
+}
+
+/* Screenshots and the app icon go grayscale — ink only */
+html[data-app="trmnl"] .unit__media--desktop-peek img,
+html[data-app="trmnl"] .product-hero__icon {
+  filter: grayscale(1) contrast(0.96) brightness(1.04);
+}
+
+/* Neutralize component-level dark-mode overrides for this page */
+html[data-app="trmnl"][data-theme="dark"] .unit--tint,
+html[data-app="trmnl"][data-theme="dark"] .unit--tint.unit--soft {
+  --unit-base: var(--bg-alt);
+  --unit-bg: color-mix(in srgb, var(--app-accent) 10%, var(--unit-base));
+}
+
+html[data-app="trmnl"][data-theme="dark"] .product-hero {
+  --unit-base: var(--bg-alt);
+  background: color-mix(in srgb, var(--app-accent) 10%, var(--unit-base));
+}
+
+html[data-app="trmnl"][data-theme="dark"] .studio-masthead,
+html[data-app="trmnl"][data-theme="dark"] .crumbbar {
+  background: color-mix(in srgb, var(--bg-elevated) 84%, transparent);
+  border-bottom-color: var(--line);
+}
+
+html[data-app="trmnl"][data-theme="dark"] .unit__media--desktop-peek img {
+  box-shadow: var(--shot-flush-shadow);
+}
+
+html[data-app="trmnl"] .eink-refresh:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--app-accent) 28%, transparent);
 }
