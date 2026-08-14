@@ -292,6 +292,10 @@ if (home.includes("home-app-card--island") || home.includes("home-app-card__peek
   failed++;
 }
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
+if (!siteCss.includes('html[data-home-layout="list"] .home-app-card__shot')) {
+  console.error("FAIL assets/site.css: shot must hide in list layout (and therefore on mobile)");
+  failed++;
+}
 if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-card__screens")) {
   console.error("FAIL assets/site.css: legacy feature/screens homepage styles should be removed");
   failed++;
