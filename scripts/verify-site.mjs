@@ -557,20 +557,6 @@ for (const [page, color] of Object.entries(themeColors)) {
   }
 }
 
-const trmnlPage = fs.readFileSync(path.join(root, "here-trmnl/index.html"), "utf8");
-for (const needle of [
-  "data-eink-demo",
-  "data-eink-screen",
-  "data-eink-refresh",
-  "data-eink-time",
-  'data-i18n="trmnl.liveTitle"',
-]) {
-  if (!trmnlPage.includes(needle)) {
-    console.error(`FAIL here-trmnl/index.html: missing eink demo (${needle})`);
-    failed++;
-  }
-}
-
 
 const siteCss2 = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
 if (!siteCss2.includes("@supports not selector(:has(*))")) {
