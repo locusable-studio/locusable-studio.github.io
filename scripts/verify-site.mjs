@@ -11,7 +11,6 @@ const pages = [
   "here-links/index.html",
   "here-links/privacy/index.html",
   "here-sidefy/index.html",
-  "here-sidefy/plugins/index.html",
   "here-sidefy/privacy/index.html",
   "here-island/index.html",
   "here-hackerba/index.html",
@@ -19,7 +18,7 @@ const pages = [
   "coming-soon/index.html",
 ];
 
-const cssVersion = "182";
+const cssVersion = "183";
 const jsVersion = "59";
 const i18nJsVersion = "6";
 
@@ -77,11 +76,6 @@ const breadcrumbs = {
     'href="/">Locusable <em>Studio</em>',
     'href="/here-wallpaper/">Here Wallpaper',
     '<span aria-current="page" data-i18n="crumb.themes">Themes</span>',
-  ],
-  "here-sidefy/plugins/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-sidefy/">Here Sidefy',
-    '<span aria-current="page" data-i18n="crumb.plugins">Plugins</span>',
   ],
   "here-wallpaper/privacy/index.html": [
     'href="/">Locusable <em>Studio</em>',
@@ -499,7 +493,6 @@ if (!sidefy.includes("detail-feature-grid")) {
 for (const href of [
   "https://apps.apple.com/app/id6751482006",
   "https://sidefy.locusable.com/",
-  "/here-sidefy/plugins/",
   "/here-sidefy/privacy/",
 ]) {
   if (!sidefy.includes(`href="${href}"`)) {
@@ -518,27 +511,6 @@ for (const needle of [
     console.error(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
     failed++;
   }
-}
-
-const plugins = fs.readFileSync(path.join(root, "here-sidefy/plugins/index.html"), "utf8");
-for (const name of [
-  "Say Hi",
-  "FreshRSS",
-  "App Store Discount",
-  "Steam Wishlist Discount",
-  "Switch Discount Tracker",
-  "Pokemon Daily",
-  "Crypto Price Monitor",
-  "V2EX Notifications",
-]) {
-  if (!plugins.includes(name)) {
-    console.error(`FAIL here-sidefy/plugins/index.html: missing plugin ${name}`);
-    failed++;
-  }
-}
-if (!plugins.includes("catalog-section")) {
-  console.error("FAIL here-sidefy/plugins/index.html: missing catalog-section");
-  failed++;
 }
 
 const themes = fs.readFileSync(path.join(root, "here-wallpaper/themes/index.html"), "utf8");
@@ -594,7 +566,6 @@ const themeColors = {
   "here-links/index.html": "#2196f3",
   "here-links/privacy/index.html": "#2196f3",
   "here-sidefy/index.html": "#f44336",
-  "here-sidefy/plugins/index.html": "#f44336",
   "here-sidefy/privacy/index.html": "#f44336",
   "here-island/index.html": "#9c27b0",
   "here-hackerba/index.html": "#ff6600",

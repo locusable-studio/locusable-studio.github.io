@@ -15,7 +15,6 @@
     "crumb.about": "关于",
     "crumb.privacy": "隐私",
     "crumb.themes": "主题",
-    "crumb.plugins": "插件",
     "nav.comingSoon": "即将推出",
     "nav.released": "已发布",
 
@@ -33,7 +32,6 @@
     "title.wallpaper.themes": "Here Wallpaper — 主题",
     "title.wallpaper.privacy": "隐私政策 — Here Wallpaper",
     "title.sidefy": "Here Sidefy — Locusable Studio",
-    "title.sidefy.plugins": "Here Sidefy — 精选插件",
     "title.sidefy.privacy": "隐私政策 — Here Sidefy",
     "title.island": "Here Island — Locusable Studio",
     "title.trmnl": "Here TRMNL — Locusable Studio",
@@ -49,7 +47,6 @@
     "meta.wallpaper.themes": "Here Wallpaper 主题 — 基础与精选配色。",
     "meta.wallpaper.privacy": "Here Wallpaper 隐私政策 — Locusable Studio。",
     "meta.sidefy": "Here Sidefy — 你的日程。沿屏边缘。",
-    "meta.sidefy.plugins": "Here Sidefy 官方精选插件 — RSS、优惠、游戏等。",
     "meta.sidefy.privacy": "Here Sidefy 隐私政策 — Locusable Studio。",
     "meta.island": "Here Island — 音乐。栖于刘海。",
     "meta.trmnl": "Here TRMNL — 你的屏。浮于桌面。",
@@ -67,7 +64,6 @@
     "cta.download": "下载",
     "cta.github": "在 GitHub 查看",
     "cta.themes": "浏览主题",
-    "cta.plugins": "浏览插件",
     "cta.soon": "即将推出",
     "cta.learnMore": "了解更多",
 
@@ -209,9 +205,6 @@
     "links.faq.q6": "可以连接多台服务器吗？",
     "links.faq.a6": "可以。一台或多台。同一条信息流。",
 
-    "plugins.title": "精选插件",
-    "plugins.lead": "Sidefy 官方精选社区插件。RSS。优惠。游戏。点开卡片，直达源码。",
-    "plugins.listLabel": "精选插件",
 
     "themes.title": "主题",
     "themes.lead": "同一套配色。真实地图预览。基础免费。精选，Pro 解锁。",
