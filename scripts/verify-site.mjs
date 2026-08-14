@@ -252,6 +252,19 @@ for (const needle of [
     failed++;
   }
 }
+if (home.includes("home-card-tags")) {
+  for (const needle of [
+    'data-i18n="home.wallpaper.tag.osm"',
+    'data-i18n="home.wallpaper.tag.maplibre"',
+    'data-i18n="home.wallpaper.tag.sync"',
+  ]) {
+    if (!home.includes(needle)) {
+      console.error(`FAIL index.html: missing wallpaper tag (${needle})`);
+      failed++;
+    }
+  }
+}
+
 if (home.includes("home-app-card__list-shots")) {
   console.error("FAIL index.html: homepage cards should not embed list screenshots");
   failed++;

@@ -822,6 +822,27 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   z-index: 1;
 }
 
+/* Key-feature pills inside the 2×2 hero card — same language as plugin tags */
+.home-card-tags {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.home-card-tags li {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  background: var(--wash);
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+
 .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__copy {
   max-width: none;
   margin: 0;
@@ -1018,6 +1039,11 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   /* The edge-plaster tab overlays the card's right edge on narrow screens;
      drop the decorative chevron (the whole card is still a link). */
   .home-app-card__arrow {
+    display: none;
+  }
+
+  /* Feature pills only fit the tall 2×2 card; hide in compact rows */
+  .home-card-tags {
     display: none;
   }
 

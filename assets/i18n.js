@@ -72,6 +72,9 @@
     "cta.learnMore": "了解更多",
 
     "home.wallpaper.subhead": "把你在意的地方，变成地图壁纸。",
+    "home.wallpaper.tag.osm": "OpenStreetMap",
+    "home.wallpaper.tag.maplibre": "MapLibre",
+    "home.wallpaper.tag.sync": "iCloud 同步",
     "home.sidefy.subhead": "日历、提醒、RSS 和插件，汇聚在 Mac 屏幕边缘。",
     "home.island.subhead": "MacBook 刘海里的专注媒体伴侣。",
     "home.trmnl.subhead": "你的 LaraPaper / TRMNL 画面，置于壁纸与桌面图标之间。",
