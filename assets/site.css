@@ -1898,10 +1898,17 @@ html[data-app] .catalog-section .section-title {
 /* Apple-style catalog cards — neutral surface, soft shadow, lift on hover */
 html[data-app] body.catalog-page .plugin-card,
 html[data-app] body.catalog-page .theme-card {
-  background: var(--bg-elevated);
+  --unit-base: var(--bg);
+  background: color-mix(in srgb, var(--app-accent) 6%, var(--unit-base));
   border: none;
   border-radius: var(--card-radius);
   animation: hero-in 0.65s var(--ease-out) both;
+}
+
+html[data-theme="dark"] body.catalog-page .plugin-card,
+html[data-theme="dark"] body.catalog-page .theme-card {
+  --unit-base: var(--bg-alt);
+  background: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
 }
 
 @media (prefers-color-scheme: dark) {
