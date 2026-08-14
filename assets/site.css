@@ -243,13 +243,13 @@ a {
 
 html[data-theme="dark"] .site-shell:has(.doc-layout) {
   --doc-base: var(--bg-alt);
-  background: color-mix(in srgb, var(--app-accent) 12%, var(--doc-base));
+  background: color-mix(in srgb, var(--app-accent) 20%, var(--doc-base));
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .site-shell:has(.doc-layout) {
     --doc-base: var(--bg-alt);
-    background: color-mix(in srgb, var(--app-accent) 12%, var(--doc-base));
+    background: color-mix(in srgb, var(--app-accent) 20%, var(--doc-base));
   }
 }
 
@@ -285,7 +285,7 @@ html[data-theme="dark"] .site-shell:has(.doc-layout) {
   justify-content: space-between;
   align-items: center;
   color: color-mix(in srgb, var(--muted) 92%, transparent);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .footer a {
@@ -799,7 +799,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 .home-app-card--2x2 .platforms {
   margin: 0 0 0.25rem;
   text-align: left;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .home-app-card--1x2 .unit__title,
@@ -840,7 +840,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .platforms {
   margin: 0 0 0.25rem;
   text-align: left;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__title {
@@ -883,13 +883,13 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   }
 
   html[data-theme="dark"] .home-app-card:hover {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 22%, var(--unit-base, var(--bg)));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 26%, var(--unit-base, var(--bg)));
   }
 }
 
 @media (hover: hover) and (prefers-color-scheme: dark) {
   :root:not([data-theme]) .home-app-card:hover {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 22%, var(--unit-base, var(--bg)));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 26%, var(--unit-base, var(--bg)));
   }
 }
 
@@ -1187,19 +1187,19 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
 }
 
 html[data-theme="dark"] .unit--tint {
-  --unit-bg: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+  --unit-bg: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
 }
 
 html[data-theme="dark"] .unit--tint.unit--soft {
-  --unit-bg: color-mix(in srgb, var(--app-accent) 14%, var(--unit-base));
+  --unit-bg: color-mix(in srgb, var(--app-accent) 24%, var(--unit-base));
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .unit--tint {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
   }
   :root:not([data-theme]) .unit--tint.unit--soft {
-    --unit-bg: color-mix(in srgb, var(--app-accent) 14%, var(--unit-base));
+    --unit-bg: color-mix(in srgb, var(--app-accent) 24%, var(--unit-base));
   }
 }
 
@@ -1586,13 +1586,13 @@ html[data-theme="dark"] .unit__media--squares figure {
 
 html[data-theme="dark"] .product-hero {
   --unit-base: var(--bg-alt);
-  background: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+  background: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) .product-hero {
     --unit-base: var(--bg-alt);
-    background: color-mix(in srgb, var(--app-accent) 12%, var(--unit-base));
+    background: color-mix(in srgb, var(--app-accent) 20%, var(--unit-base));
   }
 }
 
@@ -1675,13 +1675,13 @@ html[data-app] body.catalog-page .site-shell {
 
 html[data-theme="dark"] body.catalog-page {
   --catalog-base: var(--bg-alt);
-  background: color-mix(in srgb, var(--app-accent) 12%, var(--catalog-base));
+  background: color-mix(in srgb, var(--app-accent) 20%, var(--catalog-base));
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) body.catalog-page {
     --catalog-base: var(--bg-alt);
-    background: color-mix(in srgb, var(--app-accent) 12%, var(--catalog-base));
+    background: color-mix(in srgb, var(--app-accent) 20%, var(--catalog-base));
   }
 }
 
@@ -1694,13 +1694,13 @@ html[data-app] .site-shell:has(.product-hero) {
 
 html[data-theme="dark"][data-app] .site-shell:has(.product-hero) {
   --page-base: var(--bg-alt);
-  background: color-mix(in srgb, var(--app-accent) 12%, var(--page-base));
+  background: color-mix(in srgb, var(--app-accent) 20%, var(--page-base));
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme])[data-app] .site-shell:has(.product-hero) {
     --page-base: var(--bg-alt);
-    background: color-mix(in srgb, var(--app-accent) 12%, var(--page-base));
+    background: color-mix(in srgb, var(--app-accent) 20%, var(--page-base));
   }
 }
 
@@ -2125,7 +2125,7 @@ html[data-app] body.catalog-page .theme-card {
 
 .badge-pro {
   flex-shrink: 0;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
   padding: 2px 7px;
@@ -2210,7 +2210,7 @@ html[data-app] body.catalog-page .theme-card {
   top: 8px;
   left: 8px;
   z-index: 3;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.02em;
   padding: 4px 7px;
