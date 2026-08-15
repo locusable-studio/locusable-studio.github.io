@@ -344,6 +344,7 @@ main > .unit .unit__media {
 }
 
 .product-faq {
+  margin-top: var(--card-gap);
   padding: var(--unit-pad-y) var(--unit-pad-x);
   background: var(--bg);
 }
@@ -730,8 +731,12 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   --unit-bg: var(--bg-alt);
   background: var(--unit-bg);
   text-align: center;
-  padding: var(--unit-pad-y) var(--unit-pad-x) 0;
+  padding: var(--unit-pad-y) var(--unit-pad-x);
   overflow: hidden;
+}
+
+.unit:has(.unit__media) {
+  padding-bottom: 0;
 }
 
 .unit--lead {
@@ -1476,12 +1481,17 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   }
 
   .detail-feature-grid {
-    padding: 0.5rem 0;
-    gap: 0.5rem;
+    padding: 0;
+    gap: var(--card-gap);
   }
 
   .detail-feature-grid .unit {
     min-height: 0;
+    border-radius: var(--card-radius-sm);
+  }
+
+  .detail-feature-grid + .unit {
+    margin-top: var(--card-gap);
   }
 }
 
@@ -1532,35 +1542,34 @@ html[data-app="links"] .unit__media--phones figure {
   .unit__media--phones figure {
     flex-basis: 46%;
     max-width: 200px;
-    border-radius: 26px 26px 0 0;
+    border-radius: var(--card-radius-sm);
   }
 }
 
 .unit__media--desktop-peek {
-  overflow: hidden;
   max-width: min(1120px, 100%);
   margin: 0 auto;
   padding: 1.25rem var(--unit-pad-x) 1.25rem;
-  /* real shot 1400×787 (Mac wallpaper) — shown at full intrinsic ratio */
-  aspect-ratio: 1400 / 787;
-}
-
-.product-hero .unit__media--desktop-peek {
-  /* real shot 1259×717 — shown at full intrinsic ratio */
-  aspect-ratio: 1259 / 717;
-}
-
-html[data-app="trmnl"] .product-hero .unit__media--desktop-peek {
-  /* real shot 1617×898 — shown at full intrinsic ratio */
-  aspect-ratio: 1617 / 898;
 }
 
 .unit__media--desktop-peek img {
   width: 100%;
   height: auto;
+  /* real shot 1400×787 (Mac wallpaper) — shown at full intrinsic ratio */
+  aspect-ratio: 1400 / 787;
   border-radius: var(--card-radius);
   box-shadow: var(--shot-flush-shadow);
   display: block;
+}
+
+.product-hero .unit__media--desktop-peek img {
+  /* real shot 1259×717 — shown at full intrinsic ratio */
+  aspect-ratio: 1259 / 717;
+}
+
+html[data-app="trmnl"] .product-hero .unit__media--desktop-peek img {
+  /* real shot 1617×898 — shown at full intrinsic ratio */
+  aspect-ratio: 1617 / 898;
 }
 
 .unit__media--desktop-dual {
@@ -1759,17 +1768,17 @@ html[data-theme="dark"] .product-hero {
   }
 }
 
-/* Narrow screens: hero card goes edge-to-edge to match the grid */
+/* Narrow screens: hero, feature cards, and standalone units share one inset */
 @media (max-width: 720px) {
-  .product-hero {
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-    border-radius: var(--card-radius-sm);
+  .product-hero,
+  main > .unit,
+  .detail-feature-grid {
+    margin-left: var(--site-chrome-pad-x);
+    margin-right: var(--site-chrome-pad-x);
   }
 
+  .product-hero,
   main > .unit {
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
     border-radius: var(--card-radius-sm);
   }
 }

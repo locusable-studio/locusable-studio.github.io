@@ -18,7 +18,7 @@ const pages = [
   "coming-soon/index.html",
 ];
 
-const cssVersion = "183";
+const cssVersion = "185";
 const jsVersion = "59";
 const i18nJsVersion = "6";
 
@@ -330,6 +330,10 @@ if (!siteCss.includes("padding-top: var(--site-chrome-h-masthead);")) {
 }
 if (!siteCss.includes("border-radius: var(--card-radius);") || !siteCss.includes("aspect-ratio: 1400 / 787;")) {
   console.error("FAIL assets/site.css: screenshots should show full ratio with --card-radius corners");
+  failed++;
+}
+if (siteCss.includes("26px 26px 0 0") || /\.unit__media--desktop-peek \{[^}]*aspect-ratio/.test(siteCss)) {
+  console.error("FAIL assets/site.css: mobile screenshots must not flush-crop (full ratio, four-corner radius)");
   failed++;
 }
 if (!siteCss.includes('html[data-theme="dark"] .product-hero {')) {
