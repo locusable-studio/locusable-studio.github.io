@@ -2,12 +2,12 @@
 
 ## Home product grid card sizes
 
-The home page uses a **4-column × 3-row** CSS grid. Card sizes are named by column × row spans:
+The home page uses a **4-column × 2-row** CSS grid. Card sizes are named by column × row spans:
 
 | Name | Span | Class | Used? |
 |------|------|-------|-------|
 | 主推方卡 | 2×2 | `home-app-card--2x2` | ✅ Home: Wallpaper |
-| 横版小卡 | 2×1 | `home-app-card--2x1` | ✅ Home: Sidefy, Island, HackerBa, TRMNL · Coming Soon: Links |
+| 横版小卡 | 2×1 | `home-app-card--2x1` | ✅ Home: Sidefy, Island · Coming Soon: HackerBa · Unmaintained: TRMNL, Links |
 | 方卡 | 1×1 | `home-app-card--1x1` | ⚠️ CSS reserved, not used |
 | 竖版小卡 | 1×2 | `home-app-card--1x2` | ⚠️ CSS reserved, not used (legacy; `verify-site.mjs` still asserts the class exists — if you remove it, update the assertion too) |
 | 横版大卡 | 4×1 | `home-app-card--4x1` | ⚠️ CSS reserved, not used |
@@ -19,13 +19,12 @@ All home cards must use one of these standard classes. Do not invent ad-hoc span
 ```
 [Wallpaper 2×2 ] [Sidefy 2×1  ]
 [              ] [Island 2×1  ]
-[HackerBa 2×1  ] [TRMNL 2×1   ]
 ```
 
-- Wallpaper is the 2×2 主推方卡 (top-left).
+- Wallpaper is the 2×2 主推方卡 (left).
 - Right stack: Sidefy + Island as 2×1 cards.
-- Bottom row: HackerBa + TRMNL as 2×1 cards.
-- Here Links is **not** on the homepage — it lives on `/coming-soon/` as a single 2×1 card.
+- Here Links and TRMNL are **not** on the homepage — they live on `/unmaintained/` as 2×1 cards.
+- HackerBa is **not** on the homepage — it lives on `/coming-soon/` as a 2×1 card.
 
 ### List layout height
 
@@ -33,7 +32,7 @@ Desktop list-mode cards use **one grid row height** (`--home-row-h`, same as 横
 
 ### Mobile home (≤800px) — desktop rules above stay unchanged
 
-- **Grid:** single column; every card is a compact horizontal row (absolute icon). Cards reorder via `order`: wallpaper 1 → sidefy 2 → island 3 → hackerba 4 → trmnl 5 → links 6. Tighten left/right padding vs desktop; smaller title/subhead.
+- **Grid:** single column; every card is a compact horizontal row (absolute icon). Cards reorder via `order`: wallpaper 1 → sidefy 2 → island 3 → hackerba 4 → trmnl 5 → links 6. Tighten left/right padding vs desktop; smaller title/subhead. Home only shows wallpaper/sidefy/island; trmnl/links live on `/unmaintained/`, hackerba on `/coming-soon/`.
 - **List:** unlock fixed `--home-row-h` (`height: auto`). Icon stays **in-flow** — do **not** keep the desktop `6rem` absolute-icon left gutter. Copy `max-width` ~54%; one shot only; shot `max-height` explicit (not `calc(var(--home-row-h)…)`).
 - ≤520px: further tighten padding, icon, type, and shot radius (`--shot-radius-sm`).
 
@@ -53,7 +52,7 @@ The `.platforms` label must stay consistent across home card and product hero.
 Rules:
 - Always include the real platform. Never replace it with only `Coming Soon`.
 - Home card and product page must use the **same** platforms string.
-- Every coming-soon product uses this same platforms pattern (Links today). Do not leave one as bare platform while another appends Coming Soon.
+- Every coming-soon product uses this same platforms pattern. Do not leave one as bare platform while another appends Coming Soon.
 - Coming Soon CTA (`unit__links-soon`) is separate from the platforms line; do not invent App Store / GitHub links for unreleased products.
 - About list copy for coming-soon products should also say Coming Soon.
 - Home card and product hero `unit__subhead` must use the same one-liner.

@@ -16,11 +16,12 @@ const pages = [
   "here-hackerba/index.html",
   "here-trmnl/index.html",
   "coming-soon/index.html",
+  "unmaintained/index.html",
 ];
 
-const cssVersion = "185";
+const cssVersion = "187";
 const jsVersion = "59";
-const i18nJsVersion = "6";
+const i18nJsVersion = "10";
 
 const themeMapJsVersion = "1";
 
@@ -146,7 +147,7 @@ for (const page of pages) {
     console.error(`FAIL ${page}: legacy back-button nav found`);
     failed++;
   }
-  if (page !== "index.html" && page !== "coming-soon/index.html" && html.includes('href="/about/"')) {
+  if (page !== "index.html" && page !== "coming-soon/index.html" && page !== "unmaintained/index.html" && html.includes('href="/about/"')) {
     console.error(`FAIL ${page}: About link should only appear on hub pages`);
     failed++;
   }
@@ -190,11 +191,10 @@ if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
 for (const needle of [
-  "Focused tools for the devices you use every day.",
-  "overlooked interface spaces",
-  "Overlooked spaces deserve great tools",
-  "Locusable Studio makes focused native tools for overlooked interface spaces.",
-  "The notch. The screen edge. Between the wallpaper and your icons.",
+  "Small native tools for the devices you already use.",
+  "interface corners most people skip",
+  "A good place for a small tool",
+  "The notch, the screen edge, the gap between wallpaper and icons",
 ]) {
   if (!about.includes(needle)) {
     console.error(`FAIL about/index.html: missing studio context (${needle})`);
@@ -218,14 +218,14 @@ if (!home.includes('href="/about/"')) {
   console.error("FAIL index.html: missing About link");
   failed++;
 }
-for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/here-hackerba/", "/here-trmnl/", "/coming-soon/"]) {
+for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/coming-soon/", "/unmaintained/"]) {
   if (!home.includes(`href="${href}"`)) {
     console.error(`FAIL index.html: missing href ${href}`);
     failed++;
   }
 }
-if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 5) {
-  console.error("FAIL index.html: homepage should have five tinted app cards");
+if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 3) {
+  console.error("FAIL index.html: homepage should have three tinted app cards");
   failed++;
 }
 if (home.includes("unit--soft home-app-card") || home.includes("home-app-card--feature") || home.includes("home-app-card__screens")) {
@@ -243,9 +243,7 @@ for (const needle of [
   "home-app-card__arrow",
   'data-app="island"',
   'data-app="sidefy"',
-  'data-app="hackerba"',
   'data-app="wallpaper"',
-  'data-app="trmnl"',
 ]) {
   if (!home.includes(needle)) {
     console.error(`FAIL index.html: missing homepage card structure (${needle})`);
@@ -274,17 +272,42 @@ if (home.includes("home-app-card__list-shots")) {
   console.error("FAIL index.html: homepage cards should not embed list screenshots");
   failed++;
 }
-if (home.includes('data-app="links"')) {
-  console.error("FAIL index.html: Here Links belongs on coming-soon, not the homepage");
+if (home.includes('data-app="links"') || home.includes('data-app="hackerba"') || home.includes('data-app="trmnl"')) {
+  console.error("FAIL index.html: Links, HackerBa, and TRMNL do not belong on the homepage");
   failed++;
 }
 const comingSoon = fs.readFileSync(path.join(root, "coming-soon/index.html"), "utf8");
-if (!comingSoon.includes('data-app="links"') || !comingSoon.includes("home-product-grid")) {
-  console.error("FAIL coming-soon/index.html: should list Here Links in the product grid");
+if (comingSoon.includes('data-app="links"')) {
+  console.error("FAIL coming-soon/index.html: Here Links belongs on unmaintained");
+  failed++;
+}
+if (!comingSoon.includes('data-app="hackerba"') || !comingSoon.includes("home-product-grid")) {
+  console.error("FAIL coming-soon/index.html: should list HackerBa in the product grid");
   failed++;
 }
 if (comingSoon.includes("home-app-card__list-shots")) {
   console.error("FAIL coming-soon/index.html: cards should not embed list screenshots");
+  failed++;
+}
+const unmaintained = fs.readFileSync(path.join(root, "unmaintained/index.html"), "utf8");
+if (unmaintained.includes('data-app="hackerba"')) {
+  console.error("FAIL unmaintained/index.html: HackerBa belongs on coming-soon");
+  failed++;
+}
+if (!unmaintained.includes('data-app="trmnl"') || !unmaintained.includes('data-app="links"') || !unmaintained.includes("home-product-grid")) {
+  console.error("FAIL unmaintained/index.html: should list TRMNL and Links in the product grid");
+  failed++;
+}
+if (unmaintained.includes("home-app-card__list-shots")) {
+  console.error("FAIL unmaintained/index.html: cards should not embed list screenshots");
+  failed++;
+}
+if (!home.includes('href="/unmaintained/" class="edge-plaster edge-plaster--left"')) {
+  console.error("FAIL index.html: missing left unmaintained plaster");
+  failed++;
+}
+if (!unmaintained.includes('href="/" class="edge-plaster edge-plaster--right"')) {
+  console.error("FAIL unmaintained/index.html: missing right Released plaster");
   failed++;
 }
 if (home.includes("home-app-card--island") || home.includes("home-app-card__peeks")) {
@@ -300,8 +323,8 @@ if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-c
   console.error("FAIL assets/site.css: legacy feature/screens homepage styles should be removed");
   failed++;
 }
-if (!siteCss.includes("grid-template-rows: repeat(3, minmax(0, 1fr));")) {
-  console.error("FAIL assets/site.css: homepage grid should use three equal rows");
+if (!siteCss.includes("grid-template-rows: repeat(2, minmax(0, 1fr));")) {
+  console.error("FAIL assets/site.css: homepage grid should use two equal rows");
   failed++;
 }
 if (!siteCss.includes(".home-app-card--1x2 {")) {
@@ -429,12 +452,16 @@ if ((linksShots.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="5
 
 // Home cards render icons at 52px (CSS), so the HTML attributes must match, not the 84px hero size.
 const homeCardIcon = (html) => (html.match(/class="unit unit--tint[^"]*home-app-card[\s\S]*?width="52" height="52"/g) || []).length;
-if (homeCardIcon(home) !== 5) {
-  console.error("FAIL index.html: all five home cards should declare 52px icons");
+if (homeCardIcon(home) !== 3) {
+  console.error("FAIL index.html: all three home cards should declare 52px icons");
   failed++;
 }
 if (homeCardIcon(comingSoon) !== 1) {
-  console.error("FAIL coming-soon/index.html: the Links card should declare a 52px icon");
+  console.error("FAIL coming-soon/index.html: the HackerBa card should declare a 52px icon");
+  failed++;
+}
+if (homeCardIcon(unmaintained) !== 2) {
+  console.error("FAIL unmaintained/index.html: both unmaintained cards should declare 52px icons");
   failed++;
 }
 

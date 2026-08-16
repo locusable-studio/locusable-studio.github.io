@@ -31,17 +31,6 @@
   --card-radius-sm: 16px;
   --card-gap: 0.75rem;
   --section-gap: 3.5rem;
-  /* Flush peeks: no downward bloom (clips into a dirty band at the crop edge) */
-  --shot-flush-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.06),
-    -14px 0 28px -18px rgba(0, 0, 0, 0.2),
-    14px 0 28px -18px rgba(0, 0, 0, 0.2),
-    0 -10px 24px -14px rgba(0, 0, 0, 0.14);
-  --shot-flush-shadow-dark:
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    -14px 0 28px -18px rgba(0, 0, 0, 0.55),
-    14px 0 28px -18px rgba(0, 0, 0, 0.55),
-    0 -10px 24px -14px rgba(0, 0, 0, 0.4);
   --unit-pad-y: clamp(3.5rem, 8vw, 5.5rem);
   --unit-pad-x: clamp(1.25rem, 4vw, 2.5rem);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -756,7 +745,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   flex: 1;
   min-height: 0;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
   padding: 0.75rem;
 }
@@ -838,7 +827,6 @@ html[data-lang="zh"] [data-lang-block="zh"] {
   width: auto;
   transform: translateX(-50%);
   border-radius: var(--shot-radius);
-  box-shadow: var(--shot-flush-shadow);
 }
 
 .home-app-card--1x2 .product-hero__icon,
@@ -973,7 +961,7 @@ html[data-lang="zh"] [data-lang-block="zh"] {
 
 .site-shell:has(.home-product-grid) {
   /* Match list “1 高度” row under masthead + footer */
-  --home-row-h: calc((100dvh - var(--site-chrome-h-masthead) - 5.5rem) / 3);
+  --home-row-h: calc((100dvh - var(--site-chrome-h-masthead) - 5.5rem) / 2);
 }
 
 /* Browsers without :has() (pre-2022): keep the fixed masthead from
@@ -1517,7 +1505,6 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
-  box-shadow: var(--shot-flush-shadow);
   /* real shots 585×1266 / 585×1272 — shown at full intrinsic ratio */
   aspect-ratio: 585 / 1266;
 }
@@ -1558,7 +1545,6 @@ html[data-app="links"] .unit__media--phones figure {
   /* real shot 1400×787 (Mac wallpaper) — shown at full intrinsic ratio */
   aspect-ratio: 1400 / 787;
   border-radius: var(--card-radius);
-  box-shadow: var(--shot-flush-shadow);
   display: block;
 }
 
@@ -1590,7 +1576,6 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek img {
   border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
-  box-shadow: var(--shot-flush-shadow);
   /* 1400×758 — shown at full intrinsic ratio */
   aspect-ratio: 1400 / 758;
 }
@@ -1636,7 +1621,6 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek img {
   border-radius: var(--card-radius);
   overflow: hidden;
   background: transparent;
-  box-shadow: var(--shot-flush-shadow);
   /* real shots 890×360 — shown at full intrinsic ratio */
   aspect-ratio: 890 / 360;
 }
@@ -1645,24 +1629,6 @@ html[data-app="trmnl"] .product-hero .unit__media--desktop-peek img {
   width: 100%;
   height: auto;
   display: block;
-}
-
-html[data-theme="dark"] .unit__media--phones figure,
-html[data-theme="dark"] .unit__media--desktop-peek img,
-html[data-theme="dark"] .unit__media--desktop-dual figure,
-html[data-theme="dark"] .unit__media--island figure,
-html[data-theme="dark"] .home-app-card__shot img {
-  box-shadow: var(--shot-flush-shadow-dark);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .unit__media--phones figure,
-  :root:not([data-theme]) .unit__media--desktop-peek img,
-  :root:not([data-theme]) .unit__media--desktop-dual figure,
-  :root:not([data-theme]) .unit__media--island figure,
-  :root:not([data-theme]) .home-app-card__shot img {
-    box-shadow: var(--shot-flush-shadow-dark);
-  }
 }
 
 @media (max-width: 720px) {
@@ -1711,7 +1677,6 @@ html[data-theme="dark"] .product-hero {
   border-radius: 22px;
   object-fit: cover;
   background: #fff;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
 }
 
 .product-hero .platforms {
@@ -2099,17 +2064,6 @@ html[data-app] body.catalog-page .theme-card {
   position: relative;
   container-type: size;
   container-name: preview;
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.06),
-    0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-@media (prefers-color-scheme: dark) {
-  .phone {
-    box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-      0 4px 20px rgba(0, 0, 0, 0.32);
-  }
 }
 
 .theme-meta {
@@ -2328,7 +2282,7 @@ html[data-app] body.catalog-page .theme-card {
   to { opacity: 1; transform: none; }
 }
 
-/* Edge plaster tabs — home (right) ↔ coming soon (left) */
+/* Edge plaster tabs — unmaintained (left) ↔ home ↔ coming soon (right) */
 .edge-plaster {
   position: fixed;
   top: 50%;
