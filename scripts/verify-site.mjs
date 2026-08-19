@@ -19,7 +19,7 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "187";
+const cssVersion = "188";
 const jsVersion = "59";
 const i18nJsVersion = "10";
 
@@ -317,6 +317,10 @@ if (home.includes("home-app-card--island") || home.includes("home-app-card__peek
 const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
 if (!siteCss.includes('html[data-home-layout="list"] .home-app-card__shot')) {
   console.error("FAIL assets/site.css: shot must hide in list layout (and therefore on mobile)");
+  failed++;
+}
+if (!/@media \(max-width: 800px\)[\s\S]*html\[data-home-layout="list"\] \.home-app-card--2x2 \.product-hero__icon/.test(siteCss)) {
+  console.error("FAIL assets/site.css: mobile compact rows must override list 2x2 icon size");
   failed++;
 }
 if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-card__screens")) {

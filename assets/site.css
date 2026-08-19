@@ -1103,7 +1103,10 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   }
 
   .home-app-card--1x2 .unit__copy,
-  .home-app-card--2x2 .unit__copy {
+  .home-app-card--2x2 .unit__copy,
+  html[data-home-layout="list"] .home-app-card .unit__copy,
+  html[data-home-layout="list"] .home-app-card--1x2 .unit__copy,
+  html[data-home-layout="list"] .home-app-card--2x2 .unit__copy {
     max-width: none;
   }
 
@@ -1140,11 +1143,19 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
     order: 6;
   }
 
-  /* Compact horizontal rows (grid + list share the same look) */
+  /* Compact horizontal rows (grid + list share the same look).
+     Prefix list selectors so they beat the desktop list rules —
+     mobile always sets data-home-layout="list", and the 2×2 hero
+     otherwise keeps the larger desktop icon/type/padding. */
   .home-app-card,
   .home-app-card--1x2,
-  .home-app-card--2x2 {
+  .home-app-card--2x2,
+  html[data-home-layout="list"] .home-app-card,
+  html[data-home-layout="list"] .home-app-card--1x2,
+  html[data-home-layout="list"] .home-app-card--2x2 {
     min-height: 7.5rem;
+    height: auto;
+    max-height: none;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
@@ -1152,14 +1163,20 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   }
 
   .home-app-card--1x2 .unit__copy,
-  .home-app-card--2x2 .unit__copy {
+  .home-app-card--2x2 .unit__copy,
+  html[data-home-layout="list"] .home-app-card .unit__copy,
+  html[data-home-layout="list"] .home-app-card--1x2 .unit__copy,
+  html[data-home-layout="list"] .home-app-card--2x2 .unit__copy {
     position: static;
   }
 
   .home-app-card .product-hero__icon,
   .home-app-card--1x2 .product-hero__icon,
   .home-app-card--2x2 .product-hero__icon,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .product-hero__icon {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card--1x2 .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card--2x2 .product-hero__icon {
     position: absolute;
     top: 50%;
     left: 1.15rem;
@@ -1172,14 +1189,18 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   .home-app-card .unit__title,
   .home-app-card--1x2 .unit__title,
   .home-app-card--2x2 .unit__title,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__title {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__title,
+  html[data-home-layout="list"] .home-app-card .unit__title,
+  html[data-home-layout="list"] .home-app-card--1x2 .unit__title,
+  html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
     font-size: clamp(1.35rem, 5.5vw, 1.75rem);
   }
 
   .home-app-card .unit__subhead,
   .home-app-card--1x2 .unit__subhead,
   .home-app-card--2x2 .unit__subhead,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__subhead {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__subhead,
+  html[data-home-layout="list"] .home-app-card .unit__subhead {
     margin-top: 0.35rem;
     font-size: 0.875rem;
     line-height: 1.35;
@@ -1193,16 +1214,8 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
     transform: translateY(-50%);
   }
 
-  /* Unlock desktop list row height on narrow screens */
   html[data-home-layout="list"] {
     --home-row-h: auto;
-  }
-
-  html[data-home-layout="list"] .home-app-card,
-  html[data-home-layout="list"] .home-app-card--1x2,
-  html[data-home-layout="list"] .home-app-card--2x2 {
-    height: auto;
-    max-height: none;
   }
 }
 
@@ -1218,7 +1231,10 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
 
   .home-app-card,
   .home-app-card--1x2,
-  .home-app-card--2x2 {
+  .home-app-card--2x2,
+  html[data-home-layout="list"] .home-app-card,
+  html[data-home-layout="list"] .home-app-card--1x2,
+  html[data-home-layout="list"] .home-app-card--2x2 {
     min-height: 6.75rem;
     padding: 1rem 2.4rem 1rem 4.35rem;
     border-radius: 16px;
@@ -1227,7 +1243,10 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   .home-app-card .product-hero__icon,
   .home-app-card--1x2 .product-hero__icon,
   .home-app-card--2x2 .product-hero__icon,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .product-hero__icon {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card--1x2 .product-hero__icon,
+  html[data-home-layout="list"] .home-app-card--2x2 .product-hero__icon {
     left: 0.85rem;
     width: 40px;
     height: 40px;
@@ -1236,14 +1255,18 @@ html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
   .home-app-card .unit__title,
   .home-app-card--1x2 .unit__title,
   .home-app-card--2x2 .unit__title,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__title {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__title,
+  html[data-home-layout="list"] .home-app-card .unit__title,
+  html[data-home-layout="list"] .home-app-card--1x2 .unit__title,
+  html[data-home-layout="list"] .home-app-card--2x2 .unit__title {
     font-size: clamp(1.25rem, 5.8vw, 1.55rem);
   }
 
   .home-app-card .unit__subhead,
   .home-app-card--1x2 .unit__subhead,
   .home-app-card--2x2 .unit__subhead,
-  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__subhead {
+  .home-app-card:not(.home-app-card--1x2):not(.home-app-card--2x2) .unit__subhead,
+  html[data-home-layout="list"] .home-app-card .unit__subhead {
     font-size: 0.8125rem;
   }
 
