@@ -21,7 +21,7 @@ const pages = [
 
 const cssVersion = "189";
 const jsVersion = "59";
-const i18nJsVersion = "10";
+const i18nJsVersion = "11";
 
 const themeMapJsVersion = "1";
 
@@ -412,8 +412,8 @@ if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  marg
 }
 
 const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
-if (!wallpaper.includes('data-i18n="platform.iphoneIpadMac"')) {
-  console.error("FAIL here-wallpaper/index.html: platform line should include Mac");
+if (!wallpaper.includes('data-i18n="platform.iphoneIpad"')) {
+  console.error("FAIL here-wallpaper/index.html: platform line should be iPhone and iPad");
   failed++;
 }
 if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-peek")) {
