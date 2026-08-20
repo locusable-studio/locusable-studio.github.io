@@ -19,7 +19,7 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "188";
+const cssVersion = "189";
 const jsVersion = "59";
 const i18nJsVersion = "10";
 
@@ -327,8 +327,8 @@ if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-c
   console.error("FAIL assets/site.css: legacy feature/screens homepage styles should be removed");
   failed++;
 }
-if (!siteCss.includes("grid-template-rows: repeat(2, minmax(0, 1fr));")) {
-  console.error("FAIL assets/site.css: homepage grid should use two equal rows");
+if (!siteCss.includes("grid-auto-rows: var(--home-row-h")) {
+  console.error("FAIL assets/site.css: homepage grid rows should use --home-row-h (not stretch to fill)");
   failed++;
 }
 if (!siteCss.includes(".home-app-card--1x2 {")) {

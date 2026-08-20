@@ -26,6 +26,10 @@ All home cards must use one of these standard classes. Do not invent ad-hoc span
 - Here Links and TRMNL are **not** on the homepage — they live on `/unmaintained/` as 2×1 cards.
 - HackerBa is **not** on the homepage — it lives on `/coming-soon/` as a 2×1 card.
 
+### Grid row height
+
+Desktop grid does **not** stretch to fill the remaining viewport. Rows use `--home-row-h` (横版小卡 / “1 高度”: leftover viewport / 3, capped). Two home rows leave empty space above the footer. Coming Soon / Unmaintained only create as many rows as needed (`grid-auto-rows`).
+
 ### List layout height
 
 Desktop list-mode cards use **one grid row height** (`--home-row-h`, same as 横版小卡 / “1 高度”), not a taller clamp. 竖版/主推方卡 also becomes one row tall in list mode.
