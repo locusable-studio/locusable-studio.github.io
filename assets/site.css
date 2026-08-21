@@ -1730,6 +1730,29 @@ html[data-theme="dark"] .product-hero {
   margin: 0 auto 2rem;
 }
 
+.unit .install-snippet__code {
+  margin: 1.15rem auto 0;
+  max-width: 38rem;
+  text-align: left;
+}
+
+.install-snippet__code {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--wash);
+  color: var(--fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  -webkit-overflow-scrolling: touch;
+}
+
+.install-snippet__code code {
+  font-family: inherit;
+}
+
 @media (max-width: 520px) {
   .product-hero .product-title {
     font-size: clamp(2rem, 9vw, 2.75rem);
@@ -1743,6 +1766,10 @@ html[data-theme="dark"] .product-hero {
 
   .product-hero .unit__links {
     margin-bottom: 1.25rem;
+  }
+
+  .product-hero .unit__links:has(+ .status-note) {
+    margin-bottom: 0.45rem;
   }
 
   .unit__title {

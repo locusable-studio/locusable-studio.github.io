@@ -136,6 +136,8 @@
     "sidefy.faq.a5": "日历、提醒、RSS 和 Atom、GitHub 动态，以及插件事件。",
 
     "island.subhead": "正在播放的音乐显示在 Mac 刘海里。",
+    "island.brewTitle": "Homebrew",
+    "island.brewSubhead": "从 Locusable 的 tap 安装。Homebrew 6 需要先信任这个 cask。",
     "island.previews": "应用预览",
     "island.notchTitle": "刘海里的播放器",
     "island.notchSubhead": "封面、歌名和歌手一直能看见，又不会挡住你干活。",

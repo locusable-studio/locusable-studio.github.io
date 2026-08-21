@@ -19,9 +19,9 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "189";
+const cssVersion = "191";
 const jsVersion = "59";
-const i18nJsVersion = "11";
+const i18nJsVersion = "13";
 
 const themeMapJsVersion = "1";
 
@@ -491,6 +491,16 @@ for (const href of [
 ]) {
   if (!island.includes(`href="${href}"`)) {
     console.error(`FAIL here-island/index.html: missing href ${href}`);
+    failed++;
+  }
+}
+for (const needle of [
+  "brew tap locusable-studio/tap",
+  "brew trust --cask locusable-studio/tap/here-island",
+  "brew install --cask here-island",
+]) {
+  if (!island.includes(needle)) {
+    console.error(`FAIL here-island/index.html: missing ${needle}`);
     failed++;
   }
 }
