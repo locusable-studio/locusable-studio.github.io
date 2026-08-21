@@ -1320,8 +1320,14 @@ html[data-theme="dark"] .unit--tint.unit--soft {
   padding-bottom: 1.75rem;
 }
 
+/* Solo copy sits inside a fully-padded unit — don't stack another pad-y. */
 .unit__copy--solo {
-  padding-bottom: var(--unit-pad-y);
+  padding-bottom: 0;
+}
+
+/* Text-only cards (no media): match detail-feature-grid vertical inset. */
+main > .unit:not(:has(.unit__media)) {
+  padding-block: clamp(2rem, 5vw, 4rem);
 }
 
 .platforms {
