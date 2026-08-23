@@ -1494,6 +1494,14 @@ main > .unit:not(:has(.unit__media)) {
   padding-bottom: 0;
 }
 
+.detail-feature-grid .unit--full {
+  grid-column: 1 / -1;
+}
+
+.detail-feature-grid .unit:has(.install-snippet__code) {
+  min-height: 0;
+}
+
 @media (max-width: 720px) {
   .feature-list--cards,
   .detail-feature-grid {
@@ -1511,10 +1519,6 @@ main > .unit:not(:has(.unit__media)) {
   }
 
   .detail-feature-grid + .unit {
-    margin-top: var(--card-gap);
-  }
-
-  main > .unit + .detail-feature-grid {
     margin-top: var(--card-gap);
   }
 }

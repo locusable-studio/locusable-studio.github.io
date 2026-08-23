@@ -19,7 +19,7 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "192";
+const cssVersion = "193";
 const jsVersion = "59";
 const i18nJsVersion = "13";
 
