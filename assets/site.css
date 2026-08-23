@@ -1513,6 +1513,10 @@ main > .unit:not(:has(.unit__media)) {
   .detail-feature-grid + .unit {
     margin-top: var(--card-gap);
   }
+
+  main > .unit + .detail-feature-grid {
+    margin-top: var(--card-gap);
+  }
 }
 
 .unit__media {
