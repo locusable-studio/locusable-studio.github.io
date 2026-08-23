@@ -21,7 +21,7 @@ const pages = [
 
 const cssVersion = "193";
 const jsVersion = "59";
-const i18nJsVersion = "13";
+const i18nJsVersion = "15";
 
 const themeMapJsVersion = "1";
 
@@ -259,7 +259,7 @@ if (home.includes("home-card-tags")) {
   for (const needle of [
     'data-i18n="home.wallpaper.tag.osm"',
     'data-i18n="home.wallpaper.tag.maplibre"',
-    'data-i18n="home.wallpaper.tag.sync"',
+    'data-i18n="home.wallpaper.tag.mac"',
   ]) {
     if (!home.includes(needle)) {
       console.error(`FAIL index.html: missing wallpaper tag (${needle})`);
@@ -412,8 +412,20 @@ if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  marg
 }
 
 const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
-if (!wallpaper.includes('data-i18n="platform.iphoneIpad"')) {
-  console.error("FAIL here-wallpaper/index.html: platform line should be iPhone and iPad");
+if (!wallpaper.includes('data-i18n="platform.iphoneIpadMac"')) {
+  console.error("FAIL here-wallpaper/index.html: platform line should be iPhone, iPad, and Mac");
+  failed++;
+}
+if (!home.includes('data-i18n="platform.iphoneIpadMac"')) {
+  console.error("FAIL index.html: wallpaper card platform should match the product page");
+  failed++;
+}
+if (wallpaper.includes("wallpaper.macSoon") || wallpaper.includes("on the way")) {
+  console.error("FAIL here-wallpaper/index.html: Mac is released; remove coming-soon copy");
+  failed++;
+}
+if (!wallpaper.includes('data-mac-url="macappstore://apps.apple.com/app/id6789155385"')) {
+  console.error("FAIL here-wallpaper/index.html: App Store link should include a Mac deep link");
   failed++;
 }
 if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-peek")) {
