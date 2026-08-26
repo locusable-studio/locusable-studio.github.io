@@ -143,7 +143,7 @@
     "island.notchSubhead": "封面、歌名和歌手一直能看见，又不会挡住你干活。",
     "island.controlsTitle": "播放控制就在旁边",
     "island.controlsSubhead": "随机、切歌、暂停、循环都有，还有进度和可选的实时波形。",
-    "island.hideTitle": "截图录屏里没有",
+    "island.hideTitle": "截图时先藏起来",
     "island.hideSubhead": "本机岛还在，截图和录屏带不走。",
     "island.faqTitle": "常见问题",
     "island.faq.q1": "Here Island 免费吗？",
