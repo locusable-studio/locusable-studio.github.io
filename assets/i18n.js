@@ -139,7 +139,7 @@
 
     "island.subhead": "正在播放的音乐显示在 Mac 灵动岛里。",
     "island.brewTitle": "Homebrew",
-    "island.brewSubhead": "从 Locusable 的 tap 安装，先信任这个 cask",
+    "island.brewSubhead": "用 Homebrew 安装。先运行下面三行，中间一行是信任我们的安装包。",
     "island.previews": "应用预览",
     "island.notchTitle": "灵动岛里的播放器",
     "island.notchSubhead": "封面、歌名和歌手一直能看见，又不会挡住你干活。",
