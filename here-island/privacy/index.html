@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" data-app="links">
+<html lang="en" data-app="island">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#2196f3">
-  <title data-i18n="title.links.privacy">Privacy Policy — Here Links</title>
-  <meta name="description" data-i18n-content="meta.links.privacy" content="Privacy Policy for Here Links by Locusable Studio.">
+  <meta name="theme-color" content="#9c27b0">
+  <title data-i18n="title.island.privacy">Privacy Policy — Here Island</title>
+  <meta name="description" data-i18n-content="meta.island.privacy" content="Privacy Policy for Here Island by Locusable Studio.">
   <link rel="icon" href="/favicon.ico?v=10" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=10">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=10">
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png?v=10">
   <link rel="manifest" href="/site.webmanifest">
   <script>try { var theme = localStorage.getItem("locusable-theme"); if (theme === "light" || theme === "dark") document.documentElement.setAttribute("data-theme", theme);  var lang = localStorage.getItem("locusable-lang"); if (lang === "zh") { document.documentElement.lang = "zh-Hans"; document.documentElement.setAttribute("data-lang", "zh"); }} catch (error) {}</script>
-    <meta property="og:title" data-i18n-content="title.links.privacy" content="Privacy Policy — Here Links">
-  <meta property="og:description" data-i18n-content="meta.links.privacy" content="Privacy Policy for Here Links by Locusable Studio.">
+    <meta property="og:title" data-i18n-content="title.island.privacy" content="Privacy Policy — Here Island">
+  <meta property="og:description" data-i18n-content="meta.island.privacy" content="Privacy Policy for Here Island by Locusable Studio.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://locusable.com/here-links/privacy/">
-  <meta property="og:image" content="https://locusable.com/assets/here-links/icon-192.png?v=10">
+  <meta property="og:url" content="https://locusable.com/here-island/privacy/">
+  <meta property="og:image" content="https://locusable.com/assets/here-island/icon-192.png?v=3">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" data-i18n-content="title.links.privacy" content="Privacy Policy — Here Links">
-  <meta name="twitter:description" data-i18n-content="meta.links.privacy" content="Privacy Policy for Here Links by Locusable Studio.">
+  <meta name="twitter:title" data-i18n-content="title.island.privacy" content="Privacy Policy — Here Island">
+  <meta name="twitter:description" data-i18n-content="meta.island.privacy" content="Privacy Policy for Here Island by Locusable Studio.">
   <link rel="preload" href="/assets/fonts/Maplestory-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css?v=193">
   <noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>
@@ -30,7 +30,7 @@
       <div class="crumbbar__inner">
         <ol class="crumbs">
         <li><a href="/">Locusable <em>Studio</em></a></li>
-        <li><a href="/here-links/">Here Links</a></li>
+        <li><a href="/here-island/">Here Island</a></li>
         <li><span aria-current="page" data-i18n="crumb.privacy">Privacy</span></li>
         </ol>
         <div class="theme-control" data-theme-control>
@@ -58,13 +58,12 @@
       <main class="prose" data-reveal>
         <div data-lang-block="en">
         <h1>Privacy Policy</h1>
-        <p class="prose-meta">Here Links · Locusable Studio · Effective July 24, 2026</p>
+        <p class="prose-meta">Here Island · Locusable Studio · Effective August 28, 2026</p>
 
         <p>
-          Here Links (“the App”) is made by Locusable Studio (“we”, “us”).
-          The App is an unofficial native iOS client for self-hosted
-          <a href="https://linkding.link">linkding</a> servers that you operate.
-          We do not operate user accounts for the App, and we do not use data for tracking.
+          Here Island (“the App”) is made by Locusable Studio (“we”, “us”).
+          It is a free, open-source macOS app (GPL v3) that shows what’s playing in the Mac notch.
+          We do not operate user accounts, and we do not use data for tracking.
           We do not sell personal data.
         </p>
 
@@ -72,30 +71,31 @@
         <p>
           We do not operate analytics, advertising, or crash-reporting services that receive your information.
           We do not sell or share personal data with third parties for marketing.
-          We do not run a Locusable backend that stores your bookmarks or browsing history.
+          We do not run a Locusable backend that stores what you listen to.
         </p>
 
-        <h2>Data that stays on your device</h2>
+        <h2>Data that stays on your Mac</h2>
         <p>
-          The App stores the following on your iPhone to provide its features. This data is not sent to us:
+          The App reads Now Playing on this Mac so it can show the title, artist, artwork, and controls in the notch.
+          That stays on your device.
+        </p>
+        <p>
+          Depending on which features you use, the App may ask for these system permissions.
+          This data is processed on your Mac and is not sent to us:
         </p>
         <ul>
-          <li><strong>API tokens</strong> — stored in the Keychain so the App (and Share Extension) can authenticate to your linkding servers.</li>
-          <li><strong>Server settings</strong> — instance URLs and related preferences stored in an App Group on your device for use by the App and Share Extension.</li>
+          <li><strong>Apple Music</strong> — optional, to fetch animated artwork and to control playback via AppleScript</li>
+          <li><strong>Audio capture</strong> — optional, for the real-time waveform</li>
+          <li><strong>Screen recording</strong> — so the notch can be left out of screenshots, recordings, and screen sharing (it is not used to record your screen for us)</li>
         </ul>
-
-        <h2>Your linkding servers</h2>
         <p>
-          When you use the App, bookmark lists, searches, saves, archives, tags, snapshots, and attachments
-          are requested from the linkding server URL(s) you configure.
-          Those requests are made by the App on your device to <strong>your</strong> self-hosted instance(s).
-          How that server stores or processes data is governed by your own hosting setup and the linkding project — not by Locusable Studio.
+          Preferences such as appearance and hide toggles are stored locally on your Mac.
         </p>
 
-        <h2>Share Extension</h2>
+        <h2>Updates</h2>
         <p>
-          The optional Share Extension lets you save a link from other apps into your default linkding server.
-          It uses the same on-device Keychain tokens and App Group settings as the main App.
+          The App can check for updates through Sparkle. That check contacts our GitHub release feed to see if a new version exists.
+          We do not send Sparkle system profile information.
         </p>
 
         <h2>Children</h2>
@@ -110,20 +110,18 @@
 
         <h2>Contact</h2>
         <p>
-          For questions about this policy or technical support, open an issue at
-          <a href="https://github.com/locusable-studio/HereLinks/issues">github.com/locusable-studio/HereLinks/issues</a>.
+          For questions about this policy, open an issue at
+          <a href="https://github.com/locusable-studio/HereIsland/issues">github.com/locusable-studio/HereIsland/issues</a>.
         </p>
         </div>
         <div data-lang-block="zh">
         <h1>隐私政策</h1>
-        <p class="prose-meta">Here Links · Locusable Studio · 生效日期 2026 年 7 月 24 日</p>
+        <p class="prose-meta">Here Island · Locusable Studio · 生效日期 2026 年 8 月 28 日</p>
 
         <p>
-          Here Links（“本应用”）由 Locusable Studio（“我们”）开发。
-          本应用是你自行运营的自托管
-          <a href="https://linkding.link">linkding</a>
-          服务器的非官方原生 iOS 客户端。
-          我们不为本应用运营用户账户，也不将数据用于追踪。
+          Here Island（“本应用”）由 Locusable Studio（“我们”）开发。
+          这是一款免费开源的 macOS 应用（GPL v3），在 Mac 灵动岛里显示正在播放的内容。
+          我们不运营用户账户，也不将数据用于追踪。
           我们不出售个人数据。
         </p>
 
@@ -131,30 +129,30 @@
         <p>
           我们不运营会接收你信息的分析、广告或崩溃上报服务。
           我们不向第三方出售或共享个人数据用于营销。
-          我们不运行用于存储书签或浏览历史的 Locusable 后端。
+          我们不运行用于存储你听什么的 Locusable 后端。
         </p>
 
-        <h2>留在设备上的数据</h2>
+        <h2>留在这台 Mac 上的数据</h2>
         <p>
-          本应用在 iPhone 上存储以下内容以提供功能。这些数据不会发送给我们：
+          本应用读取这台 Mac 的正在播放信息，以便在 Mac 灵动岛里显示歌名、艺人、封面和控件。
+          这些留在你的设备上。
+        </p>
+        <p>
+          依你使用的功能，本应用可能会申请以下系统权限。这些数据在本机处理，不会发给我们：
         </p>
         <ul>
-          <li><strong>API 令牌</strong> — 存在钥匙串中，供本应用（及分享扩展）向你的 linkding 服务器认证。</li>
-          <li><strong>服务器设置</strong> — 实例 URL 及相关偏好存在设备上的 App Group 中，供本应用和分享扩展使用。</li>
+          <li><strong>Apple Music</strong> — 可选，用于获取动态封面，并通过 AppleScript 控制播放</li>
+          <li><strong>音频采集</strong> — 可选，用于实时波形</li>
+          <li><strong>屏幕录制</strong> — 用于在截图、录屏和投屏时藏掉 Mac 灵动岛（不用来替我们录下你的屏幕）</li>
         </ul>
-
-        <h2>你的 linkding 服务器</h2>
         <p>
-          使用本应用时，书签列表、搜索、保存、归档、标签、快照和附件
-          会向你配置的 linkding 服务器 URL 请求。
-          这些请求由本应用在你的设备上发往<strong>你自己的</strong>自托管实例。
-          该服务器如何存储或处理数据，由你的托管方式和 linkding 项目决定 — 与 Locusable Studio 无关。
+          外观、隐藏等偏好存在这台 Mac 本地。
         </p>
 
-        <h2>分享扩展</h2>
+        <h2>更新</h2>
         <p>
-          可选的分享扩展让你从其他 App 把链接保存到默认的 linkding 服务器。
-          它使用与主应用相同的本机钥匙串令牌和 App Group 设置。
+          本应用可通过 Sparkle 检查更新。该检查会访问我们的 GitHub 发布 feed，以确认是否有新版本。
+          我们不发送 Sparkle 系统资料信息。
         </p>
 
         <h2>儿童</h2>
@@ -169,8 +167,8 @@
 
         <h2>联系</h2>
         <p>
-          关于本政策或技术支持的问题，请在
-          <a href="https://github.com/locusable-studio/HereLinks/issues">github.com/locusable-studio/HereLinks/issues</a>
+          关于本政策的问题，请在
+          <a href="https://github.com/locusable-studio/HereIsland/issues">github.com/locusable-studio/HereIsland/issues</a>
           提交 issue。
         </p>
         </div>

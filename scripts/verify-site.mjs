@@ -13,6 +13,7 @@ const pages = [
   "here-sidefy/index.html",
   "here-sidefy/privacy/index.html",
   "here-island/index.html",
+  "here-island/privacy/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
   "coming-soon/index.html",
@@ -21,7 +22,7 @@ const pages = [
 
 const cssVersion = "193";
 const jsVersion = "59";
-const i18nJsVersion = "16";
+const i18nJsVersion = "17";
 
 const themeMapJsVersion = "1";
 
@@ -91,6 +92,11 @@ const breadcrumbs = {
   "here-sidefy/privacy/index.html": [
     'href="/">Locusable <em>Studio</em>',
     'href="/here-sidefy/">Here Sidefy',
+    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
+  ],
+  "here-island/privacy/index.html": [
+    'href="/">Locusable <em>Studio</em>',
+    'href="/here-island/">Here Island',
     '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
   ],
 };
@@ -542,6 +548,32 @@ for (const needle of [
   }
 }
 
+const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
+for (const href of [
+  "/here-island/privacy/",
+]) {
+  if (!island.includes(`href="${href}"`)) {
+    console.error(`FAIL here-island/index.html: missing href ${href}`);
+    failed++;
+  }
+}
+const islandPrivacy = fs.readFileSync(path.join(root, "here-island/privacy/index.html"), "utf8");
+for (const needle of [
+  "Mac notch",
+  "Mac 灵动岛",
+  "Sparkle",
+  "github.com/locusable-studio/HereIsland/issues",
+]) {
+  if (!islandPrivacy.includes(needle)) {
+    console.error(`FAIL here-island/privacy/index.html: missing ${needle}`);
+    failed++;
+  }
+}
+if (islandPrivacy.includes("麦金刘海") || islandPrivacy.includes("Mac 刘海")) {
+  console.error("FAIL here-island/privacy/index.html: leftover 麦金刘海 / Mac 刘海");
+  failed++;
+}
+
 const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");
 if (!sidefy.includes("detail-feature-grid")) {
   console.error("FAIL here-sidefy/index.html: missing paired feature layout");
@@ -625,6 +657,7 @@ const themeColors = {
   "here-sidefy/index.html": "#f44336",
   "here-sidefy/privacy/index.html": "#f44336",
   "here-island/index.html": "#9c27b0",
+  "here-island/privacy/index.html": "#9c27b0",
   "here-hackerba/index.html": "#ff6600",
   "here-trmnl/index.html": "#3c50b4",
 };
