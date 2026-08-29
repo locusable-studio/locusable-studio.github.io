@@ -1767,6 +1767,14 @@ html[data-theme="dark"] .product-hero {
   font-family: inherit;
 }
 
+@media (max-width: 720px) {
+  .install-snippet__code {
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
 @media (max-width: 520px) {
   .product-hero .product-title {
     font-size: clamp(2rem, 9vw, 2.75rem);
