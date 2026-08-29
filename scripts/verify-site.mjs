@@ -20,7 +20,7 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "193";
+const cssVersion = "194";
 const jsVersion = "59";
 const i18nJsVersion = "19";
 
@@ -414,6 +414,11 @@ if (!siteCss.includes(".about-page .unit__subhead {\n  max-width: 34rem;")) {
 }
 if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;")) {
   console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
+  failed++;
+}
+
+if (!/@media \(max-width: 720px\) \{[\s\S]*?\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;[\s\S]*?overflow-wrap:\s*anywhere;/.test(siteCss)) {
+  console.error("FAIL assets/site.css: install snippet must wrap on narrow screens (pre-wrap + overflow-wrap: anywhere)");
   failed++;
 }
 
