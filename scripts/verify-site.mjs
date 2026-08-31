@@ -22,7 +22,7 @@ const pages = [
 
 const cssVersion = "194";
 const jsVersion = "59";
-const i18nJsVersion = "19";
+const i18nJsVersion = "20";
 
 const themeMapJsVersion = "1";
 
@@ -527,6 +527,16 @@ for (const needle of [
     failed++;
   }
 }
+for (const needle of [
+  "island.lockTitle",
+  "island.lockSubhead",
+  "island.hideFullscreen",
+]) {
+  if (!island.includes(needle)) {
+    console.error(`FAIL here-island/index.html: missing ${needle}`);
+    failed++;
+  }
+}
 
 const hackerba = fs.readFileSync(path.join(root, "here-hackerba/index.html"), "utf8");
 if (!hackerba.includes("detail-feature-grid")) {
@@ -553,7 +563,6 @@ for (const needle of [
   }
 }
 
-const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
 for (const href of [
   "/here-island/privacy/",
 ]) {
@@ -696,6 +705,21 @@ if (fs.existsSync(path.join(root, "assets/fonts/Maplestory-Light.woff2"))) {
 
 if (!fs.existsSync(path.join(root, "assets/i18n.js"))) {
   console.error("FAIL assets/i18n.js missing");
+  failed++;
+}
+const i18nJs = fs.readFileSync(path.join(root, "assets/i18n.js"), "utf8");
+for (const needle of [
+  '"island.lockTitle": "锁屏上也能看"',
+  '"island.lockSubhead": "可选，默认关。"',
+  '"island.hideFullscreen": "全屏时也可以藏起来。默认开。"',
+]) {
+  if (!i18nJs.includes(needle)) {
+    console.error(`FAIL assets/i18n.js: missing ${needle}`);
+    failed++;
+  }
+}
+if (i18nJs.includes("刘海") || i18nJs.includes("Liquid Glass")) {
+  console.error("FAIL assets/i18n.js: leftover 刘海 / Liquid Glass");
   failed++;
 }
 for (const page of pages) {
