@@ -22,7 +22,7 @@ const pages = [
 
 const cssVersion = "194";
 const jsVersion = "59";
-const i18nJsVersion = "20";
+const i18nJsVersion = "21";
 
 const themeMapJsVersion = "1";
 
@@ -529,11 +529,28 @@ for (const needle of [
 }
 for (const needle of [
   "island.lockTitle",
-  "island.lockSubhead",
+  "island.hideTitle",
+  "island.hideSubhead",
   "island.hideFullscreen",
+  "On the lock screen too.",
+  "Screenshots without the island",
+  "Screenshots and recordings can leave it out.",
+  "Hides in native fullscreen too.",
 ]) {
   if (!island.includes(needle)) {
     console.error(`FAIL here-island/index.html: missing ${needle}`);
+    failed++;
+  }
+}
+for (const needle of [
+  "island.lockSubhead",
+  "可选，默认关",
+  "默认开",
+  "Optional, off by default",
+  "On by default",
+]) {
+  if (island.includes(needle)) {
+    console.error(`FAIL here-island/index.html: leftover switch-state copy (${needle})`);
     failed++;
   }
 }
@@ -710,11 +727,23 @@ if (!fs.existsSync(path.join(root, "assets/i18n.js"))) {
 const i18nJs = fs.readFileSync(path.join(root, "assets/i18n.js"), "utf8");
 for (const needle of [
   '"island.lockTitle": "锁屏上也能看"',
-  '"island.lockSubhead": "可选，默认关。"',
-  '"island.hideFullscreen": "全屏时也可以藏起来。默认开。"',
+  '"island.hideTitle": "截图里可以不带灵动岛"',
+  '"island.hideSubhead": "截图和录屏可以不带上它。"',
+  '"island.hideFullscreen": "全屏时也可以藏起来。"',
 ]) {
   if (!i18nJs.includes(needle)) {
     console.error(`FAIL assets/i18n.js: missing ${needle}`);
+    failed++;
+  }
+}
+for (const needle of [
+  "island.lockSubhead",
+  "可选，默认关",
+  "默认开",
+  '"island.hideFullscreen": "全屏时也可以藏起来。默认开。"',
+]) {
+  if (i18nJs.includes(needle)) {
+    console.error(`FAIL assets/i18n.js: leftover switch-state copy (${needle})`);
     failed++;
   }
 }
