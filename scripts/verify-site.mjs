@@ -2,11 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+
 const pages = [
   "index.html",
   "about/index.html",
   "here-wallpaper/index.html",
-  "here-wallpaper/themes/index.html",
   "here-wallpaper/privacy/index.html",
   "here-links/index.html",
   "here-links/privacy/index.html",
@@ -16,25 +16,17 @@ const pages = [
   "here-island/privacy/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
-  "coming-soon/index.html",
   "unmaintained/index.html",
 ];
 
-const cssVersion = "194";
-const jsVersion = "59";
-const i18nJsVersion = "21";
-
-const themeMapJsVersion = "1";
+const cssVersion = "214";
+const jsVersion = "65";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
   ["/assets/site.js", "shared script"],
-  ["/assets/i18n.js", "i18n script"],
   [`site.css?v=${cssVersion}`, "css cache version"],
   [`site.js?v=${jsVersion}`, "js cache version"],
-  [`i18n.js?v=${i18nJsVersion}`, "i18n cache version"],
-  ["<noscript><style>[data-reveal]{opacity:1;transform:none}</style></noscript>", "no-JS fallback"],
-  ['rel="preload" href="/assets/fonts/Maplestory-Bold.woff2" as="font" type="font/woff2" crossorigin', "font preload"],
   ['property="og:title"', "og:title"],
   ['property="og:description"', "og:description"],
   ['property="og:type"', "og:type"],
@@ -44,62 +36,6 @@ const must = [
   ['name="twitter:title"', "twitter:title"],
   ['name="twitter:description"', "twitter:description"],
 ];
-
-const breadcrumbs = {
-  "about/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page" data-i18n="crumb.about">About</span>',
-  ],
-  "here-wallpaper/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here Wallpaper</span>',
-  ],
-  "here-links/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here Links</span>',
-  ],
-  "here-sidefy/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here Sidefy</span>',
-  ],
-  "here-island/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here Island</span>',
-  ],
-  "here-hackerba/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here HackerBa</span>',
-  ],
-  "here-trmnl/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    '<span aria-current="page">Here TRMNL</span>',
-  ],
-  "here-wallpaper/themes/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-wallpaper/">Here Wallpaper',
-    '<span aria-current="page" data-i18n="crumb.themes">Themes</span>',
-  ],
-  "here-wallpaper/privacy/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-wallpaper/">Here Wallpaper',
-    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
-  ],
-  "here-links/privacy/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-links/">Here Links',
-    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
-  ],
-  "here-sidefy/privacy/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-sidefy/">Here Sidefy',
-    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
-  ],
-  "here-island/privacy/index.html": [
-    'href="/">Locusable <em>Studio</em>',
-    'href="/here-island/">Here Island',
-    '<span aria-current="page" data-i18n="crumb.privacy">Privacy</span>',
-  ],
-};
 
 const productFaqs = {
   "here-wallpaper/index.html": [
@@ -115,10 +51,10 @@ const productFaqs = {
     "Does Here Links collect personal data?",
   ],
   "here-sidefy/index.html": [
-    "Is Here Sidefy free?",
-    "What does Here Sidefy do?",
+    "Is Sidefy free?",
+    "What does Sidefy do?",
     "What do I need to run it?",
-    "Does Here Sidefy collect personal data?",
+    "Does Sidefy collect personal data?",
   ],
   "here-island/index.html": [
     "Is Here Island free?",
@@ -140,625 +76,281 @@ const productFaqs = {
   ],
 };
 
+const themeColors = {
+  "about/index.html": "#9b7100",
+  "here-wallpaper/index.html": "#328e3a",
+  "here-wallpaper/privacy/index.html": "#328e3a",
+  "here-links/index.html": "#1479bd",
+  "here-links/privacy/index.html": "#1479bd",
+  "here-sidefy/index.html": "#d5312c",
+  "here-sidefy/privacy/index.html": "#d5312c",
+  "here-island/index.html": "#85209d",
+  "here-island/privacy/index.html": "#85209d",
+  "here-hackerba/index.html": "#d95700",
+  "here-trmnl/index.html": "#3347a5",
+};
+
+const read = (page) => fs.readFileSync(path.join(root, page), "utf8");
+const exists = (rel) => fs.existsSync(path.join(root, rel));
+
 let failed = 0;
+const fail = (msg) => {
+  console.error(msg);
+  failed++;
+};
+
+// --- per-page contract ---
+const htmlByPage = Object.fromEntries(pages.map((page) => [page, read(page)]));
+
 for (const page of pages) {
-  const html = fs.readFileSync(path.join(root, page), "utf8");
+  const html = htmlByPage[page];
+
   for (const [needle, label] of must) {
-    if (!html.includes(needle)) {
-      console.error(`FAIL ${page}: missing ${label} (${needle})`);
-      failed++;
-    }
+    if (!html.includes(needle)) fail(`FAIL ${page}: missing ${label} (${needle})`);
   }
-  if (html.includes("crumb-back") || html.includes("crumbbar--back")) {
-    console.error(`FAIL ${page}: legacy back-button nav found`);
-    failed++;
+
+  if (!html.includes('class="topbar"') || !html.includes('class="nav" aria-label="Studio"')) {
+    fail(`FAIL ${page}: missing unified site navigation`);
   }
-  if (page !== "index.html" && page !== "coming-soon/index.html" && page !== "unmaintained/index.html" && html.includes('href="/about/"')) {
-    console.error(`FAIL ${page}: About link should only appear on hub pages`);
-    failed++;
-  }
-  const crumbs = breadcrumbs[page];
-  if (crumbs) {
-    if (!html.includes('class="crumbs"')) {
-      console.error(`FAIL ${page}: missing breadcrumb list (.crumbs)`);
-      failed++;
-    }
-    for (const needle of crumbs) {
-      if (!html.includes(needle)) {
-        console.error(`FAIL ${page}: missing breadcrumb segment (${needle})`);
-        failed++;
-      }
-    }
+  if (html.includes('class="crumbs"') || html.includes('class="crumbbar"')) {
+    fail(`FAIL ${page}: obsolete breadcrumb navigation found`);
   }
   if (page.endsWith("privacy/index.html") && !html.includes('class="doc-layout"')) {
-    console.error(`FAIL ${page}: missing doc-layout wrapper`);
-    failed++;
+    fail(`FAIL ${page}: missing doc-layout wrapper`);
   }
+  if (html.includes('class="chev"')) fail(`FAIL ${page}: obsolete chevron markup found`);
+  if (html.includes("product-faq__inner")) fail(`FAIL ${page}: obsolete FAQ inner wrapper found`);
+  if (/data-i18n|data-home-(?:lang|theme)|assets\/(?:i18n|home)\.js/.test(html)) {
+    fail(`FAIL ${page}: obsolete theme or language controls found`);
+  }
+  if (/\p{Script=Han}/u.test(html)) fail(`FAIL ${page}: Chinese content found on English-only site`);
+
   const faqQuestions = productFaqs[page];
   if (faqQuestions) {
-    if (!html.includes('class="product-faq"')) {
-      console.error(`FAIL ${page}: missing product FAQ section`);
-      failed++;
-    }
+    if (!html.includes('class="product-faq"')) fail(`FAIL ${page}: missing product FAQ section`);
     for (const question of faqQuestions) {
       if (!html.includes(`>${question}</summary>`)) {
-        console.error(`FAIL ${page}: missing FAQ question (${question})`);
-        failed++;
+        fail(`FAIL ${page}: missing FAQ question (${question})`);
       }
     }
   }
+
+  const color = themeColors[page];
+  if (color && !html.includes(`name="theme-color" content="${color}"`)) {
+    fail(`FAIL ${page}: theme-color should be ${color}`);
+  }
 }
 
-if (fs.existsSync(path.join(root, "here-wallpaper/layers/index.html"))) {
-  console.error("FAIL here-wallpaper/layers/index.html should not exist (layers merged into themes)");
-  failed++;
+// --- removed routes and assets ---
+for (const rel of [
+  "here-wallpaper/themes/index.html",
+  "here-wallpaper/layers/index.html",
+  "assets/theme-map-style.js",
+  "scripts/sync-wallpaper-themes.mjs",
+  "assets/i18n.js",
+  "assets/home.js",
+  "assets/lucide",
+  "assets/fonts/Maplestory-Bold.woff2",
+]) {
+  if (exists(rel)) fail(`FAIL ${rel} should not exist`);
 }
 
-const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const about = fs.readFileSync(path.join(root, "about/index.html"), "utf8");
+// --- home & hubs ---
+const home = htmlByPage["index.html"];
+const unmaintained = htmlByPage["unmaintained/index.html"];
+const about = htmlByPage["about/index.html"];
+
 for (const needle of [
   "Small native tools for the devices you already use.",
   "interface corners most people skip",
   "A good place for a small tool",
   "The notch, the screen edge, the gap between wallpaper and icons",
+  "prose--after-hero",
+  "What we ship",
 ]) {
-  if (!about.includes(needle)) {
-    console.error(`FAIL about/index.html: missing studio context (${needle})`);
-    failed++;
-  }
+  if (!about.includes(needle)) fail(`FAIL about/index.html: missing studio context (${needle})`);
 }
 if (about.includes("personal information such as self-hosted bookmarks")) {
-  console.error("FAIL about/index.html: removed bookmark rationale should not be shown");
-  failed++;
+  fail("FAIL about/index.html: removed bookmark rationale should not be shown");
 }
 for (const needle of [
   "A two-person studio from Xi'an, China,",
   "more than a decade of programming experience",
 ]) {
   if (about.includes(needle)) {
-    console.error(`FAIL about/index.html: removed studio detail should not be shown (${needle})`);
-    failed++;
-  }
-}
-if (!home.includes('href="/about/"')) {
-  console.error("FAIL index.html: missing About link");
-  failed++;
-}
-for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/coming-soon/", "/unmaintained/"]) {
-  if (!home.includes(`href="${href}"`)) {
-    console.error(`FAIL index.html: missing href ${href}`);
-    failed++;
-  }
-}
-if ((home.match(/class="unit unit--tint[^"]*home-app-card/g) || []).length !== 3) {
-  console.error("FAIL index.html: homepage should have three tinted app cards");
-  failed++;
-}
-if (home.includes("unit--soft home-app-card") || home.includes("home-app-card--feature") || home.includes("home-app-card__screens")) {
-  console.error("FAIL index.html: homepage should not use soft/feature/screens card patterns");
-  failed++;
-}
-if (home.includes("home-app-card__details")) {
-  console.error("FAIL index.html: homepage app cards should not include expandable details");
-  failed++;
-}
-for (const needle of [
-  'class="home-product-grid"',
-  "home-app-card--2x2",
-  "home-app-card--2x1",
-  "home-app-card__arrow",
-  'data-app="island"',
-  'data-app="sidefy"',
-  'data-app="wallpaper"',
-]) {
-  if (!home.includes(needle)) {
-    console.error(`FAIL index.html: missing homepage card structure (${needle})`);
-    failed++;
-  }
-}
-if (!home.includes('class="home-app-card__shot"') || !home.includes('/assets/shots/shot-1.jpg?v=10" width="585" height="1266"')) {
-  console.error("FAIL index.html: missing wallpaper shot in the 2x2 card");
-  failed++;
-}
-
-if (home.includes("home-card-tags")) {
-  for (const needle of [
-    'data-i18n="home.wallpaper.tag.osm"',
-    'data-i18n="home.wallpaper.tag.maplibre"',
-    'data-i18n="home.wallpaper.tag.mac"',
-  ]) {
-    if (!home.includes(needle)) {
-      console.error(`FAIL index.html: missing wallpaper tag (${needle})`);
-      failed++;
-    }
+    fail(`FAIL about/index.html: removed studio detail should not be shown (${needle})`);
   }
 }
 
-if (home.includes("home-app-card__list-shots")) {
-  console.error("FAIL index.html: homepage cards should not embed list screenshots");
-  failed++;
+if (!home.includes('href="/about/"')) fail("FAIL index.html: missing About link");
+for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/unmaintained/"]) {
+  if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
-if (home.includes('data-app="links"') || home.includes('data-app="hackerba"') || home.includes('data-app="trmnl"')) {
-  console.error("FAIL index.html: Links, HackerBa, and TRMNL do not belong on the homepage");
-  failed++;
+if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"')) {
+  fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
-const comingSoon = fs.readFileSync(path.join(root, "coming-soon/index.html"), "utf8");
-if (comingSoon.includes('data-app="links"')) {
-  console.error("FAIL coming-soon/index.html: Here Links belongs on unmaintained");
-  failed++;
+if ((home.match(/class="product"/g) || []).length !== 3) {
+  fail("FAIL index.html: homepage should list three released products");
 }
-if (!comingSoon.includes('data-app="hackerba"') || !comingSoon.includes("home-product-grid")) {
-  console.error("FAIL coming-soon/index.html: should list HackerBa in the product grid");
-  failed++;
+if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('href="/here-links/"') || !unmaintained.includes('href="/here-hackerba/"')) {
+  fail("FAIL unmaintained/index.html: product assignment is incorrect");
 }
-if (comingSoon.includes("home-app-card__list-shots")) {
-  console.error("FAIL coming-soon/index.html: cards should not embed list screenshots");
-  failed++;
+if ((unmaintained.match(/class="product"/g) || []).length !== 3) {
+  fail("FAIL unmaintained/index.html: expected 3 product rows");
 }
-const unmaintained = fs.readFileSync(path.join(root, "unmaintained/index.html"), "utf8");
-if (unmaintained.includes('data-app="hackerba"')) {
-  console.error("FAIL unmaintained/index.html: HackerBa belongs on coming-soon");
-  failed++;
+if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[page].includes('href="/coming-soon/"'))) {
+  fail("FAIL Coming Soon navigation should be removed");
 }
-if (!unmaintained.includes('data-app="trmnl"') || !unmaintained.includes('data-app="links"') || !unmaintained.includes("home-product-grid")) {
-  console.error("FAIL unmaintained/index.html: should list TRMNL and Links in the product grid");
-  failed++;
+
+const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
+if (productIconCount(home) !== 3 || productIconCount(unmaintained) !== 3) {
+  fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
-if (unmaintained.includes("home-app-card__list-shots")) {
-  console.error("FAIL unmaintained/index.html: cards should not embed list screenshots");
-  failed++;
-}
-if (!home.includes('href="/unmaintained/" class="edge-plaster edge-plaster--left"')) {
-  console.error("FAIL index.html: missing left unmaintained plaster");
-  failed++;
-}
-if (!unmaintained.includes('href="/" class="edge-plaster edge-plaster--right"')) {
-  console.error("FAIL unmaintained/index.html: missing right Released plaster");
-  failed++;
-}
-if (home.includes("home-app-card--island") || home.includes("home-app-card__peeks")) {
-  console.error("FAIL index.html: Island should use a compact card without peeks");
-  failed++;
-}
-const siteCss = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
-if (!siteCss.includes('html[data-home-layout="list"] .home-app-card__shot')) {
-  console.error("FAIL assets/site.css: shot must hide in list layout (and therefore on mobile)");
-  failed++;
-}
-if (!/@media \(max-width: 800px\)[\s\S]*html\[data-home-layout="list"\] \.home-app-card--2x2 \.product-hero__icon/.test(siteCss)) {
-  console.error("FAIL assets/site.css: mobile compact rows must override list 2x2 icon size");
-  failed++;
-}
-if (siteCss.includes(".home-app-card--feature") || siteCss.includes(".home-app-card__screens")) {
-  console.error("FAIL assets/site.css: legacy feature/screens homepage styles should be removed");
-  failed++;
-}
-if (!siteCss.includes("grid-auto-rows: var(--home-row-h")) {
-  console.error("FAIL assets/site.css: homepage grid rows should use --home-row-h (not stretch to fill)");
-  failed++;
-}
-if (!siteCss.includes(".home-app-card--1x2 {")) {
-  console.error("FAIL assets/site.css: missing 竖版小卡 size class");
-  failed++;
-}
-if (!siteCss.includes(".home-app-card--2x1 {")) {
-  console.error("FAIL assets/site.css: missing 横版小卡 size class");
-  failed++;
-}
-if (siteCss.includes(".home-app-card--island")) {
-  console.error("FAIL assets/site.css: Island full-width homepage card styles should be removed");
-  failed++;
-}
-if (!siteCss.includes("--card-radius: 20px;") || !siteCss.includes("border-radius: var(--card-radius);")) {
-  console.error("FAIL assets/site.css: cards should use the unified --card-radius token");
-  failed++;
-}
-if (!siteCss.includes(".site-shell:has(.home-product-grid) main")) {
-  console.error("FAIL assets/site.css: homepage grid should fill the main viewport area");
-  failed++;
-}
-if (!siteCss.includes("padding-top: var(--site-chrome-h-masthead);")) {
-  console.error("FAIL assets/site.css: homepage grid should clear the fixed masthead");
-  failed++;
-}
-if (!siteCss.includes("border-radius: var(--card-radius);") || !siteCss.includes("aspect-ratio: 1400 / 787;")) {
-  console.error("FAIL assets/site.css: screenshots should show full ratio with --card-radius corners");
-  failed++;
-}
-if (siteCss.includes("26px 26px 0 0") || /\.unit__media--desktop-peek \{[^}]*aspect-ratio/.test(siteCss)) {
-  console.error("FAIL assets/site.css: mobile screenshots must not flush-crop (full ratio, four-corner radius)");
-  failed++;
-}
-if (!siteCss.includes('html[data-theme="dark"] .product-hero {')) {
-  console.error("FAIL assets/site.css: product hero dark tint should respect data-theme");
-  failed++;
-}
+
+// --- shared assets ---
+const siteCss = read("assets/site.css");
+const siteJs = read("assets/site.js");
+
 for (const needle of [
+  ".topbar",
+  ".catalog",
+  ".product__icon",
+  ".product-hero",
+  ".prose",
+  "@media (max-width: 600px)",
   ".detail-feature-grid",
-  ".feature-list--cards",
-]) {
-  if (!siteCss.includes(needle)) {
-    console.error(`FAIL assets/site.css: missing product-detail layout (${needle})`);
-    failed++;
-  }
-}
-for (const needle of ['content: "›";']) {
-  if (!siteCss.includes(needle)) {
-    console.error(`FAIL assets/site.css: missing unified breadcrumb styling (${needle})`);
-    failed++;
-  }
-}
-const crumbBrandRule = siteCss.match(/\.crumbs a\[href="\/"\] \{([^}]*)\}/)?.[1] || "";
-for (const needle of [
-  'font-family: "Maplestory"',
-  "font-size: var(--site-brand-size);",
-]) {
-  if (!crumbBrandRule.includes(needle)) {
-    console.error(`FAIL assets/site.css: breadcrumb brand should match masthead (${needle})`);
-    failed++;
-  }
-}
-for (const needle of [
+  ".feature-list",
   ".product-faq {",
-  ".product-faq details {",
   ".product-faq summary {",
 ]) {
-  if (!siteCss.includes(needle)) {
-    console.error(`FAIL assets/site.css: missing FAQ style (${needle})`);
-    failed++;
+  if (!siteCss.includes(needle)) fail(`FAIL assets/site.css: missing ${needle}`);
+}
+if (!siteCss.includes(".unit__media img {") || !siteCss.includes("border-radius: 8px;")) {
+  fail("FAIL assets/site.css: screenshots should use the minimal bordered treatment");
+}
+if (!siteCss.includes(".topbar__inner {") || !siteCss.includes("width: min(100% - 32px, var(--max));")) {
+  fail("FAIL assets/site.css: navigation should use the minimal site width");
+}
+if (!/\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;/.test(siteCss)) {
+  fail("FAIL assets/site.css: install snippet must wrap");
+}
+if (siteCss.includes("Maplestory")) fail("FAIL assets/site.css: custom brand font should be removed");
+
+for (const [app, color] of Object.entries({
+  studio: "#9b7100",
+  wallpaper: "#328e3a",
+  links: "#1479bd",
+  sidefy: "#d5312c",
+  island: "#85209d",
+  hackerba: "#d95700",
+  trmnl: "#3347a5",
+})) {
+  if (!siteJs.includes(`${app}: "${color}"`)) {
+    fail(`FAIL assets/site.js: APP_THEME_COLORS should map ${app} to ${color}`);
+  }
+  if (!siteCss.includes(`[data-app="${app}"] { --accent: ${color}; }`)) {
+    fail(`FAIL assets/site.css: ${app} accent should be ${color}`);
   }
 }
-if (!siteCss.includes(".about-page .unit__subhead {\n  max-width: 34rem;")) {
-  console.error("FAIL assets/site.css: About copy should avoid orphaned final words");
-  failed++;
-}
-if (!siteCss.includes(".crumbbar__inner {\n  max-width: var(--max-wide);\n  margin: 0 auto;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;")) {
-  console.error("FAIL assets/site.css: breadcrumb content should align with homepage masthead");
-  failed++;
-}
 
-if (!/@media \(max-width: 720px\) \{[\s\S]*?\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;[\s\S]*?overflow-wrap:\s*anywhere;/.test(siteCss)) {
-  console.error("FAIL assets/site.css: install snippet must wrap on narrow screens (pre-wrap + overflow-wrap: anywhere)");
-  failed++;
-}
+// --- here-wallpaper ---
+const wallpaper = htmlByPage["here-wallpaper/index.html"];
 
-const wallpaper = fs.readFileSync(path.join(root, "here-wallpaper/index.html"), "utf8");
-if (!wallpaper.includes('data-i18n="platform.iphoneIpadMac"')) {
-  console.error("FAIL here-wallpaper/index.html: platform line should be iPhone, iPad, and Mac");
-  failed++;
+if (!wallpaper.includes('class="platforms">iPhone, iPad, and Mac</p>')) {
+  fail("FAIL here-wallpaper/index.html: platform line should be iPhone, iPad, and Mac");
 }
-if (!home.includes('data-i18n="platform.iphoneIpadMac"')) {
-  console.error("FAIL index.html: wallpaper card platform should match the product page");
-  failed++;
-}
-if (wallpaper.includes("wallpaper.macSoon") || wallpaper.includes("on the way")) {
-  console.error("FAIL here-wallpaper/index.html: Mac is released; remove coming-soon copy");
-  failed++;
+if (!home.includes("<span>iPhone, iPad, and Mac</span>")) {
+  fail("FAIL index.html: wallpaper card platform should match the product page");
 }
 if (!wallpaper.includes('data-mac-url="macappstore://apps.apple.com/app/id6789155385"')) {
-  console.error("FAIL here-wallpaper/index.html: App Store link should include a Mac deep link");
-  failed++;
+  fail("FAIL here-wallpaper/index.html: App Store link should include a Mac deep link");
 }
-if (!wallpaper.includes('id="mac-title"') || !wallpaper.includes("unit__media--desktop-peek")) {
-  console.error("FAIL here-wallpaper/index.html: missing Mac desktop preview section");
-  failed++;
+for (const shot of [
+  "shot-mac-maldives.jpg",
+  "shot-mac-brasilia.jpg",
+  "shot-mac-christ-the-redeemer.jpg",
+]) {
+  if (!exists(`assets/here-wallpaper/${shot}`)) fail(`FAIL missing assets/here-wallpaper/${shot}`);
+  if (!wallpaper.includes(shot)) fail(`FAIL here-wallpaper/index.html: missing Mac preview ${shot}`);
 }
-if (!fs.existsSync(path.join(root, "assets/here-wallpaper/shot-mac-chicago.jpg"))) {
-  console.error("FAIL missing assets/here-wallpaper/shot-mac-chicago.jpg");
-  failed++;
-}
-if (fs.existsSync(path.join(root, "assets/here-wallpaper/shot-mac-marrakech.jpg"))) {
-  console.error("FAIL assets/here-wallpaper/shot-mac-marrakech.jpg should be removed");
-  failed++;
-}
-if (wallpaper.includes("shot-mac-marrakech") || wallpaper.includes("desktop-dual")) {
-  console.error("FAIL here-wallpaper/index.html: Mac preview should be a single desktop-peek image");
-  failed++;
-}
-
-
-if (wallpaper.includes("detail-feature-media")) {
-  console.error("FAIL here-wallpaper/index.html: place-and-layout should not duplicate hero previews");
-  failed++;
+if (wallpaper.includes("/here-wallpaper/themes") || wallpaper.includes("themes-title") || wallpaper.includes("Browse themes")) {
+  fail("FAIL here-wallpaper/index.html: themes catalog link should be removed");
 }
 if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1) {
-  console.error("FAIL here-wallpaper/index.html: hero preview should appear only once");
-  failed++;
+  fail("FAIL here-wallpaper/index.html: hero preview should appear only once");
 }
-// Phone shots must declare their intrinsic dimensions (585×1266 / 585×1272), not a copied hero size.
 if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
-  console.error("FAIL here-wallpaper/index.html: hero phone shots should declare 585x1266");
-  failed++;
+  fail("FAIL here-wallpaper/index.html: hero phone shots should declare 585x1266");
 }
 
-const linksShots = fs.readFileSync(path.join(root, "here-links/index.html"), "utf8");
-if ((linksShots.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="585" height="1272"/g) || []).length !== 4) {
-  console.error("FAIL here-links/index.html: phone shots should declare 585x1272");
-  failed++;
+// --- here-links ---
+const linksPage = htmlByPage["here-links/index.html"];
+if (!linksPage.includes("feature-list")) fail("FAIL here-links/index.html: missing feature list");
+if ((linksPage.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="585" height="1272"/g) || []).length !== 4) {
+  fail("FAIL here-links/index.html: phone shots should declare 585x1272");
 }
 
-// Home cards render icons at 52px (CSS), so the HTML attributes must match, not the 84px hero size.
-const homeCardIcon = (html) => (html.match(/class="unit unit--tint[^"]*home-app-card[\s\S]*?width="52" height="52"/g) || []).length;
-if (homeCardIcon(home) !== 3) {
-  console.error("FAIL index.html: all three home cards should declare 52px icons");
-  failed++;
-}
-if (homeCardIcon(comingSoon) !== 1) {
-  console.error("FAIL coming-soon/index.html: the HackerBa card should declare a 52px icon");
-  failed++;
-}
-if (homeCardIcon(unmaintained) !== 2) {
-  console.error("FAIL unmaintained/index.html: both unmaintained cards should declare 52px icons");
-  failed++;
-}
+// --- here-island ---
+const island = htmlByPage["here-island/index.html"];
+const islandPrivacy = htmlByPage["here-island/privacy/index.html"];
 
-const siteJs = fs.readFileSync(path.join(root, "assets/site.js"), "utf8");
-if (!siteJs.includes('studio: "#b8860b"')) {
-  console.error("FAIL assets/site.js: APP_THEME_COLORS should include the studio accent");
-  failed++;
+if (!island.includes('/assets/here-island/peek.gif?v=1" width="420" height="180"') || !exists("assets/here-island/peek.gif")) {
+  fail("FAIL here-island/index.html: missing 420x180 GitHub preview GIF");
 }
-
-const linksPage = fs.readFileSync(path.join(root, "here-links/index.html"), "utf8");
-if (!linksPage.includes("feature-list--cards")) {
-  console.error("FAIL here-links/index.html: missing feature-card treatment");
-  failed++;
-}
-
-const island = fs.readFileSync(path.join(root, "here-island/index.html"), "utf8");
-if (!island.includes("detail-feature-grid")) {
-  console.error("FAIL here-island/index.html: missing paired feature layout");
-  failed++;
-}
-for (const href of [
-  "https://github.com/locusable-studio/HereIsland",
-]) {
-  if (!island.includes(`href="${href}"`)) {
-    console.error(`FAIL here-island/index.html: missing href ${href}`);
-    failed++;
-  }
-}
+if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
 for (const needle of [
+  "https://github.com/locusable-studio/HereIsland",
   "brew tap locusable-studio/tap",
   "brew trust --cask locusable-studio/tap/here-island",
   "brew install --cask here-island",
+  "/here-island/privacy/",
+  "On the lock screen too",
+  "Optional media card with artwork, controls, and progress",
+  "Stay out of screenshots",
+  "Hide during screenshots and recordings",
+  "native fullscreen",
 ]) {
-  if (!island.includes(needle)) {
-    console.error(`FAIL here-island/index.html: missing ${needle}`);
-    failed++;
-  }
+  if (!island.includes(needle)) fail(`FAIL here-island/index.html: missing ${needle}`);
 }
-for (const needle of [
-  "island.lockTitle",
-  "island.hideTitle",
-  "island.hideSubhead",
-  "island.hideFullscreen",
-  "On the lock screen too.",
-  "Screenshots without the island",
-  "Screenshots and recordings can leave it out.",
-  "Hides in native fullscreen too.",
-]) {
-  if (!island.includes(needle)) {
-    console.error(`FAIL here-island/index.html: missing ${needle}`);
-    failed++;
-  }
+for (const needle of ["Mac notch", "Sparkle", "github.com/locusable-studio/HereIsland/issues"]) {
+  if (!islandPrivacy.includes(needle)) fail(`FAIL here-island/privacy/index.html: missing ${needle}`);
 }
-for (const needle of [
-  "island.lockSubhead",
-  "可选，默认关",
-  "默认开",
-  "Optional, off by default",
-  "On by default",
-]) {
-  if (island.includes(needle)) {
-    console.error(`FAIL here-island/index.html: leftover switch-state copy (${needle})`);
-    failed++;
+for (const page of ["here-island/index.html", "here-island/privacy/index.html"]) {
+  if (htmlByPage[page].includes("麦金刘海") || htmlByPage[page].includes("Mac 刘海")) {
+    fail(`FAIL ${page}: leftover 麦金刘海 / Mac 刘海`);
   }
 }
 
-const hackerba = fs.readFileSync(path.join(root, "here-hackerba/index.html"), "utf8");
-if (!hackerba.includes("detail-feature-grid")) {
-  console.error("FAIL here-hackerba/index.html: missing paired feature layout");
-  failed++;
-}
-for (const href of [
-  "https://github.com/sha2kyou/HackerBa",
-]) {
-  if (!hackerba.includes(`href="${href}"`)) {
-    console.error(`FAIL here-hackerba/index.html: missing href ${href}`);
-    failed++;
-  }
-}
+// --- here-hackerba ---
+const hackerba = htmlByPage["here-hackerba/index.html"];
+if (!hackerba.includes("detail-feature-grid")) fail("FAIL here-hackerba/index.html: missing paired feature layout");
 for (const needle of [
+  "https://github.com/sha2kyou/HackerBa",
   "Here <em>HackerBa</em>",
   "/assets/here-hackerba/shot-list.jpg",
   "/assets/here-hackerba/shot-thread.jpg",
   "unit__media--desktop-dual",
 ]) {
-  if (!hackerba.includes(needle)) {
-    console.error(`FAIL here-hackerba/index.html: missing ${needle}`);
-    failed++;
-  }
+  if (!hackerba.includes(needle)) fail(`FAIL here-hackerba/index.html: missing ${needle}`);
 }
 
-for (const href of [
-  "/here-island/privacy/",
-]) {
-  if (!island.includes(`href="${href}"`)) {
-    console.error(`FAIL here-island/index.html: missing href ${href}`);
-    failed++;
-  }
-}
-const islandPrivacy = fs.readFileSync(path.join(root, "here-island/privacy/index.html"), "utf8");
-for (const needle of [
-  "Mac notch",
-  "Mac 灵动岛",
-  "Sparkle",
-  "github.com/locusable-studio/HereIsland/issues",
-]) {
-  if (!islandPrivacy.includes(needle)) {
-    console.error(`FAIL here-island/privacy/index.html: missing ${needle}`);
-    failed++;
-  }
-}
-if (islandPrivacy.includes("麦金刘海") || islandPrivacy.includes("Mac 刘海")) {
-  console.error("FAIL here-island/privacy/index.html: leftover 麦金刘海 / Mac 刘海");
-  failed++;
-}
+// --- here-sidefy ---
+const sidefy = htmlByPage["here-sidefy/index.html"];
+const sidefyPrivacy = htmlByPage["here-sidefy/privacy/index.html"];
 
-const sidefy = fs.readFileSync(path.join(root, "here-sidefy/index.html"), "utf8");
-if (!sidefy.includes("detail-feature-grid")) {
-  console.error("FAIL here-sidefy/index.html: missing paired feature layout");
-  failed++;
-}
+if (!sidefy.includes("detail-feature-grid")) fail("FAIL here-sidefy/index.html: missing paired feature layout");
 for (const href of [
   "https://apps.apple.com/app/id6751482006",
   "https://sidefy.locusable.com/",
   "/here-sidefy/privacy/",
 ]) {
-  if (!sidefy.includes(`href="${href}"`)) {
-    console.error(`FAIL here-sidefy/index.html: missing href ${href}`);
-    failed++;
-  }
+  if (!sidefy.includes(`href="${href}"`)) fail(`FAIL here-sidefy/index.html: missing href ${href}`);
+}
+for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy"]) {
+  if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
 }
 
-const sidefyPrivacy = fs.readFileSync(path.join(root, "here-sidefy/privacy/index.html"), "utf8");
-for (const needle of [
-  "Local Processing",
-  "sidefy.locusable.com",
-  "github.com/sidefy-team/sidefy",
-]) {
-  if (!sidefyPrivacy.includes(needle)) {
-    console.error(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
-    failed++;
-  }
-}
-
-const themes = fs.readFileSync(path.join(root, "here-wallpaper/themes/index.html"), "utf8");
-if (!themes.includes("catalog-section")) {
-  console.error("FAIL here-wallpaper/themes/index.html: missing catalog-section");
-  failed++;
-}
-if (!themes.includes("theme-grid")) {
-  console.error("FAIL here-wallpaper/themes/index.html: missing theme-grid");
-  failed++;
-}
-if (!themes.includes(`theme-map-style.js?v=${themeMapJsVersion}`)) {
-  console.error("FAIL here-wallpaper/themes/index.html: missing theme-map-style.js");
-  failed++;
-}
-if (themes.includes("styles/liberty")) {
-  console.error("FAIL here-wallpaper/themes/index.html: legacy Liberty style URL found");
-  failed++;
-}
-for (const file of ["basic_themes.json", "featured_themes.json"]) {
-  const themePath = path.join(root, "here-wallpaper/themes/data", file);
-  if (!fs.existsSync(themePath)) {
-    console.error(`FAIL missing ${file}`);
-    failed++;
-    continue;
-  }
-  const catalog = JSON.parse(fs.readFileSync(themePath, "utf8"));
-  if (!Array.isArray(catalog) || !catalog.length) {
-    console.error(`FAIL ${file}: empty catalog`);
-    failed++;
-  }
-}
-// Guard against stale catalogs: mirrors the HereWallpaper app resources.
-const themeCounts = { "basic_themes.json": 8, "featured_themes.json": 38 };
-for (const [file, min] of Object.entries(themeCounts)) {
-  const themePath = path.join(root, "here-wallpaper/themes/data", file);
-  const catalog = JSON.parse(fs.readFileSync(themePath, "utf8"));
-  if (catalog.length < min) {
-    console.error(`FAIL ${file}: expected >= ${min} themes, found ${catalog.length} — re-run scripts/sync-wallpaper-themes.mjs`);
-    failed++;
-  }
-}
-if (!fs.existsSync(path.join(root, "assets/theme-map-style.js"))) {
-  console.error("FAIL assets/theme-map-style.js missing");
-  failed++;
-}
-
-const themeColors = {
-  "about/index.html": "#b8860b",
-  "here-wallpaper/index.html": "#4caf50",
-  "here-wallpaper/themes/index.html": "#4caf50",
-  "here-wallpaper/privacy/index.html": "#4caf50",
-  "here-links/index.html": "#2196f3",
-  "here-links/privacy/index.html": "#2196f3",
-  "here-sidefy/index.html": "#f44336",
-  "here-sidefy/privacy/index.html": "#f44336",
-  "here-island/index.html": "#9c27b0",
-  "here-island/privacy/index.html": "#9c27b0",
-  "here-hackerba/index.html": "#ff6600",
-  "here-trmnl/index.html": "#3c50b4",
-};
-
-for (const [page, color] of Object.entries(themeColors)) {
-  const html = fs.readFileSync(path.join(root, page), "utf8");
-  if (!html.includes(`name="theme-color" content="${color}"`)) {
-    console.error(`FAIL ${page}: theme-color should be ${color}`);
-    failed++;
-  }
-}
-
-
-const siteCss2 = fs.readFileSync(path.join(root, "assets/site.css"), "utf8");
-if (!siteCss2.includes("@supports not selector(:has(*))")) {
-  console.error("FAIL assets/site.css: missing :has() fallback block");
-  failed++;
-}
-if (siteCss2.includes("Maplestory-Light")) {
-  console.error("FAIL assets/site.css: Light font face should be removed (dead resource)");
-  failed++;
-}
-if (!fs.existsSync(path.join(root, "assets/fonts/Maplestory-Bold.woff2"))) {
-  console.error("FAIL assets/fonts/Maplestory-Bold.woff2 missing");
-  failed++;
-}
-if (fs.existsSync(path.join(root, "assets/fonts/Maplestory-Light.woff2"))) {
-  console.error("FAIL assets/fonts/Maplestory-Light.woff2 should be removed");
-  failed++;
-}
-
-if (!fs.existsSync(path.join(root, "assets/i18n.js"))) {
-  console.error("FAIL assets/i18n.js missing");
-  failed++;
-}
-const i18nJs = fs.readFileSync(path.join(root, "assets/i18n.js"), "utf8");
-for (const needle of [
-  '"island.lockTitle": "锁屏上也能看"',
-  '"island.hideTitle": "截图里可以不带灵动岛"',
-  '"island.hideSubhead": "截图和录屏可以不带上它。"',
-  '"island.hideFullscreen": "全屏时也可以藏起来。"',
-]) {
-  if (!i18nJs.includes(needle)) {
-    console.error(`FAIL assets/i18n.js: missing ${needle}`);
-    failed++;
-  }
-}
-for (const needle of [
-  "island.lockSubhead",
-  "可选，默认关",
-  "默认开",
-  '"island.hideFullscreen": "全屏时也可以藏起来。默认开。"',
-]) {
-  if (i18nJs.includes(needle)) {
-    console.error(`FAIL assets/i18n.js: leftover switch-state copy (${needle})`);
-    failed++;
-  }
-}
-if (i18nJs.includes("刘海") || i18nJs.includes("Liquid Glass")) {
-  console.error("FAIL assets/i18n.js: leftover 刘海 / Liquid Glass");
-  failed++;
-}
-for (const page of pages) {
-  const html = fs.readFileSync(path.join(root, page), "utf8");
-  if (!html.includes('data-lang-option="en"') || !html.includes('data-lang-option="zh"')) {
-    console.error(`FAIL ${page}: missing language switcher`);
-    failed++;
-  }
-}
-
+// --- result ---
 if (failed) {
   console.error(`\n${failed} check(s) failed`);
   process.exit(1);
