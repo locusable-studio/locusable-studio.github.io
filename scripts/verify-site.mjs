@@ -164,6 +164,7 @@ for (const needle of [
   "Small native tools for the devices you already use.",
   "interface corners most people skip",
   "A good place for a small tool",
+  "founded August 15, 2025",
   "The notch, the screen edge, the gap between wallpaper and icons",
   "prose--after-hero",
   "What we ship",
