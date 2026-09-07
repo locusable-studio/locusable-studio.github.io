@@ -312,6 +312,23 @@ main,
   margin-top: 22px;
 }
 
+/* Benefit units with previews: full-width copy | media, not half-grid collapse */
+.detail-feature-grid .unit:has(> .unit__media) {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 20px 40px;
+  align-items: start;
+}
+
+.detail-feature-grid .unit:has(> .unit__media) .unit__copy {
+  margin-bottom: 0;
+}
+
+.detail-feature-grid .unit:has(> .unit__media) .unit__media {
+  margin-top: 0;
+}
+
 .unit__media figure {
   margin: 0;
 }
@@ -552,6 +569,14 @@ main,
 
   .detail-feature-grid {
     gap: 28px;
+  }
+
+  .detail-feature-grid .unit:has(> .unit__media) {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-feature-grid .unit:has(> .unit__media) .unit__media {
+    margin-top: 16px;
   }
 
   .footer__inner {
