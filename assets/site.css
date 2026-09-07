@@ -461,29 +461,54 @@ main,
 }
 
 .press-pill {
-  display: inline-block;
-  padding: 2px 9px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 4px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bar);
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 550;
-  line-height: 1.45;
+  line-height: 1.2;
   text-decoration: none;
   vertical-align: middle;
   white-space: nowrap;
 }
 
-.press-pill:hover {
+.press-pill__brand {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+.press-pill__label {
+  font-size: 12px;
+  font-weight: 600;
   color: var(--fg);
+}
+
+.press-pill:hover {
   border-color: var(--muted);
+}
+
+.press-pill:hover .press-pill__brand {
+  opacity: 1;
 }
 
 .product__links .press-pill {
   margin: 0 0 0 2px;
+  padding: 3px 10px;
+}
+
+.product__links .press-pill__brand {
+  font-size: 9px;
+}
+
+.product__links .press-pill__label {
   font-size: 11px;
-  padding: 1px 8px;
 }
 
 
