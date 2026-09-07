@@ -19,6 +19,50 @@ const pages = [
   "unmaintained/index.html",
 ];
 
+const canonicalByPage = {
+  "index.html": "https://locusable.com/",
+  "about/index.html": "https://locusable.com/about/",
+  "unmaintained/index.html": "https://locusable.com/unmaintained/",
+  "here-wallpaper/index.html": "https://locusable.com/here-wallpaper/",
+  "here-wallpaper/privacy/index.html": "https://locusable.com/here-wallpaper/privacy/",
+  "here-links/index.html": "https://locusable.com/here-links/",
+  "here-links/privacy/index.html": "https://locusable.com/here-links/privacy/",
+  "here-sidefy/index.html": "https://locusable.com/here-sidefy/",
+  "here-sidefy/privacy/index.html": "https://locusable.com/here-sidefy/privacy/",
+  "here-island/index.html": "https://locusable.com/here-island/",
+  "here-island/privacy/index.html": "https://locusable.com/here-island/privacy/",
+  "here-hackerba/index.html": "https://locusable.com/here-hackerba/",
+  "here-trmnl/index.html": "https://locusable.com/here-trmnl/",
+};
+
+const pageMeta = {
+  "index.html": {
+    title: "Locusable Studio — Tools for what’s already on the screen",
+    description:
+      "Native Mac and iPhone utilities for quiet corners of the screen — the notch, the edge, and the lock screen.",
+  },
+  "about/index.html": {
+    title: "About Locusable Studio",
+    description:
+      "A small independent studio making native tools for what’s already on the screen. Founded August 15, 2025.",
+  },
+  "here-island/index.html": {
+    title: "Here Island — Now Playing in the MacBook notch",
+    description:
+      "Free open-source media in the MacBook notch: artwork, controls, quick peek, optional lock screen card. Hide in screenshots and fullscreen.",
+  },
+  "here-sidefy/index.html": {
+    title: "Sidefy — Info stream on the Mac screen edge",
+    description:
+      "Calendar, Reminders, GitHub, RSS, and plugins in one screen-edge stream. Stay in your window; keyboard-friendly; data stays in iCloud.",
+  },
+  "here-wallpaper/index.html": {
+    title: "Here Wallpaper — Map lock screen wallpapers",
+    description:
+      "Turn a place you care about into a lock screen wallpaper. Themes, type, and layers for iPhone, iPad, and Mac — live maps on the Mac desktop too.",
+  },
+};
+
 const cssVersion = "215";
 const jsVersion = "65";
 
@@ -109,6 +153,33 @@ for (const page of pages) {
     if (!html.includes(needle)) fail(`FAIL ${page}: missing ${label} (${needle})`);
   }
 
+  const canonical = canonicalByPage[page];
+  if (!canonical || !html.includes(`<link rel="canonical" href="${canonical}">`)) {
+    fail(`FAIL ${page}: missing canonical ${canonical}`);
+  }
+
+  const meta = pageMeta[page];
+  if (meta) {
+    if (!html.includes(`<title>${meta.title}</title>`)) {
+      fail(`FAIL ${page}: title should be ${meta.title}`);
+    }
+    if (!html.includes(`<meta name="description" content="${meta.description}">`)) {
+      fail(`FAIL ${page}: description mismatch`);
+    }
+    if (!html.includes(`property="og:title" content="${meta.title}"`)) {
+      fail(`FAIL ${page}: og:title should match title`);
+    }
+    if (!html.includes(`property="og:description" content="${meta.description}"`)) {
+      fail(`FAIL ${page}: og:description should match description`);
+    }
+    if (!html.includes(`name="twitter:title" content="${meta.title}"`)) {
+      fail(`FAIL ${page}: twitter:title should match title`);
+    }
+    if (!html.includes(`name="twitter:description" content="${meta.description}"`)) {
+      fail(`FAIL ${page}: twitter:description should match description`);
+    }
+  }
+
   if (!html.includes('class="topbar"') || !html.includes('class="nav" aria-label="Studio"')) {
     fail(`FAIL ${page}: missing unified site navigation`);
   }
@@ -155,6 +226,38 @@ for (const rel of [
   if (exists(rel)) fail(`FAIL ${rel} should not exist`);
 }
 
+// --- robots + sitemap ---
+if (!exists("robots.txt")) fail("FAIL robots.txt should exist");
+else {
+  const robots = read("robots.txt");
+  if (!robots.includes("User-agent: *")) fail("FAIL robots.txt: missing User-agent: *");
+  if (!robots.includes("Allow: /")) fail("FAIL robots.txt: missing Allow: /");
+  if (!robots.includes("Sitemap: https://locusable.com/sitemap.xml")) {
+    fail("FAIL robots.txt: missing Sitemap URL");
+  }
+}
+if (!exists("sitemap.xml")) fail("FAIL sitemap.xml should exist");
+else {
+  const sitemap = read("sitemap.xml");
+  for (const loc of [
+    "https://locusable.com/",
+    "https://locusable.com/about/",
+    "https://locusable.com/unmaintained/",
+    "https://locusable.com/here-island/",
+    "https://locusable.com/here-island/privacy/",
+    "https://locusable.com/here-wallpaper/",
+    "https://locusable.com/here-wallpaper/privacy/",
+    "https://locusable.com/here-sidefy/",
+    "https://locusable.com/here-sidefy/privacy/",
+    "https://locusable.com/here-links/",
+    "https://locusable.com/here-links/privacy/",
+    "https://locusable.com/here-hackerba/",
+    "https://locusable.com/here-trmnl/",
+  ]) {
+    if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`FAIL sitemap.xml: missing ${loc}`);
+  }
+}
+
 // --- home & hubs ---
 const home = htmlByPage["index.html"];
 const unmaintained = htmlByPage["unmaintained/index.html"];
@@ -183,6 +286,17 @@ for (const needle of [
 }
 
 if (!home.includes('href="/about/"')) fail("FAIL index.html: missing About link");
+if (!home.includes('class="catalog__lead"')) fail("FAIL index.html: missing studio hook lead");
+if (!home.includes("what’s already on the screen")) {
+  fail("FAIL index.html: studio hook should use already-on-the-screen idea");
+}
+for (const line of [
+  "A place you care about, on the lock screen.",
+  "Your feeds, on the screen edge.",
+  "What’s playing, in the notch.",
+]) {
+  if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
+}
 for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/unmaintained/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
@@ -191,6 +305,9 @@ if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/
 }
 if ((home.match(/class="product"/g) || []).length !== 3) {
   fail("FAIL index.html: homepage should list three released products");
+}
+if (!home.includes("More Information")) {
+  fail("FAIL index.html: More Information links should remain");
 }
 if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('href="/here-links/"') || !unmaintained.includes('href="/here-hackerba/"')) {
   fail("FAIL unmaintained/index.html: product assignment is incorrect");
@@ -214,6 +331,7 @@ const siteJs = read("assets/site.js");
 for (const needle of [
   ".topbar",
   ".catalog",
+  ".catalog__lead",
   ".product__icon",
   ".product-hero",
   ".prose",
@@ -282,6 +400,22 @@ if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1)
 if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
   fail("FAIL here-wallpaper/index.html: hero phone shots should declare 585x1266");
 }
+for (const title of [
+  "Your place, on the lock screen",
+  "Themes, type, and layers",
+  "Save, then set in Photos",
+  "Live on the Mac desktop",
+]) {
+  if (!wallpaper.includes(`>${title}</h2>`)) {
+    fail(`FAIL here-wallpaper/index.html: missing benefit title (${title})`);
+  }
+}
+if (wallpaper.includes('class="product-scene"')) {
+  fail("FAIL here-wallpaper/index.html: product-scene should be removed");
+}
+if (wallpaper.includes(">Any place</h2>") || wallpaper.includes(">Live wallpaper for Mac</h2>")) {
+  fail("FAIL here-wallpaper/index.html: obsolete feature titles still present");
+}
 
 // --- here-links ---
 const linksPage = htmlByPage["here-links/index.html"];
@@ -304,13 +438,31 @@ for (const needle of [
   "brew trust --cask locusable-studio/tap/here-island",
   "brew install --cask here-island",
   "/here-island/privacy/",
-  "On the lock screen too",
+  "Playing lives in the notch",
+  "Controls when you hover",
+  "New track, quick peek",
+  "Lock screen card, optional",
+  "Out of screenshots and fullscreen",
   "Optional media card with artwork, controls, and progress",
-  "Stay out of screenshots",
   "Hide during screenshots and recordings",
   "native fullscreen",
+  "Title marquee on track change",
 ]) {
   if (!island.includes(needle)) fail(`FAIL here-island/index.html: missing ${needle}`);
+}
+if (island.includes('class="product-scene"')) {
+  fail("FAIL here-island/index.html: product-scene should be removed");
+}
+for (const obsolete of [
+  "Player in the notch",
+  "Playback within reach",
+  "On the lock screen too",
+  "Stay out of screenshots",
+  ">Quick peek</h2>",
+]) {
+  if (island.includes(obsolete)) {
+    fail(`FAIL here-island/index.html: obsolete feature title still present (${obsolete})`);
+  }
 }
 for (const needle of ["Mac notch", "Sparkle", "github.com/locusable-studio/HereIsland/issues"]) {
   if (!islandPrivacy.includes(needle)) fail(`FAIL here-island/privacy/index.html: missing ${needle}`);
@@ -346,26 +498,25 @@ for (const href of [
 ]) {
   if (!sidefy.includes(`href="${href}"`)) fail(`FAIL here-sidefy/index.html: missing href ${href}`);
 }
+for (const title of [
+  "One stream, no app switching",
+  "Calendar to GitHub to news",
+  "Keyboard-friendly",
+  "Quiet until you need it",
+  "Yours stays in iCloud",
+]) {
+  if (!sidefy.includes(`>${title}</h2>`)) {
+    fail(`FAIL here-sidefy/index.html: missing benefit title (${title})`);
+  }
+}
+if (sidefy.includes('class="product-scene"')) {
+  fail("FAIL here-sidefy/index.html: product-scene should be removed");
+}
+if (sidefy.includes(">One stream on the edge</h2>") || sidefy.includes(">Light enough to leave on</h2>") || sidefy.includes(">Plugins</h2>")) {
+  fail("FAIL here-sidefy/index.html: obsolete feature titles still present");
+}
 for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy"]) {
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
-}
-
-
-// --- product scene lines ---
-const islandScene = htmlByPage["here-island/index.html"];
-const sidefyScene = htmlByPage["here-sidefy/index.html"];
-const wallpaperScene = htmlByPage["here-wallpaper/index.html"];
-if (!islandScene.includes('<p class="product-scene">Keep working — what’s playing stays in the notch.</p>')) {
-  fail("FAIL here-island/index.html: missing product scene line");
-}
-if (!sidefyScene.includes('<p class="product-scene">Keep working — today’s schedule sits on the screen edge.</p>')) {
-  fail("FAIL here-sidefy/index.html: missing product scene line");
-}
-if (!wallpaperScene.includes('<p class="product-scene">Put a place you care about between the wallpaper and the icons.</p>')) {
-  fail("FAIL here-wallpaper/index.html: missing product scene line");
-}
-if (!siteCss.includes(".product-scene {")) {
-  fail("FAIL assets/site.css: missing .product-scene rule");
 }
 
 // --- result ---
