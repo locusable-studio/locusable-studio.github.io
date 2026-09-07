@@ -355,14 +355,29 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
 const islandScene = htmlByPage["here-island/index.html"];
 const sidefyScene = htmlByPage["here-sidefy/index.html"];
 const wallpaperScene = htmlByPage["here-wallpaper/index.html"];
-if (!islandScene.includes('<p class="product-scene">Keep working — what’s playing stays in the notch.</p>')) {
+if (!islandScene.includes('<p class="product-scene">What’s playing stays in the notch.</p>')) {
   fail("FAIL here-island/index.html: missing product scene line");
 }
-if (!sidefyScene.includes('<p class="product-scene">Keep working — today’s schedule sits on the screen edge.</p>')) {
+if (!sidefyScene.includes('<p class="product-scene">Calendar, Reminders, GitHub, and news — at the edge of your screen.</p>')) {
   fail("FAIL here-sidefy/index.html: missing product scene line");
 }
-if (!wallpaperScene.includes('<p class="product-scene">Put a place you care about between the wallpaper and the icons.</p>')) {
+if (!wallpaperScene.includes('<p class="product-scene">A place that matters, on your lock screen every day.</p>')) {
   fail("FAIL here-wallpaper/index.html: missing product scene line");
+}
+if (!islandScene.includes("Quick peek")) {
+  fail("FAIL here-island/index.html: missing Quick peek");
+}
+if (!islandScene.includes("Title marquee on track change, so a new song shows up without hovering.")) {
+  fail("FAIL here-island/index.html: missing Quick peek marquee subhead");
+}
+if (islandScene.includes("Keep working — what’s playing stays in the notch.")) {
+  fail("FAIL here-island/index.html: old Keep working scene line still present");
+}
+if (sidefyScene.includes("today’s schedule sits on the screen edge")) {
+  fail("FAIL here-sidefy/index.html: old today’s schedule scene line still present");
+}
+if (wallpaperScene.includes("between the wallpaper and the icons")) {
+  fail("FAIL here-wallpaper/index.html: old between the wallpaper and the icons scene line still present");
 }
 if (!siteCss.includes(".product-scene {")) {
   fail("FAIL assets/site.css: missing .product-scene rule");
