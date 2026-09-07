@@ -601,25 +601,27 @@ if (islandGrid.includes("unit__media") || islandGrid.includes("peek.gif")) {
 // --- sspai CSS pills (English two-line Featured in/on; detail pages under title only; no catalog list) ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
 const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
-const twoLinePill = (href, label) =>
+const twoLinePill = (href, brand, label) =>
   `<a class="press-pill" href="${href}" target="_blank" rel="noopener noreferrer">
-            <span class="press-pill__brand">sspai</span>
+            <span class="press-pill__brand">${brand}</span>
             <span class="press-pill__label">${label}</span>
           </a>`;
-const PILL_SIDEFY_MATRIX = twoLinePill(SSPAI_SIDEFY, "Featured in Matrix");
-const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "Featured on Home");
-const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "Featured in Matrix");
+const PILL_SIDEFY_MATRIX = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured in Matrix");
+const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured on Home");
+const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured in Matrix");
+const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
+const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "Mac Paid #1 · 2025");
 if (exists("assets/sidefy/sspai-matrix-badge.png")) {
   fail("FAIL assets/sidefy/sspai-matrix-badge.png: PNG badge must be removed");
 }
 if (home.includes("press-badge") || home.includes("sspai-matrix-badge") || sidefy.includes("press-badge") || sidefy.includes("sspai-matrix-badge") || wallpaper.includes("press-badge")) {
   fail("FAIL: obsolete .press-badge / PNG badge markup still present");
 }
-if (home.includes("press-pill") || home.includes("sspai.com/post")) {
-  fail("FAIL index.html: sspai pills belong on detail pages only, not the catalog list");
+if (home.includes("press-pill") || home.includes("sspai.com/post") || home.includes("Mac Paid #1")) {
+  fail("FAIL index.html: sspai/App Store ranking pills belong on detail pages only, not the catalog list");
 }
-if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-sidefy/index.html: missing English Featured in Matrix and Featured on Home two-line press-pills under title");
+if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes(PILL_SIDEFY_APPSTORE) || !sidefy.includes("press-pills")) {
+  fail("FAIL here-sidefy/index.html: missing English Featured in Matrix, Featured on Home, and App Store Mac Paid #1 two-line press-pills under title");
 }
 if (
   sidefy.includes("Matrix精选") ||
@@ -642,12 +644,14 @@ if (
   wallpaper.includes("编辑精选") ||
   wallpaper.includes("Matrix Featured") ||
   wallpaper.includes("Home Featured") ||
-  wallpaper.includes(SSPAI_SIDEFY)
+  wallpaper.includes(SSPAI_SIDEFY) ||
+  wallpaper.includes(PILL_SIDEFY_APPSTORE) ||
+  wallpaper.includes("Mac Paid #1")
 ) {
-  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix (no Chinese badges / On sspai / Sidefy URL / obsolete Matrix Featured)");
+  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix (no Chinese badges / On sspai / Sidefy URL / App Store ranking / obsolete Matrix Featured)");
 }
-if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai")) {
-  fail("FAIL here-island/index.html: should not include sspai pills or sspai.com/post");
+if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai") || island.includes("Mac Paid #1") || island.includes(PILL_SIDEFY_APPSTORE)) {
+  fail("FAIL here-island/index.html: should not include sspai/App Store ranking pills or sspai.com/post");
 }
 // Forbid leftover Chinese badge words site-wide
 for (const page of pages) {
