@@ -406,13 +406,13 @@ if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1)
   fail("FAIL here-wallpaper/index.html: lock-screen preview should appear once");
 }
 if (!wallpaper.includes('alt="Map lock screen wallpaper"')) {
-  fail("FAIL here-wallpaper/index.html: place block should use lock-screen preview alt");
+  fail("FAIL here-wallpaper/index.html: lock-screen preview should keep Map lock screen wallpaper alt");
 }
 if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
   fail("FAIL here-wallpaper/index.html: phone shots should declare 585x1266");
 }
 if (!wallpaper.includes('alt="Live map wallpaper on Mac"')) {
-  fail("FAIL here-wallpaper/index.html: Mac live block should use live map alt");
+  fail("FAIL here-wallpaper/index.html: Mac live preview should keep live map alt");
 }
 for (const title of [
   "Your place, on the lock screen",
@@ -446,10 +446,10 @@ if (!island.includes('/assets/here-island/peek.gif?v=1" width="420" height="180"
   fail("FAIL here-island/index.html: missing 420x180 GitHub preview GIF");
 }
 if (!island.includes('alt="Quick peek on track change"') || !island.includes("New track, quick peek")) {
-  fail("FAIL here-island/index.html: peek.gif should hang on quick peek block");
+  fail("FAIL here-island/index.html: peek.gif alt / New track title missing");
 }
 if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy screen-edge info stream"') || !htmlByPage["here-sidefy/index.html"].includes("One stream, no app switching")) {
-  fail("FAIL here-sidefy/index.html: shot-hero should hang on one-stream block");
+  fail("FAIL here-sidefy/index.html: shot-hero alt / One stream title missing");
 }
 if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
 for (const needle of [
@@ -539,6 +539,64 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
 }
 
+
+// --- hero previews vs benefit grid (no huge shots in dual-column benefits) ---
+const sectionSlice = (html, openTag) => {
+  const start = html.indexOf(openTag);
+  if (start < 0) return "";
+  const end = html.indexOf("</section>", start);
+  return end < 0 ? "" : html.slice(start, end + "</section>".length);
+};
+const gridSlice = (html) => {
+  const start = html.indexOf('<div class="detail-feature-grid">');
+  if (start < 0) return "";
+  const end = html.indexOf("</div>", start);
+  // detail-feature-grid wraps many sections; find matching close after last nested section before FAQ/mac
+  // Prefer: from open through the closing </div> that follows the last </section> before FAQ.
+  const after = html.slice(start);
+  const close = after.search(/<\/div>\s*\n\s*<(?:section class="(?:unit|product-faq)")/);
+  if (close < 0) {
+    const fallback = after.indexOf("</div>");
+    return fallback < 0 ? "" : after.slice(0, fallback + 6);
+  }
+  return after.slice(0, close + 6);
+};
+
+const sidefyHero = sectionSlice(sidefy, '<section class="product-hero"');
+const sidefyGrid = gridSlice(sidefy);
+if (!sidefyHero.includes("shot-hero.jpg")) {
+  fail("FAIL here-sidefy/index.html: product-hero must include shot-hero.jpg after download links");
+}
+if (sidefyGrid.includes("unit__media") || sidefyGrid.includes("shot-hero.jpg")) {
+  fail("FAIL here-sidefy/index.html: detail-feature-grid must not hold shot-hero / unit__media");
+}
+if (!sidefy.includes('id="stream-title">One stream, no app switching</h2>') || !sidefy.includes("unit__copy--solo")) {
+  fail("FAIL here-sidefy/index.html: One stream benefit should remain copy-only");
+}
+
+const wallpaperHero = sectionSlice(wallpaper, '<section class="product-hero"');
+const wallpaperGrid = gridSlice(wallpaper);
+if (!wallpaperHero.includes("shot-1.jpg") || !wallpaperHero.includes("shot-2.jpg") || !wallpaperHero.includes("shot-3.jpg") || !wallpaperHero.includes("shot-4.jpg")) {
+  fail("FAIL here-wallpaper/index.html: product-hero phone row must include shot-1..4");
+}
+if (!wallpaperHero.includes("shot-mac-maldives.jpg")) {
+  fail("FAIL here-wallpaper/index.html: product-hero must include Mac shot-mac-maldives under phones");
+}
+if (wallpaperGrid.includes("unit__media") || wallpaperGrid.includes("shot-1.jpg") || wallpaperGrid.includes("shot-mac-maldives.jpg")) {
+  fail("FAIL here-wallpaper/index.html: detail-feature-grid must not hold shot-1 / Mac media / unit__media");
+}
+if (wallpaper.includes('aria-labelledby="mac-title"') && /aria-labelledby="mac-title"[\s\S]*?unit__media/.test(wallpaper.split('aria-labelledby="faq-title"')[0])) {
+  fail("FAIL here-wallpaper/index.html: Live on the Mac desktop must not keep large mid-page media");
+}
+
+const islandHero = sectionSlice(island, '<section class="product-hero"');
+const islandGrid = gridSlice(island);
+if (!islandHero.includes("peek.gif")) {
+  fail("FAIL here-island/index.html: product-hero must include peek.gif after download links");
+}
+if (islandGrid.includes("unit__media") || islandGrid.includes("peek.gif")) {
+  fail("FAIL here-island/index.html: detail-feature-grid must not hold peek.gif / unit__media");
+}
 
 // --- sspai CSS pills (English two-line Featured in/on; detail pages under title only; no catalog list) ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
