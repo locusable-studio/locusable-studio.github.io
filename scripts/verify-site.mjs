@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "216";
+const cssVersion = "217";
 const jsVersion = "65";
 
 const must = [
@@ -533,33 +533,38 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
 }
 
 
-// --- sspai Matrix badge / footnotes ---
+// --- sspai CSS pills (no PNG badges) ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
 const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
-const SSPAI_BADGE = "sspai-matrix-badge.png";
-if (!exists("assets/sidefy/sspai-matrix-badge.png")) {
-  fail("FAIL assets/sidefy/sspai-matrix-badge.png: missing badge PNG");
+const PILL_MATRIX = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">sspai Matrix</a>`;
+const PILL_HOME = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">sspai Home</a>`;
+const PILL_WALLPAPER = `<a class="press-pill" href="${SSPAI_WALLPAPER}" target="_blank" rel="noopener noreferrer">On sspai</a>`;
+if (exists("assets/sidefy/sspai-matrix-badge.png")) {
+  fail("FAIL assets/sidefy/sspai-matrix-badge.png: PNG badge must be removed");
 }
-if (!home.includes(SSPAI_BADGE) || !home.includes('alt="sspai Matrix"') || !home.includes(">sspai Home</a>") || !home.includes(`href="${SSPAI_SIDEFY}"`)) {
-  fail("FAIL index.html: missing Sidefy sspai Matrix badge and Home link");
+if (home.includes("press-badge") || home.includes("sspai-matrix-badge") || sidefy.includes("press-badge") || sidefy.includes("sspai-matrix-badge")) {
+  fail("FAIL: obsolete .press-badge / PNG badge markup still present");
 }
-if (!home.includes(`href="${SSPAI_WALLPAPER}"`) || !home.includes(">On sspai</a>")) {
-  fail("FAIL index.html: missing Wallpaper sspai footnote");
+if (!home.includes(PILL_MATRIX) || !home.includes(PILL_HOME)) {
+  fail("FAIL index.html: missing Sidefy sspai Matrix and Home press-pill links");
 }
-if (!sidefy.includes(SSPAI_BADGE) || !sidefy.includes('alt="sspai Matrix"') || !sidefy.includes("press-badge") || !sidefy.includes(">sspai Home</a>") || !sidefy.includes(`href="${SSPAI_SIDEFY}"`)) {
-  fail("FAIL here-sidefy/index.html: missing sspai Matrix badge under title and Home link");
+if (!home.includes(PILL_WALLPAPER)) {
+  fail("FAIL index.html: missing Wallpaper On sspai press-pill");
+}
+if (!sidefy.includes(PILL_MATRIX) || !sidefy.includes(PILL_HOME) || !sidefy.includes("press-pills")) {
+  fail("FAIL here-sidefy/index.html: missing sspai Matrix and Home press-pills under title");
 }
 if (sidefy.includes("Featured on sspai")) {
   fail("FAIL here-sidefy/index.html: obsolete Featured on sspai footnote still present");
 }
-if (!wallpaper.includes(`href="${SSPAI_WALLPAPER}"`) || !wallpaper.includes(">On sspai</a>")) {
-  fail("FAIL here-wallpaper/index.html: missing sspai footnote near App Store links");
+if (!wallpaper.includes(PILL_WALLPAPER)) {
+  fail("FAIL here-wallpaper/index.html: missing On sspai press-pill near App Store links");
 }
-if (wallpaper.includes(SSPAI_BADGE)) {
-  fail("FAIL here-wallpaper/index.html: must NOT include sspai-matrix-badge");
+if (wallpaper.includes("sspai Matrix") || wallpaper.includes(SSPAI_SIDEFY)) {
+  fail("FAIL here-wallpaper/index.html: must NOT include Matrix pill or Sidefy sspai URL");
 }
-if (island.includes("sspai.com/post") || island.includes(SSPAI_BADGE)) {
-  fail("FAIL here-island/index.html: should not include sspai badge or sspai.com/post");
+if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai")) {
+  fail("FAIL here-island/index.html: should not include sspai pills or sspai.com/post");
 }
 
 // --- result ---
