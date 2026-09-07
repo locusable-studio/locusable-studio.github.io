@@ -195,7 +195,7 @@ for (const page of pages) {
     fail(`FAIL ${page}: obsolete theme or language controls found`);
   }
   // Sidefy sspai screenshot labels only — strip before English-site Han gate
-  const hanWhitelist = ["编辑精选", "首页推荐"];
+  const hanWhitelist = ["Matrix精选", "首页推荐"];
   let htmlForHan = html;
   for (const s of hanWhitelist) htmlForHan = htmlForHan.split(s).join("");
   if (/\p{Script=Han}/u.test(htmlForHan)) fail(`FAIL ${page}: Chinese content found on English-only site`);
@@ -537,38 +537,32 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
 }
 
 
-// --- sspai CSS pills (no PNG badges) ---
+// --- sspai CSS pills (detail pages under title only; no catalog list) ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
 const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
-const PILL_MATRIX = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">编辑精选</a>`;
-const PILL_HOME = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">首页推荐</a>`;
-const PILL_WALLPAPER = `<a class="press-pill" href="${SSPAI_WALLPAPER}" target="_blank" rel="noopener noreferrer">On sspai</a>`;
+const PILL_SIDEFY_MATRIX = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">Matrix精选</a>`;
+const PILL_SIDEFY_HOME = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">首页推荐</a>`;
+const PILL_WALLPAPER_MATRIX = `<a class="press-pill" href="${SSPAI_WALLPAPER}" target="_blank" rel="noopener noreferrer">Matrix精选</a>`;
 if (exists("assets/sidefy/sspai-matrix-badge.png")) {
   fail("FAIL assets/sidefy/sspai-matrix-badge.png: PNG badge must be removed");
 }
-if (home.includes("press-badge") || home.includes("sspai-matrix-badge") || sidefy.includes("press-badge") || sidefy.includes("sspai-matrix-badge")) {
+if (home.includes("press-badge") || home.includes("sspai-matrix-badge") || sidefy.includes("press-badge") || sidefy.includes("sspai-matrix-badge") || wallpaper.includes("press-badge")) {
   fail("FAIL: obsolete .press-badge / PNG badge markup still present");
 }
-if (!home.includes(PILL_MATRIX) || !home.includes(PILL_HOME)) {
-  fail("FAIL index.html: missing Sidefy 编辑精选 and 首页推荐 press-pill links");
+if (home.includes("press-pill") || home.includes("sspai.com/post")) {
+  fail("FAIL index.html: sspai pills belong on detail pages only, not the catalog list");
 }
-if (!home.includes(PILL_WALLPAPER)) {
-  fail("FAIL index.html: missing Wallpaper On sspai press-pill");
+if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes("press-pills")) {
+  fail("FAIL here-sidefy/index.html: missing Matrix精选 and 首页推荐 press-pills under title");
 }
-if (!sidefy.includes(PILL_MATRIX) || !sidefy.includes(PILL_HOME) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-sidefy/index.html: missing 编辑精选 and 首页推荐 press-pills under title");
+if (sidefy.includes("编辑精选") || sidefy.includes("Featured on sspai") || sidefy.includes("sspai Matrix") || sidefy.includes("sspai Home") || sidefy.includes("On sspai")) {
+  fail("FAIL here-sidefy/index.html: obsolete sspai pill labels still present");
 }
-if (sidefy.includes("Featured on sspai")) {
-  fail("FAIL here-sidefy/index.html: obsolete Featured on sspai footnote still present");
+if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes("press-pills")) {
+  fail("FAIL here-wallpaper/index.html: missing Matrix精选 press-pill under title");
 }
-if (!wallpaper.includes(PILL_WALLPAPER)) {
-  fail("FAIL here-wallpaper/index.html: missing On sspai press-pill near App Store links");
-}
-if (wallpaper.includes("sspai Matrix") || wallpaper.includes("sspai Home") || wallpaper.includes("编辑精选") || wallpaper.includes("首页推荐") || wallpaper.includes(SSPAI_SIDEFY)) {
-  fail("FAIL here-wallpaper/index.html: must NOT include Sidefy sspai pills or Sidefy sspai URL");
-}
-if (home.includes("sspai Matrix") || home.includes("sspai Home") || sidefy.includes("sspai Matrix") || sidefy.includes("sspai Home")) {
-  fail("FAIL: leftover sspai Matrix / sspai Home text still present");
+if (wallpaper.includes("On sspai") || wallpaper.includes("首页推荐") || wallpaper.includes("编辑精选") || wallpaper.includes(SSPAI_SIDEFY)) {
+  fail("FAIL here-wallpaper/index.html: must only have Matrix精选 (no On sspai / 首页推荐 / Sidefy URL)");
 }
 if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai")) {
   fail("FAIL here-island/index.html: should not include sspai pills or sspai.com/post");
