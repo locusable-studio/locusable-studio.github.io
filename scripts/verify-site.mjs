@@ -19,7 +19,7 @@ const pages = [
   "unmaintained/index.html",
 ];
 
-const cssVersion = "214";
+const cssVersion = "215";
 const jsVersion = "65";
 
 const must = [
@@ -348,6 +348,24 @@ for (const href of [
 }
 for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy"]) {
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
+}
+
+
+// --- product scene lines ---
+const islandScene = htmlByPage["here-island/index.html"];
+const sidefyScene = htmlByPage["here-sidefy/index.html"];
+const wallpaperScene = htmlByPage["here-wallpaper/index.html"];
+if (!islandScene.includes('<p class="product-scene">Keep working — what’s playing stays in the notch.</p>')) {
+  fail("FAIL here-island/index.html: missing product scene line");
+}
+if (!sidefyScene.includes('<p class="product-scene">Keep working — today’s schedule sits on the screen edge.</p>')) {
+  fail("FAIL here-sidefy/index.html: missing product scene line");
+}
+if (!wallpaperScene.includes('<p class="product-scene">Put a place you care about between the wallpaper and the icons.</p>')) {
+  fail("FAIL here-wallpaper/index.html: missing product scene line");
+}
+if (!siteCss.includes(".product-scene {")) {
+  fail("FAIL assets/site.css: missing .product-scene rule");
 }
 
 // --- result ---
