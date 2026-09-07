@@ -57,9 +57,9 @@ const pageMeta = {
       "Calendar, Reminders, GitHub, RSS, and plugins in one screen-edge stream. Stay in your window; keyboard-friendly; data stays in iCloud.",
   },
   "here-wallpaper/index.html": {
-    title: "Here Wallpaper — Map lock screen wallpapers",
+    title: "Here Wallpaper — Map wallpapers for iPhone, iPad, and Mac",
     description:
-      "Turn a place you care about into a lock screen wallpaper. Themes, type, and layers for iPhone, iPad, and Mac — live maps on the Mac desktop too.",
+      "A place you care about as wallpaper — lock screen on iPhone and iPad, live under the icons on Mac.",
   },
 };
 
@@ -292,7 +292,7 @@ if (!home.includes("what’s already on the screen")) {
   fail("FAIL index.html: studio hook should use already-on-the-screen idea");
 }
 for (const line of [
-  "A place you care about, on the lock screen.",
+  "A place you care about, on your screens.",
   "Your feeds, on the screen edge.",
   "What’s playing, in the notch.",
 ]) {
@@ -415,10 +415,10 @@ if (!wallpaper.includes('alt="Live map wallpaper on Mac"')) {
   fail("FAIL here-wallpaper/index.html: Mac live preview should keep live map alt");
 }
 for (const title of [
-  "Your place, on the lock screen",
+  "Find a place",
   "Themes, type, and layers",
-  "Save, then set in Photos",
-  "Live on the Mac desktop",
+  "Favorites and Shortcuts",
+  "Between wallpaper and icons",
 ]) {
   if (!wallpaper.includes(`>${title}</h2>`)) {
     fail(`FAIL here-wallpaper/index.html: missing benefit title (${title})`);
@@ -427,8 +427,34 @@ for (const title of [
 if (wallpaper.includes('class="product-scene"')) {
   fail("FAIL here-wallpaper/index.html: product-scene should be removed");
 }
-if (wallpaper.includes(">Any place</h2>") || wallpaper.includes(">Live wallpaper for Mac</h2>")) {
+if (
+  wallpaper.includes(">Any place</h2>") ||
+  wallpaper.includes(">Live wallpaper for Mac</h2>") ||
+  wallpaper.includes(">Your place, on the lock screen</h2>") ||
+  wallpaper.includes(">Save, then set in Photos</h2>") ||
+  wallpaper.includes(">Live on the Mac desktop</h2>")
+) {
   fail("FAIL here-wallpaper/index.html: obsolete feature titles still present");
+}
+if (!wallpaper.includes('id="find-title">') || !wallpaper.includes('id="shortcuts-title">') || !wallpaper.includes('id="mac-title">')) {
+  fail("FAIL here-wallpaper/index.html: benefit ids find/shortcuts/mac should be present");
+}
+if (wallpaper.includes('id="place-title"') || wallpaper.includes('id="export-title"')) {
+  fail("FAIL here-wallpaper/index.html: obsolete place-title / export-title ids still present");
+}
+const wallpaperMacPos = wallpaper.indexOf('aria-labelledby="mac-title"');
+const wallpaperFaqPos = wallpaper.indexOf('aria-labelledby="faq-title"');
+if (wallpaperMacPos < 0 || wallpaperFaqPos < 0 || !(wallpaper.indexOf('<div class="detail-feature-grid">') < wallpaperMacPos && wallpaperMacPos < wallpaperFaqPos)) {
+  fail("FAIL here-wallpaper/index.html: mac benefit must sit inside detail-feature-grid before FAQ");
+}
+// Ensure no separate mid-page Mac unit outside the grid: after grid close, next product section should be FAQ
+{
+  const gridStart = wallpaper.indexOf('<div class="detail-feature-grid">');
+  const after = wallpaper.slice(gridStart);
+  const close = after.search(/<\/div>\s*\n\s*<section class="product-faq"/);
+  if (close < 0) {
+    fail("FAIL here-wallpaper/index.html: detail-feature-grid should close immediately before product-faq (no mid-page Mac unit)");
+  }
 }
 
 // --- here-links ---
@@ -586,7 +612,7 @@ if (wallpaperGrid.includes("unit__media") || wallpaperGrid.includes("shot-1.jpg"
   fail("FAIL here-wallpaper/index.html: detail-feature-grid must not hold shot-1 / Mac media / unit__media");
 }
 if (wallpaper.includes('aria-labelledby="mac-title"') && /aria-labelledby="mac-title"[\s\S]*?unit__media/.test(wallpaper.split('aria-labelledby="faq-title"')[0])) {
-  fail("FAIL here-wallpaper/index.html: Live on the Mac desktop must not keep large mid-page media");
+  fail("FAIL here-wallpaper/index.html: Between wallpaper and icons must not keep large mid-page media");
 }
 
 const islandHero = sectionSlice(island, '<section class="product-hero"');
