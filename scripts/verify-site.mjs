@@ -532,6 +532,26 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
 }
 
+
+// --- sspai footnotes ---
+const SSPAI_SIDEFY = "https://sspai.com/post/102198";
+const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
+if (!home.includes(`href="${SSPAI_SIDEFY}"`) || !home.includes("Featured on sspai · Matrix & home")) {
+  fail("FAIL index.html: missing Sidefy sspai footnote");
+}
+if (!home.includes(`href="${SSPAI_WALLPAPER}"`) || !home.includes(">On sspai</a>")) {
+  fail("FAIL index.html: missing Wallpaper sspai footnote");
+}
+if (!sidefy.includes(`href="${SSPAI_SIDEFY}"`) || !sidefy.includes("Featured on sspai · Matrix & home")) {
+  fail("FAIL here-sidefy/index.html: missing sspai footnote near App Store links");
+}
+if (!wallpaper.includes(`href="${SSPAI_WALLPAPER}"`) || !wallpaper.includes(">On sspai</a>")) {
+  fail("FAIL here-wallpaper/index.html: missing sspai footnote near App Store links");
+}
+if (island.includes("sspai.com/post")) {
+  fail("FAIL here-island/index.html: should not include sspai.com/post");
+}
+
 // --- result ---
 if (failed) {
   console.error(`\n${failed} check(s) failed`);
