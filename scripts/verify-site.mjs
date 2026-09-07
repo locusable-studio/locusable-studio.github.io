@@ -389,16 +389,23 @@ for (const shot of [
   "shot-mac-christ-the-redeemer.jpg",
 ]) {
   if (!exists(`assets/here-wallpaper/${shot}`)) fail(`FAIL missing assets/here-wallpaper/${shot}`);
-  if (!wallpaper.includes(shot)) fail(`FAIL here-wallpaper/index.html: missing Mac preview ${shot}`);
 }
+if (!wallpaper.includes("shot-mac-maldives.jpg")) fail("FAIL here-wallpaper/index.html: missing Mac live preview");
+
 if (wallpaper.includes("/here-wallpaper/themes") || wallpaper.includes("themes-title") || wallpaper.includes("Browse themes")) {
   fail("FAIL here-wallpaper/index.html: themes catalog link should be removed");
 }
 if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1) {
-  fail("FAIL here-wallpaper/index.html: hero preview should appear only once");
+  fail("FAIL here-wallpaper/index.html: lock-screen preview should appear once");
+}
+if (!wallpaper.includes('alt="Map lock screen wallpaper"')) {
+  fail("FAIL here-wallpaper/index.html: place block should use lock-screen preview alt");
 }
 if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
-  fail("FAIL here-wallpaper/index.html: hero phone shots should declare 585x1266");
+  fail("FAIL here-wallpaper/index.html: phone shots should declare 585x1266");
+}
+if (!wallpaper.includes('alt="Live map wallpaper on Mac"')) {
+  fail("FAIL here-wallpaper/index.html: Mac live block should use live map alt");
 }
 for (const title of [
   "Your place, on the lock screen",
@@ -430,6 +437,12 @@ const islandPrivacy = htmlByPage["here-island/privacy/index.html"];
 
 if (!island.includes('/assets/here-island/peek.gif?v=1" width="420" height="180"') || !exists("assets/here-island/peek.gif")) {
   fail("FAIL here-island/index.html: missing 420x180 GitHub preview GIF");
+}
+if (!island.includes('alt="Quick peek on track change"') || !island.includes("New track, quick peek")) {
+  fail("FAIL here-island/index.html: peek.gif should hang on quick peek block");
+}
+if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy screen-edge info stream"') || !htmlByPage["here-sidefy/index.html"].includes("One stream, no app switching")) {
+  fail("FAIL here-sidefy/index.html: shot-hero should hang on one-stream block");
 }
 if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
 for (const needle of [
