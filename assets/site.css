@@ -453,31 +453,39 @@ main,
 }
 
 
-.press-badge {
-  display: inline-block;
+.press-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
   margin: 10px 0 0;
-  line-height: 0;
-  vertical-align: middle;
 }
 
-.press-badge img {
-  display: block;
-  width: 72px;
-  height: 72px;
-  border: 0;
-}
-
-.product__links .press-badge {
-  margin: 0;
-  vertical-align: middle;
-}
-
-.product__links .press-badge img {
+.press-pill {
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  padding: 2px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bar);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.45;
+  text-decoration: none;
   vertical-align: middle;
+  white-space: nowrap;
 }
+
+.press-pill:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+.product__links .press-pill {
+  margin: 0 0 0 2px;
+  font-size: 11px;
+  padding: 1px 8px;
+}
+
 
 @media (max-width: 600px) {
   .topbar__inner {
