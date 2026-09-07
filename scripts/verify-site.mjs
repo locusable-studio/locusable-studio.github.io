@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "217";
+const cssVersion = "218";
 const jsVersion = "65";
 
 const must = [
@@ -194,11 +194,8 @@ for (const page of pages) {
   if (/data-i18n|data-home-(?:lang|theme)|assets\/(?:i18n|home)\.js/.test(html)) {
     fail(`FAIL ${page}: obsolete theme or language controls found`);
   }
-  // Sidefy sspai screenshot labels only — strip before English-site Han gate
-  const hanWhitelist = ["Matrix精选", "首页推荐"];
-  let htmlForHan = html;
-  for (const s of hanWhitelist) htmlForHan = htmlForHan.split(s).join("");
-  if (/\p{Script=Han}/u.test(htmlForHan)) fail(`FAIL ${page}: Chinese content found on English-only site`);
+  // English-only site — no Chinese content allowed
+  if (/\p{Script=Han}/u.test(html)) fail(`FAIL ${page}: Chinese content found on English-only site`);
 
   const faqQuestions = productFaqs[page];
   if (faqQuestions) {
@@ -537,12 +534,17 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
 }
 
 
-// --- sspai CSS pills (detail pages under title only; no catalog list) ---
+// --- sspai CSS pills (English two-line Featured in/on; detail pages under title only; no catalog list) ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
 const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
-const PILL_SIDEFY_MATRIX = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">Matrix精选</a>`;
-const PILL_SIDEFY_HOME = `<a class="press-pill" href="${SSPAI_SIDEFY}" target="_blank" rel="noopener noreferrer">首页推荐</a>`;
-const PILL_WALLPAPER_MATRIX = `<a class="press-pill" href="${SSPAI_WALLPAPER}" target="_blank" rel="noopener noreferrer">Matrix精选</a>`;
+const twoLinePill = (href, label) =>
+  `<a class="press-pill" href="${href}" target="_blank" rel="noopener noreferrer">
+            <span class="press-pill__brand">sspai</span>
+            <span class="press-pill__label">${label}</span>
+          </a>`;
+const PILL_SIDEFY_MATRIX = twoLinePill(SSPAI_SIDEFY, "Featured in Matrix");
+const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "Featured on Home");
+const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "Featured in Matrix");
 if (exists("assets/sidefy/sspai-matrix-badge.png")) {
   fail("FAIL assets/sidefy/sspai-matrix-badge.png: PNG badge must be removed");
 }
@@ -553,19 +555,48 @@ if (home.includes("press-pill") || home.includes("sspai.com/post")) {
   fail("FAIL index.html: sspai pills belong on detail pages only, not the catalog list");
 }
 if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-sidefy/index.html: missing Matrix精选 and 首页推荐 press-pills under title");
+  fail("FAIL here-sidefy/index.html: missing English Featured in Matrix and Featured on Home two-line press-pills under title");
 }
-if (sidefy.includes("编辑精选") || sidefy.includes("Featured on sspai") || sidefy.includes("sspai Matrix") || sidefy.includes("sspai Home") || sidefy.includes("On sspai")) {
-  fail("FAIL here-sidefy/index.html: obsolete sspai pill labels still present");
+if (
+  sidefy.includes("Matrix精选") ||
+  sidefy.includes("首页推荐") ||
+  sidefy.includes("编辑精选") ||
+  sidefy.includes("Featured on sspai") ||
+  sidefy.includes("On sspai") ||
+  sidefy.includes("Matrix Featured") ||
+  sidefy.includes("Home Featured")
+) {
+  fail("FAIL here-sidefy/index.html: leftover Chinese badge words or obsolete sspai labels still present");
 }
 if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes("press-pills")) {
-  fail("FAIL here-wallpaper/index.html: missing Matrix精选 press-pill under title");
+  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix two-line press-pill under title");
 }
-if (wallpaper.includes("On sspai") || wallpaper.includes("首页推荐") || wallpaper.includes("编辑精选") || wallpaper.includes(SSPAI_SIDEFY)) {
-  fail("FAIL here-wallpaper/index.html: must only have Matrix精选 (no On sspai / 首页推荐 / Sidefy URL)");
+if (
+  wallpaper.includes("On sspai") ||
+  wallpaper.includes("Matrix精选") ||
+  wallpaper.includes("首页推荐") ||
+  wallpaper.includes("编辑精选") ||
+  wallpaper.includes("Matrix Featured") ||
+  wallpaper.includes("Home Featured") ||
+  wallpaper.includes(SSPAI_SIDEFY)
+) {
+  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix (no Chinese badges / On sspai / Sidefy URL / obsolete Matrix Featured)");
 }
 if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai")) {
   fail("FAIL here-island/index.html: should not include sspai pills or sspai.com/post");
+}
+// Forbid leftover Chinese badge words site-wide
+for (const page of pages) {
+  const html = htmlByPage[page];
+  for (const bad of ["Matrix精选", "首页推荐", "编辑精选", "On sspai", "Matrix Featured", "Home Featured"]) {
+    if (html.includes(bad)) fail(`FAIL ${page}: leftover badge wording (${bad})`);
+  }
+}
+if (!siteCss.includes(".press-pill__brand") || !siteCss.includes(".press-pill__label") || !siteCss.includes("flex-direction: column")) {
+  fail("FAIL assets/site.css: press-pill must be two-line flex column with brand/label");
+}
+if (!siteCss.includes("border-radius: 999px")) {
+  fail("FAIL assets/site.css: press-pill must keep capsule border-radius 999px");
 }
 
 // --- result ---
