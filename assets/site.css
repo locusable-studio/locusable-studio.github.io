@@ -452,6 +452,33 @@ main,
   font-size: 13px;
 }
 
+
+.press-badge {
+  display: inline-block;
+  margin: 10px 0 0;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.press-badge img {
+  display: block;
+  width: 72px;
+  height: 72px;
+  border: 0;
+}
+
+.product__links .press-badge {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.product__links .press-badge img {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  vertical-align: middle;
+}
+
 @media (max-width: 600px) {
   .topbar__inner {
     flex-wrap: wrap;
