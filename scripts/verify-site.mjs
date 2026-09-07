@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "215";
+const cssVersion = "216";
 const jsVersion = "65";
 
 const must = [
@@ -533,23 +533,33 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
 }
 
 
-// --- sspai footnotes ---
+// --- sspai Matrix badge / footnotes ---
 const SSPAI_SIDEFY = "https://sspai.com/post/102198";
 const SSPAI_WALLPAPER = "https://sspai.com/post/114211";
-if (!home.includes(`href="${SSPAI_SIDEFY}"`) || !home.includes("Featured on sspai · Matrix & home")) {
-  fail("FAIL index.html: missing Sidefy sspai footnote");
+const SSPAI_BADGE = "sspai-matrix-badge.png";
+if (!exists("assets/sidefy/sspai-matrix-badge.png")) {
+  fail("FAIL assets/sidefy/sspai-matrix-badge.png: missing badge PNG");
+}
+if (!home.includes(SSPAI_BADGE) || !home.includes('alt="sspai Matrix"') || !home.includes(">sspai Home</a>") || !home.includes(`href="${SSPAI_SIDEFY}"`)) {
+  fail("FAIL index.html: missing Sidefy sspai Matrix badge and Home link");
 }
 if (!home.includes(`href="${SSPAI_WALLPAPER}"`) || !home.includes(">On sspai</a>")) {
   fail("FAIL index.html: missing Wallpaper sspai footnote");
 }
-if (!sidefy.includes(`href="${SSPAI_SIDEFY}"`) || !sidefy.includes("Featured on sspai · Matrix & home")) {
-  fail("FAIL here-sidefy/index.html: missing sspai footnote near App Store links");
+if (!sidefy.includes(SSPAI_BADGE) || !sidefy.includes('alt="sspai Matrix"') || !sidefy.includes("press-badge") || !sidefy.includes(">sspai Home</a>") || !sidefy.includes(`href="${SSPAI_SIDEFY}"`)) {
+  fail("FAIL here-sidefy/index.html: missing sspai Matrix badge under title and Home link");
+}
+if (sidefy.includes("Featured on sspai")) {
+  fail("FAIL here-sidefy/index.html: obsolete Featured on sspai footnote still present");
 }
 if (!wallpaper.includes(`href="${SSPAI_WALLPAPER}"`) || !wallpaper.includes(">On sspai</a>")) {
   fail("FAIL here-wallpaper/index.html: missing sspai footnote near App Store links");
 }
-if (island.includes("sspai.com/post")) {
-  fail("FAIL here-island/index.html: should not include sspai.com/post");
+if (wallpaper.includes(SSPAI_BADGE)) {
+  fail("FAIL here-wallpaper/index.html: must NOT include sspai-matrix-badge");
+}
+if (island.includes("sspai.com/post") || island.includes(SSPAI_BADGE)) {
+  fail("FAIL here-island/index.html: should not include sspai badge or sspai.com/post");
 }
 
 // --- result ---
