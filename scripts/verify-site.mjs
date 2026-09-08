@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "231";
+const cssVersion = "232";
 const jsVersion = "66";
 
 const must = [
@@ -381,12 +381,6 @@ for (const needle of [
 }
 if (!siteCss.includes(".unit__media img {") || !siteCss.includes("border-radius: 8px;")) {
   fail("FAIL assets/site.css: screenshots should use the minimal bordered treatment");
-}
-if (
-  !siteCss.includes(".detail-feature-grid .unit:has(> .unit__media)") ||
-  !siteCss.includes("grid-column: 1 / -1;")
-) {
-  fail("FAIL assets/site.css: benefit units with media must span full width as copy|media");
 }
 if (!siteCss.includes(".topbar__inner {") || !siteCss.includes("width: min(100% - 32px, var(--max));")) {
   fail("FAIL assets/site.css: navigation should use the minimal site width");
