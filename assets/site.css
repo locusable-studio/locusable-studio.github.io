@@ -391,6 +391,27 @@ main > .unit,
   width: 100%;
 }
 
+.unit__media--desktop-scroll {
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+}
+
+.unit__media--desktop-scroll figure {
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+}
+
+.unit__media--desktop-scroll img {
+  width: 100%;
+  aspect-ratio: 1400 / 787;
+  object-fit: cover;
+  display: block;
+}
+
 .unit__media--island {
   display: flex;
   justify-content: center;
