@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "233";
+const cssVersion = "234";
 const jsVersion = "66";
 
 const must = [
@@ -345,6 +345,27 @@ if ((home.match(/class="product"/g) || []).length !== 3) {
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
 }
+if (!home.includes('<html lang="en" data-app="studio">')) {
+  fail("FAIL index.html: homepage should use data-app=studio for brand gold");
+}
+for (const [app, title] of [
+  ["wallpaper", "Here <em>Wallpaper</em>"],
+  ["sidefy", "<em>Sidefy</em>"],
+  ["island", "Here <em>Island</em>"],
+]) {
+  if (!home.includes(`<article class="product" data-app="${app}">`)) {
+    fail(`FAIL index.html: product card missing data-app=${app}`);
+  }
+  if (!home.includes(title)) {
+    fail(`FAIL index.html: product title should use accent em (${title})`);
+  }
+}
+if (!home.includes('class="product-title"')) {
+  fail("FAIL index.html: product titles should use product-title for accent em");
+}
+if (!about.includes('data-app="studio"')) {
+  fail("FAIL about/index.html: studio pages should keep data-app=studio");
+}
 if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('href="/here-links/"') || !unmaintained.includes('href="/here-hackerba/"')) {
   fail("FAIL unmaintained/index.html: product assignment is incorrect");
 }
@@ -405,6 +426,13 @@ for (const [app, color] of Object.entries({
   if (!siteCss.includes(`[data-app="${app}"] { --accent: ${color}; }`)) {
     fail(`FAIL assets/site.css: ${app} accent should be ${color}`);
   }
+}
+if (!/\.brand \{[\s\S]*?color:\s*var\(--accent-ink,\s*var\(--accent\)\);/.test(siteCss)) {
+  fail("FAIL assets/site.css: .brand should use var(--accent-ink, var(--accent))");
+}
+if (!siteCss.includes('[data-app="studio"] { --accent: #9b7100; }') ||
+    !siteCss.includes('[data-app="studio"] { --accent-ink: #ddc274; }')) {
+  fail("FAIL assets/site.css: studio accent / accent-ink should remain gold");
 }
 
 // --- here-wallpaper ---

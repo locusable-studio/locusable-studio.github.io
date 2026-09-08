@@ -107,7 +107,7 @@ a {
 }
 
 .brand {
-  color: var(--fg);
+  color: var(--accent-ink, var(--accent));
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
