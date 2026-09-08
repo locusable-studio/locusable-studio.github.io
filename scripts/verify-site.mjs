@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "235";
+const cssVersion = "236";
 const jsVersion = "66";
 
 const must = [
@@ -154,8 +154,13 @@ for (const page of pages) {
   if (navigation.includes('/unmaintained/')) {
     fail(`FAIL ${page}: Archive belongs in the footer, not the top navigation`);
   }
-  if (["index.html", "about/index.html", "unmaintained/index.html"].includes(page) && !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(footer)) {
-    fail(`FAIL ${page}: missing footer Archive link`);
+  if (page === "index.html") {
+    if (!/href="\/about\/"[^>]*>About<\/a>/.test(footer) || !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(footer)) {
+      fail(`FAIL ${page}: homepage footer should keep About and Archive`);
+    }
+  }
+  if ((page === "about/index.html" || page === "unmaintained/index.html") && /footer__links/.test(footer)) {
+    fail(`FAIL ${page}: About/Archive footer links belong on homepage only`);
   }
 
   if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) {
@@ -448,9 +453,8 @@ for (const [app, color] of Object.entries({
 if (!/\.brand \{[\s\S]*?color:\s*var\(--fg\);/.test(siteCss)) {
   fail("FAIL assets/site.css: .brand should use var(--fg)");
 }
-if (!siteCss.includes(".brand__studio") || !siteCss.includes("color: #9b7100;") ||
-    !/\.brand__studio[\s\S]*?#ddc274/.test(siteCss)) {
-  fail("FAIL assets/site.css: .brand__studio should use studio gold light/dark");
+if (!siteCss.includes(".brand__studio") || !siteCss.includes("color: var(--accent-ink, var(--accent));")) {
+  fail("FAIL assets/site.css: .brand__studio should follow page accent");
 }
 if (!siteCss.includes('[data-app="studio"] { --accent: #9b7100; }') ||
     !siteCss.includes('[data-app="studio"] { --accent-ink: #ddc274; }')) {
