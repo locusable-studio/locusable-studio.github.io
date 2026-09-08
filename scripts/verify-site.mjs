@@ -326,10 +326,13 @@ if (!home.includes('class="catalog__lead"')) fail("FAIL index.html: missing stud
 if (!home.includes("what’s already on the screen")) {
   fail("FAIL index.html: studio hook should use already-on-the-screen idea");
 }
+if (!home.includes("<h1>Tools for what’s already on the screen.</h1>")) {
+  fail("FAIL index.html: missing restored homepage H1");
+}
 for (const line of [
-  "Map wallpapers for places you care about.",
-  "Calendar, reminders, and feeds on your Mac’s screen edge.",
-  "Music and playback controls in your MacBook notch.",
+  "A place you care about, on your screens.",
+  "Your feeds, on the screen edge.",
+  "What’s playing, in the notch.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
