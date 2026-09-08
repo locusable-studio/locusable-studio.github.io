@@ -107,11 +107,19 @@ a {
 }
 
 .brand {
-  color: var(--accent-ink, var(--accent));
+  color: var(--fg);
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.brand__studio {
+  color: #9b7100;
+}
+
+@media (prefers-color-scheme: dark) {
+  .brand__studio { color: #ddc274; }
 }
 
 .nav {

@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "234";
+const cssVersion = "235";
 const jsVersion = "66";
 
 const must = [
@@ -217,6 +217,9 @@ for (const page of pages) {
 
   if (!html.includes('class="topbar"') || !html.includes('class="nav" aria-label="Studio"')) {
     fail(`FAIL ${page}: missing unified site navigation`);
+  }
+  if (!html.includes('<a class="brand" href="/">Locusable <span class="brand__studio">Studio</span></a>')) {
+    fail(`FAIL ${page}: brand should keep Locusable in --fg and Studio in brand__studio`);
   }
   if (html.includes('class="crumbs"') || html.includes('class="crumbbar"')) {
     fail(`FAIL ${page}: obsolete breadcrumb navigation found`);
@@ -372,6 +375,21 @@ if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('hre
 if ((unmaintained.match(/class="product"/g) || []).length !== 3) {
   fail("FAIL unmaintained/index.html: expected 3 product rows");
 }
+for (const [app, title] of [
+  ["trmnl", "Here <em>TRMNL</em>"],
+  ["links", "Here <em>Links</em>"],
+  ["hackerba", "Here <em>HackerBa</em>"],
+]) {
+  if (!unmaintained.includes(`<article class="product" data-app="${app}">`)) {
+    fail(`FAIL unmaintained/index.html: product card missing data-app=${app}`);
+  }
+  if (!unmaintained.includes(title)) {
+    fail(`FAIL unmaintained/index.html: product title should use accent em (${title})`);
+  }
+}
+if (!unmaintained.includes('class="product-title"')) {
+  fail("FAIL unmaintained/index.html: product titles should use product-title for accent em");
+}
 if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[page].includes('href="/coming-soon/"'))) {
   fail("FAIL Coming Soon navigation should be removed");
 }
@@ -427,8 +445,12 @@ for (const [app, color] of Object.entries({
     fail(`FAIL assets/site.css: ${app} accent should be ${color}`);
   }
 }
-if (!/\.brand \{[\s\S]*?color:\s*var\(--accent-ink,\s*var\(--accent\)\);/.test(siteCss)) {
-  fail("FAIL assets/site.css: .brand should use var(--accent-ink, var(--accent))");
+if (!/\.brand \{[\s\S]*?color:\s*var\(--fg\);/.test(siteCss)) {
+  fail("FAIL assets/site.css: .brand should use var(--fg)");
+}
+if (!siteCss.includes(".brand__studio") || !siteCss.includes("color: #9b7100;") ||
+    !/\.brand__studio[\s\S]*?#ddc274/.test(siteCss)) {
+  fail("FAIL assets/site.css: .brand__studio should use studio gold light/dark");
 }
 if (!siteCss.includes('[data-app="studio"] { --accent: #9b7100; }') ||
     !siteCss.includes('[data-app="studio"] { --accent-ink: #ddc274; }')) {
