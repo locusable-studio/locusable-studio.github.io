@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "232";
+const cssVersion = "233";
 const jsVersion = "66";
 
 const must = [
@@ -425,8 +425,11 @@ for (const shot of [
   "shot-mac-christ-the-redeemer.jpg",
 ]) {
   if (!exists(`assets/here-wallpaper/${shot}`)) fail(`FAIL missing assets/here-wallpaper/${shot}`);
+  if (!wallpaper.includes(shot)) fail(`FAIL here-wallpaper/index.html: missing Mac preview ${shot}`);
 }
-if (!wallpaper.includes("shot-mac-maldives.jpg")) fail("FAIL here-wallpaper/index.html: missing Mac live preview");
+if (!wallpaper.includes("unit__media--desktop-scroll")) {
+  fail("FAIL here-wallpaper/index.html: Mac previews should use unit__media--desktop-scroll");
+}
 
 if (wallpaper.includes("/here-wallpaper/themes") || wallpaper.includes("themes-title") || wallpaper.includes("Browse themes")) {
   fail("FAIL here-wallpaper/index.html: themes catalog link should be removed");
@@ -440,8 +443,14 @@ if (!wallpaper.includes('alt="Map lock screen wallpaper"')) {
 if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
   fail("FAIL here-wallpaper/index.html: phone shots should declare 585x1266");
 }
-if (!wallpaper.includes('alt="Live map wallpaper on Mac"')) {
-  fail("FAIL here-wallpaper/index.html: Mac live preview should keep live map alt");
+for (const alt of [
+  "Mac desktop map wallpaper — Maldives",
+  "Mac desktop map wallpaper — Brasília",
+  "Mac desktop map wallpaper — Christ the Redeemer",
+]) {
+  if (!wallpaper.includes(`alt="${alt}"`)) {
+    fail(`FAIL here-wallpaper/index.html: missing Frodo Mac alt (${alt})`);
+  }
 }
 for (const title of [
   "Find a place",
@@ -634,8 +643,17 @@ const wallpaperGrid = gridSlice(wallpaper);
 if (!wallpaperHero.includes("shot-1.jpg") || !wallpaperHero.includes("shot-2.jpg") || !wallpaperHero.includes("shot-3.jpg") || !wallpaperHero.includes("shot-4.jpg")) {
   fail("FAIL here-wallpaper/index.html: product-hero phone row must include shot-1..4");
 }
-if (!wallpaperHero.includes("shot-mac-maldives.jpg")) {
-  fail("FAIL here-wallpaper/index.html: hero must include the full-width Mac preview");
+for (const shot of [
+  "shot-mac-maldives.jpg",
+  "shot-mac-brasilia.jpg",
+  "shot-mac-christ-the-redeemer.jpg",
+]) {
+  if (!wallpaperHero.includes(shot)) {
+    fail(`FAIL here-wallpaper/index.html: hero must include Mac preview ${shot}`);
+  }
+}
+if (!wallpaperHero.includes("unit__media--desktop-scroll")) {
+  fail("FAIL here-wallpaper/index.html: hero Mac row must use desktop-scroll");
 }
 if (wallpaperGrid.includes("shot-1.jpg") || wallpaperGrid.includes("shot-mac-maldives.jpg")) {
   fail("FAIL here-wallpaper/index.html: phone and desktop previews belong in the hero");
