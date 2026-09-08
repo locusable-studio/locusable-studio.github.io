@@ -20,22 +20,20 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Here Wallpaper — Map wallpapers for iPhone, iPad, and Mac">
   <meta name="twitter:description" content="A place you care about as wallpaper — lock screen on iPhone and iPad, live under the icons on Mac.">
-  <link rel="stylesheet" href="/assets/site.css?v=219">
+  <link rel="stylesheet" href="/assets/site.css?v=231">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="topbar">
-    <div class="topbar__inner">
-      <a class="brand" href="/">Locusable Studio</a>
-      <nav class="nav" aria-label="Studio">
-        <a href="/" class="nav__category--active">Released</a>
-        <a href="/unmaintained/">Unmaintained</a>
-        <a href="/about/">About</a>
-      </nav>
-    </div>
-  </header>
+      <div class="topbar__inner">
+        <a class="brand" href="/">Locusable Studio</a>
+        <nav class="nav" aria-label="Studio">
+        </nav>
+      </div>
+    </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here/icon-192.png?v=10" width="84" height="84" alt="Here Wallpaper app icon">
         <p class="platforms">iPhone, iPad, and Mac</p>
@@ -58,12 +56,14 @@
             rel="noopener noreferrer"
           >View on the App Store</a>
         </div>
+        <p class="preview-label">iPhone &amp; iPad · Lock screen wallpapers</p>
         <div class="unit__media unit__media--phones" aria-label="Wallpaper previews">
           <figure><img src="/assets/shots/shot-1.jpg?v=10" width="585" height="1266" alt="Map lock screen wallpaper"></figure>
           <figure><img src="/assets/shots/shot-2.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 2"></figure>
           <figure><img src="/assets/shots/shot-3.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 3"></figure>
           <figure><img src="/assets/shots/shot-4.jpg?v=10" width="585" height="1266" alt="Here Wallpaper preview 4"></figure>
         </div>
+        <p class="preview-label">Mac · Live desktop wallpaper</p>
         <div class="unit__media unit__media--desktop-peek" aria-label="Mac wallpaper preview">
           <figure><img src="/assets/here-wallpaper/shot-mac-maldives.jpg?v=1" width="1400" height="787" alt="Live map wallpaper on Mac"></figure>
         </div>
@@ -73,28 +73,28 @@
       <section class="unit" aria-labelledby="find-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="find-title">Find a place</h2>
-          <p class="unit__subhead">Search, use your location, or try a random featured spot. Zoom the scale until streets or a coastline fill the frame.</p>
+          <p class="unit__subhead">Search for a place, use your location, or try a featured spot. Frame the streets or coastline with a zoom.</p>
         </div>
       </section>
 
       <section class="unit" aria-labelledby="theme-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="theme-title">Themes, type, and layers</h2>
-          <p class="unit__subhead">Night maps, ink, blueprint, and more. Titles, fonts, and layers you control.</p>
+          <p class="unit__subhead">Choose night maps, ink, blueprint, and more. Adjust the title, font, and map layers to suit your screen.</p>
         </div>
       </section>
 
       <section class="unit" aria-labelledby="shortcuts-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="shortcuts-title">Favorites and Shortcuts</h2>
-          <p class="unit__subhead">iOS can’t set wallpaper inside the app. Star a map, then use Shortcuts — or export to Photos and set it yourself.</p>
+          <p class="unit__subhead">Set a favorite map as wallpaper with Shortcuts on iPhone or iPad, or export to Photos and set it manually.</p>
         </div>
       </section>
 
       <section class="unit" aria-labelledby="mac-title">
         <div class="unit__copy unit__copy--solo">
           <h2 class="product-title unit__title" id="mac-title">Between wallpaper and icons</h2>
-          <p class="unit__subhead">On Mac, open the app and the map sits under your desktop icons. Pick a display, follow appearance, or rotate places on wake.</p>
+          <p class="unit__subhead">Keep a live map beneath your Mac’s desktop icons. Choose a display, follow system appearance, or rotate places on wake.</p>
         </div>
       </section>
       </div>
@@ -111,7 +111,7 @@
         </details>
         <details>
           <summary>What do I need to run it?</summary>
-          <p>iPhone or iPad with iOS 26 or later, or a Mac with macOS 26 or later.</p>
+          <p>iPhone with iOS 26 or later, iPad with iPadOS 26 or later, or a Mac with macOS 26 or later.</p>
         </details>
         <details>
           <summary>Does Here Wallpaper collect personal data?</summary>
@@ -131,10 +131,12 @@
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+        <div class="footer__links">
+          <a href="/here-wallpaper/privacy/">Privacy Policy</a>
+        </div>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=65" defer></script>
+  <script src="/assets/site.js?v=66" defer></script>
 </body>
 </html>

@@ -39,7 +39,7 @@ const pageMeta = {
   "index.html": {
     title: "Locusable Studio — Tools for what’s already on the screen",
     description:
-      "Native Mac and iPhone utilities for quiet corners of the screen — the notch, the edge, and the lock screen.",
+      "Native Mac, iPhone, and iPad utilities for quiet corners of the screen — the notch, the edge, and the lock screen.",
   },
   "about/index.html": {
     title: "About Locusable Studio",
@@ -54,7 +54,7 @@ const pageMeta = {
   "here-sidefy/index.html": {
     title: "Sidefy — Info stream on the Mac screen edge",
     description:
-      "Calendar, Reminders, GitHub, RSS, and plugins in one screen-edge stream. Stay in your window; keyboard-friendly; data stays in iCloud.",
+      "Calendar, Reminders, GitHub, RSS, and plugins in one screen-edge stream. Stay in your window with keyboard-friendly controls and local data processing.",
   },
   "here-wallpaper/index.html": {
     title: "Here Wallpaper — Map wallpapers for iPhone, iPad, and Mac",
@@ -63,8 +63,8 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "219";
-const jsVersion = "65";
+const cssVersion = "231";
+const jsVersion = "66";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -148,6 +148,41 @@ const htmlByPage = Object.fromEntries(pages.map((page) => [page, read(page)]));
 
 for (const page of pages) {
   const html = htmlByPage[page];
+
+  const navigation = html.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/)?.[0] || "";
+  const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0] || "";
+  if (navigation.includes('/unmaintained/')) {
+    fail(`FAIL ${page}: Archive belongs in the footer, not the top navigation`);
+  }
+  if (["index.html", "about/index.html", "unmaintained/index.html"].includes(page) && !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(footer)) {
+    fail(`FAIL ${page}: missing footer Archive link`);
+  }
+
+  if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) {
+    fail(`FAIL ${page}: expected one page heading`);
+  }
+  if (!html.includes('class="skip-link" href="#main-content"') ||
+      !html.includes('<main id="main-content" tabindex="-1"')) {
+    fail(`FAIL ${page}: missing keyboard skip destination`);
+  }
+  if (/<style\b|\sstyle=/.test(html)) {
+    fail(`FAIL ${page}: page styling must use the shared stylesheet`);
+  }
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
+  if (new Set(ids).size !== ids.length) fail(`FAIL ${page}: duplicate element ids`);
+  for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    if (url.startsWith("#")) {
+      if (!ids.includes(url.slice(1))) fail(`FAIL ${page}: missing anchor ${url}`);
+    } else if (url.startsWith("/") && !url.startsWith("//")) {
+      let local = url.split(/[?#]/)[0].slice(1);
+      if (!local || local.endsWith("/")) local += "index.html";
+      if (!exists(local)) fail(`FAIL ${page}: missing local destination ${url}`);
+    }
+  }
+  if (/^here-(links|trmnl|hackerba)\/index.html$/.test(page) &&
+      !html.includes('class="status-note"')) {
+    fail(`FAIL ${page}: unmaintained product needs a visible status`);
+  }
 
   for (const [needle, label] of must) {
     if (!html.includes(needle)) fail(`FAIL ${page}: missing ${label} (${needle})`);
@@ -292,9 +327,9 @@ if (!home.includes("what’s already on the screen")) {
   fail("FAIL index.html: studio hook should use already-on-the-screen idea");
 }
 for (const line of [
-  "A place you care about, on your screens.",
-  "Your feeds, on the screen edge.",
-  "What’s playing, in the notch.",
+  "Map wallpapers for places you care about.",
+  "Calendar, reminders, and feeds on your Mac’s screen edge.",
+  "Music and playback controls in your MacBook notch.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
@@ -549,7 +584,7 @@ for (const title of [
   "Calendar to GitHub to news",
   "Keyboard-friendly",
   "Quiet until you need it",
-  "Yours stays in iCloud",
+  "Processed on your Mac",
 ]) {
   if (!sidefy.includes(`>${title}</h2>`)) {
     fail(`FAIL here-sidefy/index.html: missing benefit title (${title})`);
@@ -606,13 +641,10 @@ if (!wallpaperHero.includes("shot-1.jpg") || !wallpaperHero.includes("shot-2.jpg
   fail("FAIL here-wallpaper/index.html: product-hero phone row must include shot-1..4");
 }
 if (!wallpaperHero.includes("shot-mac-maldives.jpg")) {
-  fail("FAIL here-wallpaper/index.html: product-hero must include Mac shot-mac-maldives under phones");
+  fail("FAIL here-wallpaper/index.html: hero must include the full-width Mac preview");
 }
-if (wallpaperGrid.includes("unit__media") || wallpaperGrid.includes("shot-1.jpg") || wallpaperGrid.includes("shot-mac-maldives.jpg")) {
-  fail("FAIL here-wallpaper/index.html: detail-feature-grid must not hold shot-1 / Mac media / unit__media");
-}
-if (wallpaper.includes('aria-labelledby="mac-title"') && /aria-labelledby="mac-title"[\s\S]*?unit__media/.test(wallpaper.split('aria-labelledby="faq-title"')[0])) {
-  fail("FAIL here-wallpaper/index.html: Between wallpaper and icons must not keep large mid-page media");
+if (wallpaperGrid.includes("shot-1.jpg") || wallpaperGrid.includes("shot-mac-maldives.jpg")) {
+  fail("FAIL here-wallpaper/index.html: phone and desktop previews belong in the hero");
 }
 
 const islandHero = sectionSlice(island, '<section class="product-hero"');

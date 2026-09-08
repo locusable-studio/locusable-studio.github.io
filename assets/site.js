@@ -20,7 +20,7 @@
         meta.setAttribute("content", accent);
         return;
       }
-      meta.setAttribute("content", dark.matches ? "#000000" : "#ffffff");
+      meta.setAttribute("content", dark.matches ? "#151515" : "#ffffff");
     }
     apply();
     if (dark.addEventListener) dark.addEventListener("change", apply);

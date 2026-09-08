@@ -20,22 +20,20 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Here Island — Now Playing in the MacBook notch">
   <meta name="twitter:description" content="Free open-source media in the MacBook notch: artwork, controls, quick peek, optional lock screen card. Hide in screenshots and fullscreen.">
-  <link rel="stylesheet" href="/assets/site.css?v=219">
+  <link rel="stylesheet" href="/assets/site.css?v=231">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="topbar">
-    <div class="topbar__inner">
-      <a class="brand" href="/">Locusable Studio</a>
-      <nav class="nav" aria-label="Studio">
-        <a href="/" class="nav__category--active">Released</a>
-        <a href="/unmaintained/">Unmaintained</a>
-        <a href="/about/">About</a>
-      </nav>
-    </div>
-  </header>
+      <div class="topbar__inner">
+        <a class="brand" href="/">Locusable Studio</a>
+        <nav class="nav" aria-label="Studio">
+        </nav>
+      </div>
+    </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section class="product-hero" aria-labelledby="product-title">
         <img class="product-hero__icon" src="/assets/here-island/icon-192.png?v=3" width="84" height="84" alt="Here Island app icon">
         <p class="platforms">Mac</p>
@@ -59,15 +57,6 @@
       </section>
 
       <div class="detail-feature-grid">
-      <section class="unit unit--wide" aria-labelledby="brew-title">
-        <div class="unit__copy unit__copy--solo">
-          <h2 class="product-title unit__title" id="brew-title">Homebrew</h2>
-          <p class="unit__subhead">Install with Homebrew. Trust the package first.</p>
-          <pre class="install-snippet__code" tabindex="0"><code>brew tap locusable-studio/tap
-brew trust --cask locusable-studio/tap/here-island
-brew install --cask here-island</code></pre>
-        </div>
-      </section>
 
       <section class="unit" aria-labelledby="playing-title">
         <div class="unit__copy unit__copy--solo">
@@ -105,6 +94,16 @@ brew install --cask here-island</code></pre>
       </section>
       </div>
 
+      <section class="unit" aria-labelledby="brew-title">
+        <div class="unit__copy unit__copy--solo">
+          <h2 class="product-title unit__title" id="brew-title">Homebrew</h2>
+          <p class="unit__subhead">Install with Homebrew. Trust the package first.</p>
+          <pre class="install-snippet__code" tabindex="0"><code>brew tap locusable-studio/tap
+brew trust --cask locusable-studio/tap/here-island
+brew install --cask here-island</code></pre>
+        </div>
+      </section>
+
       <section class="product-faq" aria-labelledby="faq-title">
         <h2 class="product-title unit__title" id="faq-title">FAQ</h2>
         <details>
@@ -129,10 +128,12 @@ brew install --cask here-island</code></pre>
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
-        <a href="/here-island/privacy/">Privacy Policy</a>
+        <div class="footer__links">
+          <a href="/here-island/privacy/">Privacy Policy</a>
+        </div>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=65" defer></script>
+  <script src="/assets/site.js?v=66" defer></script>
 </body>
 </html>

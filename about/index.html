@@ -20,22 +20,21 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About Locusable Studio">
   <meta name="twitter:description" content="A small independent studio making native tools for what’s already on the screen. Founded August 15, 2025.">
-  <link rel="stylesheet" href="/assets/site.css?v=219">
+  <link rel="stylesheet" href="/assets/site.css?v=231">
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="site-shell">
     <header class="topbar">
       <div class="topbar__inner">
         <a class="brand" href="/">Locusable Studio</a>
         <nav class="nav" aria-label="Studio">
           <a href="/">Released</a>
-          <a href="/unmaintained/">Unmaintained</a>
-          <a href="/about/" aria-current="page">About</a>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section class="product-hero" aria-labelledby="about-title">
         <p class="platforms">About</p>
         <h1 class="product-title" id="about-title">We make tools for what’s already on the screen.</h1>
@@ -43,11 +42,11 @@
 
       <article class="prose prose--after-hero">
         <h2 id="who-title">Who we are</h2>
-        <p>We’re a small independent studio, founded August 15, 2025. We build native apps for Mac and iPhone that sit in quiet corners of the interface—the notch, the screen edge, the space around your wallpaper—and do one job without getting in the way.</p>
+        <p>We’re a small independent studio, founded August 15, 2025. We build native apps for Mac, iPhone, and iPad that sit in quiet corners of the interface—the notch, the screen edge, the space around your wallpaper—and do one job without getting in the way.</p>
 
         <h2 id="ship-title">What we ship</h2>
         <p><a href="/here-wallpaper/">Here Wallpaper</a> turns a place on the map into a lock screen wallpaper, and can run live on the Mac desktop. <a href="/here-sidefy/">Sidefy</a> keeps calendar, reminders, and feeds on the screen edge. <a href="/here-island/">Here Island</a> puts Now Playing in the MacBook notch.</p>
-        <p>When something no longer fits, we move it to <a href="/unmaintained/">Unmaintained</a> instead of pretending it’s still active.</p>
+        <p>Apps we no longer maintain are listed in <a href="/unmaintained/">Archive</a>, with their original descriptions and available links.</p>
 
         <p>Some apps go to the App Store; others are open source on GitHub. We prefer local processing, no tracking, and interfaces that feel like they belong on the device.</p>
         <p>Start with the <a href="/">released apps</a>, or find us on <a href="https://github.com/locusable-studio" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
@@ -57,9 +56,12 @@
     <footer class="footer">
       <div class="footer__inner">
         <span>Copyright © 2026 Locusable Studio. All rights reserved.</span>
+        <div class="footer__links">
+          <a href="/unmaintained/">Archive</a>
+        </div>
       </div>
     </footer>
   </div>
-  <script src="/assets/site.js?v=65" defer></script>
+  <script src="/assets/site.js?v=66" defer></script>
 </body>
 </html>
