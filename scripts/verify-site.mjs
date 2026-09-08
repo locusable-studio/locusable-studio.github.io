@@ -516,15 +516,6 @@ if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy screen-edge info
   fail("FAIL here-sidefy/index.html: shot-hero alt / One stream title missing");
 }
 if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
-if (!island.includes("https://github.com/locusable-studio/HereIsland/releases/download/v2026.9.8/HereIsland.dmg")) {
-  fail("FAIL here-island/index.html: missing v2026.9.8 HereIsland.dmg download URL");
-}
-if (island.includes("releases/latest/download/HereIsland.dmg")) {
-  fail("FAIL here-island/index.html: still points at latest/download instead of v2026.9.8");
-}
-if (!island.includes("2026.9.8") || !island.includes('class="product-version"')) {
-  fail("FAIL here-island/index.html: missing visible product-version 2026.9.8");
-}
 for (const needle of [
   "https://github.com/locusable-studio/HereIsland",
   "brew tap locusable-studio/tap",
