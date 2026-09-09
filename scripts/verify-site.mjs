@@ -16,13 +16,13 @@ const pages = [
   "here-island/privacy/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
-  "unmaintained/index.html",
+  "archive/index.html",
 ];
 
 const canonicalByPage = {
   "index.html": "https://locusable.com/",
   "about/index.html": "https://locusable.com/about/",
-  "unmaintained/index.html": "https://locusable.com/unmaintained/",
+  "archive/index.html": "https://locusable.com/archive/",
   "here-wallpaper/index.html": "https://locusable.com/here-wallpaper/",
   "here-wallpaper/privacy/index.html": "https://locusable.com/here-wallpaper/privacy/",
   "here-links/index.html": "https://locusable.com/here-links/",
@@ -157,25 +157,25 @@ for (const page of pages) {
 
   const navigation = html.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/)?.[0] || "";
   const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0] || "";
-  if (!/href="\/about\/"[^>]*>About<\/a>/.test(navigation) || !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(navigation)) {
+  if (!/href="\/about\/"[^>]*>About<\/a>/.test(navigation) || !/href="\/archive\/"[^>]*>Archive<\/a>/.test(navigation)) {
     fail(`FAIL ${page}: top navigation should keep About and Archive`);
   }
   if (page === "about/index.html" && !navigation.includes('aria-current="page"')) {
     fail(`FAIL ${page}: About should be marked current in the top navigation`);
   }
-  if (page === "unmaintained/index.html" && !navigation.includes('aria-current="page"')) {
+  if (page === "archive/index.html" && !navigation.includes('aria-current="page"')) {
     fail(`FAIL ${page}: Archive should be marked current in the top navigation`);
   }
   if (page === "index.html") {
     const main = html.match(/<main\b[^>]*>[\s\S]*?<\/main>/)?.[0] || "";
-    if (/href="\/about\/"/.test(main) || /href="\/unmaintained\/"/.test(main)) {
+    if (/href="\/about\/"/.test(main) || /href="\/archive\/"/.test(main)) {
       fail(`FAIL ${page}: About and Archive belong in the top navigation, not under the catalog lead`);
     }
-    if (/footer__links/.test(footer) || /href="\/about\/"/.test(footer) || /href="\/unmaintained\/"/.test(footer)) {
+    if (/footer__links/.test(footer) || /href="\/about\/"/.test(footer) || /href="\/archive\/"/.test(footer)) {
       fail(`FAIL ${page}: homepage footer should be copyright only`);
     }
   }
-  if ((page === "about/index.html" || page === "unmaintained/index.html") && /footer__links/.test(footer)) {
+  if ((page === "about/index.html" || page === "archive/index.html") && /footer__links/.test(footer)) {
     fail(`FAIL ${page}: About/Archive pages should not have footer links`);
   }
 
@@ -202,7 +202,7 @@ for (const page of pages) {
   }
   if (/^here-(links|trmnl|hackerba)\/index.html$/.test(page) &&
       !html.includes('class="status-note"')) {
-    fail(`FAIL ${page}: unmaintained product needs a visible status`);
+    fail(`FAIL ${page}: archived product needs a visible status`);
   }
 
   for (const [needle, label] of must) {
@@ -318,7 +318,7 @@ else {
   for (const loc of [
     "https://locusable.com/",
     "https://locusable.com/about/",
-    "https://locusable.com/unmaintained/",
+    "https://locusable.com/archive/",
     "https://locusable.com/here-island/",
     "https://locusable.com/here-island/privacy/",
     "https://locusable.com/here-wallpaper/",
@@ -336,7 +336,7 @@ else {
 
 // --- home & hubs ---
 const home = htmlByPage["index.html"];
-const unmaintained = htmlByPage["unmaintained/index.html"];
+const archive = htmlByPage["archive/index.html"];
 const about = htmlByPage["about/index.html"];
 
 for (const needle of [
@@ -373,7 +373,7 @@ for (const line of [
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/unmaintained/"]) {
+for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
 if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"')) {
@@ -406,36 +406,83 @@ if (!home.includes('class="product-title"')) {
 if (!about.includes('data-app="studio"')) {
   fail("FAIL about/index.html: studio pages should keep data-app=studio");
 }
-if (!unmaintained.includes('<html lang="en" data-app="studio">')) {
-  fail("FAIL unmaintained/index.html: Archive should use data-app=studio for brand gold");
+if (!archive.includes('<html lang="en" data-app="studio">')) {
+  fail("FAIL archive/index.html: Archive should use data-app=studio for brand gold");
 }
-if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('href="/here-links/"') || !unmaintained.includes('href="/here-hackerba/"')) {
-  fail("FAIL unmaintained/index.html: product assignment is incorrect");
+if (!archive.includes('href="/here-trmnl/"') || !archive.includes('href="/here-links/"') || !archive.includes('href="/here-hackerba/"')) {
+  fail("FAIL archive/index.html: product assignment is incorrect");
 }
-if ((unmaintained.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL unmaintained/index.html: expected 3 product rows");
+if ((archive.match(/class="product"/g) || []).length !== 3) {
+  fail("FAIL archive/index.html: expected 3 product rows");
 }
 for (const [app, title] of [
   ["trmnl", "Here <em>TRMNL</em>"],
   ["links", "Here <em>Links</em>"],
   ["hackerba", "Here <em>HackerBa</em>"],
 ]) {
-  if (!unmaintained.includes(`<article class="product" data-app="${app}">`)) {
-    fail(`FAIL unmaintained/index.html: product card missing data-app=${app}`);
+  if (!archive.includes(`<article class="product" data-app="${app}">`)) {
+    fail(`FAIL archive/index.html: product card missing data-app=${app}`);
   }
-  if (!unmaintained.includes(title)) {
-    fail(`FAIL unmaintained/index.html: product title should use accent em (${title})`);
+  if (!archive.includes(title)) {
+    fail(`FAIL archive/index.html: product title should use accent em (${title})`);
   }
 }
-if (!unmaintained.includes('class="product-title"')) {
-  fail("FAIL unmaintained/index.html: product titles should use product-title for accent em");
+if (!archive.includes('class="product-title"')) {
+  fail("FAIL archive/index.html: product titles should use product-title for accent em");
+}
+if (!archive.includes("<title>Archive — Locusable Studio</title>")) {
+  fail("FAIL archive/index.html: title should be Archive — Locusable Studio");
+}
+if (!archive.includes('property="og:title" content="Archive — Locusable Studio"')) {
+  fail("FAIL archive/index.html: og:title should be Archive — Locusable Studio");
+}
+if (/Unmaintained/i.test(archive)) {
+  fail("FAIL archive/index.html: public copy must not contain Unmaintained");
+}
+if (archive.includes("/unmaintained/")) {
+  fail("FAIL archive/index.html: canonical/nav paths must use /archive/");
+}
+
+// --- legacy /unmaintained/ redirect-only ---
+if (!exists("unmaintained/index.html")) {
+  fail("FAIL unmaintained/index.html: legacy path should remain as a redirect");
+} else {
+  const legacy = read("unmaintained/index.html");
+  if (!/http-equiv=["']refresh["']/i.test(legacy) || !legacy.includes("url=/archive/")) {
+    fail("FAIL unmaintained/index.html: should meta-refresh to /archive/");
+  }
+  if (!legacy.includes('location.replace("/archive/")') && !legacy.includes("location.replace('/archive/')")) {
+    fail("FAIL unmaintained/index.html: should JS-replace to /archive/");
+  }
+  if (!legacy.includes('href="/archive/"')) {
+    fail("FAIL unmaintained/index.html: should include an /archive/ fallback link");
+  }
+  if (/Unmaintained/i.test(legacy)) {
+    fail("FAIL unmaintained/index.html: redirect page must not expose Unmaintained");
+  }
+  if (legacy.includes('class="topbar"') || legacy.includes('class="catalog"')) {
+    fail("FAIL unmaintained/index.html: should be redirect-only, not a full page");
+  }
+}
+
+// Outward public pages: zero Unmaintained wording
+for (const page of pages) {
+  if (/Unmaintained/i.test(htmlByPage[page])) {
+    fail(`FAIL ${page}: outward copy must not contain Unmaintained`);
+  }
+  if (htmlByPage[page].includes("/unmaintained/")) {
+    fail(`FAIL ${page}: internal hrefs must use /archive/, not /unmaintained/`);
+  }
+}
+if (read("sitemap.xml").includes("/unmaintained/")) {
+  fail("FAIL sitemap.xml: should list /archive/, not /unmaintained/");
 }
 if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[page].includes('href="/coming-soon/"'))) {
   fail("FAIL Coming Soon navigation should be removed");
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 3 || productIconCount(unmaintained) !== 3) {
+if (productIconCount(home) !== 3 || productIconCount(archive) !== 3) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
