@@ -467,12 +467,6 @@ main > .unit,
   cursor: pointer;
 }
 
-.product-faq details + details,
-.product-faq h3 + p + h3,
-.product-faq dd + dt {
-  border-top: 1px solid var(--line);
-}
-
 .product-faq details p,
 .product-faq h3 + p,
 .product-faq dd {
