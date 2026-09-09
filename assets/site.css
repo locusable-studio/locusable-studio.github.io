@@ -5,7 +5,7 @@
   --fg: #171717;
   --muted: #666;
   --line: #ddd;
-  --link: #075fbb;
+  --link: var(--accent-ink, var(--accent));
   --accent: #9b7100;
   --icon-border: rgba(0, 0, 0, 0.14);
   --max: 720px;
@@ -21,7 +21,6 @@
     --fg: #f2f2f2;
     --muted: #aaa;
     --line: #3a3a3a;
-    --link: #72b7ff;
     --icon-border: rgba(255, 255, 255, 0.2);
   }
 }
@@ -33,6 +32,10 @@
 [data-app="hackerba"] { --accent: #d95700; }
 [data-app="trmnl"] { --accent: #3347a5; }
 [data-app="studio"] { --accent: #9b7100; }
+
+[data-app] {
+  --link: var(--accent-ink, var(--accent));
+}
 
 *,
 *::before,
@@ -221,6 +224,7 @@ main,
 }
 
 .product__links a {
+  color: var(--link);
   text-underline-offset: 2px;
 }
 
@@ -451,27 +455,42 @@ main > .unit,
 }
 
 .product-faq .unit__title {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .product-faq summary,
 .product-faq h3,
 .product-faq dt {
-  margin: 0;
-  padding: 14px 0;
+  padding: 0;
   font-size: 15px;
   font-weight: 600;
 }
 
+.product-faq h3,
+.product-faq dt {
+  margin: 28px 0 6px;
+}
+
 .product-faq summary {
+  margin: 0 0 6px;
   cursor: pointer;
+}
+
+.product-faq details {
+  margin-top: 28px;
+}
+
+.product-faq .unit__title + h3,
+.product-faq .unit__title + dt,
+.product-faq .unit__title + details {
+  margin-top: 0;
 }
 
 .product-faq details p,
 .product-faq h3 + p,
 .product-faq dd {
   max-width: 58ch;
-  margin: 0 0 14px;
+  margin: 0;
   color: var(--muted);
 }
 
@@ -562,22 +581,22 @@ main > .unit,
 .press-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin: 8px 0 0;
+  gap: 8px;
+  margin: 14px 0 0;
 }
 
 .press-pill {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 0;
-  padding: 3px 10px;
+  gap: 1px;
+  padding: 5px 12px 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--bar);
+  background: transparent;
   color: var(--muted);
-  line-height: 1.2;
+  line-height: 1.15;
   text-decoration: none;
   vertical-align: middle;
   white-space: nowrap;
@@ -585,9 +604,10 @@ main > .unit,
 
 .press-pill__brand {
   font-size: 9px;
-  font-weight: 500;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--muted);
-  opacity: 0.85;
 }
 
 .press-pill__label {
@@ -600,8 +620,9 @@ main > .unit,
   border-color: var(--muted);
 }
 
-.press-pill:hover .press-pill__brand {
-  opacity: 1;
+.press-pill:hover .press-pill__label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 
@@ -610,15 +631,10 @@ main > .unit,
     --section-space: 32px;
   }
   .topbar__inner {
-    flex-wrap: wrap;
     gap: 8px 14px;
-    padding: 10px 0;
   }
 
   .nav {
-    width: 100%;
-    order: 3;
-    margin-left: 0;
     overflow-x: auto;
   }
 

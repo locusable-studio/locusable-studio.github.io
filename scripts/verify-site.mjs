@@ -49,12 +49,12 @@ const pageMeta = {
   "here-island/index.html": {
     title: "Here Island — Now Playing in the MacBook notch",
     description:
-      "Free open-source media in the MacBook notch: artwork, controls, quick peek, optional lock screen card. Hide in screenshots and fullscreen.",
+      "Free open-source media in the MacBook notch: artwork, controls, optional waveform, quick peek, lock screen card. Hide in screenshots and fullscreen.",
   },
   "here-sidefy/index.html": {
     title: "Sidefy — Info stream on the Mac screen edge",
     description:
-      "Calendar, Reminders, GitHub, RSS, and plugins in one screen-edge stream. Stay in your window with keyboard-friendly controls and local data processing.",
+      "Calendar, Reminders, GitHub, RSS, and plugins on the Mac screen edge, with reader mode and translation. Keyboard-friendly, processed on your Mac.",
   },
   "here-wallpaper/index.html": {
     title: "Here Wallpaper — Map wallpapers for iPhone, iPad, and Mac",
@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "239";
+const cssVersion = "247";
 const jsVersion = "68";
 
 const must = [
@@ -157,16 +157,26 @@ for (const page of pages) {
 
   const navigation = html.match(/<nav\b[^>]*>[\s\S]*?<\/nav>/)?.[0] || "";
   const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0] || "";
-  if (navigation.includes('/unmaintained/')) {
-    fail(`FAIL ${page}: Archive belongs in the footer, not the top navigation`);
+  if (!/href="\/about\/"[^>]*>About<\/a>/.test(navigation) || !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(navigation)) {
+    fail(`FAIL ${page}: top navigation should keep About and Archive`);
+  }
+  if (page === "about/index.html" && !navigation.includes('aria-current="page"')) {
+    fail(`FAIL ${page}: About should be marked current in the top navigation`);
+  }
+  if (page === "unmaintained/index.html" && !navigation.includes('aria-current="page"')) {
+    fail(`FAIL ${page}: Archive should be marked current in the top navigation`);
   }
   if (page === "index.html") {
-    if (!/href="\/about\/"[^>]*>About<\/a>/.test(footer) || !/href="\/unmaintained\/"[^>]*>Archive<\/a>/.test(footer)) {
-      fail(`FAIL ${page}: homepage footer should keep About and Archive`);
+    const main = html.match(/<main\b[^>]*>[\s\S]*?<\/main>/)?.[0] || "";
+    if (/href="\/about\/"/.test(main) || /href="\/unmaintained\/"/.test(main)) {
+      fail(`FAIL ${page}: About and Archive belong in the top navigation, not under the catalog lead`);
+    }
+    if (/footer__links/.test(footer) || /href="\/about\/"/.test(footer) || /href="\/unmaintained\/"/.test(footer)) {
+      fail(`FAIL ${page}: homepage footer should be copyright only`);
     }
   }
   if ((page === "about/index.html" || page === "unmaintained/index.html") && /footer__links/.test(footer)) {
-    fail(`FAIL ${page}: About/Archive footer links belong on homepage only`);
+    fail(`FAIL ${page}: About/Archive pages should not have footer links`);
   }
 
   if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) {
@@ -249,6 +259,10 @@ for (const page of pages) {
   const faqQuestions = productFaqs[page];
   if (faqQuestions) {
     if (!html.includes('class="product-faq"')) fail(`FAIL ${page}: missing product FAQ section`);
+    const faq = html.match(/<section class="product-faq"[\s\S]*?<\/section>/)?.[0] || "";
+    if (/Privacy Policy|\/privacy\//.test(faq)) {
+      fail(`FAIL ${page}: FAQ should not include a Privacy Policy link`);
+    }
     if (flatFaqPages.has(page)) {
       if (/<details[\s>]/.test(html) || /<summary[\s>]/.test(html)) {
         fail(`FAIL ${page}: product FAQ should be flat (no details/summary)`);
@@ -283,6 +297,7 @@ for (const rel of [
   "assets/home.js",
   "assets/lucide",
   "assets/fonts/Maplestory-Bold.woff2",
+  "assets/here-wallpaper/shot-iphone-dhaka.webp",
 ]) {
   if (exists(rel)) fail(`FAIL ${rel} should not exist`);
 }
@@ -353,8 +368,8 @@ if (!home.includes("what’s already on the screen")) {
 }
 for (const line of [
   "Map wallpapers for places you care about.",
-  "Calendar, reminders, and feeds on your Mac’s screen edge.",
-  "Music and playback controls in your MacBook notch.",
+  "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
+  "Now Playing in the MacBook notch.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
@@ -496,6 +511,15 @@ if (!siteCss.includes('[data-app="studio"] { --accent: #9b7100; }') ||
     !siteCss.includes('[data-app="studio"] { --accent-ink: #ddc274; }')) {
   fail("FAIL assets/site.css: studio accent / accent-ink should remain gold");
 }
+if (!siteCss.includes("--link: var(--accent-ink, var(--accent));")) {
+  fail("FAIL assets/site.css: links should follow the page accent");
+}
+if (!siteCss.includes(".product__links a") || !siteCss.includes("color: var(--link);")) {
+  fail("FAIL assets/site.css: catalog More Information links should follow the product accent");
+}
+if (siteCss.includes("#075fbb") || siteCss.includes("#72b7ff")) {
+  fail("FAIL assets/site.css: leftover global blue link color");
+}
 
 // --- here-wallpaper ---
 const wallpaper = htmlByPage["here-wallpaper/index.html"];
@@ -509,13 +533,26 @@ if (!home.includes("<span>iPhone, iPad, and Mac</span>")) {
 if (!wallpaper.includes('data-mac-url="macappstore://apps.apple.com/app/id6789155385"')) {
   fail("FAIL here-wallpaper/index.html: App Store link should include a Mac deep link");
 }
+if (!exists("assets/here-wallpaper/icon-192.png")) {
+  fail("FAIL missing assets/here-wallpaper/icon-192.png");
+}
+if (exists("assets/here")) {
+  fail("FAIL leftover assets/here; Wallpaper icon belongs in assets/here-wallpaper");
+}
+if (!wallpaper.includes("/assets/here-wallpaper/icon-192.png") || !home.includes("/assets/here-wallpaper/icon-192.png")) {
+  fail("FAIL wallpaper icon should live at assets/here-wallpaper/icon-192.png");
+}
 for (const shot of [
-  "shot-mac-maldives.jpg",
-  "shot-mac-brasilia.jpg",
-  "shot-mac-christ-the-redeemer.jpg",
+  "shot-iphone-cocos-island.webp",
+  "shot-iphone-acropolis.webp",
+  "shot-iphone-shanghai.webp",
+  "shot-iphone-machu-picchu.webp",
+  "shot-mac-maldives.webp",
+  "shot-mac-brasilia.webp",
+  "shot-mac-christ-the-redeemer.webp",
 ]) {
   if (!exists(`assets/here-wallpaper/${shot}`)) fail(`FAIL missing assets/here-wallpaper/${shot}`);
-  if (!wallpaper.includes(shot)) fail(`FAIL here-wallpaper/index.html: missing Mac preview ${shot}`);
+  if (!wallpaper.includes(shot)) fail(`FAIL here-wallpaper/index.html: missing preview ${shot}`);
 }
 if (!wallpaper.includes("unit__media--desktop-scroll")) {
   fail("FAIL here-wallpaper/index.html: Mac previews should use unit__media--desktop-scroll");
@@ -524,13 +561,13 @@ if (!wallpaper.includes("unit__media--desktop-scroll")) {
 if (wallpaper.includes("/here-wallpaper/themes") || wallpaper.includes("themes-title") || wallpaper.includes("Browse themes")) {
   fail("FAIL here-wallpaper/index.html: themes catalog link should be removed");
 }
-if ((wallpaper.match(/\/assets\/shots\/shot-1\.jpg\?v=10/g) || []).length !== 1) {
+if ((wallpaper.match(/\/assets\/here-wallpaper\/shot-iphone-acropolis\.webp\?v=1/g) || []).length !== 1) {
   fail("FAIL here-wallpaper/index.html: lock-screen preview should appear once");
 }
 if (!wallpaper.includes('alt="Map lock screen wallpaper"')) {
   fail("FAIL here-wallpaper/index.html: lock-screen preview should keep Map lock screen wallpaper alt");
 }
-if ((wallpaper.match(/\/assets\/shots\/shot-\d\.jpg\?v=10" width="585" height="1266"/g) || []).length !== 4) {
+if ((wallpaper.match(/\/assets\/here-wallpaper\/shot-iphone-[a-z-]+\.webp\?v=1" width="585" height="1266"/g) || []).length !== 4) {
   fail("FAIL here-wallpaper/index.html: phone shots should declare 585x1266");
 }
 for (const alt of [
@@ -545,7 +582,7 @@ for (const alt of [
 for (const title of [
   "Find a place",
   "Themes, type, and layers",
-  "Favorites and Shortcuts",
+  "Favorites, Shortcuts, and widgets",
   "Between wallpaper and icons",
 ]) {
   if (!wallpaper.includes(`>${title}</h2>`)) {
@@ -588,7 +625,7 @@ if (wallpaperMacPos < 0 || wallpaperFaqPos < 0 || !(wallpaper.indexOf('<div clas
 // --- here-links ---
 const linksPage = htmlByPage["here-links/index.html"];
 if (!linksPage.includes("feature-list")) fail("FAIL here-links/index.html: missing feature list");
-if ((linksPage.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="585" height="1272"/g) || []).length !== 4) {
+if ((linksPage.match(/\/assets\/here-links\/shot-iphone-[a-z-]+\.webp\?v=\d" width="585" height="1272"/g) || []).length !== 4) {
   fail("FAIL here-links/index.html: phone shots should declare 585x1272");
 }
 
@@ -596,14 +633,20 @@ if ((linksPage.match(/\/assets\/here-links\/shots\/shot-\d\.jpg\?v=\d" width="58
 const island = htmlByPage["here-island/index.html"];
 const islandPrivacy = htmlByPage["here-island/privacy/index.html"];
 
-if (!island.includes('/assets/here-island/peek.gif?v=1" width="420" height="180"') || !exists("assets/here-island/peek.gif")) {
+if (!island.includes('/assets/here-island/shot-mac-quick-peek.gif?v=1" width="420" height="180"') || !exists("assets/here-island/shot-mac-quick-peek.gif")) {
   fail("FAIL here-island/index.html: missing 420x180 GitHub preview GIF");
+}
+if (exists("assets/here-links/shots") || exists("assets/shots") || exists("assets/here-island/peek.gif")) {
+  fail("FAIL leftover screenshot folder or obsolete peek.gif");
 }
 if (!island.includes('alt="Quick peek on track change"') || !island.includes("New track, quick peek")) {
   fail("FAIL here-island/index.html: peek.gif alt / New track title missing");
 }
 if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy screen-edge info stream"') || !htmlByPage["here-sidefy/index.html"].includes("One stream, no app switching")) {
   fail("FAIL here-sidefy/index.html: shot-hero alt / One stream title missing");
+}
+if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy desktop feed columns"')) {
+  fail("FAIL here-sidefy/index.html: missing desktop feed columns alt");
 }
 if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
 for (const needle of [
@@ -615,12 +658,15 @@ for (const needle of [
   "Playing lives in the notch",
   "Controls when you hover",
   "New track, quick peek",
+  "Now Playing or Apple Music",
   "Lock screen card, optional",
   "Out of screenshots and fullscreen",
   "Optional media card with artwork, controls, and progress",
   "Hide during screenshots and recordings",
   "native fullscreen",
   "Title marquee on track change",
+  "real-time waveform",
+  "follow Apple Music",
 ]) {
   if (!island.includes(needle)) fail(`FAIL here-island/index.html: missing ${needle}`);
 }
@@ -653,8 +699,8 @@ if (!hackerba.includes("detail-feature-grid")) fail("FAIL here-hackerba/index.ht
 for (const needle of [
   "https://github.com/sha2kyou/HackerBa",
   "Here <em>HackerBa</em>",
-  "/assets/here-hackerba/shot-list.jpg",
-  "/assets/here-hackerba/shot-thread.jpg",
+  "/assets/here-hackerba/shot-desktop-list.webp",
+  "/assets/here-hackerba/shot-desktop-thread.webp",
   "unit__media--desktop-dual",
 ]) {
   if (!hackerba.includes(needle)) fail(`FAIL here-hackerba/index.html: missing ${needle}`);
@@ -718,11 +764,17 @@ const gridSlice = (html) => {
 
 const sidefyHero = sectionSlice(sidefy, '<section class="product-hero"');
 const sidefyGrid = gridSlice(sidefy);
-if (!sidefyHero.includes("shot-hero.jpg")) {
-  fail("FAIL here-sidefy/index.html: product-hero must include shot-hero.jpg after download links");
+if (!sidefyHero.includes("shot-mac-screen-edge.webp") || !sidefyHero.includes("shot-mac-feed-columns.webp")) {
+  fail("FAIL here-sidefy/index.html: product-hero must include shot-mac-screen-edge.webp and shot-mac-feed-columns.webp after download links");
 }
-if (sidefyGrid.includes("unit__media") || sidefyGrid.includes("shot-hero.jpg")) {
-  fail("FAIL here-sidefy/index.html: detail-feature-grid must not hold shot-hero / unit__media");
+if (!sidefyHero.includes("unit__media--desktop-scroll")) {
+  fail("FAIL here-sidefy/index.html: hero previews must use desktop-scroll");
+}
+if (!exists("assets/sidefy/shot-mac-feed-columns.webp")) {
+  fail("FAIL missing assets/sidefy/shot-mac-feed-columns.webp");
+}
+if (sidefyGrid.includes("unit__media") || sidefyGrid.includes("shot-mac-screen-edge.webp") || sidefyGrid.includes("shot-mac-feed-columns.webp")) {
+  fail("FAIL here-sidefy/index.html: detail-feature-grid must not hold screenshots / unit__media");
 }
 if (!sidefy.includes('id="stream-title">One stream, no app switching</h2>') || !sidefy.includes("unit__copy--solo")) {
   fail("FAIL here-sidefy/index.html: One stream benefit should remain copy-only");
@@ -730,13 +782,21 @@ if (!sidefy.includes('id="stream-title">One stream, no app switching</h2>') || !
 
 const wallpaperHero = sectionSlice(wallpaper, '<section class="product-hero"');
 const wallpaperGrid = gridSlice(wallpaper);
-if (!wallpaperHero.includes("shot-1.jpg") || !wallpaperHero.includes("shot-2.jpg") || !wallpaperHero.includes("shot-3.jpg") || !wallpaperHero.includes("shot-4.jpg")) {
-  fail("FAIL here-wallpaper/index.html: product-hero phone row must include shot-1..4");
+if (!wallpaperHero.includes("shot-iphone-cocos-island.webp") || !wallpaperHero.includes("shot-iphone-acropolis.webp") || !wallpaperHero.includes("shot-iphone-shanghai.webp") || !wallpaperHero.includes("shot-iphone-machu-picchu.webp")) {
+  fail("FAIL here-wallpaper/index.html: product-hero phone row must include named iPhone previews");
+}
+const cocosPos = wallpaperHero.indexOf("shot-iphone-cocos-island.webp");
+const acropolisPos = wallpaperHero.indexOf("shot-iphone-acropolis.webp");
+if (cocosPos < 0 || acropolisPos < 0 || !(cocosPos < acropolisPos)) {
+  fail("FAIL here-wallpaper/index.html: Cocos Island preview should be first in the phone row");
+}
+if (wallpaperHero.includes("shot-iphone-dhaka.webp") || wallpaper.includes("shot-iphone-dhaka.webp")) {
+  fail("FAIL here-wallpaper/index.html: Dhaka preview should be removed");
 }
 for (const shot of [
-  "shot-mac-maldives.jpg",
-  "shot-mac-brasilia.jpg",
-  "shot-mac-christ-the-redeemer.jpg",
+  "shot-mac-maldives.webp",
+  "shot-mac-brasilia.webp",
+  "shot-mac-christ-the-redeemer.webp",
 ]) {
   if (!wallpaperHero.includes(shot)) {
     fail(`FAIL here-wallpaper/index.html: hero must include Mac preview ${shot}`);
@@ -745,17 +805,25 @@ for (const shot of [
 if (!wallpaperHero.includes("unit__media--desktop-scroll")) {
   fail("FAIL here-wallpaper/index.html: hero Mac row must use desktop-scroll");
 }
-if (wallpaperGrid.includes("shot-1.jpg") || wallpaperGrid.includes("shot-mac-maldives.jpg")) {
+if (wallpaperGrid.includes("shot-iphone-acropolis.webp") || wallpaperGrid.includes("shot-mac-maldives.webp")) {
   fail("FAIL here-wallpaper/index.html: phone and desktop previews belong in the hero");
+}
+for (const [name, hero] of [["here-sidefy", sidefyHero], ["here-wallpaper", wallpaperHero]]) {
+  const subhead = hero.indexOf('class="unit__subhead"');
+  const pills = hero.indexOf('class="press-pills"');
+  const links = hero.indexOf('class="unit__links"');
+  if (!(subhead >= 0 && pills > subhead && links > pills)) {
+    fail(`FAIL ${name}/index.html: press-pills should sit after the product description and before download links`);
+  }
 }
 
 const islandHero = sectionSlice(island, '<section class="product-hero"');
 const islandGrid = gridSlice(island);
-if (!islandHero.includes("peek.gif")) {
-  fail("FAIL here-island/index.html: product-hero must include peek.gif after download links");
+if (!islandHero.includes("shot-mac-quick-peek.gif")) {
+  fail("FAIL here-island/index.html: product-hero must include shot-mac-quick-peek.gif after download links");
 }
-if (islandGrid.includes("unit__media") || islandGrid.includes("peek.gif")) {
-  fail("FAIL here-island/index.html: detail-feature-grid must not hold peek.gif / unit__media");
+if (islandGrid.includes("unit__media") || islandGrid.includes("shot-mac-quick-peek.gif")) {
+  fail("FAIL here-island/index.html: detail-feature-grid must not hold shot-mac-quick-peek.gif / unit__media");
 }
 
 // --- sspai CSS pills (English two-line Featured in/on; detail pages under title only; no catalog list) ---
