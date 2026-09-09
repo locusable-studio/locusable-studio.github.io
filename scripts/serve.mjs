@@ -13,6 +13,7 @@ const types = {
   ".webmanifest": "application/manifest+json",
   ".png": "image/png",
   ".jpg": "image/jpeg",
+  ".webp": "image/webp",
   ".gif": "image/gif",
   ".ico": "image/x-icon",
   ".svg": "image/svg+xml",
