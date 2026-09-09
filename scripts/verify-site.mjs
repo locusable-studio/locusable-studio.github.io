@@ -63,8 +63,8 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "237";
-const jsVersion = "67";
+const cssVersion = "238";
+const jsVersion = "68";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -84,41 +84,47 @@ const must = [
 const productFaqs = {
   "here-wallpaper/index.html": [
     "Is Here Wallpaper free?",
-    "What does Here Wallpaper do?",
     "What do I need to run it?",
     "Does Here Wallpaper collect personal data?",
+    "What does Pro include?",
   ],
   "here-links/index.html": [
     "Is Here Links free?",
-    "What does Here Links do?",
     "What do I need to run it?",
     "Does Here Links collect personal data?",
+    "Can I connect more than one server?",
   ],
   "here-sidefy/index.html": [
     "Is Sidefy free?",
-    "What does Sidefy do?",
     "What do I need to run it?",
     "Does Sidefy collect personal data?",
   ],
   "here-island/index.html": [
     "Is Here Island free?",
-    "What does Here Island do?",
     "What do I need to run it?",
     "Does Here Island collect personal data?",
   ],
   "here-hackerba/index.html": [
     "Is Here HackerBa free?",
-    "What does Here HackerBa do?",
     "What do I need to run it?",
     "Does Here HackerBa collect personal data?",
+    "How do I install it?",
   ],
   "here-trmnl/index.html": [
     "Is Here TRMNL free?",
-    "What does Here TRMNL do?",
     "What do I need to run it?",
     "Does Here TRMNL collect personal data?",
   ],
 };
+
+const flatFaqPages = new Set([
+  "here-wallpaper/index.html",
+  "here-sidefy/index.html",
+  "here-island/index.html",
+  "here-links/index.html",
+  "here-hackerba/index.html",
+  "here-trmnl/index.html",
+]);
 
 const themeColors = {
   "about/index.html": "#9b7100",
@@ -243,9 +249,20 @@ for (const page of pages) {
   const faqQuestions = productFaqs[page];
   if (faqQuestions) {
     if (!html.includes('class="product-faq"')) fail(`FAIL ${page}: missing product FAQ section`);
-    for (const question of faqQuestions) {
-      if (!html.includes(`>${question}</summary>`)) {
-        fail(`FAIL ${page}: missing FAQ question (${question})`);
+    if (flatFaqPages.has(page)) {
+      if (/<details[\s>]/.test(html) || /<summary[\s>]/.test(html)) {
+        fail(`FAIL ${page}: product FAQ should be flat (no details/summary)`);
+      }
+      for (const question of faqQuestions) {
+        if (!html.includes(`>${question}</h3>`) && !html.includes(`>${question}</dt>`)) {
+          fail(`FAIL ${page}: missing FAQ question (${question})`);
+        }
+      }
+    } else {
+      for (const question of faqQuestions) {
+        if (!html.includes(`>${question}</summary>`)) {
+          fail(`FAIL ${page}: missing FAQ question (${question})`);
+        }
       }
     }
   }
@@ -419,7 +436,8 @@ for (const needle of [
   ".detail-feature-grid",
   ".feature-list",
   ".product-faq {",
-  ".product-faq summary {",
+  ".product-faq summary,",
+  ".product-faq h3,",
 ]) {
   if (!siteCss.includes(needle)) fail(`FAIL assets/site.css: missing ${needle}`);
 }
@@ -429,11 +447,15 @@ if (!siteCss.includes(".unit__media img {") || !siteCss.includes("border-radius:
 if (!siteCss.includes(".topbar__inner {") || !siteCss.includes("width: min(100% - 32px, var(--max));")) {
   fail("FAIL assets/site.css: navigation should use the minimal site width");
 }
-if (!/\.topbar \{[\s\S]*?position:\s*sticky;/.test(siteCss) || !siteCss.includes(".topbar.is-scrolled")) {
-  fail("FAIL assets/site.css: topbar should be sticky with .is-scrolled border");
+if (!/\.topbar \{[\s\S]*?position:\s*fixed;/.test(siteCss) ||
+    !siteCss.includes("border-bottom: 1px solid var(--line);") ||
+    siteCss.includes(".topbar.is-scrolled") ||
+    !siteCss.includes("--topbar-height:") ||
+    !/\.site-shell \{[\s\S]*?padding-top:\s*var\(--topbar-height\);/.test(siteCss)) {
+  fail("FAIL assets/site.css: topbar should be fixed with always-on border and spacer");
 }
-if (!siteJs.includes('classList.toggle("is-scrolled"') || !siteJs.includes("initTopbarScroll")) {
-  fail("FAIL assets/site.js: topbar should toggle .is-scrolled on scroll");
+if (siteJs.includes('classList.toggle("is-scrolled"') || siteJs.includes("initTopbarScroll")) {
+  fail("FAIL assets/site.js: topbar should not toggle .is-scrolled on scroll");
 }
 if (!/\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;/.test(siteCss)) {
   fail("FAIL assets/site.css: install snippet must wrap");

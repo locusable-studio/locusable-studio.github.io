@@ -50,18 +50,6 @@
   }
 
 
-  function initTopbarScroll() {
-    var topbar = document.querySelector(".topbar");
-    if (!topbar) return;
-    function update() {
-      var y = window.scrollY || document.documentElement.scrollTop || 0;
-      topbar.classList.toggle("is-scrolled", y > 0);
-    }
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-  }
-
   initThemeColor();
   bindAppStoreLinks();
-  initTopbarScroll();
 })();
