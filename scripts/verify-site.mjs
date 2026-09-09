@@ -63,8 +63,8 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "236";
-const jsVersion = "66";
+const cssVersion = "237";
+const jsVersion = "67";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -428,6 +428,12 @@ if (!siteCss.includes(".unit__media img {") || !siteCss.includes("border-radius:
 }
 if (!siteCss.includes(".topbar__inner {") || !siteCss.includes("width: min(100% - 32px, var(--max));")) {
   fail("FAIL assets/site.css: navigation should use the minimal site width");
+}
+if (!/\.topbar \{[\s\S]*?position:\s*sticky;/.test(siteCss) || !siteCss.includes(".topbar.is-scrolled")) {
+  fail("FAIL assets/site.css: topbar should be sticky with .is-scrolled border");
+}
+if (!siteJs.includes('classList.toggle("is-scrolled"') || !siteJs.includes("initTopbarScroll")) {
+  fail("FAIL assets/site.js: topbar should toggle .is-scrolled on scroll");
 }
 if (!/\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;/.test(siteCss)) {
   fail("FAIL assets/site.css: install snippet must wrap");
