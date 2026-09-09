@@ -63,7 +63,7 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "238";
+const cssVersion = "239";
 const jsVersion = "68";
 
 const must = [
@@ -440,6 +440,14 @@ for (const needle of [
   ".product-faq h3,",
 ]) {
   if (!siteCss.includes(needle)) fail(`FAIL assets/site.css: missing ${needle}`);
+}
+if (siteCss.includes(".product-faq details + details") ||
+    siteCss.includes(".product-faq h3 + p + h3") ||
+    siteCss.includes(".product-faq dd + dt")) {
+  fail("FAIL assets/site.css: FAQ inter-item border dividers should be removed");
+}
+if (!/main > \.unit,\s*\.product-faq,\s*\.detail-feature-grid \{\s*border-top:/.test(siteCss)) {
+  fail("FAIL assets/site.css: section-level product-faq border-top should remain");
 }
 if (!siteCss.includes(".unit__media img {") || !siteCss.includes("border-radius: 8px;")) {
   fail("FAIL assets/site.css: screenshots should use the minimal bordered treatment");
