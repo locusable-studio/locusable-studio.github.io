@@ -406,6 +406,9 @@ if (!home.includes('class="product-title"')) {
 if (!about.includes('data-app="studio"')) {
   fail("FAIL about/index.html: studio pages should keep data-app=studio");
 }
+if (!unmaintained.includes('<html lang="en" data-app="studio">')) {
+  fail("FAIL unmaintained/index.html: Archive should use data-app=studio for brand gold");
+}
 if (!unmaintained.includes('href="/here-trmnl/"') || !unmaintained.includes('href="/here-links/"') || !unmaintained.includes('href="/here-hackerba/"')) {
   fail("FAIL unmaintained/index.html: product assignment is incorrect");
 }
