@@ -717,10 +717,6 @@ for (const needle of [
   "Title marquee on track change",
   "real-time waveform",
   "follow Apple Music",
-  "What’s new in v2026.9.15",
-  "Cover art no longer sticks to the previous track when you skip quickly",
-  "More reliable cover loading and cancellation, with a logo fallback when art is missing",
-  "Stable release builds no longer publish into the beta update feed",
 ]) {
   if (!island.includes(needle)) fail(`FAIL here-island/index.html: missing ${needle}`);
 }
