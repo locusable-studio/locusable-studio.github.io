@@ -31,6 +31,7 @@
 [data-app="links"] { --accent: #1479bd; }
 [data-app="hackerba"] { --accent: #d95700; }
 [data-app="trmnl"] { --accent: #3347a5; }
+[data-app="nextto"] { --accent: #2563eb; }
 [data-app="studio"] { --accent: #9b7100; }
 
 [data-app] {
@@ -680,5 +681,6 @@ main > .unit,
   [data-app="links"] { --accent-ink: #84c3ed; }
   [data-app="hackerba"] { --accent-ink: #ffb17c; }
   [data-app="trmnl"] { --accent-ink: #a4b1f5; }
+  [data-app="nextto"] { --accent-ink: #93c5fd; }
   [data-app="studio"] { --accent-ink: #ddc274; }
 }
