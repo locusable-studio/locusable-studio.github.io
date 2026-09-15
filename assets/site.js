@@ -7,6 +7,7 @@
     island: "#85209d",
     hackerba: "#d95700",
     trmnl: "#3347a5",
+    nextto: "#2563eb",
   };
 
   function initThemeColor() {

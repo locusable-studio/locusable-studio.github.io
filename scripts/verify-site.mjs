@@ -16,6 +16,7 @@ const pages = [
   "here-island/privacy/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
+  "nextto/index.html",
   "archive/index.html",
 ];
 
@@ -33,6 +34,7 @@ const canonicalByPage = {
   "here-island/privacy/index.html": "https://locusable.com/here-island/privacy/",
   "here-hackerba/index.html": "https://locusable.com/here-hackerba/",
   "here-trmnl/index.html": "https://locusable.com/here-trmnl/",
+  "nextto/index.html": "https://locusable.com/nextto/",
 };
 
 const pageMeta = {
@@ -61,10 +63,15 @@ const pageMeta = {
     description:
       "A place you care about as wallpaper — lock screen on iPhone and iPad, live under the icons on Mac.",
   },
+  "nextto/index.html": {
+    title: "NextTo — Vote on missing tools, we ship the release",
+    description:
+      "A board for missing tools. Votes decide what we build next. When it’s ready, download the release on the site.",
+  },
 };
 
-const cssVersion = "247";
-const jsVersion = "68";
+const cssVersion = "248";
+const jsVersion = "69";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -115,6 +122,11 @@ const productFaqs = {
     "What do I need to run it?",
     "Does Here TRMNL collect personal data?",
   ],
+  "nextto/index.html": [
+    "Is NextTo free?",
+    "What do I need to run it?",
+    "Does NextTo collect personal data?",
+  ],
 };
 
 const flatFaqPages = new Set([
@@ -124,6 +136,7 @@ const flatFaqPages = new Set([
   "here-links/index.html",
   "here-hackerba/index.html",
   "here-trmnl/index.html",
+  "nextto/index.html",
 ]);
 
 const themeColors = {
@@ -138,6 +151,7 @@ const themeColors = {
   "here-island/privacy/index.html": "#85209d",
   "here-hackerba/index.html": "#d95700",
   "here-trmnl/index.html": "#3347a5",
+  "nextto/index.html": "#2563eb",
 };
 
 const read = (page) => fs.readFileSync(path.join(root, page), "utf8");
@@ -329,6 +343,7 @@ else {
     "https://locusable.com/here-links/privacy/",
     "https://locusable.com/here-hackerba/",
     "https://locusable.com/here-trmnl/",
+    "https://locusable.com/nextto/",
   ]) {
     if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`FAIL sitemap.xml: missing ${loc}`);
   }
@@ -346,6 +361,7 @@ for (const needle of [
   "quiet corners of the interface",
   "Start with the",
   "prose--after-hero",
+  "NextTo",
 ]) {
   if (!about.includes(needle)) fail(`FAIL about/index.html: missing studio context (${needle})`);
 }
@@ -370,17 +386,18 @@ for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
   "Now Playing in the MacBook notch.",
+  "Vote on missing tools. We build and publish the release.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/archive/"]) {
+for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/nextto/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
 if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
-if ((home.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL index.html: homepage should list three released products");
+if ((home.match(/class="product"/g) || []).length !== 4) {
+  fail("FAIL index.html: homepage should list four released products");
 }
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
@@ -392,6 +409,7 @@ for (const [app, title] of [
   ["wallpaper", "Here <em>Wallpaper</em>"],
   ["sidefy", "<em>Sidefy</em>"],
   ["island", "Here <em>Island</em>"],
+  ["nextto", "<em>NextTo</em>"],
 ]) {
   if (!home.includes(`<article class="product" data-app="${app}">`)) {
     fail(`FAIL index.html: product card missing data-app=${app}`);
@@ -482,7 +500,7 @@ if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[pag
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 3 || productIconCount(archive) !== 3) {
+if (productIconCount(home) !== 4 || productIconCount(archive) !== 3) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
@@ -543,6 +561,7 @@ for (const [app, color] of Object.entries({
   island: "#85209d",
   hackerba: "#d95700",
   trmnl: "#3347a5",
+  nextto: "#2563eb",
 })) {
   if (!siteJs.includes(`${app}: "${color}"`)) {
     fail(`FAIL assets/site.js: APP_THEME_COLORS should map ${app} to ${color}`);
@@ -789,6 +808,38 @@ for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/si
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
 }
 
+// --- nextto ---
+const nextto = htmlByPage["nextto/index.html"];
+if (!exists("assets/nextto/icon-192.png")) {
+  fail("FAIL missing assets/nextto/icon-192.png");
+}
+if (!nextto.includes("/assets/nextto/icon-192.png") || !home.includes("/assets/nextto/icon-192.png")) {
+  fail("FAIL nextto icon should live at assets/nextto/icon-192.png");
+}
+if (!nextto.includes('class="platforms">Web</p>')) {
+  fail("FAIL nextto/index.html: platform line should be Web");
+}
+if (!home.includes("<span>Web</span>")) {
+  fail("FAIL index.html: NextTo card platform should match the product page");
+}
+if (!nextto.includes('href="https://nextto.locusable.com/"')) {
+  fail("FAIL nextto/index.html: missing Open NextTo href");
+}
+if (!nextto.includes("detail-feature-grid")) fail("FAIL nextto/index.html: missing paired feature layout");
+for (const title of ["Upvote a need", "Watch the build", "Download the release"]) {
+  if (!nextto.includes(`>${title}</h2>`)) {
+    fail(`FAIL nextto/index.html: missing benefit title (${title})`);
+  }
+}
+if (!exists("assets/nextto/shot-web-home.webp")) {
+  fail("FAIL missing assets/nextto/shot-web-home.webp");
+}
+if (!nextto.includes("/assets/nextto/shot-web-home.webp")) {
+  fail("FAIL nextto/index.html: missing homepage preview");
+}
+if (!about.includes('href="/nextto/"')) {
+  fail("FAIL about/index.html: missing NextTo product link");
+}
 
 // --- hero previews vs benefit grid (no huge shots in dual-column benefits) ---
 const sectionSlice = (html, openTag) => {
@@ -874,6 +925,15 @@ if (!islandHero.includes("shot-mac-quick-peek.gif")) {
 }
 if (islandGrid.includes("unit__media") || islandGrid.includes("shot-mac-quick-peek.gif")) {
   fail("FAIL here-island/index.html: detail-feature-grid must not hold shot-mac-quick-peek.gif / unit__media");
+}
+
+const nexttoHero = sectionSlice(nextto, '<section class="product-hero"');
+const nexttoGrid = gridSlice(nextto);
+if (!nexttoHero.includes("shot-web-home.webp") || !nexttoHero.includes("unit__media--desktop-peek")) {
+  fail("FAIL nextto/index.html: product-hero must include shot-web-home.webp after Open NextTo");
+}
+if (nexttoGrid.includes("unit__media") || nexttoGrid.includes("shot-web-home.webp")) {
+  fail("FAIL nextto/index.html: detail-feature-grid must not hold shot-web-home.webp / unit__media");
 }
 
 // --- sspai CSS pills (English two-line Featured in/on; detail pages under title only; no catalog list) ---
