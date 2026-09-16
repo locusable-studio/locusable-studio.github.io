@@ -10,8 +10,8 @@ const pages = [
   "here-wallpaper/privacy/index.html",
   "here-links/index.html",
   "here-links/privacy/index.html",
-  "here-sidefy/index.html",
-  "here-sidefy/privacy/index.html",
+  "here-nunc/index.html",
+  "here-nunc/privacy/index.html",
   "here-island/index.html",
   "here-island/privacy/index.html",
   "here-hackerba/index.html",
@@ -28,8 +28,8 @@ const canonicalByPage = {
   "here-wallpaper/privacy/index.html": "https://locusable.com/here-wallpaper/privacy/",
   "here-links/index.html": "https://locusable.com/here-links/",
   "here-links/privacy/index.html": "https://locusable.com/here-links/privacy/",
-  "here-sidefy/index.html": "https://locusable.com/here-sidefy/",
-  "here-sidefy/privacy/index.html": "https://locusable.com/here-sidefy/privacy/",
+  "here-nunc/index.html": "https://locusable.com/here-nunc/",
+  "here-nunc/privacy/index.html": "https://locusable.com/here-nunc/privacy/",
   "here-island/index.html": "https://locusable.com/here-island/",
   "here-island/privacy/index.html": "https://locusable.com/here-island/privacy/",
   "here-hackerba/index.html": "https://locusable.com/here-hackerba/",
@@ -53,10 +53,10 @@ const pageMeta = {
     description:
       "Free open-source media in the MacBook notch: artwork, controls, optional waveform, quick peek, lock screen card. Hide in screenshots and fullscreen.",
   },
-  "here-sidefy/index.html": {
-    title: "Sidefy — Info stream on the Mac screen edge",
+  "here-nunc/index.html": {
+    title: "Nunc (formerly Sidefy) — Info stream on the Mac screen edge",
     description:
-      "Calendar, Reminders, GitHub, RSS, and plugins on the Mac screen edge, with reader mode and translation. Keyboard-friendly, processed on your Mac.",
+      "Nunc, formerly Sidefy: Calendar, Reminders, GitHub, RSS, and plugins on the Mac screen edge, with reader mode and translation. Keyboard-friendly, processed on your Mac.",
   },
   "here-wallpaper/index.html": {
     title: "Here Wallpaper — Map wallpapers for iPhone, iPad, and Mac",
@@ -70,8 +70,8 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "248";
-const jsVersion = "69";
+const cssVersion = "249";
+const jsVersion = "70";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -101,10 +101,11 @@ const productFaqs = {
     "Does Here Links collect personal data?",
     "Can I connect more than one server?",
   ],
-  "here-sidefy/index.html": [
-    "Is Sidefy free?",
+  "here-nunc/index.html": [
+    "Is this the same app as Sidefy?",
+    "Is Nunc free?",
     "What do I need to run it?",
-    "Does Sidefy collect personal data?",
+    "Does Nunc collect personal data?",
   ],
   "here-island/index.html": [
     "Is Here Island free?",
@@ -131,7 +132,7 @@ const productFaqs = {
 
 const flatFaqPages = new Set([
   "here-wallpaper/index.html",
-  "here-sidefy/index.html",
+  "here-nunc/index.html",
   "here-island/index.html",
   "here-links/index.html",
   "here-hackerba/index.html",
@@ -145,8 +146,8 @@ const themeColors = {
   "here-wallpaper/privacy/index.html": "#328e3a",
   "here-links/index.html": "#1479bd",
   "here-links/privacy/index.html": "#1479bd",
-  "here-sidefy/index.html": "#d5312c",
-  "here-sidefy/privacy/index.html": "#d5312c",
+  "here-nunc/index.html": "#d5312c",
+  "here-nunc/privacy/index.html": "#d5312c",
   "here-island/index.html": "#85209d",
   "here-island/privacy/index.html": "#85209d",
   "here-hackerba/index.html": "#d95700",
@@ -337,8 +338,8 @@ else {
     "https://locusable.com/here-island/privacy/",
     "https://locusable.com/here-wallpaper/",
     "https://locusable.com/here-wallpaper/privacy/",
-    "https://locusable.com/here-sidefy/",
-    "https://locusable.com/here-sidefy/privacy/",
+    "https://locusable.com/here-nunc/",
+    "https://locusable.com/here-nunc/privacy/",
     "https://locusable.com/here-links/",
     "https://locusable.com/here-links/privacy/",
     "https://locusable.com/here-hackerba/",
@@ -390,7 +391,7 @@ for (const line of [
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-sidefy/", "/here-island/", "/nextto/", "/archive/"]) {
+for (const href of ["/here-wallpaper/", "/here-nunc/", "/here-island/", "/nextto/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
 if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"')) {
@@ -402,12 +403,18 @@ if ((home.match(/class="product"/g) || []).length !== 4) {
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
 }
+if (!home.includes('<p class="product-aka">Formerly Sidefy</p>') || !home.includes("<em>Nunc</em>")) {
+  fail("FAIL index.html: Nunc card should keep the title and Formerly Sidefy aka");
+}
+if (!about.includes('href="/here-nunc/"') || !about.includes("formerly Sidefy")) {
+  fail("FAIL about/index.html: Nunc should be named with formerly Sidefy");
+}
 if (!home.includes('<html lang="en" data-app="studio">')) {
   fail("FAIL index.html: homepage should use data-app=studio for brand gold");
 }
 for (const [app, title] of [
   ["wallpaper", "Here <em>Wallpaper</em>"],
-  ["sidefy", "<em>Sidefy</em>"],
+  ["nunc", "<em>Nunc</em>"],
   ["island", "Here <em>Island</em>"],
   ["nextto", "<em>NextTo</em>"],
 ]) {
@@ -483,6 +490,36 @@ if (!exists("unmaintained/index.html")) {
   }
 }
 
+// --- legacy /here-sidefy/ redirect to /here-nunc/ ---
+for (const [rel, dest, label] of [
+  ["here-sidefy/index.html", "/here-nunc/", "Nunc"],
+  ["here-sidefy/privacy/index.html", "/here-nunc/privacy/", "Nunc Privacy Policy"],
+]) {
+  if (!exists(rel)) {
+    fail(`FAIL ${rel}: legacy Sidefy path should remain as a redirect`);
+    continue;
+  }
+  const legacy = read(rel);
+  if (!/http-equiv=["']refresh["']/i.test(legacy) || !legacy.includes(`url=${dest}`)) {
+    fail(`FAIL ${rel}: should meta-refresh to ${dest}`);
+  }
+  if (!legacy.includes(`location.replace("${dest}")`)) {
+    fail(`FAIL ${rel}: should JS-replace to ${dest}`);
+  }
+  if (!legacy.includes(`href="${dest}"`)) {
+    fail(`FAIL ${rel}: should include a ${dest} fallback link`);
+  }
+  if (!legacy.includes(`Continue to ${label}`)) {
+    fail(`FAIL ${rel}: should keep a named fallback link`);
+  }
+  if (legacy.includes('class="topbar"') || legacy.includes('class="product-hero"')) {
+    fail(`FAIL ${rel}: should be redirect-only, not a full page`);
+  }
+}
+if (exists("assets/sidefy")) {
+  fail("FAIL leftover assets/sidefy; product assets belong in assets/nunc");
+}
+
 // Outward public pages: zero Unmaintained wording
 for (const page of pages) {
   if (/Unmaintained/i.test(htmlByPage[page])) {
@@ -494,6 +531,9 @@ for (const page of pages) {
 }
 if (read("sitemap.xml").includes("/unmaintained/")) {
   fail("FAIL sitemap.xml: should list /archive/, not /unmaintained/");
+}
+if (read("sitemap.xml").includes("/here-sidefy/")) {
+  fail("FAIL sitemap.xml: should list /here-nunc/, not /here-sidefy/");
 }
 if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[page].includes('href="/coming-soon/"'))) {
   fail("FAIL Coming Soon navigation should be removed");
@@ -552,12 +592,18 @@ if (!/\.install-snippet__code \{[\s\S]*?white-space:\s*pre-wrap;/.test(siteCss))
   fail("FAIL assets/site.css: install snippet must wrap");
 }
 if (siteCss.includes("Maplestory")) fail("FAIL assets/site.css: custom brand font should be removed");
+if (!siteCss.includes(".product-aka") || !siteCss.includes(".product-hero .product-aka")) {
+  fail("FAIL assets/site.css: product-aka should mark former product names");
+}
+if (!/\.product h2:has\(\+ \.product-aka\) \{/.test(siteCss)) {
+  fail("FAIL assets/site.css: catalog aka line should sit close under the title");
+}
 
 for (const [app, color] of Object.entries({
   studio: "#9b7100",
   wallpaper: "#328e3a",
   links: "#1479bd",
-  sidefy: "#d5312c",
+  nunc: "#d5312c",
   island: "#85209d",
   hackerba: "#d95700",
   trmnl: "#3347a5",
@@ -711,11 +757,11 @@ if (exists("assets/here-links/shots") || exists("assets/shots") || exists("asset
 if (!island.includes('alt="Quick peek on track change"') || !island.includes("New track, quick peek")) {
   fail("FAIL here-island/index.html: peek.gif alt / New track title missing");
 }
-if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy screen-edge info stream"') || !htmlByPage["here-sidefy/index.html"].includes("One stream, no app switching")) {
-  fail("FAIL here-sidefy/index.html: shot-hero alt / One stream title missing");
+if (!htmlByPage["here-nunc/index.html"].includes('alt="Nunc screen-edge info stream"') || !htmlByPage["here-nunc/index.html"].includes("One stream, no app switching")) {
+  fail("FAIL here-nunc/index.html: shot-hero alt / One stream title missing");
 }
-if (!htmlByPage["here-sidefy/index.html"].includes('alt="Sidefy desktop feed columns"')) {
-  fail("FAIL here-sidefy/index.html: missing desktop feed columns alt");
+if (!htmlByPage["here-nunc/index.html"].includes('alt="Nunc desktop feed columns"')) {
+  fail("FAIL here-nunc/index.html: missing desktop feed columns alt");
 }
 if (!island.includes("detail-feature-grid")) fail("FAIL here-island/index.html: missing paired feature layout");
 for (const needle of [
@@ -775,17 +821,29 @@ for (const needle of [
   if (!hackerba.includes(needle)) fail(`FAIL here-hackerba/index.html: missing ${needle}`);
 }
 
-// --- here-sidefy ---
-const sidefy = htmlByPage["here-sidefy/index.html"];
-const sidefyPrivacy = htmlByPage["here-sidefy/privacy/index.html"];
+// --- here-nunc ---
+const sidefy = htmlByPage["here-nunc/index.html"];
+const sidefyPrivacy = htmlByPage["here-nunc/privacy/index.html"];
 
-if (!sidefy.includes("detail-feature-grid")) fail("FAIL here-sidefy/index.html: missing paired feature layout");
+if (!sidefy.includes("detail-feature-grid")) fail("FAIL here-nunc/index.html: missing paired feature layout");
+if (!sidefy.includes('data-app="nunc"') || !sidefy.includes('<p class="product-aka">Formerly Sidefy</p>')) {
+  fail("FAIL here-nunc/index.html: Nunc page should use data-app=nunc and Formerly Sidefy");
+}
+if (!exists("assets/nunc/icon-192.png")) {
+  fail("FAIL missing assets/nunc/icon-192.png");
+}
+if (!sidefy.includes("/assets/nunc/icon-192.png") || !home.includes("/assets/nunc/icon-192.png")) {
+  fail("FAIL Nunc icon should live at assets/nunc/icon-192.png");
+}
+if (sidefy.includes("/assets/sidefy/") || home.includes("/assets/sidefy/")) {
+  fail("FAIL Nunc assets should not use /assets/sidefy/");
+}
 for (const href of [
   "https://apps.apple.com/app/id6751482006",
   "https://sidefy.locusable.com/",
-  "/here-sidefy/privacy/",
+  "/here-nunc/privacy/",
 ]) {
-  if (!sidefy.includes(`href="${href}"`)) fail(`FAIL here-sidefy/index.html: missing href ${href}`);
+  if (!sidefy.includes(`href="${href}"`)) fail(`FAIL here-nunc/index.html: missing href ${href}`);
 }
 for (const title of [
   "One stream, no app switching",
@@ -795,17 +853,17 @@ for (const title of [
   "Processed on your Mac",
 ]) {
   if (!sidefy.includes(`>${title}</h2>`)) {
-    fail(`FAIL here-sidefy/index.html: missing benefit title (${title})`);
+    fail(`FAIL here-nunc/index.html: missing benefit title (${title})`);
   }
 }
 if (sidefy.includes('class="product-scene"')) {
-  fail("FAIL here-sidefy/index.html: product-scene should be removed");
+  fail("FAIL here-nunc/index.html: product-scene should be removed");
 }
 if (sidefy.includes(">One stream on the edge</h2>") || sidefy.includes(">Light enough to leave on</h2>") || sidefy.includes(">Plugins</h2>")) {
-  fail("FAIL here-sidefy/index.html: obsolete feature titles still present");
+  fail("FAIL here-nunc/index.html: obsolete feature titles still present");
 }
-for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy"]) {
-  if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-sidefy/privacy/index.html: missing ${needle}`);
+for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy", "formerly Sidefy"]) {
+  if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-nunc/privacy/index.html: missing ${needle}`);
 }
 
 // --- nextto ---
@@ -866,19 +924,19 @@ const gridSlice = (html) => {
 const sidefyHero = sectionSlice(sidefy, '<section class="product-hero"');
 const sidefyGrid = gridSlice(sidefy);
 if (!sidefyHero.includes("shot-mac-screen-edge.webp") || !sidefyHero.includes("shot-mac-feed-columns.webp")) {
-  fail("FAIL here-sidefy/index.html: product-hero must include shot-mac-screen-edge.webp and shot-mac-feed-columns.webp after download links");
+  fail("FAIL here-nunc/index.html: product-hero must include shot-mac-screen-edge.webp and shot-mac-feed-columns.webp after download links");
 }
 if (!sidefyHero.includes("unit__media--desktop-scroll")) {
-  fail("FAIL here-sidefy/index.html: hero previews must use desktop-scroll");
+  fail("FAIL here-nunc/index.html: hero previews must use desktop-scroll");
 }
-if (!exists("assets/sidefy/shot-mac-feed-columns.webp")) {
-  fail("FAIL missing assets/sidefy/shot-mac-feed-columns.webp");
+if (!exists("assets/nunc/shot-mac-feed-columns.webp")) {
+  fail("FAIL missing assets/nunc/shot-mac-feed-columns.webp");
 }
 if (sidefyGrid.includes("unit__media") || sidefyGrid.includes("shot-mac-screen-edge.webp") || sidefyGrid.includes("shot-mac-feed-columns.webp")) {
-  fail("FAIL here-sidefy/index.html: detail-feature-grid must not hold screenshots / unit__media");
+  fail("FAIL here-nunc/index.html: detail-feature-grid must not hold screenshots / unit__media");
 }
 if (!sidefy.includes('id="stream-title">One stream, no app switching</h2>') || !sidefy.includes("unit__copy--solo")) {
-  fail("FAIL here-sidefy/index.html: One stream benefit should remain copy-only");
+  fail("FAIL here-nunc/index.html: One stream benefit should remain copy-only");
 }
 
 const wallpaperHero = sectionSlice(wallpaper, '<section class="product-hero"');
@@ -909,7 +967,7 @@ if (!wallpaperHero.includes("unit__media--desktop-scroll")) {
 if (wallpaperGrid.includes("shot-iphone-acropolis.webp") || wallpaperGrid.includes("shot-mac-maldives.webp")) {
   fail("FAIL here-wallpaper/index.html: phone and desktop previews belong in the hero");
 }
-for (const [name, hero] of [["here-sidefy", sidefyHero], ["here-wallpaper", wallpaperHero]]) {
+for (const [name, hero] of [["here-nunc", sidefyHero], ["here-wallpaper", wallpaperHero]]) {
   const subhead = hero.indexOf('class="unit__subhead"');
   const pills = hero.indexOf('class="press-pills"');
   const links = hero.indexOf('class="unit__links"');
@@ -949,8 +1007,8 @@ const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured on Home");
 const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured in Matrix");
 const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
 const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "Mac Paid #1 · 2025");
-if (exists("assets/sidefy/sspai-matrix-badge.png")) {
-  fail("FAIL assets/sidefy/sspai-matrix-badge.png: PNG badge must be removed");
+if (exists("assets/nunc/sspai-matrix-badge.png") || exists("assets/sidefy/sspai-matrix-badge.png")) {
+  fail("FAIL assets/nunc/sspai-matrix-badge.png: PNG badge must be removed");
 }
 if (home.includes("press-badge") || home.includes("sspai-matrix-badge") || sidefy.includes("press-badge") || sidefy.includes("sspai-matrix-badge") || wallpaper.includes("press-badge")) {
   fail("FAIL: obsolete .press-badge / PNG badge markup still present");
@@ -959,7 +1017,7 @@ if (home.includes("press-pill") || home.includes("sspai.com/post") || home.inclu
   fail("FAIL index.html: sspai/App Store ranking pills belong on detail pages only, not the catalog list");
 }
 if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes(PILL_SIDEFY_APPSTORE) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-sidefy/index.html: missing English Featured in Matrix, Featured on Home, and App Store Mac Paid #1 two-line press-pills under title");
+  fail("FAIL here-nunc/index.html: missing English Featured in Matrix, Featured on Home, and App Store Mac Paid #1 two-line press-pills under title");
 }
 if (
   sidefy.includes("Matrix精选") ||
@@ -970,7 +1028,7 @@ if (
   sidefy.includes("Matrix Featured") ||
   sidefy.includes("Home Featured")
 ) {
-  fail("FAIL here-sidefy/index.html: leftover Chinese badge words or obsolete sspai labels still present");
+  fail("FAIL here-nunc/index.html: leftover Chinese badge words or obsolete sspai labels still present");
 }
 if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes("press-pills")) {
   fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix two-line press-pill under title");
