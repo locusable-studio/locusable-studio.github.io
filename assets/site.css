@@ -26,7 +26,7 @@
 }
 
 [data-app="wallpaper"] { --accent: #328e3a; }
-[data-app="sidefy"] { --accent: #d5312c; }
+[data-app="nunc"] { --accent: #d5312c; }
 [data-app="island"] { --accent: #85209d; }
 [data-app="links"] { --accent: #1479bd; }
 [data-app="hackerba"] { --accent: #d95700; }
@@ -271,6 +271,23 @@ main,
 .product-title em {
   color: var(--accent-ink, var(--accent));
   font-style: normal;
+}
+
+.product-aka {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-hero .product-aka {
+  margin: 6px 0 0;
+}
+
+.product h2:has(+ .product-aka) {
+  margin-bottom: 3px;
+}
+
+.product .product-aka {
+  margin: 0 0 7px;
 }
 
 .unit__subhead {
@@ -676,7 +693,7 @@ main > .unit,
 
 @media (prefers-color-scheme: dark) {
   [data-app="wallpaper"] { --accent-ink: #80cb86; }
-  [data-app="sidefy"] { --accent-ink: #ff938d; }
+  [data-app="nunc"] { --accent-ink: #ff938d; }
   [data-app="island"] { --accent-ink: #d6a0e3; }
   [data-app="links"] { --accent-ink: #84c3ed; }
   [data-app="hackerba"] { --accent-ink: #ffb17c; }

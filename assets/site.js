@@ -3,7 +3,7 @@
     studio: "#9b7100",
     wallpaper: "#328e3a",
     links: "#1479bd",
-    sidefy: "#d5312c",
+    nunc: "#d5312c",
     island: "#85209d",
     hackerba: "#d95700",
     trmnl: "#3347a5",
