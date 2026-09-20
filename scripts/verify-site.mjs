@@ -862,6 +862,9 @@ if (sidefy.includes('class="product-scene"')) {
 if (sidefy.includes(">One stream on the edge</h2>") || sidefy.includes(">Light enough to leave on</h2>") || sidefy.includes(">Plugins</h2>")) {
   fail("FAIL here-nunc/index.html: obsolete feature titles still present");
 }
+if (sidefy.includes("There’s a free trial") || !sidefy.includes("no free trial")) {
+  fail("FAIL here-nunc/index.html: Nunc should state there is no free trial");
+}
 for (const needle of ["Local Processing", "sidefy.locusable.com", "github.com/sidefy-team/sidefy", "formerly Sidefy"]) {
   if (!sidefyPrivacy.includes(needle)) fail(`FAIL here-nunc/privacy/index.html: missing ${needle}`);
 }
