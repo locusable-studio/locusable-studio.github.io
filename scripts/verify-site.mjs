@@ -1009,6 +1009,7 @@ const twoLinePill = (href, brand, label) =>
 const PILL_SIDEFY_MATRIX = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured in Matrix");
 const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured on Home");
 const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured in Matrix");
+const PILL_WALLPAPER_HOME = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured on Home");
 const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
 const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "Mac Paid #1 · 2025");
 if (exists("assets/nunc/sspai-matrix-badge.png") || exists("assets/sidefy/sspai-matrix-badge.png")) {
@@ -1034,8 +1035,8 @@ if (
 ) {
   fail("FAIL here-nunc/index.html: leftover Chinese badge words or obsolete sspai labels still present");
 }
-if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes("press-pills")) {
-  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix two-line press-pill under title");
+if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes(PILL_WALLPAPER_HOME) || !wallpaper.includes("press-pills")) {
+  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix and Featured on Home two-line press-pills under title");
 }
 if (
   wallpaper.includes("On sspai") ||
@@ -1048,7 +1049,7 @@ if (
   wallpaper.includes(PILL_SIDEFY_APPSTORE) ||
   wallpaper.includes("Mac Paid #1")
 ) {
-  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix (no Chinese badges / On sspai / Sidefy URL / App Store ranking / obsolete Matrix Featured)");
+  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix + Featured on Home (no Chinese badges / On sspai / Sidefy URL / App Store ranking / obsolete Matrix Featured)");
 }
 if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai") || island.includes("Mac Paid #1") || island.includes(PILL_SIDEFY_APPSTORE)) {
   fail("FAIL here-island/index.html: should not include sspai/App Store ranking pills or sspai.com/post");
