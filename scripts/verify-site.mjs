@@ -737,6 +737,23 @@ if (wallpaperMacPos < 0 || wallpaperFaqPos < 0 || !(wallpaper.indexOf('<div clas
     fail("FAIL here-wallpaper/index.html: detail-feature-grid should close immediately before product-faq (no mid-page Mac unit)");
   }
 }
+const wallpaperProAnswer =
+  "Pro: more themes and fonts, plus the option to hide the export credit. Some themes are free, and map layers are open to everyone.";
+const wallpaperProMatch = wallpaper.match(/<h3>What does Pro include\?<\/h3>\s*<p>([^<]*)<\/p>/);
+if (!wallpaperProMatch || wallpaperProMatch[1] !== wallpaperProAnswer) {
+  fail("FAIL here-wallpaper/index.html: Pro FAQ should use the locked English");
+}
+if (wallpaperProMatch && /(?:more|extra|additional)[^.]{0,80}map layers|map layers(?! are open to everyone)/i.test(wallpaperProMatch[1])) {
+  fail("FAIL here-wallpaper/index.html: Pro FAQ must not claim map layers");
+}
+for (const [name, html] of [
+  ["here-wallpaper/index.html", wallpaper],
+  ["index.html", home],
+]) {
+  if (html.includes("fonts, and map layers") || html.includes("more map layers")) {
+    fail(`FAIL ${name}: Pro must not claim map layers`);
+  }
+}
 
 // --- here-links ---
 const linksPage = htmlByPage["here-links/index.html"];
