@@ -1047,7 +1047,7 @@ const PILL_WALLPAPER_HOME = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured on H
 const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
 const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "China Mac Paid #1 · 2025");
 const APP_STORE_WALLPAPER = "https://apps.apple.com/app/id6789155385";
-const PILL_WALLPAPER_APPSTORE = twoLinePill(APP_STORE_WALLPAPER, "App Store", "China Free · Graphics & Design #171 · 2026");
+const PILL_WALLPAPER_APPSTORE = twoLinePill(APP_STORE_WALLPAPER, "App Store", "China Free · Graphics & Design #153 · 2026");
 if (exists("assets/nunc/sspai-matrix-badge.png") || exists("assets/sidefy/sspai-matrix-badge.png")) {
   fail("FAIL assets/nunc/sspai-matrix-badge.png: PNG badge must be removed");
 }
@@ -1075,7 +1075,7 @@ if (
   fail("FAIL here-nunc/index.html: leftover Chinese badge words or obsolete sspai labels still present");
 }
 if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes(PILL_WALLPAPER_HOME) || !wallpaper.includes(PILL_WALLPAPER_APPSTORE) || !wallpaper.includes("press-pills")) {
-  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix, Featured on Home, and App Store China Free · Graphics & Design #171 · 2026 two-line press-pills under title");
+  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix, Featured on Home, and App Store China Free · Graphics & Design #153 · 2026 two-line press-pills under title");
 }
 if (
   wallpaper.includes("On sspai") ||
