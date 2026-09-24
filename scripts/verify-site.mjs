@@ -1045,7 +1045,7 @@ const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured on Home");
 const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured in Matrix");
 const PILL_WALLPAPER_HOME = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured on Home");
 const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
-const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "Mac Paid #1 · 2025");
+const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "China Mac Paid #1 · 2025");
 const APP_STORE_WALLPAPER = "https://apps.apple.com/app/id6789155385";
 const PILL_WALLPAPER_APPSTORE = twoLinePill(APP_STORE_WALLPAPER, "App Store", "China Free · Graphics & Design #171 · 2026");
 if (exists("assets/nunc/sspai-matrix-badge.png") || exists("assets/sidefy/sspai-matrix-badge.png")) {
@@ -1058,7 +1058,10 @@ if (home.includes("press-pill") || home.includes("sspai.com/post") || home.inclu
   fail("FAIL index.html: sspai/App Store ranking pills belong on detail pages only, not the catalog list");
 }
 if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes(PILL_SIDEFY_APPSTORE) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-nunc/index.html: missing English Featured in Matrix, Featured on Home, and App Store Mac Paid #1 two-line press-pills under title");
+  fail("FAIL here-nunc/index.html: missing English Featured in Matrix, Featured on Home, and App Store China Mac Paid #1 two-line press-pills under title");
+}
+if (sidefy.includes('press-pill__label">Mac Paid #1 · 2025')) {
+  fail("FAIL here-nunc/index.html: App Store ranking label must be China Mac Paid #1 · 2025");
 }
 if (
   sidefy.includes("Matrix精选") ||
