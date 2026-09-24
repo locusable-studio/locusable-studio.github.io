@@ -737,6 +737,23 @@ if (wallpaperMacPos < 0 || wallpaperFaqPos < 0 || !(wallpaper.indexOf('<div clas
     fail("FAIL here-wallpaper/index.html: detail-feature-grid should close immediately before product-faq (no mid-page Mac unit)");
   }
 }
+const wallpaperFreeAnswer =
+  "It’s free to download. Pro is available as a subscription (monthly or yearly, with a trial) or a one-time Lifetime purchase.";
+const wallpaperFreeMatch = wallpaper.match(/<h3>Is Here Wallpaper free\?<\/h3>\s*<p>([^<]*)<\/p>/);
+if (!wallpaperFreeMatch || wallpaperFreeMatch[1] !== wallpaperFreeAnswer) {
+  fail("FAIL here-wallpaper/index.html: free FAQ should use the locked English");
+}
+if (
+  wallpaperFreeMatch &&
+  /monthly or yearly/i.test(wallpaperFreeMatch[1]) &&
+  !/one-time/i.test(wallpaperFreeMatch[1]) &&
+  !/Lifetime/i.test(wallpaperFreeMatch[1])
+) {
+  fail("FAIL here-wallpaper/index.html: free FAQ must mention Lifetime / one-time purchase, not only monthly/yearly");
+}
+if (wallpaper.includes("Pro is a monthly or yearly subscription.")) {
+  fail("FAIL here-wallpaper/index.html: free FAQ still says only monthly/yearly without Lifetime / one-time purchase");
+}
 const wallpaperProAnswer =
   "Pro: more themes and fonts, plus the option to hide the export credit. Some themes are free, and map layers are open to everyone.";
 const wallpaperProMatch = wallpaper.match(/<h3>What does Pro include\?<\/h3>\s*<p>([^<]*)<\/p>/);
