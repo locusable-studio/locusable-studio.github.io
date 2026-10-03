@@ -70,7 +70,24 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "249";
+const lastUpdatedByPage = {
+  "index.html": "October 3, 2026",
+  "about/index.html": "September 20, 2026",
+  "archive/index.html": "September 20, 2026",
+  "here-wallpaper/index.html": "September 24, 2026",
+  "here-wallpaper/privacy/index.html": "September 3, 2026",
+  "here-links/index.html": "September 9, 2026",
+  "here-links/privacy/index.html": "September 3, 2026",
+  "here-nunc/index.html": "October 3, 2026",
+  "here-nunc/privacy/index.html": "September 16, 2026",
+  "here-island/index.html": "September 15, 2026",
+  "here-island/privacy/index.html": "September 3, 2026",
+  "here-hackerba/index.html": "September 9, 2026",
+  "here-trmnl/index.html": "September 9, 2026",
+  "nextto/index.html": "September 20, 2026",
+};
+
+const cssVersion = "250";
 const jsVersion = "70";
 
 const must = [
@@ -192,6 +209,14 @@ for (const page of pages) {
   }
   if ((page === "about/index.html" || page === "archive/index.html") && /footer__links/.test(footer)) {
     fail(`FAIL ${page}: About/Archive pages should not have footer links`);
+  }
+  const updated = lastUpdatedByPage[page];
+  const updatedLine = `Last updated ${updated}`;
+  if (!updated || !footer.includes(`<span class="footer__updated">${updatedLine}</span>`)) {
+    fail(`FAIL ${page}: footer should include its own "${updatedLine}" line beside the copyright`);
+  }
+  if ((footer.match(/Last updated /g) || []).length !== 1) {
+    fail(`FAIL ${page}: footer should show one last-updated line`);
   }
 
   if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) {
