@@ -527,6 +527,18 @@ main > .unit,
   gap: 16px;
 }
 
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 16px;
+  row-gap: 2px;
+}
+
+.footer__updated {
+  white-space: nowrap;
+}
+
 .footer__links {
   display: flex;
   flex-wrap: wrap;

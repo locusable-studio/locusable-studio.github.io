@@ -70,7 +70,24 @@ const pageMeta = {
   },
 };
 
-const cssVersion = "249";
+const lastUpdatedByPage = {
+  "index.html": "October 3, 2026",
+  "about/index.html": "September 20, 2026",
+  "archive/index.html": "September 20, 2026",
+  "here-wallpaper/index.html": "September 24, 2026",
+  "here-wallpaper/privacy/index.html": "August 23, 2026",
+  "here-links/index.html": "September 9, 2026",
+  "here-links/privacy/index.html": "July 24, 2026",
+  "here-nunc/index.html": "October 3, 2026",
+  "here-nunc/privacy/index.html": "September 16, 2026",
+  "here-island/index.html": "September 15, 2026",
+  "here-island/privacy/index.html": "August 28, 2026",
+  "here-hackerba/index.html": "September 9, 2026",
+  "here-trmnl/index.html": "September 9, 2026",
+  "nextto/index.html": "September 20, 2026",
+};
+
+const cssVersion = "250";
 const jsVersion = "70";
 
 const must = [
@@ -192,6 +209,14 @@ for (const page of pages) {
   }
   if ((page === "about/index.html" || page === "archive/index.html") && /footer__links/.test(footer)) {
     fail(`FAIL ${page}: About/Archive pages should not have footer links`);
+  }
+  const updated = lastUpdatedByPage[page];
+  const updatedLine = `Last updated ${updated}`;
+  if (!updated || !footer.includes(`<span class="footer__updated">${updatedLine}</span>`)) {
+    fail(`FAIL ${page}: footer should include its own "${updatedLine}" line beside the copyright`);
+  }
+  if ((footer.match(/Last updated /g) || []).length !== 1) {
+    fail(`FAIL ${page}: footer should show one last-updated line`);
   }
 
   if ((html.match(/<h1(?:\s|>)/g) || []).length !== 1) {
@@ -737,6 +762,40 @@ if (wallpaperMacPos < 0 || wallpaperFaqPos < 0 || !(wallpaper.indexOf('<div clas
     fail("FAIL here-wallpaper/index.html: detail-feature-grid should close immediately before product-faq (no mid-page Mac unit)");
   }
 }
+const wallpaperFreeAnswer =
+  "It’s free to download. Pro is available as a subscription (monthly or yearly, with a trial) or a one-time Lifetime purchase.";
+const wallpaperFreeMatch = wallpaper.match(/<h3>Is Here Wallpaper free\?<\/h3>\s*<p>([^<]*)<\/p>/);
+if (!wallpaperFreeMatch || wallpaperFreeMatch[1] !== wallpaperFreeAnswer) {
+  fail("FAIL here-wallpaper/index.html: free FAQ should use the locked English");
+}
+if (
+  wallpaperFreeMatch &&
+  /monthly or yearly/i.test(wallpaperFreeMatch[1]) &&
+  !/one-time/i.test(wallpaperFreeMatch[1]) &&
+  !/Lifetime/i.test(wallpaperFreeMatch[1])
+) {
+  fail("FAIL here-wallpaper/index.html: free FAQ must mention Lifetime / one-time purchase, not only monthly/yearly");
+}
+if (wallpaper.includes("Pro is a monthly or yearly subscription.")) {
+  fail("FAIL here-wallpaper/index.html: free FAQ still says only monthly/yearly without Lifetime / one-time purchase");
+}
+const wallpaperProAnswer =
+  "Pro: more themes and fonts, plus the option to hide the export credit. Some themes are free, and map layers are open to everyone.";
+const wallpaperProMatch = wallpaper.match(/<h3>What does Pro include\?<\/h3>\s*<p>([^<]*)<\/p>/);
+if (!wallpaperProMatch || wallpaperProMatch[1] !== wallpaperProAnswer) {
+  fail("FAIL here-wallpaper/index.html: Pro FAQ should use the locked English");
+}
+if (wallpaperProMatch && /(?:more|extra|additional)[^.]{0,80}map layers|map layers(?! are open to everyone)/i.test(wallpaperProMatch[1])) {
+  fail("FAIL here-wallpaper/index.html: Pro FAQ must not claim map layers");
+}
+for (const [name, html] of [
+  ["here-wallpaper/index.html", wallpaper],
+  ["index.html", home],
+]) {
+  if (html.includes("fonts, and map layers") || html.includes("more map layers")) {
+    fail(`FAIL ${name}: Pro must not claim map layers`);
+  }
+}
 
 // --- here-links ---
 const linksPage = htmlByPage["here-links/index.html"];
@@ -1009,8 +1068,11 @@ const twoLinePill = (href, brand, label) =>
 const PILL_SIDEFY_MATRIX = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured in Matrix");
 const PILL_SIDEFY_HOME = twoLinePill(SSPAI_SIDEFY, "sspai", "Featured on Home");
 const PILL_WALLPAPER_MATRIX = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured in Matrix");
+const PILL_WALLPAPER_HOME = twoLinePill(SSPAI_WALLPAPER, "sspai", "Featured on Home");
 const APP_STORE_SIDEFY = "https://apps.apple.com/app/id6751482006";
-const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "Mac Paid #1 · 2025");
+const PILL_SIDEFY_APPSTORE = twoLinePill(APP_STORE_SIDEFY, "App Store", "China Mac Paid #1 · 2025");
+const APP_STORE_WALLPAPER = "https://apps.apple.com/app/id6789155385";
+const PILL_WALLPAPER_APPSTORE = twoLinePill(APP_STORE_WALLPAPER, "App Store", "China Free · Graphics & Design #153 · 2026");
 if (exists("assets/nunc/sspai-matrix-badge.png") || exists("assets/sidefy/sspai-matrix-badge.png")) {
   fail("FAIL assets/nunc/sspai-matrix-badge.png: PNG badge must be removed");
 }
@@ -1021,7 +1083,10 @@ if (home.includes("press-pill") || home.includes("sspai.com/post") || home.inclu
   fail("FAIL index.html: sspai/App Store ranking pills belong on detail pages only, not the catalog list");
 }
 if (!sidefy.includes(PILL_SIDEFY_MATRIX) || !sidefy.includes(PILL_SIDEFY_HOME) || !sidefy.includes(PILL_SIDEFY_APPSTORE) || !sidefy.includes("press-pills")) {
-  fail("FAIL here-nunc/index.html: missing English Featured in Matrix, Featured on Home, and App Store Mac Paid #1 two-line press-pills under title");
+  fail("FAIL here-nunc/index.html: missing English Featured in Matrix, Featured on Home, and App Store China Mac Paid #1 two-line press-pills under title");
+}
+if (sidefy.includes('press-pill__label">Mac Paid #1 · 2025')) {
+  fail("FAIL here-nunc/index.html: App Store ranking label must be China Mac Paid #1 · 2025");
 }
 if (
   sidefy.includes("Matrix精选") ||
@@ -1034,8 +1099,8 @@ if (
 ) {
   fail("FAIL here-nunc/index.html: leftover Chinese badge words or obsolete sspai labels still present");
 }
-if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes("press-pills")) {
-  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix two-line press-pill under title");
+if (!wallpaper.includes(PILL_WALLPAPER_MATRIX) || !wallpaper.includes(PILL_WALLPAPER_HOME) || !wallpaper.includes(PILL_WALLPAPER_APPSTORE) || !wallpaper.includes("press-pills")) {
+  fail("FAIL here-wallpaper/index.html: missing English Featured in Matrix, Featured on Home, and App Store China Free · Graphics & Design #153 · 2026 two-line press-pills under title");
 }
 if (
   wallpaper.includes("On sspai") ||
@@ -1048,7 +1113,7 @@ if (
   wallpaper.includes(PILL_SIDEFY_APPSTORE) ||
   wallpaper.includes("Mac Paid #1")
 ) {
-  fail("FAIL here-wallpaper/index.html: must only have English Featured in Matrix (no Chinese badges / On sspai / Sidefy URL / App Store ranking / obsolete Matrix Featured)");
+  fail("FAIL here-wallpaper/index.html: sspai pills must stay English Featured in Matrix + Featured on Home (no Chinese badges / On sspai / Sidefy URL / Nunc Mac Paid #1 / obsolete Matrix Featured)");
 }
 if (island.includes("sspai.com/post") || island.includes("press-pill") || island.includes("sspai") || island.includes("Mac Paid #1") || island.includes(PILL_SIDEFY_APPSTORE)) {
   fail("FAIL here-island/index.html: should not include sspai/App Store ranking pills or sspai.com/post");
