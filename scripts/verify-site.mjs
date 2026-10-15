@@ -71,16 +71,16 @@ const pageMeta = {
 };
 
 const lastUpdatedByPage = {
-  "index.html": "October 3, 2026",
-  "about/index.html": "September 20, 2026",
-  "archive/index.html": "September 20, 2026",
+  "index.html": "October 15, 2026",
+  "about/index.html": "October 15, 2026",
+  "archive/index.html": "October 15, 2026",
   "here-wallpaper/index.html": "September 24, 2026",
   "here-wallpaper/privacy/index.html": "August 23, 2026",
   "here-links/index.html": "September 9, 2026",
   "here-links/privacy/index.html": "July 24, 2026",
   "here-nunc/index.html": "October 3, 2026",
   "here-nunc/privacy/index.html": "September 16, 2026",
-  "here-island/index.html": "September 15, 2026",
+  "here-island/index.html": "October 15, 2026",
   "here-island/privacy/index.html": "August 28, 2026",
   "here-hackerba/index.html": "September 9, 2026",
   "here-trmnl/index.html": "September 9, 2026",
@@ -240,7 +240,7 @@ for (const page of pages) {
       if (!exists(local)) fail(`FAIL ${page}: missing local destination ${url}`);
     }
   }
-  if ((page === "nextto/index.html" || /^here-(links|trmnl|hackerba)\/index.html$/.test(page)) &&
+  if ((page === "nextto/index.html" || /^here-(links|trmnl|hackerba|island)\/index.html$/.test(page)) &&
       !html.includes('class="status-note"')) {
     fail(`FAIL ${page}: archived product needs a visible status`);
   }
@@ -410,18 +410,17 @@ if (!home.includes("what’s already on the screen")) {
 for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
-  "Now Playing in the MacBook notch.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-nunc/", "/here-island/", "/archive/"]) {
+for (const href of ["/here-wallpaper/", "/here-nunc/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
-if (home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
+if (home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
-if ((home.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL index.html: homepage should list three released products");
+if ((home.match(/class="product"/g) || []).length !== 2) {
+  fail("FAIL index.html: homepage should list two released products");
 }
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
@@ -438,7 +437,6 @@ if (!home.includes('<html lang="en" data-app="studio">')) {
 for (const [app, title] of [
   ["wallpaper", "Here <em>Wallpaper</em>"],
   ["nunc", "<em>Nunc</em>"],
-  ["island", "Here <em>Island</em>"],
 ]) {
   if (!home.includes(`<article class="product" data-app="${app}">`)) {
     fail(`FAIL index.html: product card missing data-app=${app}`);
@@ -459,13 +457,14 @@ if (!archive.includes('<html lang="en" data-app="studio">')) {
 if (!archive.includes('href="/nextto/"') || !archive.includes('href="/here-trmnl/"') || !archive.includes('href="/here-links/"') || !archive.includes('href="/here-hackerba/"')) {
   fail("FAIL archive/index.html: product assignment is incorrect");
 }
-if ((archive.match(/class="product"/g) || []).length !== 4) {
-  fail("FAIL archive/index.html: expected 4 product rows");
+if ((archive.match(/class="product"/g) || []).length !== 5) {
+  fail("FAIL archive/index.html: expected 5 product rows");
 }
 if (!archive.includes("Vote on missing tools. We build and publish the release.")) {
   fail("FAIL archive/index.html: missing NextTo product card line");
 }
 for (const [app, title] of [
+  ["island", "Here <em>Island</em>"],
   ["nextto", "<em>NextTo</em>"],
   ["trmnl", "Here <em>TRMNL</em>"],
   ["links", "Here <em>Links</em>"],
@@ -566,7 +565,7 @@ if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[pag
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 3 || productIconCount(archive) !== 4) {
+if (productIconCount(home) !== 2 || productIconCount(archive) !== 5) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
