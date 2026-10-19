@@ -93,7 +93,7 @@ const lastUpdatedByPage = {
   "nextto/index.html": "September 20, 2026",
 };
 
-const cssVersion = "250";
+const cssVersion = "251";
 const jsVersion = "70";
 
 const must = [
