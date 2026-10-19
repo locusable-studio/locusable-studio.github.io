@@ -4,11 +4,8 @@ import path from "node:path";
 const root = process.cwd();
 
 const pages = [
-  "here-button/pricing/index.html",
   "here-button/index.html",
   "here-button/privacy/index.html",
-  "here-button/terms/index.html",
-  "here-button/refunds/index.html",
   "index.html",
   "about/index.html",
   "here-wallpaper/index.html",
@@ -26,11 +23,8 @@ const pages = [
 ];
 
 const canonicalByPage = {
-  "here-button/pricing/index.html": "https://locusable.com/here-button/pricing/",
   "here-button/index.html": "https://locusable.com/here-button/",
   "here-button/privacy/index.html": "https://locusable.com/here-button/privacy/",
-  "here-button/terms/index.html": "https://locusable.com/here-button/terms/",
-  "here-button/refunds/index.html": "https://locusable.com/here-button/refunds/",
   "index.html": "https://locusable.com/",
   "about/index.html": "https://locusable.com/about/",
   "archive/index.html": "https://locusable.com/archive/",
@@ -81,11 +75,8 @@ const pageMeta = {
 };
 
 const lastUpdatedByPage = {
-  "here-button/pricing/index.html": "October 19, 2026",
   "here-button/index.html": "October 19, 2026",
   "here-button/privacy/index.html": "October 19, 2026",
-  "here-button/terms/index.html": "October 19, 2026",
-  "here-button/refunds/index.html": "October 19, 2026",
   "index.html": "October 19, 2026",
   "about/index.html": "October 19, 2026",
   "archive/index.html": "October 15, 2026",
@@ -435,7 +426,7 @@ if (home.includes('href="/here-island/"') || home.includes('href="/here-links/"'
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
 if ((home.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL index.html: homepage should list two released products and Here Button coming soon");
+  fail("FAIL index.html: homepage should list three released products");
 }
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
