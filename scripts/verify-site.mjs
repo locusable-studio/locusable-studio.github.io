@@ -4,6 +4,11 @@ import path from "node:path";
 const root = process.cwd();
 
 const pages = [
+  "here-button/pricing/index.html",
+  "here-button/index.html",
+  "here-button/privacy/index.html",
+  "here-button/terms/index.html",
+  "here-button/refunds/index.html",
   "index.html",
   "about/index.html",
   "here-wallpaper/index.html",
@@ -21,6 +26,11 @@ const pages = [
 ];
 
 const canonicalByPage = {
+  "here-button/pricing/index.html": "https://locusable.com/here-button/pricing/",
+  "here-button/index.html": "https://locusable.com/here-button/",
+  "here-button/privacy/index.html": "https://locusable.com/here-button/privacy/",
+  "here-button/terms/index.html": "https://locusable.com/here-button/terms/",
+  "here-button/refunds/index.html": "https://locusable.com/here-button/refunds/",
   "index.html": "https://locusable.com/",
   "about/index.html": "https://locusable.com/about/",
   "archive/index.html": "https://locusable.com/archive/",
@@ -71,8 +81,13 @@ const pageMeta = {
 };
 
 const lastUpdatedByPage = {
-  "index.html": "October 15, 2026",
-  "about/index.html": "October 15, 2026",
+  "here-button/pricing/index.html": "October 19, 2026",
+  "here-button/index.html": "October 19, 2026",
+  "here-button/privacy/index.html": "October 19, 2026",
+  "here-button/terms/index.html": "October 19, 2026",
+  "here-button/refunds/index.html": "October 19, 2026",
+  "index.html": "October 19, 2026",
+  "about/index.html": "October 19, 2026",
   "archive/index.html": "October 15, 2026",
   "here-wallpaper/index.html": "September 24, 2026",
   "here-wallpaper/privacy/index.html": "August 23, 2026",
@@ -419,8 +434,8 @@ for (const href of ["/here-wallpaper/", "/here-nunc/", "/archive/"]) {
 if (home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
-if ((home.match(/class="product"/g) || []).length !== 2) {
-  fail("FAIL index.html: homepage should list two released products");
+if ((home.match(/class="product"/g) || []).length !== 3) {
+  fail("FAIL index.html: homepage should list two released products and Here Button coming soon");
 }
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
@@ -565,7 +580,7 @@ if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[pag
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 2 || productIconCount(archive) !== 5) {
+if (productIconCount(home) !== 3 || productIconCount(archive) !== 5) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
