@@ -75,10 +75,10 @@ const pageMeta = {
 };
 
 const lastUpdatedByPage = {
-  "here-button/index.html": "October 19, 2026",
-  "here-button/privacy/index.html": "October 19, 2026",
-  "index.html": "October 19, 2026",
-  "about/index.html": "October 19, 2026",
+  "here-button/index.html": "October 20, 2026",
+  "here-button/privacy/index.html": "October 20, 2026",
+  "index.html": "October 20, 2026",
+  "about/index.html": "October 20, 2026",
   "archive/index.html": "October 15, 2026",
   "here-wallpaper/index.html": "September 24, 2026",
   "here-wallpaper/privacy/index.html": "August 23, 2026",
@@ -93,7 +93,7 @@ const lastUpdatedByPage = {
   "nextto/index.html": "September 20, 2026",
 };
 
-const cssVersion = "251";
+const cssVersion = "252";
 const jsVersion = "70";
 
 const must = [
@@ -112,6 +112,11 @@ const must = [
 ];
 
 const productFaqs = {
+  "here-button/index.html": [
+    "Is Here Button free?",
+    "What do I need to run it?",
+    "Does Here Button collect personal data?",
+  ],
   "here-wallpaper/index.html": [
     "Is Here Wallpaper free?",
     "What do I need to run it?",
@@ -154,6 +159,7 @@ const productFaqs = {
 };
 
 const flatFaqPages = new Set([
+  "here-button/index.html",
   "here-wallpaper/index.html",
   "here-nunc/index.html",
   "here-island/index.html",
@@ -165,6 +171,8 @@ const flatFaqPages = new Set([
 
 const themeColors = {
   "about/index.html": "#9b7100",
+  "here-button/index.html": "#9b7100",
+  "here-button/privacy/index.html": "#9b7100",
   "here-wallpaper/index.html": "#328e3a",
   "here-wallpaper/privacy/index.html": "#328e3a",
   "here-links/index.html": "#1479bd",
@@ -416,11 +424,15 @@ if (!home.includes("what’s already on the screen")) {
 for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
+  "Keep buttons from your Mac apps in a floating panel.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-nunc/", "/archive/"]) {
+for (const href of ["/here-wallpaper/", "/here-nunc/", "/here-button/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
+}
+if (home.includes("HereButton_latest.dmg") || home.includes(">Download</a>")) {
+  fail("FAIL index.html: catalog cards should link to More Information, not Download");
 }
 if (home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
@@ -436,6 +448,9 @@ if (!home.includes('<p class="product-aka">Formerly Sidefy</p>') || !home.includ
 }
 if (!about.includes('href="/here-nunc/"') || !about.includes("formerly Sidefy")) {
   fail("FAIL about/index.html: Nunc should be named with formerly Sidefy");
+}
+if (!about.includes('href="/here-button/"') || !about.includes("Here Button")) {
+  fail("FAIL about/index.html: Here Button should be listed with the other shipped apps");
 }
 if (!home.includes('<html lang="en" data-app="studio">')) {
   fail("FAIL index.html: homepage should use data-app=studio for brand gold");
@@ -665,6 +680,32 @@ if (!siteCss.includes(".product__links a") || !siteCss.includes("color: var(--li
 }
 if (siteCss.includes("#075fbb") || siteCss.includes("#72b7ff")) {
   fail("FAIL assets/site.css: leftover global blue link color");
+}
+
+// --- here-button ---
+const hereButton = htmlByPage["here-button/index.html"];
+const hereButtonPrivacy = htmlByPage["here-button/privacy/index.html"];
+
+if (!hereButton.includes('class="platforms">Mac</p>')) {
+  fail("FAIL here-button/index.html: platform line should be Mac");
+}
+if (!home.includes("<span>Mac</span>") || !home.includes('href="/here-button/">More Information</a>')) {
+  fail("FAIL index.html: Here Button card should match other products (platform + More Information)");
+}
+if (!hereButton.includes("HereButton_latest.dmg") || !hereButton.includes("View on GitHub")) {
+  fail("FAIL here-button/index.html: Download and View on GitHub should stay on the product page");
+}
+if (!exists("assets/here-button/icon-256.png") || !exists("assets/here-button/edge-docking.mp4")) {
+  fail("FAIL missing Here Button media assets");
+}
+if (exists("assets/here-button/product.css")) {
+  fail("FAIL assets/here-button/product.css: product styles belong in site.css");
+}
+if (!siteCss.includes(".unit__media video")) {
+  fail("FAIL assets/site.css: shared video media styles missing");
+}
+if (!hereButtonPrivacy.includes("Accessibility") || !hereButtonPrivacy.includes("Sparkle")) {
+  fail("FAIL here-button/privacy/index.html: should cover Accessibility and Sparkle updates");
 }
 
 // --- here-wallpaper ---

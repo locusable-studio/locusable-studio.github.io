@@ -414,6 +414,14 @@ main > .unit,
   border-radius: 8px;
 }
 
+.unit__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
 .unit__media--phones {
   display: flex;
   gap: 14px;
