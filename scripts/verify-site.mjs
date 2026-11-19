@@ -434,7 +434,7 @@ if (!home.includes("what’s already on the screen")) {
 for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
-  "An Android memory assistant that continuously transcribes conversations in the background and helps you find what was said.",
+  "All-Day-Memory Harness is an Android app that transcribes conversations in the background and helps you find what was said.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
