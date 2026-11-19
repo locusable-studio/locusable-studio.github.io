@@ -8,6 +8,7 @@ const pages = [
   "here-button/privacy/index.html",
   "index.html",
   "admh/index.html",
+  "admh/privacy/index.html",
   "about/index.html",
   "here-wallpaper/index.html",
   "here-wallpaper/privacy/index.html",
@@ -28,6 +29,7 @@ const canonicalByPage = {
   "here-button/privacy/index.html": "https://locusable.com/here-button/privacy/",
   "index.html": "https://locusable.com/",
   "admh/index.html": "https://locusable.com/admh/",
+  "admh/privacy/index.html": "https://locusable.com/admh/privacy/",
   "about/index.html": "https://locusable.com/about/",
   "archive/index.html": "https://locusable.com/archive/",
   "here-wallpaper/index.html": "https://locusable.com/here-wallpaper/",
@@ -47,7 +49,7 @@ const pageMeta = {
   "index.html": {
     title: "Locusable Studio — Tools for what’s already on the screen",
     description:
-      "Native Mac, iPhone, and iPad utilities for quiet corners of the screen — the notch, the edge, and the lock screen.",
+      "Native tools for Mac, iPhone, iPad, and Android, from screen-edge utilities and map wallpapers to an all-day memory assistant.",
   },
   "about/index.html": {
     title: "About Locusable Studio",
@@ -79,9 +81,10 @@ const pageMeta = {
 const lastUpdatedByPage = {
   "here-button/index.html": "October 20, 2026",
   "here-button/privacy/index.html": "October 20, 2026",
-  "index.html": "October 20, 2026",
+  "index.html": "November 19, 2026",
   "admh/index.html": "November 19, 2026",
-  "about/index.html": "October 20, 2026",
+  "admh/privacy/index.html": "November 19, 2026",
+  "about/index.html": "November 19, 2026",
   "archive/index.html": "October 15, 2026",
   "here-wallpaper/index.html": "September 24, 2026",
   "here-wallpaper/privacy/index.html": "August 23, 2026",
@@ -174,6 +177,7 @@ const flatFaqPages = new Set([
 
 const themeColors = {
   "admh/index.html": "#62538a",
+  "admh/privacy/index.html": "#62538a",
   "about/index.html": "#9b7100",
   "here-button/index.html": "#9b7100",
   "here-button/privacy/index.html": "#9b7100",
@@ -376,6 +380,7 @@ else {
   for (const loc of [
     "https://locusable.com/",
     "https://locusable.com/admh/",
+    "https://locusable.com/admh/privacy/",
     "https://locusable.com/about/",
     "https://locusable.com/archive/",
     "https://locusable.com/here-island/",
@@ -453,6 +458,12 @@ if (!home.includes("More Information")) {
 }
 if (!home.includes('<p class="product-aka">Formerly Sidefy</p>') || !home.includes("<em>Nunc</em>")) {
   fail("FAIL index.html: Nunc card should keep the title and Formerly Sidefy aka");
+}
+if (!about.includes('<a href="/admh/">ADMH</a>')) {
+  fail("FAIL about/index.html: missing ADMH product link");
+}
+if (!htmlByPage["admh/index.html"].includes('<a href="/admh/privacy/">Privacy Policy</a>')) {
+  fail("FAIL admh/index.html: missing Privacy Policy link");
 }
 if (!about.includes('href="/here-nunc/"') || !about.includes("formerly Sidefy")) {
   fail("FAIL about/index.html: Nunc should be named with formerly Sidefy");

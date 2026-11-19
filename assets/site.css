@@ -330,10 +330,6 @@ main,
 
 
 .unit,
-.product-faq h3[id] {
-  scroll-margin-top: calc(var(--topbar-height) + 12px);
-}
-
 .product-faq {
   padding: var(--section-space) 0;
 }
