@@ -1,6 +1,7 @@
 (function () {
   var APP_THEME_COLORS = {
     studio: "#9b7100",
+    admh: "#62538a",
     wallpaper: "#328e3a",
     links: "#1479bd",
     nunc: "#d5312c",

@@ -7,6 +7,7 @@ const pages = [
   "here-button/index.html",
   "here-button/privacy/index.html",
   "index.html",
+  "admh/index.html",
   "about/index.html",
   "here-wallpaper/index.html",
   "here-wallpaper/privacy/index.html",
@@ -26,6 +27,7 @@ const canonicalByPage = {
   "here-button/index.html": "https://locusable.com/here-button/",
   "here-button/privacy/index.html": "https://locusable.com/here-button/privacy/",
   "index.html": "https://locusable.com/",
+  "admh/index.html": "https://locusable.com/admh/",
   "about/index.html": "https://locusable.com/about/",
   "archive/index.html": "https://locusable.com/archive/",
   "here-wallpaper/index.html": "https://locusable.com/here-wallpaper/",
@@ -78,6 +80,7 @@ const lastUpdatedByPage = {
   "here-button/index.html": "October 20, 2026",
   "here-button/privacy/index.html": "October 20, 2026",
   "index.html": "October 20, 2026",
+  "admh/index.html": "November 19, 2026",
   "about/index.html": "October 20, 2026",
   "archive/index.html": "October 15, 2026",
   "here-wallpaper/index.html": "September 24, 2026",
@@ -93,8 +96,8 @@ const lastUpdatedByPage = {
   "nextto/index.html": "September 20, 2026",
 };
 
-const cssVersion = "252";
-const jsVersion = "70";
+const cssVersion = "253";
+const jsVersion = "71";
 
 const must = [
   ["/assets/site.css", "shared stylesheet"],
@@ -170,6 +173,7 @@ const flatFaqPages = new Set([
 ]);
 
 const themeColors = {
+  "admh/index.html": "#62538a",
   "about/index.html": "#9b7100",
   "here-button/index.html": "#9b7100",
   "here-button/privacy/index.html": "#9b7100",
@@ -371,6 +375,7 @@ else {
   const sitemap = read("sitemap.xml");
   for (const loc of [
     "https://locusable.com/",
+    "https://locusable.com/admh/",
     "https://locusable.com/about/",
     "https://locusable.com/archive/",
     "https://locusable.com/here-island/",
@@ -424,21 +429,24 @@ if (!home.includes("what’s already on the screen")) {
 for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
-  "Keep buttons from your Mac apps in a floating panel.",
+  "An Android memory assistant that continuously transcribes conversations in the background and helps you find what was said.",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/here-wallpaper/", "/here-nunc/", "/here-button/", "/archive/"]) {
+for (const href of ["/admh/", "/here-wallpaper/", "/here-nunc/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
 if (home.includes("HereButton_latest.dmg") || home.includes(">Download</a>")) {
   fail("FAIL index.html: catalog cards should link to More Information, not Download");
 }
-if (home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
+if (home.includes('href="/here-button/"') || home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
 if ((home.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL index.html: homepage should list three released products");
+  fail("FAIL index.html: homepage should list three products");
+}
+if (home.match(/<article class="product" data-app="([^"]+)">/)?.[1] !== "admh") {
+  fail("FAIL index.html: ADMH should be the first product");
 }
 if (!home.includes("More Information")) {
   fail("FAIL index.html: More Information links should remain");
@@ -456,6 +464,7 @@ if (!home.includes('<html lang="en" data-app="studio">')) {
   fail("FAIL index.html: homepage should use data-app=studio for brand gold");
 }
 for (const [app, title] of [
+  ["admh", "<em>ADMH</em>"],
   ["wallpaper", "Here <em>Wallpaper</em>"],
   ["nunc", "<em>Nunc</em>"],
 ]) {
@@ -478,8 +487,8 @@ if (!archive.includes('<html lang="en" data-app="studio">')) {
 if (!archive.includes('href="/nextto/"') || !archive.includes('href="/here-trmnl/"') || !archive.includes('href="/here-links/"') || !archive.includes('href="/here-hackerba/"')) {
   fail("FAIL archive/index.html: product assignment is incorrect");
 }
-if ((archive.match(/class="product"/g) || []).length !== 5) {
-  fail("FAIL archive/index.html: expected 5 product rows");
+if ((archive.match(/class="product"/g) || []).length !== 6) {
+  fail("FAIL archive/index.html: expected 6 product rows");
 }
 if (!archive.includes("Vote on missing tools. We build and publish the release.")) {
   fail("FAIL archive/index.html: missing NextTo product card line");
@@ -586,7 +595,7 @@ if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[pag
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 3 || productIconCount(archive) !== 5) {
+if (productIconCount(home) !== 3 || productIconCount(archive) !== 6) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
@@ -647,6 +656,7 @@ if (!/\.product h2:has\(\+ \.product-aka\) \{/.test(siteCss)) {
 
 for (const [app, color] of Object.entries({
   studio: "#9b7100",
+  admh: "#62538a",
   wallpaper: "#328e3a",
   links: "#1479bd",
   nunc: "#d5312c",
@@ -689,8 +699,11 @@ const hereButtonPrivacy = htmlByPage["here-button/privacy/index.html"];
 if (!hereButton.includes('class="platforms">Mac</p>')) {
   fail("FAIL here-button/index.html: platform line should be Mac");
 }
-if (!home.includes("<span>Mac</span>") || !home.includes('href="/here-button/">More Information</a>')) {
-  fail("FAIL index.html: Here Button card should match other products (platform + More Information)");
+const hereButtonCard = (archive.match(/<article class="product"[^>]*>[\s\S]*?<\/article>/g) || [])
+  .find((card) => card.includes('href="/here-button/"')) || "";
+if (!hereButtonCard.includes("Keep buttons from your Mac apps in a floating panel.") ||
+    !hereButtonCard.includes('<span>Mac</span> · <a href="/here-button/">More Information</a>')) {
+  fail("FAIL archive/index.html: Here Button card should include its description, platform, and More Information link");
 }
 if (!hereButton.includes("HereButton_latest.dmg") || !hereButton.includes("View on GitHub")) {
   fail("FAIL here-button/index.html: Download and View on GitHub should stay on the product page");

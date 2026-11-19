@@ -25,6 +25,7 @@
   }
 }
 
+[data-app="admh"] { --accent: #62538a; }
 [data-app="wallpaper"] { --accent: #328e3a; }
 [data-app="nunc"] { --accent: #d5312c; }
 [data-app="island"] { --accent: #85209d; }
@@ -329,6 +330,10 @@ main,
 
 
 .unit,
+.product-faq h3[id] {
+  scroll-margin-top: calc(var(--topbar-height) + 12px);
+}
+
 .product-faq {
   padding: var(--section-space) 0;
 }
@@ -725,6 +730,7 @@ main > .unit,
 }
 
 @media (prefers-color-scheme: dark) {
+  [data-app="admh"] { --accent-ink: #c4b5ed; }
   [data-app="wallpaper"] { --accent-ink: #80cb86; }
   [data-app="nunc"] { --accent-ink: #ff938d; }
   [data-app="island"] { --accent-ink: #d6a0e3; }
