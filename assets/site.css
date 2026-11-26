@@ -35,6 +35,9 @@
 [data-app="nextto"] { --accent: #2563eb; }
 [data-app="studio"] { --accent: #9b7100; }
 
+[data-app="wallpaper"] { --accent-ink: #287831; }
+[data-app="hackerba"] { --accent-ink: #b94700; }
+
 [data-app] {
   --link: var(--accent-ink, var(--accent));
 }
