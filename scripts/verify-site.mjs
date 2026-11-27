@@ -7,6 +7,7 @@ const pages = [
   "here-button/index.html",
   "here-button/privacy/index.html",
   "index.html",
+  "ginkgo/index.html",
   "admh/index.html",
   "admh/privacy/index.html",
   "about/index.html",
@@ -28,6 +29,7 @@ const canonicalByPage = {
   "here-button/index.html": "https://locusable.com/here-button/",
   "here-button/privacy/index.html": "https://locusable.com/here-button/privacy/",
   "index.html": "https://locusable.com/",
+  "ginkgo/index.html": "https://locusable.com/ginkgo/",
   "admh/index.html": "https://locusable.com/admh/",
   "admh/privacy/index.html": "https://locusable.com/admh/privacy/",
   "about/index.html": "https://locusable.com/about/",
@@ -81,7 +83,8 @@ const pageMeta = {
 const lastUpdatedByPage = {
   "here-button/index.html": "October 20, 2026",
   "here-button/privacy/index.html": "October 20, 2026",
-  "index.html": "November 19, 2026",
+  "index.html": "November 27, 2026",
+  "ginkgo/index.html": "November 27, 2026",
   "admh/index.html": "November 19, 2026",
   "admh/privacy/index.html": "November 19, 2026",
   "about/index.html": "November 19, 2026",
@@ -393,6 +396,7 @@ else {
     "https://locusable.com/here-links/privacy/",
     "https://locusable.com/here-hackerba/",
     "https://locusable.com/here-trmnl/",
+    "https://locusable.com/ginkgo/",
     "https://locusable.com/nextto/",
   ]) {
     if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`FAIL sitemap.xml: missing ${loc}`);
@@ -435,10 +439,11 @@ for (const line of [
   "Map wallpapers for places you care about.",
   "Calendar, reminders, RSS, and plugins on your Mac’s screen edge.",
   "All-Day-Memory Harness is an Android app that transcribes conversations in the background and helps you find what was said.",
+  "An e-ink launcher for the first-generation Xiaomi MiReader (Android 8.1).",
 ]) {
   if (!home.includes(line)) fail(`FAIL index.html: missing product card line (${line})`);
 }
-for (const href of ["/admh/", "/here-wallpaper/", "/here-nunc/", "/archive/"]) {
+for (const href of ["/admh/", "/here-wallpaper/", "/here-nunc/", "/ginkgo/", "/archive/"]) {
   if (!home.includes(`href="${href}"`)) fail(`FAIL index.html: missing href ${href}`);
 }
 if (home.includes("HereButton_latest.dmg") || home.includes(">Download</a>")) {
@@ -447,8 +452,8 @@ if (home.includes("HereButton_latest.dmg") || home.includes(">Download</a>")) {
 if (home.includes('href="/here-button/"') || home.includes('href="/here-island/"') || home.includes('href="/here-links/"') || home.includes('href="/here-hackerba/"') || home.includes('href="/here-trmnl/"') || home.includes('href="/nextto/"')) {
   fail("FAIL index.html: archived and unreleased products do not belong on the released page");
 }
-if ((home.match(/class="product"/g) || []).length !== 3) {
-  fail("FAIL index.html: homepage should list three products");
+if ((home.match(/class="product"/g) || []).length !== 4) {
+  fail("FAIL index.html: homepage should list four products");
 }
 if (home.match(/<article class="product" data-app="([^"]+)">/)?.[1] !== "admh") {
   fail("FAIL index.html: ADMH should be the first product");
@@ -478,6 +483,7 @@ for (const [app, title] of [
   ["admh", "<em>ADMH</em>"],
   ["wallpaper", "Here <em>Wallpaper</em>"],
   ["nunc", "<em>Nunc</em>"],
+  ["ginkgo", "<em>Ginkgo</em>"],
 ]) {
   if (!home.includes(`<article class="product" data-app="${app}">`)) {
     fail(`FAIL index.html: product card missing data-app=${app}`);
@@ -606,7 +612,7 @@ if (home.includes('href="/coming-soon/"') || pages.some((page) => htmlByPage[pag
 }
 
 const productIconCount = (html) => (html.match(/class="product__icon"[^>]*width="72" height="72"/g) || []).length;
-if (productIconCount(home) !== 3 || productIconCount(archive) !== 6) {
+if (productIconCount(home) !== 4 || productIconCount(archive) !== 6) {
   fail("FAIL hub pages: product icons should declare 72px dimensions");
 }
 
